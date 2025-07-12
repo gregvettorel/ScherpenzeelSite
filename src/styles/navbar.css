@@ -8,6 +8,7 @@
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
 }
 
 .navbar-container {
@@ -27,6 +28,7 @@
   text-decoration: none;
   letter-spacing: -0.02em;
   transition: opacity 0.3s ease;
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 .navbar-logo:hover {
@@ -54,6 +56,7 @@
   transition: color 0.3s ease;
   text-transform: uppercase;
   position: relative;
+  font-family: 'Inter', sans-serif;
 }
 
 .navbar-nav-link:hover {
@@ -88,6 +91,7 @@
   transition: all 0.3s ease;
   text-decoration: none;
   display: inline-block;
+  font-family: 'Inter', sans-serif;
 }
 
 .navbar-cta:hover {

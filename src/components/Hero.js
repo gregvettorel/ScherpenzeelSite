@@ -28,17 +28,31 @@ export default function HeroSection() {
           transition={{ duration: 1 }}
           className="hero-title"
         >
-          Beyond Boundaries<br />In Sound & Vision
+          We Create Expert Teams<br />For Digital Excellence
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 1 }}
+          transition={{ delay: 0.3, duration: 1 }}
           className="hero-subtitle"
         >
-          Immersive brand storytelling for tomorrow's culture.
+          Your vision, our expert team. Powered by cutting-edge technology and driven by innovation.
         </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 1 }}
+          className="hero-cta"
+        >
+          <a href="#consultation" className="hero-cta-button primary">
+            Book a Consultation
+          </a>
+          <a href="#services" className="hero-cta-button">
+            View Our Services
+          </a>
+        </motion.div>
       </div>
     </section>
   );
