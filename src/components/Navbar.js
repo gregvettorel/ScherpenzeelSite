@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import '../styles/navbar.css';
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -23,29 +24,28 @@ export default function Navbar() {
   return (
     <header className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
-        <a href="#" className="navbar-logo">
+        {/* Logo */}
+        <Link to="/" className="navbar-logo">
           SCHERPENZEEL
-        </a>
-        
+        </Link>
+
+        {/* Navigation */}
         <nav className={`navbar-nav ${isMobileMenuOpen ? 'active' : ''}`}>
+                    <div className="navbar-nav-item">
+
+                      <Link to="/services" className="navbar-nav-link">Services</Link>
+</div>
           <div className="navbar-nav-item">
-            <a href="#services" className="navbar-nav-link">Services</a>
-          </div>
-          <div className="navbar-nav-item">
-            <a href="#work" className="navbar-nav-link">Work</a>
-          </div>
-          <div className="navbar-nav-item">
-            <a href="#about" className="navbar-nav-link">About</a>
-          </div>
-          <div className="navbar-nav-item">
-            <a href="#contact" className="navbar-nav-link">Contact</a>
+            <Link to="/calendar" className="navbar-nav-link">Calendar</Link>
           </div>
         </nav>
 
+        {/* Call to Action */}
         <a href="#consultation" className="navbar-cta">
           Book Consultation
         </a>
 
+        {/* Mobile toggle */}
         <button 
           className="navbar-mobile-toggle"
           onClick={toggleMobileMenu}

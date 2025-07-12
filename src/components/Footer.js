@@ -12,7 +12,7 @@ const Footer = () => {
     >
       <div className="footer-container">
         <div className="footer-brand">
-          <h2>Medusmo</h2>
+          <h2>SCHERPENZEEL</h2>
           <p>Crafting digital experiences that leave a lasting mark.</p>
           <div className="social-icons">
             <a href="#"><Twitter size={20} /></a>
