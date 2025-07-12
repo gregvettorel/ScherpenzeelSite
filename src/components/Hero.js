@@ -1,10 +1,28 @@
-export default function Hero() {
+'use client';
+
+import '../styles/hero.css';
+
+import { motion } from 'framer-motion';
+
+export default function HeroSection() {
   return (
-    <section className="text-center py-24">
-      <h2 className="text-5xl font-bold mb-4">Minimal. Bold. Creative.</h2>
-      <p className="text-gray-400 max-w-xl mx-auto">
-        We design digital experiences for modern brands. Clean interfaces, bold typography, and lasting impressions.
-      </p>
+    <section className="hero-section">
+      <motion.h1
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="hero-title"
+      >
+        Beyond Boundaries<br />In Sound & Vision
+      </motion.h1>
+      <motion.p
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6, duration: 1 }}
+        className="hero-subtitle"
+      >
+        Immersive brand storytelling for tomorrow's culture.
+      </motion.p>
     </section>
   );
 }
