@@ -14,7 +14,7 @@ export default function HeroSection() {
         muted
         playsInline
         preload="auto"
-        src="/videos/hero-video.mp4"
+        src="/videos/respireblendeer.mkv"
       />
 
       {/* Overlay for contrast */}
