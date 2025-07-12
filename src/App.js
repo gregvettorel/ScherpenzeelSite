@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="bg-black text-white font-sans min-h-screen">
       <Navbar />
-      <main className="px-6 py-12">
+      <main>
         <Hero />
       </main>
       <Footer />
