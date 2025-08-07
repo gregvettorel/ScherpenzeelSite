@@ -1,25 +1,25 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Footer from "./components/Footer";
-import Calendar from "./pages/Calendar";
-import Services from './pages/Services';
+import NavbarOld from "./components/NavbarOld";
+import HeroOld from "./components/HeroOld";
+import FooterOld from "./components/FooterOld";
+import CalendarOld from "./pages/CalendarOld";
+import ServicesOld from './pages/ServicesOld';
 
 function App() {
   return (
     <Router>
       <div className="bg-black text-white font-sans min-h-screen">
-        <Navbar />
+        <NavbarOld />
 
         <main>
           <Routes>
-            <Route path="/" element={<Hero />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/" element={<HeroOld />} />
+            <Route path="/services" element={<ServicesOld />} />
+            <Route path="/calendar" element={<CalendarOld />} />
           </Routes>
         </main>
 
-        <Footer />
+        <FooterOld />
       </div>
     </Router>
   );
