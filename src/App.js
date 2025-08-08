@@ -5,6 +5,9 @@ import './output.css';
 // ✅ New component imports
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Hero from "./components/Hero";
+import Projects from "./components/Projects";
+import RunningBanner from "./components/RunningBanner";
 
 // Later you'll add:
   // import Hero from "./components/Hero";
@@ -16,6 +19,10 @@ function App() {
   return (
     <div className="bg-white text-black font-sans min-h-screen">
       <Navbar />
+      <Hero />
+      <Projects />
+      <RunningBanner />
+
 
       {/* Add new sections below as you create them */}
       {/* <Hero /> */}
