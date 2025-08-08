@@ -3,16 +3,16 @@ import React from 'react';
 
 function Navbar() {
   return (
-    <nav className="flex items-center justify-between px-8 py-5 text-sm">
+<nav className="pt-8 px-8 py-5 flex items-center justify-between text-sm">
       {/* Left logo */}
       <div className="flex items-center gap-2 shrink-0">
-        <img src="/logo.png" alt="Logo" className="h-8" />
+        <img src="/logo_site.png" alt="Logo" className="h-10" />
       </div>
 
       {/* Center navigation */}
       <ul className="hidden md:flex gap-8 font-medium text-sm">
         <li><a href="#portfolio" className="hover:opacity-70">Portfolio</a></li>
-        <li><a href="#how-it-works" className="hover:opacity-70">How it Works</a></li>
+        <li><a href="#how-it-works" className="hover:opacity-70">What We Offer</a></li>
         <li><a href="#pricing" className="hover:opacity-70">Pricing</a></li>
         <li><a href="#about" className="hover:opacity-70">About</a></li>
       </ul>
