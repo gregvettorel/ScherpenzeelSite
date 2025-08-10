@@ -10,6 +10,7 @@ import Projects from "./components/Projects";
 import RunningBanner from "./components/RunningBanner";
 import AboutSection from "./components/AboutSection";
 import Services from "./components/Services";
+import TeamLetsTalk from "./components/TeamLetsTalk";
 
 // Later you'll add:
   // import Hero from "./components/Hero";
@@ -24,10 +25,9 @@ function App() {
       <Hero />
       <Projects />
       <RunningBanner />
-      {/**
       <AboutSection />
-      */}
       <Services />
+      <TeamLetsTalk />
 
       {/* Add new sections below as you create them */}
       {/* <Hero /> */}

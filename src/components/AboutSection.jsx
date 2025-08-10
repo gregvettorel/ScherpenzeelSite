@@ -17,7 +17,7 @@ export default function AboutSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Left: image */}
           <div className="lg:col-span-6">
-            <div className="relative overflow-hidden rounded-2xl shadow-xl ring-1 ring-black/5">
+            <div className="relative overflow-hidden ring-black/5">
               {/* If you use Next.js, swap <img> for <Image fill/> */}
               <img
 src={macbookImage}
