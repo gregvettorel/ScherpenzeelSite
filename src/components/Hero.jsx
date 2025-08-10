@@ -11,7 +11,7 @@ function Hero() {
         
         {/* Left Text Content */}
         <div className="flex-1">
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
+          <h1 className="font-title text-4xl md:text-6xl font-bold leading-tight mb-6">
             Your product,<br />ready to <span className="text-blue-600">launch.</span>
           </h1>
           <p className="text-gray-700 text-lg mb-8">

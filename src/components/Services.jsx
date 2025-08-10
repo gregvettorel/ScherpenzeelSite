@@ -6,7 +6,7 @@ import {
   faWrench,
   faLifeRing,
   faCompass,
-  faArrowUpRightFromSquare,
+  faArrowRight, // <-- use this icon
 } from "@fortawesome/free-solid-svg-icons";
 
 const services = [
@@ -40,37 +40,42 @@ export default function Services() {
   return (
     <section id="services" className="bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-6">
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-8">
           Services
         </h2>
-
         <div className="divide-y divide-gray-200 border-y border-gray-200">
           {services.map((service, idx) => (
             <div
               key={idx}
-              className="flex flex-col sm:flex-row items-start sm:items-center justify-between py-5 gap-4 sm:gap-6"
+              className="flex flex-col md:flex-row items-stretch justify-between py-10 gap-6"
             >
-              {/* Left: Icon + Title */}
-              <div className="flex items-center gap-4 min-w-[220px] sm:w-1/3">
+              {/* Icon + Title */}
+              <div className="flex items-center gap-6 min-w-[250px] md:min-w-[320px]">
                 <FontAwesomeIcon
                   icon={service.icon}
-                  className="w-7 h-7 sm:w-8 sm:h-8 text-black flex-shrink-0"
+                  className="w-10 h-10 text-black flex-shrink-0"
                 />
-                <h3 className="text-2xl font-semibold">{service.title}</h3>
+                <span className="text-3xl font-bold">{service.title}</span>
               </div>
-
-              {/* Middle: Description */}
-              <p className="text-gray-500 text-base sm:text-lg sm:w-2/3">
-                {service.description}
-              </p>
-
-              {/* Right: Arrow button */}
-              <button className="flex-shrink-0 w-10 h-10 border border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-100 transition">
-                <FontAwesomeIcon
-                  icon={faArrowUpRightFromSquare}
-                  className="w-4 h-4"
-                />
-              </button>
+              {/* Explanation */}
+              <div className="flex-1 flex items-center">
+                <p className="text-gray-500 text-lg max-w-2xl">
+                  {service.description}
+                </p>
+              </div>
+              {/* Arrow icon, styled as minimal outlined circle */}
+              <div className="flex items-center">
+                <button
+                  aria-label={`More about ${service.title}`}
+                  className="group flex items-center gap-3 px-8 py-4 border border-gray-200 rounded-full bg-white text-black font-medium transition hover:bg-gray-100 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-black/10"
+                  type="button"
+                >
+                  <FontAwesomeIcon
+                    icon={faArrowRight}
+                    className="w-5 h-5 text-black transition-transform duration-200 group-hover:translate-x-2"
+                  />
+                </button>
+              </div>
             </div>
           ))}
         </div>
