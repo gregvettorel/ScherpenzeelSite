@@ -8,6 +8,8 @@ import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import Projects from "./components/Projects";
 import RunningBanner from "./components/RunningBanner";
+import AboutSection from "./components/AboutSection";
+import Services from "./components/Services";
 
 // Later you'll add:
   // import Hero from "./components/Hero";
@@ -22,7 +24,10 @@ function App() {
       <Hero />
       <Projects />
       <RunningBanner />
-
+      {/**
+      <AboutSection />
+      */}
+      <Services />
 
       {/* Add new sections below as you create them */}
       {/* <Hero /> */}

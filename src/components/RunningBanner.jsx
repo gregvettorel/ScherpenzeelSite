@@ -1,15 +1,28 @@
-import React from 'react';
-
-function RunningBanner() {
+export default function RunningBanner() {
   return (
-    <div className="w-full bg-blue-600 overflow-hidden py-6">
-      <div className="whitespace-nowrap animate-marquee text-white text-5xl font-light">
-        <span className="mx-12">Visual design for digital</span>
-        <span className="mx-12">Visual design for digital</span>
-        <span className="mx-12">Visual design for digital</span>
+    <div
+      className="
+        relative w-full bg-blue-600 overflow-hidden
+        py-12 sm:py-16 md:py-20
+      "
+    >
+      <div
+        className="
+          absolute inset-y-0 left-full
+          flex items-center /* centers text vertically */
+          w-max whitespace-nowrap will-change-transform
+          [animation:ticker_20s_linear_infinite]
+        "
+      >
+        <span
+          className="
+            text-white tracking-wider
+            text-5xl sm:text-6xl md:text-7xl lg:text-8xl
+          "
+        >
+          Visual design for digital experiences
+        </span>
       </div>
     </div>
   );
 }
-
-export default RunningBanner;

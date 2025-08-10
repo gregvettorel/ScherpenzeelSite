@@ -4,3 +4,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/** For Banner **/
+/* Start at the right edge (left:100%) and slide past the left edge */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-100vw - 100%)); }
+}
+/*End For Banner* 
