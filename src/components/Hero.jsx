@@ -12,7 +12,7 @@ function Hero() {
 
     // 1) stroke lengths + stagger
     const svg = root.querySelector('svg');
-    const els = svg?.querySelectorAll('#pencil_icon path, #pencil_icon line, #pencil_icon polyline') ?? [];
+    const els = svg?.querySelectorAll('#pencil path, #pencil line, #pencil polyline') ?? [];
     els.forEach((el, i) => {
       let len = 400; try { len = el.getTotalLength(); } catch {}
       el.style.setProperty('--len', len);
@@ -48,6 +48,17 @@ function Hero() {
       root.classList.add('smile-now');
       setTimeout(() => root.classList.remove('smile-now'), 280);
     }, 2200);
+
+    // Add per-element randomness for natural feel
+    const code = document.querySelector('.hero-visual #code_icon');
+    if (code) {
+      code.style.setProperty('--dev-dur', (5.6 + Math.random() * 1.4) + 's');
+      code.style.animationDelay = (Math.random() * 1.2) + 's';
+    }
+    const pencil = document.querySelector('.hero-visual #pencil');
+    if (pencil) {
+      pencil.style.animationDelay = (Math.random() * 0.5) + 's';
+    }
 
     return () => { clearTimeout(toIdle); clearTimeout(first); clearInterval(loop); io.disconnect(); };
   }, []);
