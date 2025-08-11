@@ -1,5 +1,6 @@
 // src/components/Projects.jsx
 import React from 'react';
+import '../styles/projects-anim.css'; // Import your CSS for animations
 
 const projects = [
   {
@@ -42,7 +43,7 @@ function Projects() {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl  p-6 flex flex-col"
+              className="project-card bg-white  p-6 flex flex-col"
             >
               <img
                 src={project.image}

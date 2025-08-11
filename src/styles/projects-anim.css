@@ -1,0 +1,38 @@
+.project-card {
+  display: flex;
+  flex-direction: column;
+  /* Remove overflow: hidden; */
+  border-radius: 1rem;
+  background: #fff;
+  transition:
+    transform 0.36s cubic-bezier(.22,.61,.36,1),
+    box-shadow 0.36s cubic-bezier(.22,.61,.36,1),
+    filter 0.36s cubic-bezier(.22,.61,.36,1);
+  will-change: transform, box-shadow, filter;
+  cursor: pointer;
+}
+
+.project-card:hover,
+.project-card:focus-visible {
+  transform: translateY(-8px) scale(1.035) rotate(-0.5deg);
+  filter: brightness(1.03) saturate(1.04);
+  z-index: 1;
+}
+
+.project-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  /* No border-radius on bottom, so text is never cut off */
+  transition: filter 0.36s cubic-bezier(.22,.61,.36,1), transform 0.36s cubic-bezier(.22,.61,.36,1);
+}
+
+.project-card:hover img,
+.project-card:focus-visible img {
+  filter: brightness(1.08) saturate(1.08) blur(0.2px);
+  transform: scale(1.025) rotate(0.3deg);
+  will-change: filter, transform;
+}
