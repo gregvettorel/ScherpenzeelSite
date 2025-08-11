@@ -1,0 +1,113 @@
+/* ---- Layout & rhythm ---- */
+.services {
+  background: #fff;
+}
+.services__inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 56px;
+  padding-bottom: 64px;
+}
+.services__title {
+  font-weight: 800;
+  font-size: clamp(28px, 3.2vw, 34px);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0 0 28px;
+}
+
+/* container with thin dividers like Figma */
+.services__list {
+  border-top: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.services__row {
+  display: grid;
+  grid-template-columns: 1.2fr 1.8fr auto; /* ≈ 4 / 6 / 2 */
+  align-items: center;
+  column-gap: 28px;
+  padding: 28px 0;
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
+.services__row:first-child { border-top: 0; }
+
+/* ---- Left column: icon + heading ---- */
+.services__label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 280px;
+}
+.services__icon {
+  width: 28px;
+  height: 28px;
+  color: #000;
+}
+.services__heading {
+  font-weight: 700;
+  font-size: clamp(22px, 2.6vw, 28px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+/* ---- Middle column: description ---- */
+.services__desc {
+  margin: 0;
+  color: #6b7280;            /* neutral gray */
+  font-size: clamp(16px, 2vw, 17px);
+  line-height: 1.7;          /* comfy leading */
+  max-width: 48ch;           /* match Figma text measure */
+}
+
+/* ---- Right column: pill arrow button ---- */
+.services__cta {
+  display: flex;
+  justify-content: flex-end;
+}
+.services__btn {
+  height: 48px;
+  padding: 0 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.28);
+  background: #fff;
+  cursor: pointer;
+  transition: border-color .2s ease, background-color .2s ease, transform .2s ease;
+}
+.services__btn:hover {
+  border-color: rgba(0,0,0,0.6);
+  background-color: #f8f8f8;
+}
+.services__btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
+}
+.services__btnIcon {
+  width: 18px;
+  height: 18px;
+  color: #000;
+  transform: rotate(45deg);   /* diagonal ↗ */
+  transition: transform .2s ease;
+}
+.services__btn:hover .services__btnIcon {
+  transform: translate(4px, -4px) rotate(45deg); /* subtle nudge like Figma */
+}
+
+/* ---- Responsive tweaks ---- */
+@media (max-width: 900px) {
+  .services__row {
+    grid-template-columns: 1fr 1fr auto;
+    column-gap: 20px;
+  }
+  .services__label { min-width: 0; }
+}
+@media (max-width: 680px) {
+  .services__row {
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+    align-items: start;
+  }
+  .services__cta { justify-content: flex-start; }
+  .services__btn { height: 44px; padding: 0 20px; }
+}

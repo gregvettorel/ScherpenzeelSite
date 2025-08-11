@@ -11,6 +11,7 @@ import RunningBanner from "./components/RunningBanner";
 import AboutSection from "./components/AboutSection";
 import Services from "./components/Services";
 import TeamLetsTalk from "./components/TeamLetsTalk";
+import ProcessSteps from "./components/ProcessSteps"; 
 
 // Later you'll add:
   // import Hero from "./components/Hero";
@@ -27,7 +28,9 @@ function App() {
       <RunningBanner />
       <AboutSection />
       <Services />
+      <ProcessSteps />
       <TeamLetsTalk />
+   
 
       {/* Add new sections below as you create them */}
       {/* <Hero /> */}
