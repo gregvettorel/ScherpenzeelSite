@@ -190,40 +190,43 @@
   }
 }
 
-/* Optional: stagger for multiple icons (if you duplicate #code_icon in SVG) */
-.hero-visual #code_icon2 { animation-delay: 2.2s; }
-.hero-visual #code_icon3 { animation-delay: 4.4s; }
-
-/* For the pencil, if you want the same effect: */
-.hero-visual #pencil_icon {
-  animation:
-    pencil-bubble 6.2s cubic-bezier(.77,0,.18,1) infinite,
-    pencil-swing 3.6s ease-in-out .2s infinite;
-  transform-origin: 60% 90%;
-  opacity: 0.7;
-}
-
-@keyframes pencil-bubble {
+/* Shared smooth float keyframe */
+@keyframes smooth-float-up {
   0% {
+    transform: translateY(0) scale(0.96);
     opacity: 0;
-    transform: translateY(0) scale(0.7) rotate(-10deg);
   }
-  10% {
-    opacity: 0.7;
-    transform: translateY(0) scale(1) rotate(-2deg);
+  15% {
+    opacity: 1;
   }
-  80% {
-    opacity: 0.7;
-    transform: translateY(-80px) scale(1.08) rotate(2deg);
-  }
-  92% {
-    opacity: 0;
-    transform: translateY(-120px) scale(1.12) rotate(0deg);
+  70% {
+    transform: translateY(-80px) scale(1);
+    opacity: 1;
   }
   100% {
+    transform: translateY(-110px) scale(1.02);
     opacity: 0;
-    transform: translateY(0) scale(0.7) rotate(-10deg);
   }
+}
+
+/* Dev icon(s) */
+.hero-visual #code_icon,
+.hero-visual #code_icon2,
+.hero-visual #code_icon3 {
+  animation: smooth-float-up 5.8s cubic-bezier(.22,.61,.36,1) infinite;
+  transform-origin: 50% 100%;
+  will-change: transform, opacity;
+}
+
+/* Stagger duplicates for variety */
+.hero-visual #code_icon2 { animation-delay: 1.9s; }
+.hero-visual #code_icon3 { animation-delay: 3.8s; }
+
+/* Pencil bubble (same effect, slightly longer) */
+.hero-visual #pencil_icon {
+  animation: smooth-float-up 6.2s cubic-bezier(.22,.61,.36,1) infinite;
+  transform-origin: 60% 90%;
+  will-change: transform, opacity;
 }
 
 /* Motion safety */

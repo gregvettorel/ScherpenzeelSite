@@ -12,7 +12,7 @@ function Hero() {
 
     // 1) stroke lengths + stagger
     const svg = root.querySelector('svg');
-    const els = svg?.querySelectorAll('#pencil path, #pencil line, #pencil polyline') ?? [];
+    const els = svg?.querySelectorAll('#pencil path, #pencil line, #pencil_icon polyline') ?? [];
     els.forEach((el, i) => {
       let len = 400; try { len = el.getTotalLength(); } catch {}
       el.style.setProperty('--len', len);
@@ -55,7 +55,7 @@ function Hero() {
       code.style.setProperty('--dev-dur', (5.6 + Math.random() * 1.4) + 's');
       code.style.animationDelay = (Math.random() * 1.2) + 's';
     }
-    const pencil = document.querySelector('.hero-visual #pencil');
+    const pencil = document.querySelector('.hero-visual #pencil_icon');
     if (pencil) {
       pencil.style.animationDelay = (Math.random() * 0.5) + 's';
     }
