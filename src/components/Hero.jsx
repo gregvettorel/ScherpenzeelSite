@@ -9,58 +9,29 @@ function Hero() {
   useEffect(() => {
     const root = document.querySelector('.hero-visual');
     if (!root) return;
-
-    // 1) stroke lengths + stagger
     const svg = root.querySelector('svg');
-    const els = svg?.querySelectorAll('#pencil path, #pencil line, #pencil_icon polyline') ?? [];
-    els.forEach((el, i) => {
-      let len = 400; try { len = el.getTotalLength(); } catch {}
-      el.style.setProperty('--len', len);
-      el.style.animationDelay = `${i * 0.03}s`;
+    if (!svg) return;
+
+    // Per-finger randomness
+    const fingers = svg.querySelectorAll('#fingersilian path, #fingersgreg path');
+    fingers.forEach(f => {
+      const depth = (5 + Math.random()*3).toFixed(1) + 'deg';      // 5–8deg
+      const speed = (1.02 + Math.random()*0.18).toFixed(2) + 's';  // 1.02–1.20s
+      const jitter = (Math.random()*0.18 - 0.09).toFixed(3) + 's'; // ±90ms
+      f.style.setProperty('--press-depth', depth);
+      f.style.animationDelay = `calc(var(--press-delay, 0s) + ${jitter})`;
+      f.style.setProperty('--press-speed', speed);
     });
 
-    // 2) run draw once, then idle
-    root.classList.add('draw-ready');
-    const toIdle = setTimeout(() => root.classList.remove('draw-ready'), 1400);
-
-    // 3) synced blink (no drift)
-    const blink = () => {
-      root.classList.add('blink-now');
-      setTimeout(() => root.classList.remove('blink-now'), 140);
+    // Occasional typing burst
+    const burst = () => {
+      root.classList.add('typing-burst');
+      setTimeout(() => root.classList.remove('typing-burst'), 900);
     };
-    const first = setTimeout(blink, 1800);
-    const loop = setInterval(() => Math.random() > 0.35 && blink(), 3100);
+    const t1 = setTimeout(burst, 1800 + Math.random()*600);
+    const loop = setInterval(() => burst(), 4000 + Math.random()*3000);
 
-    // 4) pause when offscreen
-    const io = new window.IntersectionObserver(([e]) => {
-      root.style.animationPlayState = e.isIntersecting ? 'running' : 'paused';
-    }, { threshold: 0.2 });
-    io.observe(root);
-
-    // Add click event listener for boing animation
-    root.addEventListener('click', () => {
-      root.classList.add('boing');
-      setTimeout(() => root.classList.remove('boing'), 350);
-    });
-
-    // First-load smile
-    setTimeout(() => {
-      root.classList.add('smile-now');
-      setTimeout(() => root.classList.remove('smile-now'), 280);
-    }, 2200);
-
-    // Add per-element randomness for natural feel
-    const code = document.querySelector('.hero-visual #code_icon');
-    if (code) {
-      code.style.setProperty('--dev-dur', (5.6 + Math.random() * 1.4) + 's');
-      code.style.animationDelay = (Math.random() * 1.2) + 's';
-    }
-    const pencil = document.querySelector('.hero-visual #pencil_icon');
-    if (pencil) {
-      pencil.style.animationDelay = (Math.random() * 0.5) + 's';
-    }
-
-    return () => { clearTimeout(toIdle); clearTimeout(first); clearInterval(loop); io.disconnect(); };
+    return () => { clearTimeout(t1); clearInterval(loop); };
   }, []);
 
   return (

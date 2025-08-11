@@ -246,3 +246,43 @@
 
 .hero-visual #code_icon2 { animation-delay: 1.2s; }
 .hero-visual #code_icon3 { animation-delay: 2.4s; }
+
+@keyframes finger-type-natural {
+  0%, 80%, 100% { transform: rotate(0deg); }
+  30% { transform: rotate(var(--press-depth, 6deg)); }
+  40% { transform: rotate(calc(var(--press-depth, 6deg) * -0.35)); }
+}
+
+.hero-visual #fingersilian path,
+.hero-visual #fingersgreg path {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: finger-type-natural var(--press-speed,1.08s) cubic-bezier(.7,0,.3,1) infinite;
+  animation-delay: var(--press-delay,0s);
+}
+
+/* Stagger for each finger */
+.hero-visual #fingersilian #LOWERFINGER    { --press-delay: 0.00s; }
+.hero-visual #fingersilian #MIDDLEFINGER   { --press-delay: 0.18s; }
+.hero-visual #fingersilian #UPPERFINGER    { --press-delay: 0.34s; }
+.hero-visual #fingersgreg  #LOWERFINGER-2  { --press-delay: 0.00s; }
+.hero-visual #fingersgreg  #MIDDLEFINGER-2 { --press-delay: 0.18s; }
+.hero-visual #fingersgreg  #UPPERFINGER-2  { --press-delay: 0.34s; }
+
+/* Typing burst (optional: laptop nudge, steam, code icon speed-up) */
+@keyframes laptop-nudge {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50%      { transform: translateY(1.4px) rotate(-0.6deg); }
+}
+.hero-visual.typing-burst #code_icon {
+  animation: laptop-nudge 320ms ease-in-out 2;
+}
+.hero-visual.typing-burst #steam_short_line,
+.hero-visual.typing-burst #long_line {
+  animation-duration: 3.2s !important;
+}
+.hero-visual.typing-burst #code_icon,
+.hero-visual.typing-burst #code_icon2,
+.hero-visual.typing-burst #code_icon3 {
+  animation-duration: 4.9s;
+}
