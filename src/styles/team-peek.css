@@ -1,0 +1,51 @@
+/* Wrapper is the IO target */
+.card-wrap { position: relative; }
+
+/* Card surface sits above body */
+.team-card { position: relative; z-index: 10; }
+
+/* BODY/HEAD behind the card (hidden by default) */
+.peek-body{
+  position: absolute;
+  left: 50%;
+  top: -110px;                          /* adjust to your art */
+  width: 160px;                         /* adjust to your art */
+  transform: translateX(-50%) translateY(18px); /* start lower = behind */
+  z-index: 0;                           /* behind the card */
+  opacity: 0;                           /* hidden until in view */
+  pointer-events: none;
+  user-select: none;
+  transition: transform .7s cubic-bezier(.22,.61,.36,1), opacity .7s ease;
+}
+
+/* HANDS on the rim, always visible, above the card */
+.peek-hands{
+  position: absolute;
+  left: 50%;
+  top: -12px;
+  transform: translate(-50%, 6px);
+  width: 160px;
+  z-index: 20;                          /* above the card edge */
+  pointer-events: none;
+  user-select: none;
+  transition: transform .6s cubic-bezier(.22,.61,.36,1);
+}
+
+/* When wrapper enters viewport -> rise in */
+.card-wrap.inview .peek-body{
+  opacity: 1;
+  transform: translateX(-50%) translateY(-6px); /* rises from behind */
+}
+.card-wrap.inview .peek-hands{
+  transform: translate(-50%, 2px);             /* subtle settle */
+}
+
+/* Hover delight */
+.card-wrap:hover .peek-hands { transform: translate(-50%, 0px); }
+.card-wrap:hover .peek-body  { transform: translateX(-50%) translateY(-8px); }
+
+/* Responsive */
+@media (min-width:640px){
+  .peek-body, .peek-hands { width: 180px; }
+  .peek-body { top: -130px; }
+}
