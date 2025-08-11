@@ -1,0 +1,153 @@
+/* Scope to the hero so nothing else gets touched */
+.hero-visual svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  transform-box: fill-box;
+}
+
+/* Stroke-draw for lines/paths inside the main group */
+.hero-visual #pencil_icon path,
+.hero-visual #pencil_icon line,
+.hero-visual #pencil_icon polyline {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: var(--len, 1000);
+  stroke-dashoffset: var(--len, 1000);
+  animation: hero-draw 1.4s ease-out;
+  animation-fill-mode: none;
+}
+
+/* Gentle float on the whole icon */
+.hero-visual #pencil_icon {
+  animation: pencil-float 4.5s ease-in-out infinite, pencil-swing 2.8s ease-in-out infinite;
+  transform-origin: 60% 90%;
+}
+@keyframes pencil-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-24px); }
+}
+@keyframes pencil-swing {
+  0%, 100% { rotate: 0deg; }
+  30% { rotate: -8deg; }
+  70% { rotate: 6deg; }
+}
+
+
+.hero-visual #steam_short_line {
+  animation-delay: 0.2s;
+}
+.hero-visual #steam_long_line {
+  animation-delay: 0.7s;
+}
+
+/* Code icon pulse animation */
+.hero-visual #code_icon {
+  animation: code-pulse 2.8s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes code-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.025); opacity: 0.96; }
+}
+
+
+
+/* --- EYE BLINK (opacity only, both Ilian and Gregory eyes blink together) --- */
+.hero-visual #lefteyeilian,
+.hero-visual #righteyeilian,
+.hero-visual #lefteye_greg,
+.hero-visual #righteye_greg {
+  animation: hero-blink 6s ease-in-out 2s infinite !important;
+  transform-origin: center;
+}
+@keyframes hero-blink {
+  0%, 96%, 100% { opacity: 1; }
+  97%, 98%     { opacity: 0; }
+}
+
+
+
+/* --- STEAM DRAW ANIMATION (draws once, not looping) --- */
+.hero-visual #steam_short_line,
+.hero-visual #steam_long_line {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: steam-draw-loop 2.8s cubic-bezier(.77,0,.18,1) infinite;
+  opacity: 1;
+}
+.hero-visual #steam_short_line { animation-delay: 0.2s; }
+.hero-visual #steam_long_line { animation-delay: 0.7s; }
+
+@keyframes steam-draw-loop {
+  0% {
+    stroke-dashoffset: 120;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+    stroke-dashoffset: 120;
+  }
+  40% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+  70% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+  90% {
+    opacity: 0;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    opacity: 0;
+    stroke-dashoffset: 120;
+  }
+}
+
+/* Typing fingers (Ilian) */
+.hero-visual #fingersilian path {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: finger-type 1.1s cubic-bezier(.7,0,.3,1) infinite;
+}
+.hero-visual #fingersilian #LOWERFINGER { animation-delay: 0.0s; }
+.hero-visual #fingersilian #MIDDLEFINGER { animation-delay: 0.18s; }
+.hero-visual #fingersilian #UPPERFINGER { animation-delay: 0.34s; }
+
+@keyframes finger-type {
+  0%, 80%, 100% { transform: rotate(0deg); }
+  30% { transform: rotate(7deg); }
+  40% { transform: rotate(-3deg); }
+}
+
+/* Typing fingers (Gregory) */
+.hero-visual #fingersgreg path {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: finger-type-greg 1.1s cubic-bezier(.7,0,.3,1) infinite;
+}
+.hero-visual #fingersgreg #LOWERFINGER-2 { animation-delay: 0.0s; }
+.hero-visual #fingersgreg #MIDDLEFINGER-2 { animation-delay: 0.18s; }
+.hero-visual #fingersgreg #UPPERFINGER-2 { animation-delay: 0.34s; }
+
+@keyframes finger-type-greg {
+  0%, 80%, 100% { transform: rotate(0deg); }
+  30% { transform: rotate(7deg); }
+  40% { transform: rotate(-3deg); }
+}
+
+/* Hover lift */
+.hero-visual svg:hover #pencil_icon {
+  transform: translateY(-4px);
+}
+
+/* Motion safety */
+@media (prefers-reduced-motion: reduce) {
+  .hero-visual #pencil_icon,
+  .hero-visual #pencil_icon * {
+    animation: none !important;
+    transform: none !important;
+  }
+}
