@@ -8,77 +8,108 @@
   padding: 0 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  gap: 72px;                       /* more breathing room like Figma */
 }
+
+/* Symmetric columns: visual | connector | text */
 .process-steps__row {
-  display: flex;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 1fr 220px 1fr;  /* equal spacing left/right */
+  align-items: center;
   gap: 56px;
-  margin-bottom: 0;
-  padding-bottom: 0;
+  padding-top: 56px;
 }
+.process-steps__row:first-child { border-top: 0; }
+
+/* Same widths on alt rows; only flip the center connector */
 .process-steps__row--alt {
-  flex-direction: row-reverse;
+  grid-template-columns: 1fr 220px 1fr;
 }
+.process-steps__row--alt .process-steps__arrow { transform: scaleX(-1); }
+
+/* Visual: number next to the illustration */
 .process-steps__visual {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;              /* number beside image */
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
   min-width: 200px;
-  margin-top: 0.5em;
+  margin: 0;
 }
 .process-steps__row--alt .process-steps__visual {
-  align-items: flex-end;
+  justify-content: flex-end;        /* align pair to the right on alt rows */
 }
-.process-steps__number {
-  font-family: 'DM Sans', 'Inter', sans-serif;
-  font-size: 3.2rem;
+
+/* Section heading (DM Sans) */
+.process-steps__heading {
+  font-family: 'DM Sans', system-ui, -apple-system, Segoe UI, sans-serif;
   font-weight: 700;
-  color: #1877ff;
-  margin-bottom: 18px;
-  line-height: 1;
-  letter-spacing: -0.02em;
+  font-size: clamp(28px, 3.2vw, 34px);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: #0f172a; /* near-black */
+  margin: 0;      /* section spacing handled by container */
 }
+
+/* Big number: DM Sans Medium */
+.process-steps__number {
+  font-family: 'DM Sans', system-ui, -apple-system, Segoe UI, sans-serif;
+  font-weight: 500;                 /* Medium */
+  font-size: clamp(56px, 6vw, 84px);
+  color: #1877ff;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* Illustration sizing */
 .process-steps__img {
-  width: 180px;
+  width: 190px;
   max-width: 100%;
   height: auto;
   display: block;
   user-select: none;
-  margin-bottom: 0;
+  margin: 0;
 }
+
+/* Text column: title above text, Inter, correct colors */
 .process-steps__text {
   max-width: 520px;
-  padding-top: 0.5em;
+  margin: 0;
+  padding: 0;
 }
 .process-steps__title {
-  font-size: 2.1rem;
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, sans-serif; /* override global heading font */
+  font-size: clamp(28px, 3.2vw, 34px);
   font-weight: 700;
-  color: #222;
-  margin-bottom: 0.5em;
-  font-family: 'DM Sans', 'Inter', sans-serif;
+  color: #111827;                   /* near-black like Figma */
+  line-height: 1.2;
+  margin: 0 0 10px 0;
 }
 .process-steps__desc {
-  color: #6b7280;
-  font-size: 1.13rem;
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, sans-serif;
+  color: #6b7280;                   /* neutral body gray */
+  font-size: clamp(16px, 2vw, 17px);
   line-height: 1.7;
   margin: 0;
 }
+
+/* Keep the center connector fixed width */
+.process-steps__connector { flex: 0 0 220px; align-self: center; }
+.process-steps__connector svg { width: 100%; height: 24px; overflow: visible; }
 
 /* Responsive */
 @media (max-width: 900px) {
   .process-steps__row,
   .process-steps__row--alt {
-    flex-direction: column !important;
+    grid-template-columns: 1fr;     /* stack */
     gap: 24px;
-    align-items: flex-start;
   }
   .process-steps__visual,
   .process-steps__row--alt .process-steps__visual {
-    align-items: flex-start;
+    justify-content: flex-start;    /* number stays left of image on mobile */
   }
-  .process-steps__text {
-    max-width: 100%;
-    padding-top: 0;
-  }
+  .process-steps__img { width: 160px; }
+  .process-steps__text { max-width: 100%; }
 }
