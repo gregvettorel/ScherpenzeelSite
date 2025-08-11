@@ -118,22 +118,16 @@
 .hero-visual #fingersgreg  #MIDDLEFINGER-2 { --press-delay: 0.18s; }
 .hero-visual #fingersgreg  #UPPERFINGER-2  { --press-delay: 0.34s; }
 
-/* Typing burst (optional: laptop nudge, steam, code icon speed-up) */
+/* Typing burst (keep steam tweak only) */
 @keyframes laptop-nudge {
   0%, 100% { transform: translateY(0) rotate(0); }
   50%      { transform: translateY(1.4px) rotate(-0.6deg); }
 }
-.hero-visual.typing-burst #code_icon {
-  animation: laptop-nudge 320ms ease-in-out 2;
-}
+
+/* Keep steam speed-up */
 .hero-visual.typing-burst #steam_short_line,
 .hero-visual.typing-burst #long_line {
   animation-duration: 3.2s !important;
-}
-.hero-visual.typing-burst #code_icon,
-.hero-visual.typing-burst #code_icon2,
-.hero-visual.typing-burst #code_icon3 {
-  animation-duration: 4.9s;
 }
 
 /* Shared smooth float keyframe */
