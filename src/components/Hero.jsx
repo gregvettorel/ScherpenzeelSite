@@ -15,12 +15,12 @@ function Hero() {
             Your product,<br />ready to <span className="text-blue-600">launch.</span>
           </h1>
           <p className="text-gray-700 text-lg mb-8">
-            <a href="#" className="text-blue-600">Design and development</a>, handled by two specialists fully dedicated to your product → from first sketch to final build.
+            <a href="/services" className="text-blue-600">Design and development</a>, handled by two specialists fully dedicated to your product → from first sketch to final build.
           </p>
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <a href="#" className="bg-black text-white text-sm px-6 py-3 rounded-full font-medium hover:opacity-90 transition">
+            <a href="/contact" className="bg-black text-white text-sm px-6 py-3 rounded-full font-medium hover:opacity-90 transition">
               Free Advice <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="w-4 h-4" />
             </a>
             <a href="mailto:wakodesign@gmail.com" className="border border-black text-sm px-6 py-3 rounded-full font-medium hover:bg-black hover:text-white transition">
