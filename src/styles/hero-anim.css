@@ -18,38 +18,28 @@
   animation-fill-mode: none;
 }
 
-/* Gentle float on the whole icon */
+/* Gentler pencil */
 .hero-visual #pencil_icon {
-  animation: pencil-float 4.5s ease-in-out infinite, pencil-swing 2.8s ease-in-out infinite;
   transform-origin: 60% 90%;
+  animation:
+    pencil-float 7s ease-in-out infinite,
+    pencil-swing 3.6s ease-in-out .2s infinite;
 }
-@keyframes pencil-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-24px); }
-}
-@keyframes pencil-swing {
-  0%, 100% { rotate: 0deg; }
-  30% { rotate: -8deg; }
-  70% { rotate: 6deg; }
-}
+@keyframes pencil-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+@keyframes pencil-swing  { 0%,100%{rotate:0} 30%{rotate:-3deg} 70%{rotate:2deg} }
 
+/* Parallax on code & mug */
+.hero-visual #code_icon { animation: float-s 7.4s ease-in-out .3s infinite; }
+.hero-visual #mug       { animation: float-s 6.8s ease-in-out .6s infinite; }
+@keyframes float-s { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
 
-.hero-visual #steam_short_line {
-  animation-delay: 0.2s;
+/* Subtle ground shadow (add <ellipse id="shadow" ...> to SVG) */
+.hero-visual #shadow {
+  opacity:.18;
+  transform-origin:center;
+  animation: shadow-breathe 7s ease-in-out infinite;
 }
-.hero-visual #steam_long_line {
-  animation-delay: 0.7s;
-}
-
-/* Code icon pulse animation */
-.hero-visual #code_icon {
-  animation: code-pulse 2.8s ease-in-out infinite;
-  transform-origin: center;
-}
-@keyframes code-pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.025); opacity: 0.96; }
-}
+@keyframes shadow-breathe { 0%,100%{transform:scaleX(1)} 50%{transform:scaleX(.92)} }
 
 
 
@@ -66,6 +56,16 @@
   97%, 98%     { opacity: 0; }
 }
 
+/* Synced blink (add class="eye" to all four eye paths in your SVG) */
+.hero-visual .eye { transform-origin: center; }
+.hero-visual.blink-now #lefteyeilian,
+.hero-visual.blink-now #righteyeilian,
+.hero-visual.blink-now #lefteye_greg,
+.hero-visual.blink-now #righteye_greg {
+  animation: wink 140ms ease-in-out forwards;
+}
+@keyframes wink { to { transform: scaleY(0.06); } }
+
 
 
 /* --- STEAM DRAW ANIMATION (draws once, not looping) --- */
@@ -73,37 +73,19 @@
 .hero-visual #steam_long_line {
   stroke-dasharray: 120;
   stroke-dashoffset: 120;
-  animation: steam-draw-loop 2.8s cubic-bezier(.77,0,.18,1) infinite;
-  opacity: 1;
+  opacity: 0;
+  filter: blur(.2px);
+  animation: steam-rise 3.8s ease-in-out infinite;
 }
-.hero-visual #steam_short_line { animation-delay: 0.2s; }
-.hero-visual #steam_long_line { animation-delay: 0.7s; }
+.hero-visual #steam_short_line { animation-delay: .2s; }
+.hero-visual #steam_long_line  { animation-delay: .9s; }
 
-@keyframes steam-draw-loop {
-  0% {
-    stroke-dashoffset: 120;
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-    stroke-dashoffset: 120;
-  }
-  40% {
-    opacity: 1;
-    stroke-dashoffset: 0;
-  }
-  70% {
-    opacity: 1;
-    stroke-dashoffset: 0;
-  }
-  90% {
-    opacity: 0;
-    stroke-dashoffset: 0;
-  }
-  100% {
-    opacity: 0;
-    stroke-dashoffset: 120;
-  }
+@keyframes steam-rise {
+  0%   { stroke-dashoffset:120; opacity:0; transform:translate(0,8px); }
+  20%  { opacity:.6; }
+  50%  { stroke-dashoffset:0;   opacity:.9; transform:translate(2px,-8px); }
+  85%  { opacity:.3; transform:translate(-1px,-18px); }
+  100% { stroke-dashoffset:120; opacity:0; transform:translate(0,-22px); }
 }
 
 /* Typing fingers (Ilian) */
@@ -142,6 +124,10 @@
 .hero-visual svg:hover #pencil_icon {
   transform: translateY(-4px);
 }
+.hero-visual:hover #mug   { transform: translateY(-4px); transition: transform .2s ease; }
+.hero-visual.smile-now #mouthilian { transform: translateY(-2px); transition: transform .25s ease; }
+.hero-visual.boing #pencil_icon { animation: boing .32s cubic-bezier(.2,1.6,.3,1) 1; }
+@keyframes boing { 0%{scale:1} 50%{scale:1.05} 100%{scale:1} }
 
 /* Motion safety */
 @media (prefers-reduced-motion: reduce) {
@@ -151,3 +137,9 @@
     transform: none !important;
   }
 }
+
+.hero-visual #pencil_icon,
+.hero-visual #code_icon,
+.hero-visual #mug,
+.hero-visual #steam_short_line,
+.hero-visual #steam_long_line { will-change: transform, opacity; }

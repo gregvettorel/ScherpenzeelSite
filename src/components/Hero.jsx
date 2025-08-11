@@ -9,46 +9,47 @@ function Hero() {
   useEffect(() => {
     const root = document.querySelector('.hero-visual');
     if (!root) return;
+
+    // 1) stroke lengths + stagger
     const svg = root.querySelector('svg');
-    if (!svg) return;
-
-    // 0) Prepare entrance state
-    root.classList.add('draw-ready');
-
-    // 1) Stroke-draw lengths + slight stagger
-    const drawables = svg.querySelectorAll('#pencil_icon path, #pencil_icon line, #pencil_icon polyline');
-    drawables.forEach((el, i) => {
-      let len = 400;
-      try { len = el.getTotalLength(); } catch {}
+    const els = svg?.querySelectorAll('#pencil_icon path, #pencil_icon line, #pencil_icon polyline') ?? [];
+    els.forEach((el, i) => {
+      let len = 400; try { len = el.getTotalLength(); } catch {}
       el.style.setProperty('--len', len);
-      el.style.animationDelay = `${0.035 * i}s`;
-      el.style.animationDuration = `${0.85 + Math.random() * 0.35}s`;
+      el.style.animationDelay = `${i * 0.03}s`;
     });
 
-    // After entrance, switch to idle loops
-    const idleTimer = setTimeout(() => {
-      root.classList.remove('draw-ready');
-      root.classList.add('is-idle');
-    }, 1600);
+    // 2) run draw once, then idle
+    root.classList.add('draw-ready');
+    const toIdle = setTimeout(() => root.classList.remove('draw-ready'), 1400);
 
-    // 2) Synchronized blink for ALL eyes (Ilian + Gregory)
+    // 3) synced blink (no drift)
     const blink = () => {
       root.classList.add('blink-now');
-      setTimeout(() => root.classList.remove('blink-now'), 140); // shorter, natural blink
+      setTimeout(() => root.classList.remove('blink-now'), 140);
     };
-    // First blink shortly after draw
-    const firstBlink = setTimeout(blink, 1900);
-    // Natural, non-regular cadence
-    const blinkInterval = setInterval(() => {
-      if (Math.random() > 0.35) blink();
-    }, 3200 + Math.random() * 900);
+    const first = setTimeout(blink, 1800);
+    const loop = setInterval(() => Math.random() > 0.35 && blink(), 3100);
 
-    // Cleanup
-    return () => {
-      clearTimeout(idleTimer);
-      clearTimeout(firstBlink);
-      clearInterval(blinkInterval);
-    };
+    // 4) pause when offscreen
+    const io = new window.IntersectionObserver(([e]) => {
+      root.style.animationPlayState = e.isIntersecting ? 'running' : 'paused';
+    }, { threshold: 0.2 });
+    io.observe(root);
+
+    // Add click event listener for boing animation
+    root.addEventListener('click', () => {
+      root.classList.add('boing');
+      setTimeout(() => root.classList.remove('boing'), 350);
+    });
+
+    // First-load smile
+    setTimeout(() => {
+      root.classList.add('smile-now');
+      setTimeout(() => root.classList.remove('smile-now'), 280);
+    }, 2200);
+
+    return () => { clearTimeout(toIdle); clearTimeout(first); clearInterval(loop); io.disconnect(); };
   }, []);
 
   return (
