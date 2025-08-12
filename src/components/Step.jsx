@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 export default function Step({ step, alt }) {
