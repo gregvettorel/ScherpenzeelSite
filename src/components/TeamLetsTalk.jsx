@@ -46,7 +46,7 @@ export default function TeamLetsTalk() {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-10">
         <div className="text-center mb-10">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Team</h2>
+          <h2 className="section-title">Team</h2>
         </div>
 
         {/* Grid */}
@@ -58,7 +58,7 @@ export default function TeamLetsTalk() {
               className="card-wrap relative"        // was: "card-wrap relative inview"
             >
               {/* 1) BODY/HEAD — BEHIND the card */}
-              <img src={m.head} alt="" className="peek-body" draggable={false} />
+              <img src={m.head} alt="" className="peek-body" draggable={false} loading="lazy" decoding="async" />
 
               {/* 2) CARD SURFACE */}
               <article
@@ -69,11 +69,19 @@ export default function TeamLetsTalk() {
                 "
               >
                 {/* 3) HANDS — ABOVE the card edge */}
-                <img src={handsPeek} alt="" className="peek-hands" draggable={false} />
+                <img src={handsPeek} alt="" className="peek-hands" draggable={false} loading="eager" decoding="sync" />
 
                 {/* card content */}
                 <div className="mx-auto mb-6 size-44 rounded-full overflow-hidden ring-1 ring-gray-200">
-                  <img src={m.photo} alt={m.name} className="w-full h-full object-cover" />
+                  <img
+                    src={m.photo}
+                    alt={m.name}
+                    className="w-full h-full object-cover"
+                    width={176}
+                    height={176}
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
                 <h3 className="text-lg font-semibold">{m.name}</h3>
                 <p className="mt-2 text-[11px] tracking-[0.2em] text-gray-500 uppercase">{m.role}</p>

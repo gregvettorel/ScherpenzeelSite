@@ -30,7 +30,7 @@ function Projects() {
     <section className="px-4 sm:px-6 md:px-10 pt-1 pb-20">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-10">
-          <h2 className="text-2xl font-semibold">Projects</h2>
+          <h2 className="section-title">Projects</h2>
           <a
             href="#more"
             className="text-base font-bold hover:underline flex items-center gap-1"

@@ -40,8 +40,8 @@ export default function Services() {
   return (
     <section className="services">
       <div className="services__inner">
-        <h2 className="services__title">Services</h2>
-
+        {/* use the global section-title for consistent font/size */}
+        <h2 className="section-title mb-7">Services</h2>
         <div className="services__list">
           {items.map((s, i) => (
             <div className="services__row" key={i}>

@@ -10,13 +10,8 @@
   padding-top: 56px;
   padding-bottom: 64px;
 }
-.services__title {
-  font-weight: 800;
-  font-size: clamp(28px, 3.2vw, 34px);
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  margin: 0 0 28px;
-}
+
+/* removed .services__title — we now use .section-title globally */
 
 /* container with thin dividers like Figma */
 .services__list {
@@ -55,10 +50,10 @@
 /* ---- Middle column: description ---- */
 .services__desc {
   margin: 0;
-  color: #6b7280;            /* neutral gray */
+  color: #6b7280;
   font-size: clamp(16px, 2vw, 17px);
-  line-height: 1.7;          /* comfy leading */
-  max-width: 48ch;           /* match Figma text measure */
+  line-height: 1.7;
+  max-width: 48ch;
 }
 
 /* ---- Right column: pill arrow button ---- */
@@ -87,11 +82,11 @@
   width: 18px;
   height: 18px;
   color: #000;
-  transform: rotate(45deg);   /* diagonal ↗ */
+  transform: rotate(45deg);
   transition: transform .2s ease;
 }
 .services__btn:hover .services__btnIcon {
-  transform: translate(4px, -4px) rotate(45deg); /* subtle nudge like Figma */
+  transform: translate(4px, -4px) rotate(45deg);
 }
 
 /* ---- Responsive tweaks ---- */

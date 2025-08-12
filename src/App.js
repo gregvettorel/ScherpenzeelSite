@@ -21,7 +21,8 @@ import ProcessSteps from "./components/ProcessSteps";
 
 function App() {
   return (
-    <div className="bg-white text-black font-sans min-h-screen">
+    <div className="bg-white text-black font-body min-h-screen">
+      {/* was: font-sans */}
       <Navbar />
       <Hero />
       <Projects />

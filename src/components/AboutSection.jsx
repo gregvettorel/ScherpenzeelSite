@@ -9,7 +9,7 @@ export default function AboutSection() {
         {/* Section Title */}
         <h2
           id="about-heading"
-          className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 mb-10"
+          className="section-title text-gray-900 mb-10"
         >
           About us
         </h2>
