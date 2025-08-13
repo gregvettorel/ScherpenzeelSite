@@ -12,6 +12,7 @@ import AboutSection from "./components/AboutSection";
 import Services from "./components/Services";
 import TeamLetsTalk from "./components/TeamLetsTalk";
 import ProcessSteps from "./components/ProcessSteps"; 
+import Loader from "./components/Loader";
 
 // Later you'll add:
   // import Hero from "./components/Hero";
@@ -23,6 +24,7 @@ function App() {
   return (
     <div className="bg-white text-black font-body min-h-screen">
       {/* was: font-sans */}
+      <Loader />
       <Navbar />
       <Hero />
       <Projects />

@@ -1,0 +1,32 @@
+:root{
+  --wrap: 72rem;
+  --px: clamp(16px, 2.6vw, 28px);
+
+  --brand: #1877ff;
+  --ink: #111318;
+  --muted: #6b7280;
+  --surface: #fff;
+
+  --radius-2: 12px;
+  --radius-3: 18px;
+
+  --shadow-soft: 0 2px 20px rgba(0,0,0,.06);
+  --ring: rgba(0,0,0,.06);
+
+  --h1: clamp(40px, 6vw, 64px);
+  --h2: clamp(26px, 3vw, 34px);
+  --h3: clamp(18px, 2.2vw, 24px);
+
+  --lh-tight: 1.08;
+  --lh-copy: 1.7;
+}
+
+/* container helper */
+.wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: var(--px); }
+
+/* section rhythm */
+.section { padding: 72px 0; }
+.section--tight { padding: 48px 0; }
+
+.text-muted{ color: var(--muted); }
+.link-blue{ color: var(--brand); text-underline-offset: 4px; }

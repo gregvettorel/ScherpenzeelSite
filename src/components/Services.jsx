@@ -1,20 +1,20 @@
 import React from "react";
-import "../styles/services.css"; // Import your CSS for styles
+import "../styles/services.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faPenRuler,          // Design
+  faPencilRuler,        // Design
   faWrench,            // Build
-  faHandHoldingHeart,  // Ongoing Support
-  faHeadset,           // Consultation
-  faArrowRight,        // will rotate to make ↗
+  faLifeRing,          // Ongoing Support
+  faCompass,           // Consultation
+  faArrowUpRightFromSquare,      // will rotate to make ↗
 } from "@fortawesome/free-solid-svg-icons";
 
 const items = [
   {
-    icon: faPenRuler,
+    icon: faPencilRuler,
     title: "Design",
     desc:
-      "Need a name, logo or full brand? We craft identities that feel fresh, professional and on-point.",
+      "Need a name, logo or full brand? We craft identities that feel fresh, professional and on‑point.",
   },
   {
     icon: faWrench,
@@ -23,13 +23,13 @@ const items = [
       "We develop fast, responsive websites and scalable MVPs.",
   },
   {
-    icon: faHandHoldingHeart,
+    icon: faLifeRing,
     title: "Ongoing Support",
     desc:
-      "Hosting, updates, fixes and light improvements, so your product stays sharp and stress-free.",
+      "Hosting, updates, fixes and light improvements, so your product stays sharp and stress‑free.",
   },
   {
-    icon: faHeadset,
+    icon: faCompass,
     title: "Consultation",
     desc:
       "We work alongside you to define your vision, shape your roadmap, and offer honest technical advice.",
@@ -38,36 +38,25 @@ const items = [
 
 export default function Services() {
   return (
-    <section id="services" className="services">
-      <div className="services__inner">
-        {/* use the global section-title for consistent font/size */}
-        <h2 className="section-title mb-7">Services</h2>
-        <div className="services__list">
+    <section id="services" className="section">
+      <div className="wrap">
+        <h2 className="h2">Services</h2>
+        <div className="svc">
           {items.map((s, i) => (
-            <div className="services__row" key={i}>
-              {/* Left: icon + big title */}
-              <div className="services__label">
-                <FontAwesomeIcon icon={s.icon} className="services__icon" />
-                <span className="services__heading">{s.title}</span>
+            <article className="svc__row" key={i}>
+              <div className="svc__left">
+                <FontAwesomeIcon icon={s.icon} className="svc__icon" />
+                <span className="svc__title">{s.title}</span>
               </div>
-
-              {/* Middle: description */}
-              <p className="services__desc">{s.desc}</p>
-
-              {/* Right: pill outline with diagonal arrow */}
-              <div className="services__cta">
-                <button
-                  type="button"
-                  aria-label={`More about ${s.title}`}
-                  className="services__btn"
-                >
-                  <FontAwesomeIcon
-                    icon={faArrowRight}
-                    className="services__btnIcon"
-                  />
-                </button>
-              </div>
-            </div>
+              <p className="svc__desc">{s.desc}</p>
+              <a
+                href="/contact"
+                className="svc__cta"
+                aria-label={`More about ${s.title}`}
+              >
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+              </a>
+            </article>
           ))}
         </div>
       </div>

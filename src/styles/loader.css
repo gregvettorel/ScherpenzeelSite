@@ -1,0 +1,85 @@
+.wk-loader{
+  position: fixed; inset: 0; z-index: 9999;
+  display: grid; place-items: center;
+  isolation: isolate;
+  transition: opacity .35s ease, visibility .35s ease;
+  opacity: 1; visibility: visible;
+}
+.wk-loader--fade{
+  opacity: 0; visibility: hidden;
+}
+.wk-loader__glass{
+  position: absolute; inset: 0;
+  background: radial-gradient(1200px 600px at 50% -10%, rgba(24,119,255,.08), transparent 60%),
+              rgba(255,255,255,.35);
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+}
+.wk-loader__logo{
+  position: relative;
+  display: grid;
+  place-items: center;
+  gap: 14px;
+}
+.wk-loader__badge{
+  position: relative;
+  width: 84px; height: 84px;
+  border-radius: 24px;
+  background: rgba(255,255,255,.75);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.08),
+    inset 0 0 0 1px rgba(255,255,255,.5);
+  display: grid; place-items: center;
+  animation: wk-breathe 2.6s ease-in-out infinite;
+}
+.wk-loader__mark{
+  width: 52px; height: 52px; display:block;
+  filter: drop-shadow(0 4px 10px rgba(24,119,255,.18));
+  animation: wk-pop .6s cubic-bezier(.22,.61,.36,1) both;
+}
+.wk-loader__shimmer{
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(110deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,.65) 12%,
+      rgba(255,255,255,0) 24%);
+  transform: translateX(-120%);
+  animation: wk-shimmer 1400ms ease-in-out infinite;
+  mix-blend-mode: soft-light;
+}
+.wk-loader__dots{
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.wk-loader__dots span{
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #1877ff;
+  opacity: .5; transform: translateY(0);
+  animation: wk-dot 1.2s ease-in-out infinite;
+}
+.wk-loader__dots span:nth-child(2){ animation-delay: .15s; }
+.wk-loader__dots span:nth-child(3){ animation-delay: .30s; }
+@keyframes wk-breathe{
+  0%,100%{ transform: scale(1); }
+  50%    { transform: scale(1.035); }
+}
+@keyframes wk-pop{
+  from{ transform: translateY(6px) scale(.96); opacity: 0; }
+  to  { transform: translateY(0)  scale(1);   opacity: 1; }
+}
+@keyframes wk-shimmer{
+  0%  { transform: translateX(-120%); }
+  100%{ transform: translateX(120%);  }
+}
+@keyframes wk-dot{
+  0%, 60%, 100% { transform: translateY(0);    opacity: .5; }
+  30%           { transform: translateY(-5px); opacity: 1;  }
+}
+@media (prefers-reduced-motion: reduce){
+  .wk-loader__badge,
+  .wk-loader__mark,
+  .wk-loader__shimmer,
+  .wk-loader__dots span{
+    animation: none !important;
+  }
+}
