@@ -38,7 +38,7 @@ export default function TeamLetsTalk() {
   }, []);
 
   return (
-    <section className="relative">
+    <section id="team" className="relative">
       {/* Background shape */}
       <div className="absolute inset-0 -z-10 flex justify-center">
         <img src={backgroundLogo} alt="" aria-hidden="true" className="w-auto max-w-none h-full opacity-100" />
@@ -50,7 +50,7 @@ export default function TeamLetsTalk() {
         </div>
 
         {/* Grid */}
-        <div className="mx-auto max-w-4xl grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <div className="mx-auto max-w-4xl grid grid-cols-1 sm:grid-cols-2 gap-8 team-cards-grid">
           {team.map((m, i) => (
             <div
               key={m.name}

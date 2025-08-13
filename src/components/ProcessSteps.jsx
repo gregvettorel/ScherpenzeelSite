@@ -35,7 +35,7 @@ const steps = [
 
 export default function ProcessSteps() {
 	return (
-		<section className="process-steps">
+		<section id="how-it-works" className="process-steps">
 			<div className="process-steps__inner">
 				<h2 className="section-title text-center mb-10">How it works</h2>
 

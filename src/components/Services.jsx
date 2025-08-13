@@ -38,7 +38,7 @@ const items = [
 
 export default function Services() {
   return (
-    <section className="services">
+    <section id="services" className="services">
       <div className="services__inner">
         {/* use the global section-title for consistent font/size */}
         <h2 className="section-title mb-7">Services</h2>

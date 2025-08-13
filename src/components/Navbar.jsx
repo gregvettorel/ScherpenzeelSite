@@ -1,36 +1,96 @@
 // src/components/Navbar.jsx
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import "../styles/navbar.css";
 
-function Navbar() {
+const LINKS = [
+  { href: "#portfolio", label: "Portfolio" },
+  { href: "#how-it-works", label: "What We Offer" },
+  { href: "#pricing", label: "Pricing" },
+  { href: "#about", label: "About" },
+];
+
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+
+  // lock/unlock page scroll only while open
+  useEffect(() => {
+    document.body.classList.toggle("nav-locked", open);
+    return () => document.body.classList.remove("nav-locked");
+  }, [open]);
+
+  // close on ESC
+  useEffect(() => {
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
   return (
-    <nav className="pt-8 pb-5">
-      <div className="max-w-6xl mx-auto flex items-center justify-between text-sm">
-        {/* Left logo */}
-        <div className="flex items-center gap-2 shrink-0">
-          <img src="/logo_site.png" alt="Logo" className="h-10" />
-        </div>
-
-        {/* Center navigation */}
-        <ul className="hidden md:flex gap-8 font-medium text-sm">
-          <li><a href="#portfolio" className="hover:opacity-70">Portfolio</a></li>
-          <li><a href="#how-it-works" className="hover:opacity-70">What We Offer</a></li>
-          <li><a href="#pricing" className="hover:opacity-70">Pricing</a></li>
-          <li><a href="#about" className="hover:opacity-70">About</a></li>
-        </ul>
-
-        {/* Right items */}
-        <div className="flex items-center gap-6">
-          <a href="#work" className="font-semibold text-sm">Work</a>
-          <a
-            href="#contact"
-            className="px-4 py-1 border border-black rounded-full text-sm hover:bg-black hover:text-white transition"
-          >
-            Contact
+    <>
+      {/* HEADER (glass) */}
+      <header className="nav">
+        <div className="nav__inner">
+          <a href="/" className="nav__brand" aria-label="Home">
+            <img src="/logo_site.svg" alt="" />
           </a>
+
+          <nav className="nav__links" aria-label="Primary">
+            {LINKS.map((l) => (
+              <a key={l.href} href={l.href} className="nav__link">
+                {l.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="nav__right">
+            <a href="#work" className="nav__text">Work</a>
+            <a href="#contact" className="nav__btn">Contact</a>
+          </div>
+
+          <button
+            className="nav__burger"
+            aria-label="Open menu"
+            aria-controls="mobile-drawer"
+            aria-expanded={open}
+            onClick={() => setOpen(true)}
+          >
+            <span/><span/><span/>
+          </button>
         </div>
-      </div>
-    </nav>
+      </header>
+
+      {/* BACKDROP + DRAWER (siblings of header, above everything) */}
+      {open && (
+        <button
+          className="nav__backdrop"
+          aria-hidden="true"
+          onClick={() => setOpen(false)}
+        />
+      )}
+
+      <aside
+        id="mobile-drawer"
+        className={`nav__drawer ${open ? "is-open" : ""}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation"
+      >
+        <div className="drawer__head">
+          <img src="/logo_site.svg" alt="" />
+          <button className="drawer__close" aria-label="Close menu" onClick={() => setOpen(false)}>✕</button>
+        </div>
+
+        <nav className="drawer__links">
+          {LINKS.map((l) => (
+            <a key={l.href} href={l.href} className="drawer__link" onClick={() => setOpen(false)}>
+              {l.label}
+            </a>
+          ))}
+          <hr className="drawer__rule" />
+          <a href="#work" className="drawer__link" onClick={() => setOpen(false)}>Work</a>
+          <a href="#contact" className="drawer__btn" onClick={() => setOpen(false)}>Contact</a>
+        </nav>
+      </aside>
+    </>
   );
 }
-
-export default Navbar;

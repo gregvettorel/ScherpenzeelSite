@@ -49,3 +49,32 @@
   .peek-body, .peek-hands { width: 180px; }
   .peek-body { top: -130px; }
 }
+@media (max-width: 640px) {
+  .team-cards-grid,
+  .mx-auto.max-w-4xl.grid {
+    gap: 5.5rem !important; /* Even more vertical gap between cards */
+  }
+  .peek-body, .peek-hands {
+    width: 70px !important;   /* Make heads/hands smaller */
+  }
+  .peek-body {
+    top: -44px !important;    /* Move heads further up */
+  }
+  .team-card {
+    padding-top: 3.2rem !important; /* More space above the photo */
+  }
+  .section-title {
+    margin-top: 80px !important; /* Push title down further */
+    position: relative;
+    z-index: 2;
+  }
+  /* Add extra space above the first card to avoid overlap with the title */
+  .team-cards-grid > .card-wrap:first-child {
+    margin-top: 2.5rem !important;
+  }
+}
+
+/* If you want to hide the peek images on very small screens: */
+@media (max-width: 400px) {
+  .peek-body, .peek-hands { display: none !important; }
+}
