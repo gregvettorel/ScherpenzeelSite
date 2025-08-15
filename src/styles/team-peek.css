@@ -204,3 +204,11 @@
   width: 1rem;
   height: 1rem;
 }
+
+.section-title--center {
+  text-align: center;
+}
+
+.section-title--spaced {
+  margin-bottom: 2.5rem; /* same as Tailwind mb-10 */
+}
