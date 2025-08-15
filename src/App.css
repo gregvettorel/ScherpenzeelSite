@@ -36,3 +36,56 @@
     transform: rotate(360deg);
   }
 }
+
+@import "./styles/tokens.css";
+@import "./styles/services.css";
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif; /* default body font */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Only h1/h2 (and .section-title) use DM Sans */
+h1, h2, .section-title {
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* All other headings use Inter */
+h3, h4, h5, h6 {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Utility: section titles shared across sections */
+.section-title {
+  font-weight: 800;
+  font-size: clamp(28px, 3.2vw, 34px);
+  line-height: 1.15;
+  margin: 0; /* section spacing handled by containers */
+}
+
+/* Optional helpers if needed elsewhere */
+.font-title { font-family: 'DM Sans', sans-serif !important; }
+.font-body  { font-family: 'Inter', sans-serif !important; }
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.btn-solid{
+  display:inline-flex; align-items:center; gap:8px;
+  background:#000; color:#fff; padding:12px 18px; border-radius:999px;
+  font-weight:600; text-decoration:none; border:1px solid #000;
+  transition:opacity .2s ease;
+}
+.btn-solid:hover{ opacity:.9; }
+
+.btn-ghost{
+  display:inline-flex; align-items:center; gap:8px;
+  background:transparent; color:#000; padding:12px 18px; border-radius:999px;
+  border:1px solid #000; font-weight:600; text-decoration:none;
+  transition:all .2s ease;
+}
+.btn-ghost:hover{ background:#000; color:#

@@ -16,7 +16,6 @@ import Loader from "./components/Loader";
 function App() {
   return (
     <div className="bg-white text-black font-body min-h-screen">
-      {/* was: font-sans */}
       <Loader />
       <Navbar />
       <Hero />
@@ -26,13 +25,6 @@ function App() {
       <Services />
       <ProcessSteps />
       <TeamLetsTalk />
-   
-
-      {/* Add new sections below as you create them */}
-      {/* <Hero /> */}
-      {/* <Portfolio /> */}
-      {/* <Services /> */}
-      {/* <ContactSection /> */}
 
       <Footer />
     </div>

@@ -83,8 +83,8 @@ export default function TeamLetsTalk() {
       <div className="container pad-y-xl">
         <h2 className="cta-title">Let’s talk!</h2>
         <div className="cta-row">
-          <a href="mailto:hello@joey.co" className="cta-btn">
-            hello@joey.co
+          <a href="mailto:thisiswako@gmail.com" className="cta-btn">
+            thisiswako@gmail.com
             <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-sm" />
           </a>
         </div>

@@ -3,10 +3,9 @@ import React, { useEffect, useState } from "react";
 import "../styles/navbar.css";
 
 const LINKS = [
-  { href: "#portfolio", label: "Portfolio" },
-  { href: "#how-it-works", label: "What We Offer" },
-  { href: "#pricing", label: "Pricing" },
-  { href: "#about", label: "About" },
+  { href: "#portfolio", label: "Projects" },
+  { href: "#how-it-works", label: "Our Services" },
+  { href: "#about", label: "About Us" },
 ];
 
 export default function Navbar() {
@@ -43,7 +42,6 @@ export default function Navbar() {
           </nav>
 
           <div className="nav__right">
-            <a href="#work" className="nav__text">Work</a>
             <a href="#contact" className="nav__btn">Contact</a>
           </div>
 

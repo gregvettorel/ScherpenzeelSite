@@ -22,8 +22,8 @@ export default function Hero() {
             <a href="/contact" className="btn-solid">
               Free Advice <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
             </a>
-            <a href="mailto:wakodesign@gmail.com" className="btn-ghost">
-              wakodesign@gmail.com <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+            <a href="mailto:thisiswako@gmail.com" className="btn-ghost">
+              thisiswako@gmail.com <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
             </a>
           </div>
         </div>
