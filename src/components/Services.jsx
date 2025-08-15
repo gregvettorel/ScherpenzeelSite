@@ -33,21 +33,21 @@ const items = [
 
 export default function Services() {
   return (
-    <section id="services" className="section">
-      <div className="wrap">
-        <h2 className="h2">Services</h2>
+    <section id="services" className="services-section">
+      <div className="services-wrap">
+        <h2 className="services-title">Services</h2>
 
-        <div className="svc">
+        <div className="services-list">
           {items.map((s, i) => (
-            <article className="svc__row" key={i}>
-              <div className="svc__left">
-                <FontAwesomeIcon icon={s.icon} className="svc__icon" />
-                <span className="svc__title">{s.title}</span>
+            <article className="services-row" key={i}>
+              <div className="services-left">
+                <FontAwesomeIcon icon={s.icon} className="services-icon" />
+                <span className="services-row-title">{s.title}</span>
               </div>
 
-              <p className="svc__desc">{s.desc}</p>
+              <p className="services-desc">{s.desc}</p>
 
-              <a href="/contact" className="svc__cta" aria-label={`More about ${s.title}`}>
+              <a href="/contact" className="services-cta" aria-label={`More about ${s.title}`}>
                 <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
               </a>
             </article>
