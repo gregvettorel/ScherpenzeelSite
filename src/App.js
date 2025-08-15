@@ -1,6 +1,5 @@
 // src/App.js
 import React from "react";
-import './output.css';
 
 // ✅ New component imports
 import Navbar from "./components/Navbar";
@@ -13,12 +12,6 @@ import Services from "./components/Services";
 import TeamLetsTalk from "./components/TeamLetsTalk";
 import ProcessSteps from "./components/ProcessSteps"; 
 import Loader from "./components/Loader";
-
-// Later you'll add:
-  // import Hero from "./components/Hero";
-  // import Portfolio from "./components/Portfolio";
-  // import Services from "./components/Services";
-  // import ContactSection from "./components/ContactSection";
 
 function App() {
   return (
