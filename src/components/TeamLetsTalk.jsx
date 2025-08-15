@@ -2,8 +2,6 @@ import React, { useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
-import backgroundLogo from "../assets/backgroundlogo.png";
-
 // circle photos
 import gregoryImage from "../assets/team-gregory.png";
 import ilianImage from "../assets/team-ilian.png";

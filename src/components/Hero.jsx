@@ -1,9 +1,6 @@
 // src/components/Hero.jsx
 import React from "react";
-import heroImage from "../assets/hero.svg";
 import { ReactComponent as HeroVisual } from "../assets/hero.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import "../styles/hero-anim.css";
 
 export default function Hero() {
@@ -24,7 +21,6 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Inline SVG so CSS can target inner IDs/classes */}
         <div style={{flex:1,display:"grid",placeItems:"center"}}>
           <HeroVisual className="hero-visual" />
         </div>
