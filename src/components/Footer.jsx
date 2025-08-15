@@ -1,14 +1,20 @@
-// src/components/Footer.jsx
-import React from 'react';
+import React from "react";
+import "../styles/footer.css";
 
 function Footer() {
   return (
-    <footer className="text-center text-xs text-gray-400 mt-16 px-4 py-6">
+    <footer className="footer">
       <p>2023 © — Made by Wako design</p>
-      <div className="mt-2 flex justify-center gap-4 text-gray-400">
-        <a href="google.com" className="hover:underline">Dribbble</a>
-        <a href="google.com" className="hover:underline">Instagram</a>
-        <a href="google.com" className="hover:underline">LinkedIn</a>
+      <div className="footer-links">
+        <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer">
+          Dribbble
+        </a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+          Instagram
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+          LinkedIn
+        </a>
       </div>
     </footer>
   );
