@@ -63,11 +63,12 @@
   .team-card {
     padding-top: 3.2rem !important; /* More space above the photo */
   }
-  .section-title {
-    margin-top: 80px !important; /* Push title down further */
+  #team .section-title {
+    margin-top: 80px !important;
     position: relative;
     z-index: 2;
   }
+  
   /* Add extra space above the first card to avoid overlap with the title */
   .team-cards-grid > .card-wrap:first-child {
     margin-top: 2.5rem !important;

@@ -1,8 +1,10 @@
 // src/components/Hero.jsx
 import React from "react";
 import heroImage from "../assets/hero.svg";
+import { ReactComponent as HeroVisual } from "../assets/hero.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import "../styles/hero-anim.css";
 
 export default function Hero() {
   return (
@@ -17,12 +19,14 @@ export default function Hero() {
             fully dedicated to your product → from first sketch to final build.
           </p>
           <div style={{display:"flex",gap:12,flexWrap:"wrap"}}>
-            <a href="/contact" className="btn-solid">Free Advice <FontAwesomeIcon icon={faArrowUpRightFromSquare}/></a>
-            <a href="mailto:wakodesign@gmail.com" className="btn-ghost">wakodesign@gmail.com <FontAwesomeIcon icon={faArrowUpRightFromSquare}/></a>
+            <a href="/contact" className="btn-solid">Free Advice</a>
+            <a href="mailto:wakodesign@gmail.com" className="btn-ghost">wakodesign@gmail.com</a>
           </div>
         </div>
+
+        {/* Inline SVG so CSS can target inner IDs/classes */}
         <div style={{flex:1,display:"grid",placeItems:"center"}}>
-          <img src={heroImage} alt="Developers working" style={{width:"min(480px,100%)",height:"auto"}}/>
+          <HeroVisual className="hero-visual" />
         </div>
       </div>
     </section>

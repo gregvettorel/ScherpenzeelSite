@@ -1,133 +1,62 @@
-/* ---- Layout & rhythm ---- */
-.services {
-  background: #fff;
-}
-.services__inner {
-  max-width: 72rem;
-  margin: 0 auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  padding-top: 56px;
-  padding-bottom: 64px;
+/* Section spacing (mobile tightened per-section) */
+@media (max-width: 768px) {
+  #services.section { padding-top: 40px; padding-bottom: 40px; }
 }
 
-/* removed .services__title — we now use .section-title globally */
+/* Heading */
+.h2 { font-size: var(--h2); font-weight: 800; margin: 0 0 24px; }
 
-/* container with thin dividers like Figma */
-.services__list {
-  border-top: 1px solid rgba(0,0,0,0.1);
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-}
-.services__row {
+/* Container with thin dividers */
+.svc { border-top: 1px solid #e7e7e9; }
+
+.svc__row {
   display: grid;
-  grid-template-columns: 1.2fr 1.8fr auto; /* ≈ 4 / 6 / 2 */
+  grid-template-columns: 1.2fr 1.6fr auto; /* left / desc / cta */
   align-items: center;
-  column-gap: 28px;
-  padding: 28px 0;
-  border-top: 1px solid rgba(0,0,0,0.1);
-}
-.services__row:first-child { border-top: 0; }
-
-/* ---- Left column: icon + heading ---- */
-.services__label {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  min-width: 280px;
-}
-.services__icon {
-  width: 28px;
-  height: 28px;
-  color: #000;
-}
-.services__heading {
-  font-weight: 700;
-  font-size: clamp(22px, 2.6vw, 28px);
-  line-height: 1.2;
-  letter-spacing: -0.01em;
+  gap: 24px;
+  padding: 22px 0;
+  border-bottom: 1px solid #e7e7e9;
 }
 
-/* ---- Middle column: description ---- */
-.services__desc {
+/* Left column: icon + title */
+.svc__left { display: flex; align-items: center; gap: 14px; min-width: 240px; }
+.svc__icon { width: 28px; height: 28px; color: #000; }
+.svc__title { font-size: 28px; font-weight: 800; line-height: 1.2; }
+
+/* Middle column: description */
+.svc__desc {
   margin: 0;
-  color: #6b7280;
-  font-size: clamp(16px, 2vw, 17px);
-  line-height: 1.7;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: var(--lh-copy);
   max-width: 48ch;
 }
 
-/* ---- Right column: pill arrow button ---- */
-.services__cta {
-  display: flex;
-  justify-content: flex-end;
-}
-.services__btn {
-  height: 48px;
-  padding: 0 24px;
+/* Right column: pill icon button */
+.svc__cta {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
   border-radius: 999px;
-  border: 1px solid rgba(0,0,0,0.28);
-  background: #fff;
-  cursor: pointer;
-  transition: border-color .2s ease, background-color .2s ease, transform .2s ease;
-}
-.services__btn:hover {
-  border-color: rgba(0,0,0,0.6);
-  background-color: #f8f8f8;
-}
-.services__btn:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
-}
-.services__btnIcon {
-  width: 18px;
-  height: 18px;
+  border: 1px solid #d8dbe0;
   color: #000;
-  transform: rotate(45deg);
-  transition: transform .2s ease;
+  text-decoration: none;
+  transition: transform .2s ease, background-color .2s ease, border-color .2s ease;
 }
-.services__btn:hover .services__btnIcon {
-  transform: translate(4px, -4px) rotate(45deg);
-}
+.svc__cta svg { width: 18px; height: 18px; transform: rotate(45deg); }
+.svc__cta:hover { background: #f6f7f8; border-color: #cdd1d8; transform: translateX(2px); }
 
-/* ---- Responsive tweaks ---- */
+/* Responsive */
 @media (max-width: 900px) {
-  .services__row {
-    grid-template-columns: 1fr 1fr auto;
-    column-gap: 20px;
-  }
-  .services__label { min-width: 0; }
-}
-@media (max-width: 680px) {
-  .services__row {
-    grid-template-columns: 1fr;
-    row-gap: 10px;
-    align-items: start;
-  }
-  .services__cta { justify-content: flex-start; }
-  .services__btn { height: 44px; padding: 0 20px; }
+  .svc__row { grid-template-columns: 1fr; gap: 12px; }
+  .svc__left { min-width: unset; }
+  .svc__desc { max-width: none; }
+  .svc__cta { justify-self: start; }
+
+.svc__row:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
-.h2{ font-size:var(--h2); font-weight:800; margin:0 0 24px; }
-
-.svc{ border-top:1px solid #e7e7e9; }
-.svc__row{
-  display:grid; grid-template-columns: 1.2fr 1.6fr auto;
-  align-items:center; gap:24px;
-  padding:22px 0; border-bottom:1px solid #e7e7e9;
-}
-.svc__left{ display:flex; align-items:center; gap:14px; min-width:240px; }
-.svc__icon{ width:28px; height:28px; color:#000; }
-.svc__title{ font-size:28px; font-weight:800; }
-
-.svc__desc{ color:var(--muted); font-size:18px; line-height:var(--lh-copy); margin:0; }
-.svc__cta{
-  display:inline-grid; place-items:center; width:44px; height:44px;
-  border-radius:999px; border:1px solid #d8dbe0; color:#000; text-decoration:none;
-  transition: all .2s ease;
-}
-.svc__cta:hover{ background:#f6f7f8; border-color:#cdd1d8; transform:translateX(2px); }
-
-@media (max-width: 900px){
-  .svc__row{ grid-template-columns: 1fr; gap:12px; }
-  .svc__left{ min-width:unset; }
 }

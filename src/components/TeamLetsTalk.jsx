@@ -39,10 +39,6 @@ export default function TeamLetsTalk() {
 
   return (
     <section id="team" className="relative">
-      {/* Background shape */}
-      <div className="absolute inset-0 -z-10 flex justify-center">
-        <img src={backgroundLogo} alt="" aria-hidden="true" className="w-auto max-w-none h-full opacity-100" />
-      </div>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-10">
         <div className="text-center mb-10">

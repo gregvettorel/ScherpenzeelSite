@@ -1,39 +1,35 @@
 // AboutSection.jsx
 import React from "react";
-import macbookImage from '../assets/macbookwako.png';
+import "../styles/about.css";
+import macbookImage from "../assets/macbookwako.png";
 
 export default function AboutSection() {
   return (
-    <section id="about" aria-labelledby="about-heading" className="bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-10 pt-16 pb-20">
-        {/* Section Title */}
-        <h2
-          id="about-heading"
-          className="section-title text-gray-900 mb-10"
-        >
+    <section id="about" className="about">
+      <div className="about__wrap">
+        <h2 id="about-heading" className="section-title about__title">
           About us
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        <div className="about__grid">
           {/* Left: image */}
-          <div className="lg:col-span-6">
-            <div className="relative overflow-hidden ring-black/5 rounded-2xl ">
+          <div className="about__media">
+            <div className="about__mediaInner">
               <img
                 src={macbookImage}
                 alt="Wako brand displayed on a laptop screen"
-                className="block w-full h-auto object-cover"
+                className="about__img"
               />
             </div>
           </div>
 
           {/* Right: text */}
-          <div className="lg:col-span-6">
-            <h3 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 mb-5">
-              At Wako, we turn ideas into digital
-              products people remember.
+          <div className="about__content">
+            <h3 className="about__headline">
+              At Wako, we turn ideas into digital products people remember.
             </h3>
 
-            <div className="space-y-4 text-gray-600 text-base sm:text-lg max-w-xl">
+            <div className="about__copy">
               <p>
                 We blend bold design with precise development to craft websites
                 and apps that not only look beautiful but also work flawlessly.
