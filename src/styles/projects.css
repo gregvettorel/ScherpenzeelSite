@@ -1,0 +1,57 @@
+.projects-section {
+  padding: 0.25rem 1rem 5rem; /* top, sides, bottom */
+}
+
+.projects-container {
+  max-width: 72rem; /* ~1152px like Tailwind's max-w-6xl */
+  margin: 0 auto;
+}
+
+.projects-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem; /* ~mb-10 */
+}
+
+.more-link {
+  font-size: 1rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.more-link:hover {
+  text-decoration: underline;
+}
+
+.arrow {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.project-title {
+  font-weight: bold;
+  font-size: 1.125rem; /* ~text-lg */
+  margin-bottom: 0.25rem;
+}
+
+.project-category {
+  font-size: 0.875rem; /* ~text-sm */
+  color: #6b7280; /* Tailwind's text-gray-500 */
+}
