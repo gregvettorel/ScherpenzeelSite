@@ -42,7 +42,7 @@
 .hero-visual #mug { animation: float-s 6.8s ease-in-out .6s infinite; }
 @keyframes float-s { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
 
-/* Subtle ground shadow (add <ellipse id="shadow" ...> to SVG) */
+/* Subtle ground shadow */
 .hero-visual #shadow {
   opacity:.18;
   transform-origin:center;
@@ -50,9 +50,7 @@
 }
 @keyframes shadow-breathe { 0%,100%{transform:scaleX(1)} 50%{transform:scaleX(.92)} }
 
-
-
-/* --- EYE BLINK (opacity only, both Ilian and Gregory eyes blink together) --- */
+/* --- EYE BLINK --- */
 .hero-visual #lefteyeilian,
 .hero-visual #righteyeilian,
 .hero-visual #lefteye_greg,
@@ -65,7 +63,7 @@
   97%, 98%     { opacity: 0; }
 }
 
-/* Synced blink (add class="eye" to all four eye paths in your SVG) */
+/* Synced blink */
 .hero-visual .eye { transform-origin: center; }
 .hero-visual.blink-now #lefteyeilian,
 .hero-visual.blink-now #righteyeilian,
@@ -74,8 +72,6 @@
   animation: wink 140ms ease-in-out forwards;
 }
 @keyframes wink { to { transform: scaleY(0.06); } }
-
-
 
 /* --- STEAM --- */
 .hero-visual #steam_short_line,
@@ -118,7 +114,7 @@
 .hero-visual #fingersgreg  #MIDDLEFINGER-2 { --press-delay: 0.18s; }
 .hero-visual #fingersgreg  #UPPERFINGER-2  { --press-delay: 0.34s; }
 
-/* Typing burst (keep steam tweak only) */
+/* Typing burst */
 @keyframes laptop-nudge {
   0%, 100% { transform: translateY(0) rotate(0); }
   50%      { transform: translateY(1.4px) rotate(-0.6deg); }
@@ -184,7 +180,7 @@
 
 @media (max-width: 768px) {
   #hero.section {
-    padding-top: 40px;   /* reduced from desktop spacing */
+    padding-top: 40px;
     padding-bottom: 40px;
   }
 
@@ -195,16 +191,16 @@
   }
 
   #hero .wrap > div:first-child {
-    order: 2; /* text second */
+    order: 2;
   }
 
   #hero .wrap > div:last-child {
-    order: 1; /* image first */
+    order: 1;
   }
 
   #hero .wrap img,
   #hero .wrap .hero-visual {
-    max-width: 260px; /* smaller image */
+    max-width: 260px;
     width: 100%;
     height: auto;
   }
@@ -267,5 +263,13 @@
     max-width: 260px;
     width: 100%;
     height: auto;
+  }
+}
+
+/* Slight desktop scale-down for hero visual */
+@media (min-width: 901px) {
+  .hero__visual-wrap .hero-visual {
+    transform: scale(0.92);
+    transform-origin: center;
   }
 }
