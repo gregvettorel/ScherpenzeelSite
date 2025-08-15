@@ -1,27 +1,33 @@
 // src/components/Hero.jsx
 import React from "react";
 import { ReactComponent as HeroVisual } from "../assets/hero.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import "../styles/hero-anim.css";
 
 export default function Hero() {
   return (
-    <section className="section" id="hero">
-      <div className="wrap" style={{display:"flex",gap:"40px",alignItems:"center",justifyContent:"space-between"}}>
-        <div style={{flex:1,minWidth:300}}>
-          <h1 style={{fontSize:"var(--h1)",lineHeight:"var(--lh-tight)",fontWeight:800,margin:"0 0 16px"}}>
-            Your product,<br/>ready to <span style={{color:"var(--brand)"}}>launch.</span>
+    <section className="section hero" id="hero">
+      <div className="wrap hero__row">
+        <div className="hero__content">
+          <h1 className="hero__title">
+            Your product,<br />
+            ready to <span className="hero__accent">launch.</span>
           </h1>
-          <p className="text-muted" style={{fontSize:"18px",margin:"0 0 28px"}}>
+          <p className="hero__lead">
             <a className="link-blue" href="/services">Design and development</a>, handled by two specialists
             fully dedicated to your product → from first sketch to final build.
           </p>
-          <div style={{display:"flex",gap:12,flexWrap:"wrap"}}>
-            <a href="/contact" className="btn-solid">Free Advice</a>
-            <a href="mailto:wakodesign@gmail.com" className="btn-ghost">wakodesign@gmail.com</a>
+          <div className="hero__actions">
+            <a href="/contact" className="btn-solid">
+              Free Advice <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+            </a>
+            <a href="mailto:wakodesign@gmail.com" className="btn-ghost">
+              wakodesign@gmail.com <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+            </a>
           </div>
         </div>
-
-        <div style={{flex:1,display:"grid",placeItems:"center"}}>
+        <div className="hero__visual-wrap">
           <HeroVisual className="hero-visual" />
         </div>
       </div>
