@@ -29,4 +29,4 @@
 .section--tight { padding: 48px 0; }
 
 .text-muted{ color: var(--muted); }
-.link-blue{ color: var(--brand); text-underline-offset: 4px; }
+.link-blue{ color: var(--brand); text-underline-offset: 4px; text-decoration: none;}

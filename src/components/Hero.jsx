@@ -7,7 +7,7 @@ import "../styles/hero-anim.css";
 
 export default function Hero() {
   return (
-    <section className="section hero" id="hero">
+    <section id="hero" className="section section--pad hero">
       <div className="wrap hero__row">
         <div className="hero__content">
           <h1 className="hero__title">
