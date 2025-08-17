@@ -4,12 +4,10 @@
 }
 
 .services-wrap {
-  max-width: 1152px;               /* ~6xl */
-  margin: 0 auto;
-  padding: 0 16px;
+  /* padding: 0 16px; */
 }
-@media (min-width: 640px) { .services-wrap { padding: 0 24px; } }
-@media (min-width: 1024px){ .services-wrap { padding: 0 40px; } }
+@media (min-width: 640px) { .services-wrap { /* padding: 0 24px; */ } }
+@media (min-width: 1024px){ .services-wrap { /* padding: 0 40px; */ } }
 
 /* ===== Title (smaller than hero) ===== */
 .services-title {

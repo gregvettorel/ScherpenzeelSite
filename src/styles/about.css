@@ -7,14 +7,13 @@
 .about__wrap {
   max-width: 72rem;           /* ~1152px */
   margin: 0 auto;
-  padding-inline: 16px;       /* mobile side padding */
   padding-top: 0;             /* removed on mobile */
   padding-bottom: 0;          /* removed on mobile */
 }
 
 /* Increase horizontal padding on wider screens */
-@media (min-width: 640px) { .about__wrap { padding-inline: 24px; } }
-@media (min-width: 768px) { .about__wrap { padding-inline: 40px; } }
+@media (min-width: 640px) { .about__wrap { /* padding-inline: 24px; */ } }
+@media (min-width: 768px) { .about__wrap { /* padding-inline: 40px; */ } }
 
 /* Add vertical rhythm back on desktop only */
 @media (min-width: 768px) {

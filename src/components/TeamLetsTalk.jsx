@@ -37,7 +37,7 @@ export default function TeamLetsTalk() {
   }, []);
 
   return (
-    <section id="team" className="team-section">
+    <section id="team" className="team-section section-pad">
       <div className="container pad-y-lg">
         <div className="text-center mb-lg">
           <h2 className="section-title">Team</h2>

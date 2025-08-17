@@ -55,3 +55,14 @@
   font-size: 0.875rem; /* ~text-sm */
   color: #6b7280; /* Tailwind's text-gray-500 */
 }
+
+.container {
+  /* padding-left: 1rem; */
+  /* padding-right: 1rem; */
+}
+@media (min-width: 640px) {
+  .container { /* padding-left: 1.5rem; padding-right: 1.5rem; */ }
+}
+@media (min-width: 1024px) {
+  .container { /* padding-left: 2rem; padding-right: 2rem; */ }
+}

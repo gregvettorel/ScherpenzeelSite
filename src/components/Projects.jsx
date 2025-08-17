@@ -11,7 +11,7 @@ const projects = [
 
 function Projects() {
   return (
-    <section id="portfolio" className="projects-section">
+    <section id="portfolio" className="projects-section section-pad">
       <div className="projects-container">
         <div className="projects-header">
           <h2 className="section-title">Projects</h2>

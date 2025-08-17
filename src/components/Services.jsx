@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/services.css";
+import "../styles/tokens.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPencilRuler,      // Design
@@ -33,7 +34,7 @@ const items = [
 
 export default function Services() {
   return (
-    <section id="services" className="services-section">
+    <section id="services" className="services-section section-pad">
       <div className="services-wrap">
         <h2 className="services-title">Services</h2>
 

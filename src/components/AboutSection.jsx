@@ -5,7 +5,7 @@ import macbookImage from "../assets/macbookwako.png";
 
 export default function AboutSection() {
   return (
-    <section id="about" className="about">
+    <section id="about" className="about section-pad">
       <div className="about__wrap">
         <h2 id="about-heading" className="section-title about__title">
           About us
