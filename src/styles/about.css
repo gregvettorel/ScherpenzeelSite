@@ -9,6 +9,9 @@
   margin: 0 auto;
   padding-top: 0;             /* removed on mobile */
   padding-bottom: 0;          /* removed on mobile */
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  /* Only vertical padding if needed */
 }
 
 /* Increase horizontal padding on wider screens */

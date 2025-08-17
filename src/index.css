@@ -1,14 +1,15 @@
 @import "./styles/tokens.css";
 @import "./styles/services.css";
 
+/* Body uses Inter */
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif; /* default body font */
+  font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Only h1/h2 (and .section-title) use DM Sans */
+/* h1, h2, and .section-title use DM Sans */
 h1, h2, .section-title {
   font-family: 'DM Sans', sans-serif;
   letter-spacing: -0.01em;
@@ -19,17 +20,25 @@ h3, h4, h5, h6 {
   font-family: 'Inter', sans-serif;
 }
 
-/* Utility: section titles shared across sections */
+/* Section title utility */
 .section-title {
   font-weight: 800;
   font-size: clamp(28px, 3.2vw, 34px);
   line-height: 1.15;
-  margin: 0; /* section spacing handled by containers */
+  margin: 0;
 }
 
-/* Optional helpers if needed elsewhere */
-.font-title { font-family: 'DM Sans', sans-serif !important; }
-.font-body  { font-family: 'Inter', sans-serif !important; }
+/* Section horizontal padding */
+.section-pad {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+/* Remove horizontal paddings from other containers (handled by .section-pad) */
+.wrap, .container, .about__wrap, .projects-container, .services-wrap {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
