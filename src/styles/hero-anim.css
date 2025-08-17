@@ -233,7 +233,20 @@
 }
 .hero__accent {
   color: var(--brand);
+    display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
+.hero__accent:hover {
+  animation: launch-bounce 0.6s ease-out;
+}
+
+@keyframes launch-bounce {
+  0%   { transform: translateY(0); }
+  40%  { transform: translateY(-6px); }
+  60%  { transform: translateY(-2px); }
+  100% { transform: translateY(0); }
+}
+
 .hero__lead {
   color: var(--muted);
   font-size: 18px;
