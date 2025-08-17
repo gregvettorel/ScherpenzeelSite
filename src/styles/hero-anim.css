@@ -230,6 +230,7 @@
   font-weight: 800;
   margin: 0 0 16px 0;
   font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
 }
 .hero__accent {
   color: var(--brand);
