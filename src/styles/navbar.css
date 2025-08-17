@@ -12,7 +12,7 @@ body.nav-locked { overflow: hidden; }  /* lock scroll only while menu is open */
   box-shadow: 0 2px 12px rgba(0,0,0,0.04);
 }
 .nav__inner{
-  max-width: 1120px; margin: 0 auto; padding: 14px 20px;
+  max-width: 1120px; margin: 0 auto; padding: 20px 0px;
   display: grid; grid-template-columns: auto 1fr auto auto; gap: 20px; align-items: center;
 }
 .nav__brand img{ height: 28px; display: block; }
@@ -85,5 +85,5 @@ body.nav-locked { overflow: hidden; }  /* lock scroll only while menu is open */
 @media (max-width: 960px){
   .nav__links, .nav__right{ display: none; }
   .nav__burger{ display: block; justify-self: end; }
-  .nav__inner{ grid-template-columns: auto 1fr auto; }
+  .nav__inner{ grid-template-columns: auto 1fr auto;  padding: 14px 20px;}
 }
