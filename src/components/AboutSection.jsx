@@ -1,8 +1,9 @@
-// AboutSection.jsx
+// src/components/AboutSection.jsx
 import React from "react";
 import "../styles/about.css";
 import macbookImage from "../assets/macbookwako.png";
 import SectionReveal from "./SectionReveal";
+import AboutIcon from "./AboutIcon";
 
 export default function AboutSection() {
   return (
@@ -24,23 +25,41 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* Right: text */}
+          {/* Right: content */}
           <div className="about__content">
-            <h3 className="about__headline">
-              At Wako, we turn ideas into digital products people remember.
-            </h3>
-
+            <h3 className="about__headline">Small team. Big impact.</h3>
             <div className="about__copy">
               <p>
-                We blend bold design with precise development to craft websites
-                and apps that not only look beautiful but also work flawlessly.
+                We’re two specialists blending design, code, and marketing into digital
+                products that stand out.
               </p>
               <p>
-                With backgrounds in marketing, branding, and technology, we
-                create products that connect with audiences and deliver
-                measurable results.
+                We started Wako to bridge design and development — offering the clarity of
+                design and the reliability of engineering, without the overhead of a big
+                agency.
               </p>
+              <p>
+                Every project gets our full attention from first sketch to launch. No layers
+                of management. No handoffs. Just direct collaboration, sharp ideas, and
+                results you can see.
+              </p>
+
+              <div className="about__chips">
+                <span className="about__chip">
+                  <AboutIcon type="design" />
+                  3 years UI/UX & marketing
+                </span>
+                <span className="about__chip">
+                  <AboutIcon type="dev" />
+                  3.5 years full-stack dev
+                </span>
+                <span className="about__chip">
+                  <AboutIcon type="degree" />
+                  Degrees in design & tech
+                </span>
+              </div>
             </div>
+
           </div>
         </div>
       </div>
