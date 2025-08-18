@@ -26,8 +26,9 @@ body.nav-locked {
 .nav__inner {
   max-width: var(--wrap);
   margin: 0 auto;
-  margin: 0px 5%;
-  padding: 20px 0px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  /* no left/right padding here */
   display: grid;
   grid-template-columns: auto 1fr auto auto;
   align-items: center;
@@ -216,12 +217,10 @@ body.nav-locked {
 
 /* ===== responsive ===== */
 @media (max-width: 960px) {
-
   .nav__links,
   .nav__right {
     display: none;
   }
-
   .nav__burger {
     display: block;
     justify-self: end;

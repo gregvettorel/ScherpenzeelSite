@@ -3,7 +3,7 @@
   --wrap: 72rem;
   --px: clamp(16px, 2.6vw, 28px);
 
-  --brand: #1877ff;
+  --brand: #0579FE;
   --ink: #111318;
   --muted: #6b7280;
   --surface: #fff;
@@ -26,23 +26,21 @@
 .wrap {
   max-width: var(--wrap);
   margin-inline: auto;
-
+  padding-inline: var(--px); /* ensures consistent side padding everywhere */
 }
 
 /* section rhythm */
 .section { padding: 72px 0; }
 .section--tight { padding: 48px 0; }
 .section-pad {
-  padding-left: 5%;
-  padding-right: 5%;
-  padding-bottom: 5%;
+  padding-inline: var(--px);
+  padding-bottom: var(--px);
 }
 
 @media (max-width: 700px) {
   .section-pad {
-    padding-left: 10%;
-    padding-right: 10%;
-    padding-bottom: 10%;
+    padding-inline: var(--px);
+    padding-bottom: calc(var(--px) * 1.25);
   }
 }
 

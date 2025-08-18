@@ -167,7 +167,7 @@
 .cta-title {
   text-align: center;
   font-weight: 700;
-  color: #2563eb; /* Tailwind blue-600 */
+  color: #0579FE; /* Tailwind blue-600 */
   /* 4xl..7xl responsive scale */
   font-size: clamp(2.25rem, 6vw, 4.5rem);
   line-height: 1.1;

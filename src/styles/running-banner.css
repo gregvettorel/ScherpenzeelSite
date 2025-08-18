@@ -1,7 +1,7 @@
 .running-banner {
   position: relative;
   width: 100%;
-  background-color: #2563eb; /* blue-600 */
+  background-color: #0579FE; /* blue-600 */
   overflow: hidden;
 
   /* Taller banner */
@@ -27,6 +27,9 @@
   color: white;
   letter-spacing: 0.05em;
   font-size: clamp(2.5rem, 5vw, 6rem); /* responsive size */
+  font-family: DM Sans, sans-serif;
+  /* make sure there is no spacing between letters*/
+  letter-spacing: 0;
 }
 
 @keyframes ticker {

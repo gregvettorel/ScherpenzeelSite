@@ -35,13 +35,11 @@ const steps = [
 
 export default function ProcessSteps() {
 	return (
-		<section id="how-it-works" className=" section-pad">
-			<div className="wrap">
-				<h2 className="section-title text-center mb-10">How it works</h2>
-				{steps.map((step, i) => (
-					<Step key={step.number} step={step} alt={i % 2 === 1} />
-				))}
-			</div>
+		<section id="how-it-works" className="section-pad">
+			<h2 className="section-title text-center mb-10">How it works</h2>
+			{steps.map((step, i) => (
+				<Step key={step.number} step={step} alt={i % 2 === 1} />
+			))}
 		</section>
 	);
 }

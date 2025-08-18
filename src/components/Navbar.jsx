@@ -28,7 +28,7 @@ export default function Navbar() {
     <>
       {/* HEADER (glass) */}
       <header className="nav">
-        <div className="nav__inner">
+        <div className="nav__inner wrap">
           <a href="/" className="nav__brand" aria-label="Home">
             <img src="/logo_site.svg" alt="" />
           </a>
