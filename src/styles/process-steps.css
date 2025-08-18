@@ -1,14 +1,4 @@
-.process-steps {
-  background: #fff;
-  padding: 0 0 64px 0;
-}
-.process-steps__inner {
-  max-width: 72rem;
-  margin: 0 auto;
-  /* padding: 0 1.5rem; */
-  display: flex;
-  flex-direction: column;                      /* more breathing room like Figma */
-}
+
 
 /* Symmetric columns: visual | connector | text */
 .process-steps__row {
@@ -94,9 +84,6 @@
   margin: 0;
 }
 
-/* Keep the center connector fixed width */
-.process-steps__connector { flex: 0 0 220px; align-self: center; }
-.process-steps__connector svg { width: 100%; height: 24px; overflow: visible; }
 
 /* Responsive */
 @media (max-width: 900px) {

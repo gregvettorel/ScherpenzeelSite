@@ -26,7 +26,7 @@
 .wrap {
   max-width: var(--wrap);
   margin-inline: auto;
-  padding-inline: var(--px);
+
 }
 
 /* section rhythm */
