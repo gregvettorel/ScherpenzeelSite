@@ -27,8 +27,10 @@ function Projects() {
                 src={project.image}
                 alt={project.title}
               />
-              <div className="project-title">{project.title}</div>
-              <div className="project-category">{project.category}</div>
+              <div className="project-info">
+                <div className="project-title">{project.title}</div>
+                <div className="project-category">{project.category}</div>
+              </div>
             </div>
           ))}
         </div>
