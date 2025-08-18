@@ -7,8 +7,7 @@ import {
   faPencilRuler,
   faWrench,
   faLifeRing,
-  faCompass,
-  faArrowRight,
+  faCompass
 } from "@fortawesome/free-solid-svg-icons";
 import SectionReveal from "./SectionReveal";
 import WakoButton from "./WakoButton";

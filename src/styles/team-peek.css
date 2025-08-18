@@ -221,5 +221,21 @@
 }
 
 .section-title--spaced {
-  margin-bottom: 2.5rem; /* same as Tailwind mb-10 */
+  margin-bottom: 2.5rem;
+}
+
+#team {
+  position: relative;       /* anchor the pseudo element */
+  z-index: 0;
+}
+
+#team::before {
+  content: "";
+  position: absolute;
+  right: 0;                 /* stick the box to the right */
+  top: -300px;
+  bottom: -200px;
+  width: 100%;               /* keep your chosen width */
+  background: url("../assets/backgroundlogo.png") right center/contain no-repeat;
+  z-index: -1;
 }
