@@ -2,6 +2,7 @@
 import React from "react";
 import { ReactComponent as HeroVisual } from "../assets/hero.svg";
 import WakoButton from "./WakoButton";
+import PhoneIcon from "./PhoneIcon";
 import EnvelopeIcon from "./EnvelopeIcon";
 import "../styles/hero-anim.css";
 import SectionReveal from "./SectionReveal";
@@ -21,8 +22,8 @@ export default function Hero() {
             fully dedicated to your product → from first sketch to final build.
           </p>
           <div className="hero__actions">
-            <WakoButton href="/contact" variant="solid">
-              Free Advice
+            <WakoButton href="tel:+1234567890" variant="solid">
+              Free Advice <PhoneIcon size={22} />
             </WakoButton>
             <WakoButton href="mailto:thisiswako@gmail.com" variant="ghost">
               thisiswako@gmail.com <EnvelopeIcon size={22} />

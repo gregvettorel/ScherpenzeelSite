@@ -22,7 +22,7 @@ export default function WakoButton({
   const enhancedChildren = React.Children.map(children, (child) =>
     React.isValidElement(child) &&
     child.type &&
-    ["ArrowDraw", "EnvelopeIcon"].includes(child.type.name)
+    ["ArrowDraw", "EnvelopeIcon", "PhoneIcon"].includes(child.type.name)
       ? React.cloneElement(child, { hovered })
       : child
   );
