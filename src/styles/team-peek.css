@@ -55,6 +55,9 @@
   outline: 1px solid rgba(0,0,0,0.05); /* ring-1 ring-black/5 */
   padding: 2rem;                 /* p-8 */
   text-align: center;
+  transition:
+    transform 0.36s cubic-bezier(.22,.61,.36,1),
+    box-shadow 0.36s cubic-bezier(.22,.61,.36,1);
 }
 
 /* avatar circle */
@@ -71,6 +74,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.32s cubic-bezier(.22,.61,.36,1);
 }
 
 /* text */
@@ -128,6 +132,18 @@
 /* Hover delight */
 .card-wrap:hover .peek-hands { transform: translate(-50%, 0px); }
 .card-wrap:hover .peek-body  { transform: translateX(-50%) translateY(-8px); }
+.card-wrap:hover .team-card {
+  transform: translateY(-8px) scale(1.035) rotate(-0.5deg);
+  box-shadow: 0 8px 32px rgba(24,119,255,0.10), 0 2px 20px rgba(0,0,0,0.06);
+  transition: 
+    transform 0.36s cubic-bezier(.22,.61,.36,1),
+    box-shadow 0.36s cubic-bezier(.22,.61,.36,1);
+  will-change: transform, box-shadow;
+}
+.card-wrap:hover .avatar {
+  transform: scale(1.06) rotate(-2deg);
+  transition: transform 0.32s cubic-bezier(.22,.61,.36,1);
+}
 
 /* Responsive */
 @media (min-width:640px){
