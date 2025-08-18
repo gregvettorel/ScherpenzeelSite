@@ -24,6 +24,7 @@
   background: transparent;
   color: #000;
   border-color: #000;
+  border-width: 2px; /* Ensure 2px border */
 }
 
 .wako-btn:focus-visible {

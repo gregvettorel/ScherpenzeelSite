@@ -20,7 +20,11 @@ export default function EnvelopeIcon({ size = 22, hovered = false }) {
       <motion.polygon
         points="3,7 12,14 21,7"
         initial={false}
-        animate={hovered ? { points: "3,7 12,4 21,7" } : { points: "3,7 12,14 21,7" }}
+        animate={
+          hovered
+            ? { points: "3,7 12,1 21,7" } // y=1 for a much higher open flap
+            : { points: "3,7 12,14 21,7" }
+        }
         transition={{ type: "spring", stiffness: 320, damping: 22 }}
       />
     </motion.svg>

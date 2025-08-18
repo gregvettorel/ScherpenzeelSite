@@ -65,13 +65,6 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 15px 35px; /* bigger button */
-  border-radius: 999px;
-  border: 1px solid #000;
-  color: #000;
-  background: transparent;
-  text-decoration: none;
-  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 .services-cta svg {
