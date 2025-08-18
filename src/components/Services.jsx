@@ -4,13 +4,14 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import "../index.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faPencilRuler,      // Design
-  faWrench,           // Build
-  faLifeRing,         // Ongoing Support
-  faCompass,          // Consultation
-  faArrowUpRightFromSquare,
+  faPencilRuler,
+  faWrench,
+  faLifeRing,
+  faCompass,
+  faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
 import SectionReveal from "./SectionReveal";
+import WakoButton from "./WakoButton";
 
 const items = [
   {
@@ -50,9 +51,14 @@ export default function Services() {
 
               <p className="services-desc">{s.desc}</p>
 
-              <a href="/contact" className="services-cta" aria-label={`More about ${s.title}`}>
-                <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-              </a>
+              <WakoButton
+                href="/contact"
+                variant="ghost"
+                className="services-cta"
+                aria-label={`More about ${s.title}`}
+              >
+                <FontAwesomeIcon icon={faArrowRight} />
+              </WakoButton>
             </article>
           ))}
         </div>

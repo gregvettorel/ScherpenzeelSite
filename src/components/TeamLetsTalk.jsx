@@ -15,6 +15,7 @@ import ilianPeek from "../assets/ilianteam_1.svg";// head/upper (goes behind)
 // One CSS to rule them all (replaces your old file)
 import "../styles/team-peek.css";
 import SectionReveal from "./SectionReveal";
+import WakoButton from "./WakoButton";
 
 const team = [
   { name: "Gregory Vettorel", role: "FULL STACK DEVELOPER", photo: gregoryImage, head: gregPeek },
@@ -87,16 +88,10 @@ export default function TeamLetsTalk() {
           <span className="hero__accent">Let’s talk!</span>
         </h2>
         <div className="cta-row">
-          <motion.a
-            href="mailto:thisiswako@gmail.com"
-            className="cta-btn"
-            whileHover={{ scale: 1.06, boxShadow: "0 4px 24px rgba(24,119,255,0.10)" }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ type: "spring", stiffness: 320, damping: 22 }}
-          >
+          <WakoButton href="mailto:thisiswako@gmail.com" variant="solid">
             thisiswako@gmail.com
             <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-sm" />
-          </motion.a>
+          </WakoButton>
         </div>
       </div>
     </SectionReveal>

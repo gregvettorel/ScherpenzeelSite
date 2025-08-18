@@ -1,11 +1,13 @@
 // src/components/Navbar.jsx
 import React, { useEffect, useState } from "react";
 import "../styles/navbar.css";
+import WakoButton from "./WakoButton";
 
 const LINKS = [
-  { href: "#portfolio", label: "Projects" },
-  { href: "#how-it-works", label: "Our Services" },
-  { href: "#about", label: "About Us" },
+  { href: "#portfolio", label: "Work" },
+  { href: "#how-it-works", label: "Process" },
+  { href: "#about", label: "About" },
+  { href: "#team", label: "Team" },
 ];
 
 export default function Navbar() {
@@ -42,7 +44,9 @@ export default function Navbar() {
           </nav>
 
           <div className="nav__right">
-            <a href="#contact" className="nav__btn">Contact</a>
+            <WakoButton href="#contact" variant="ghost" className="nav__btn">
+              Contact
+            </WakoButton>
           </div>
 
           <button

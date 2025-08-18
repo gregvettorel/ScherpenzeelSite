@@ -1,0 +1,32 @@
+.wako-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid transparent;
+  padding: 1.5rem 2rem;
+  transition: background 0.18s, color 0.18s, border 0.18s;
+  outline: none;
+}
+
+.wako-btn--solid {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.wako-btn--ghost {
+  background: transparent;
+  color: #000;
+  border-color: #000;
+}
+
+.wako-btn:focus-visible {
+  box-shadow: 0 0 0 2px #0579FE55;
+  border-color: #0579FE;
+}

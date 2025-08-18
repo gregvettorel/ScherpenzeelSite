@@ -1,6 +1,7 @@
 // src/components/Hero.jsx
 import React from "react";
 import { ReactComponent as HeroVisual } from "../assets/hero.svg";
+import WakoButton from "./WakoButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import "../styles/hero-anim.css";
@@ -20,12 +21,12 @@ export default function Hero() {
             fully dedicated to your product → from first sketch to final build.
           </p>
           <div className="hero__actions">
-            <a href="/contact" className="btn-solid">
+            <WakoButton href="/contact" variant="solid">
               Free Advice <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-            </a>
-            <a href="mailto:thisiswako@gmail.com" className="btn-ghost">
+            </WakoButton>
+            <WakoButton href="mailto:thisiswako@gmail.com" variant="ghost">
               thisiswako@gmail.com <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-            </a>
+            </WakoButton>
           </div>
         </div>
         <div className="hero__visual-wrap">

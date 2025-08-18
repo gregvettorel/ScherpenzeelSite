@@ -4,13 +4,17 @@ import { useEffect, useRef } from "react";
 export default function SectionReveal({ children, delay = 0, y = 40, as: Tag = "section", ...props }) {
   const controls = useAnimation();
   const ref = useRef();
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const io = new window.IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) controls.start("visible");
+        if (entry.isIntersecting && !hasAnimated.current) {
+          controls.start("visible");
+          hasAnimated.current = true;
+        }
       },
       { threshold: 0.18 }
     );
