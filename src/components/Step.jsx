@@ -72,7 +72,6 @@ export default function Step({ step, alt }) {
           {/* Arrowhead that follows the drawn tip (chevron style) */}
           <g
             transform={`translate(${arrow.x},${arrow.y}) rotate(${arrow.angle})`}
-            transformBox="fill-box"
             transformOrigin="0 0"
             style={{ opacity: progress > 0.01 ? 1 : 0, pointerEvents: "none" }}
             shapeRendering="geometricPrecision"
