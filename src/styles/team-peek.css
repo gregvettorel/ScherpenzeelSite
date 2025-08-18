@@ -174,11 +174,6 @@
   }
 }
 
-/* If you want to hide the peek images on very small screens: */
-@media (max-width: 400px) {
-  .peek-body, .peek-hands { display: none !important; }
-}
-
 /* ========== CTA ========== */
 .cta-title {
   text-align: center;
