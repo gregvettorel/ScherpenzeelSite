@@ -1,6 +1,9 @@
 /* Scope to the hero so nothing else gets touched */
 .hero-visual {
   overflow: visible !important;
+  max-width: 464px;
+  width: 100%;
+  height: auto;
 }
 .hero-visual svg {
   overflow: visible !important;
@@ -227,8 +230,7 @@
 .hero__title {
   font-size: var(--h1);
   line-height: var(--lh-tight);
-  font-weight: 800;
-  margin: 0 0 16px 0;
+  font-weight: 500; /* was 800, now medium */
   font-family: 'DM Sans', sans-serif;
   cursor: default;
 }
@@ -253,7 +255,7 @@
   color: var(--muted);
   font-size: 18px;
   line-height: 1.8;
-  margin: 0 0 28px 0;
+  margin: 0 0 1.6rem 0;
   font-family: 'Inter', sans-serif;
 }
 .hero__actions {
@@ -274,6 +276,7 @@
   }
   .hero__content {
     order: 2;
+    display: flex;
   }
   .hero-visual {
     max-width: 260px;

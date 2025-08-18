@@ -6,7 +6,7 @@ import PhoneIcon from "./PhoneIcon";
 import EnvelopeIcon from "./EnvelopeIcon";
 import "../styles/hero-anim.css";
 import SectionReveal from "./SectionReveal";
-import ArrowDraw from "./ArrowDraw";
+
 
 export default function Hero() {
   return (

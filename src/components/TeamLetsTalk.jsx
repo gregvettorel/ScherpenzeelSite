@@ -1,7 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
-import { motion } from "framer-motion";
 
 // circle photos
 import gregoryImage from "../assets/team-gregory.png";
@@ -16,7 +13,6 @@ import ilianPeek from "../assets/ilianteam_1.svg";// head/upper (goes behind)
 import "../styles/team-peek.css";
 import SectionReveal from "./SectionReveal";
 import WakoButton from "./WakoButton";
-import ArrowDraw from "./ArrowDraw";
 import EnvelopeIcon from "./EnvelopeIcon";
 
 const team = [
