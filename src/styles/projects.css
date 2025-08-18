@@ -1,6 +1,3 @@
-.projects-section {
-  padding: 0.25rem 1rem 5rem; /* top, sides, bottom */
-}
 
 .projects-container {
   max-width: 72rem; /* ~1152px like Tailwind's max-w-6xl */

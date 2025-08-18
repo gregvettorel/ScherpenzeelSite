@@ -14,14 +14,7 @@
   /* Only vertical padding if needed */
 }
 
-/* Increase horizontal padding on wider screens */
-@media (min-width: 640px) { .about__wrap { /* padding-inline: 24px; */ } }
-@media (min-width: 768px) { .about__wrap { /* padding-inline: 40px; */ } }
 
-/* Add vertical rhythm back on desktop only */
-@media (min-width: 768px) {
-  .about__wrap { padding-top: 64px; padding-bottom: 80px; }
-}
 
 /* Optional: keep section title color consistent */
 .about__title { color: #111827; margin: 0 0 40px; }

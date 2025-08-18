@@ -10,6 +10,7 @@
 
   display: flex; /* ensures vertical centering */
   align-items: center;
+  margin-bottom: 10%;
 }
 
 .running-banner__inner {
