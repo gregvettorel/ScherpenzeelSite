@@ -26,8 +26,8 @@ body.nav-locked {
 .nav__inner {
   max-width: var(--wrap);
   margin: 0 auto;
-  padding-top: 14px;
-  padding-bottom: 14px;
+  padding-top: 24px;
+  padding-bottom: 24px;
   /* no left/right padding here */
   display: grid;
   grid-template-columns: auto 1fr auto auto;
@@ -51,10 +51,34 @@ body.nav-locked {
   color: #111;
   font-weight: 500;
   font-size: 14px;
+  position: relative;
+  transition: color 0.18s;
 }
 
-.nav__link:hover {
-  opacity: .75;
+.nav__link::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: #0579fe;
+  border-radius: 1px;
+  transform: scaleX(0);
+  transition: transform 0.22s cubic-bezier(.22, .61, .36, 1);
+  transform-origin: left;
+}
+
+.nav__link:hover,
+.nav__link:focus-visible {
+  color: #0579fe;
+  font-weight: 600;
+}
+
+.nav__link:hover::after,
+.nav__link:focus-visible::after {
+  transform: scaleX(1);
 }
 
 /* desktop right */
@@ -84,8 +108,6 @@ body.nav-locked {
   border-radius: 999px;
   padding: 8px 14px;
 }
-
-
 
 /* burger (mobile) */
 .nav__burger {
