@@ -17,6 +17,7 @@ import "../styles/team-peek.css";
 import SectionReveal from "./SectionReveal";
 import WakoButton from "./WakoButton";
 import ArrowDraw from "./ArrowDraw";
+import EnvelopeIcon from "./EnvelopeIcon";
 
 const team = [
   { name: "Gregory Vettorel", role: "FULL STACK DEVELOPER", photo: gregoryImage, head: gregPeek },
@@ -90,7 +91,7 @@ export default function TeamLetsTalk() {
         </h2>
         <div className="cta-row">
           <WakoButton href="mailto:thisiswako@gmail.com" variant="solid">
-            thisiswako@gmail.com <ArrowDraw size={22} />
+            thisiswako@gmail.com <EnvelopeIcon size={22} />
           </WakoButton>
         </div>
       </div>

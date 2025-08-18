@@ -18,9 +18,11 @@ export default function WakoButton({
     (variant === "ghost" ? " wako-btn--ghost" : " wako-btn--solid") +
     (className ? " " + className : "");
 
-  // Inject hovered prop into ArrowDraw children
+  // Inject hovered prop into ArrowDraw and EnvelopeIcon children
   const enhancedChildren = React.Children.map(children, (child) =>
-    React.isValidElement(child) && child.type && child.type.name === "ArrowDraw"
+    React.isValidElement(child) &&
+    child.type &&
+    ["ArrowDraw", "EnvelopeIcon"].includes(child.type.name)
       ? React.cloneElement(child, { hovered })
       : child
   );

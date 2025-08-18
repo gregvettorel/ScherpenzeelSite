@@ -2,8 +2,7 @@
 import React from "react";
 import { ReactComponent as HeroVisual } from "../assets/hero.svg";
 import WakoButton from "./WakoButton";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import EnvelopeIcon from "./EnvelopeIcon";
 import "../styles/hero-anim.css";
 import SectionReveal from "./SectionReveal";
 import ArrowDraw from "./ArrowDraw";
@@ -23,10 +22,10 @@ export default function Hero() {
           </p>
           <div className="hero__actions">
             <WakoButton href="/contact" variant="solid">
-              Free Advice <ArrowDraw size={22} />
+              Free Advice
             </WakoButton>
             <WakoButton href="mailto:thisiswako@gmail.com" variant="ghost">
-              thisiswako@gmail.com <ArrowDraw size={22} />
+              thisiswako@gmail.com <EnvelopeIcon size={22} />
             </WakoButton>
           </div>
         </div>
