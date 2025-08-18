@@ -1,5 +1,6 @@
 import React from "react";
 import Step from "./Step";
+import SectionReveal from "./SectionReveal"; // <-- import
 import step1 from "../assets/step1.svg";
 import step2 from "../assets/step2.svg";
 import step3 from "../assets/step3.svg";
@@ -35,13 +36,13 @@ const steps = [
 
 export default function ProcessSteps() {
 	return (
-		<section id="how-it-works" className="section section-pad">
+		<SectionReveal id="how-it-works" className="section section-pad">
 			<div className="wrap">
 				<h2 className="section-title text-center mb-10">How it works</h2>
 				{steps.map((step, i) => (
 					<Step key={step.number} step={step} alt={i % 2 === 1} />
 				))}
 			</div>
-		</section>
+		</SectionReveal>
 	);
 }

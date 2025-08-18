@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
 
 // circle photos
 import gregoryImage from "../assets/team-gregory.png";
@@ -13,6 +14,7 @@ import ilianPeek from "../assets/ilianteam_1.svg";// head/upper (goes behind)
 
 // One CSS to rule them all (replaces your old file)
 import "../styles/team-peek.css";
+import SectionReveal from "./SectionReveal";
 
 const team = [
   { name: "Gregory Vettorel", role: "FULL STACK DEVELOPER", photo: gregoryImage, head: gregPeek },
@@ -37,7 +39,7 @@ export default function TeamLetsTalk() {
   }, []);
 
   return (
-    <section id="team" className="team-section section-pad">
+    <SectionReveal id="team" className="team-section section-pad">
       <div className="container pad-y-lg">
         <div className="text-center mb-lg">
           <h2 className="section-title">Team</h2>
@@ -85,12 +87,18 @@ export default function TeamLetsTalk() {
           <span className="hero__accent">Let’s talk!</span>
         </h2>
         <div className="cta-row">
-          <a href="mailto:thisiswako@gmail.com" className="cta-btn">
+          <motion.a
+            href="mailto:thisiswako@gmail.com"
+            className="cta-btn"
+            whileHover={{ scale: 1.06, boxShadow: "0 4px 24px rgba(24,119,255,0.10)" }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 320, damping: 22 }}
+          >
             thisiswako@gmail.com
             <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-sm" />
-          </a>
+          </motion.a>
         </div>
       </div>
-    </section>
+    </SectionReveal>
   );
 }

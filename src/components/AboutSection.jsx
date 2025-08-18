@@ -2,10 +2,11 @@
 import React from "react";
 import "../styles/about.css";
 import macbookImage from "../assets/macbookwako.png";
+import SectionReveal from "./SectionReveal";
 
 export default function AboutSection() {
   return (
-    <section id="about" className="about section-pad">
+    <SectionReveal id="about" className="about section-pad">
       <div className="about__wrap">
         <h2 id="about-heading" className="section-title about__title">
           About us
@@ -43,6 +44,6 @@ export default function AboutSection() {
           </div>
         </div>
       </div>
-    </section>
+    </SectionReveal>
   );
 }

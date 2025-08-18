@@ -10,6 +10,7 @@ import {
   faCompass,          // Consultation
   faArrowUpRightFromSquare,
 } from "@fortawesome/free-solid-svg-icons";
+import SectionReveal from "./SectionReveal";
 
 const items = [
   {
@@ -35,7 +36,7 @@ const items = [
 
 export default function Services() {
   return (
-    <section className="section section-pad">
+    <SectionReveal className="section section-pad">
       <div className="wrap">
         <h2 className="services-title">Services</h2>
 
@@ -56,6 +57,6 @@ export default function Services() {
           ))}
         </div>
       </div>
-    </section>
+    </SectionReveal>
   );
 }

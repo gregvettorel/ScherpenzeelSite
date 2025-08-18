@@ -4,10 +4,11 @@ import { ReactComponent as HeroVisual } from "../assets/hero.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import "../styles/hero-anim.css";
+import SectionReveal from "./SectionReveal";
 
 export default function Hero() {
   return (
-    <section id="hero" className="section section-pad hero">
+    <SectionReveal id="hero" className="section section-pad hero">
       <div className="wrap hero__row">
         <div className="hero__content">
           <h1 className="hero__title">
@@ -31,6 +32,6 @@ export default function Hero() {
           <HeroVisual className="hero-visual" />
         </div>
       </div>
-    </section>
+    </SectionReveal>
   );
 }
