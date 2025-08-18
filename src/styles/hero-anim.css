@@ -239,6 +239,7 @@
 }
 .hero__accent:hover {
   animation: launch-bounce 0.6s ease-out;
+  cursor: default;
 }
 
 @keyframes launch-bounce {

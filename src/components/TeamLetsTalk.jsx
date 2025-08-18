@@ -81,7 +81,9 @@ export default function TeamLetsTalk() {
 
       {/* CTA */}
       <div className="container pad-y-xl">
-        <h2 className="cta-title">Let’s talk!</h2>
+        <h2 className="cta-title">
+          <span className="hero__accent">Let’s talk!</span>
+        </h2>
         <div className="cta-row">
           <a href="mailto:thisiswako@gmail.com" className="cta-btn">
             thisiswako@gmail.com
