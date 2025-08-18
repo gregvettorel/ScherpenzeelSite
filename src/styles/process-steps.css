@@ -99,3 +99,72 @@
   .process-steps__img { width: 160px; }
   .process-steps__text { max-width: 100%; }
 }
+
+/* ---------- Hover micro-interactions ---------- */
+.process-steps__row {
+  transition: transform .35s cubic-bezier(.22,.61,.36,1),
+              box-shadow .35s cubic-bezier(.22,.61,.36,1),
+              background-color .35s ease;
+  will-change: transform;
+  border-radius: 14px; /* subtle rounding to feel like a unit */
+}
+
+.process-steps__visual,
+.process-steps__text {
+  transition: transform .35s cubic-bezier(.22,.61,.36,1), opacity .35s ease;
+}
+
+/* Arrow base + transitions */
+.process-steps__arrow svg {
+  transition: transform .35s cubic-bezier(.22,.61,.36,1);
+  will-change: transform;
+}
+
+.process-steps__curve,
+.process-steps__chev {
+  stroke: #C2C8D0;
+  stroke-width: 4.5;
+  transition: stroke .25s ease, filter .25s ease;
+}
+
+/* Only apply hover effects on devices that support hover */
+@media (hover: hover) {
+  .process-steps__row:hover {
+    transform: translateY(-4px) scale(1.015);
+  }
+  .process-steps__row:hover .process-steps__img {
+    transform: translateY(-2px) scale(1.03);
+  }
+  .process-steps__row:hover .process-steps__number {
+    transform: translateY(-1px);
+    transition: transform .35s cubic-bezier(.22,.61,.36,1);
+  }
+
+  /* Arrow tilt: normal rows tilt 4deg clockwise */
+  .process-steps__row:hover .process-steps__arrow svg {
+    transform: rotate(4deg);
+  }
+  /* Alt rows are mirrored, so tilt the other way for symmetry */
+  .process-steps__row--alt:hover .process-steps__arrow svg {
+    transform: rotate(-4deg);
+  }
+
+  /* Curve/chevron get a friendly highlight */
+  .process-steps__row:hover .process-steps__curve,
+  .process-steps__row:hover .process-steps__chev {
+    stroke: #1877ff;
+    filter: drop-shadow(0 1px 0 rgba(24,119,255,.15));
+  }
+}
+
+/* Respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .process-steps__row,
+  .process-steps__visual,
+  .process-steps__text,
+  .process-steps__arrow svg,
+  .process-steps__curve,
+  .process-steps__chev {
+    transition: none !important;
+  }
+}
