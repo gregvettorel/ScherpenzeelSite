@@ -1,5 +1,6 @@
 // src/App.js
 import React from "react";
+import "./index.css";
 
 // ✅ New component imports
 import Navbar from "./components/Navbar";
