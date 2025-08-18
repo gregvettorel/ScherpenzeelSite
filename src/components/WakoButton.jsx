@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 
@@ -11,17 +11,27 @@ export default function WakoButton({
   className = "",
   ...props
 }) {
+  const [hovered, setHovered] = useState(false);
   const Comp = motion[as] || motion.a;
   const base =
     "wako-btn" +
     (variant === "ghost" ? " wako-btn--ghost" : " wako-btn--solid") +
     (className ? " " + className : "");
 
+  // Inject hovered prop into ArrowDraw children
+  const enhancedChildren = React.Children.map(children, (child) =>
+    React.isValidElement(child) && child.type && child.type.name === "ArrowDraw"
+      ? React.cloneElement(child, { hovered })
+      : child
+  );
+
   return (
     <Comp
       href={href}
       onClick={onClick}
       className={base}
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
       whileHover={{
         scale: 1.06,
         boxShadow:
@@ -37,7 +47,7 @@ export default function WakoButton({
       transition={{ type: "spring", stiffness: 320, damping: 22 }}
       {...props}
     >
-      {children}
+      {enhancedChildren}
     </Comp>
   );
 }

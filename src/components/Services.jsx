@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/services.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import "../index.css"
+import "../index.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPencilRuler,
@@ -12,6 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import SectionReveal from "./SectionReveal";
 import WakoButton from "./WakoButton";
+import ArrowDraw from "./ArrowDraw";
 
 const items = [
   {
@@ -56,8 +57,14 @@ export default function Services() {
                 variant="ghost"
                 className="services-cta"
                 aria-label={`More about ${s.title}`}
+                style={{
+                  padding: "0.75rem 1.5rem",
+                  minWidth: 56,
+                  minHeight: 56,
+                  justifyContent: "center",
+                }}
               >
-                <FontAwesomeIcon icon={faArrowRight} />
+                <ArrowDraw size={56} strokeWidth={4} />
               </WakoButton>
             </article>
           ))}

@@ -1,7 +1,8 @@
-import React from "react";
-import "../styles/projects.css"; // new CSS file
-import "../styles/projects-anim.css"; // your animation CSS
+import React, { useState } from "react";
+import "../styles/projects.css";
+import "../styles/projects-anim.css";
 import SectionReveal from "./SectionReveal";
+import ArrowDraw from "./ArrowDraw";
 
 const projects = [
   { title: "Critly", category: "Mobile App", image: "/projects/critly.png" },
@@ -11,13 +12,20 @@ const projects = [
 ];
 
 function Projects() {
+  const [moreHovered, setMoreHovered] = useState(false);
+
   return (
     <SectionReveal id="portfolio" className="projects-section section section-pad">
       <div className="projects-container wrap">
         <div className="projects-header">
           <h2 className="section-title">Projects</h2>
-          <a href="#more" className="more-link">
-            More <span className="arrow">→</span>
+          <a
+            href="#more"
+            className="more-link"
+            onMouseEnter={() => setMoreHovered(true)}
+            onMouseLeave={() => setMoreHovered(false)}
+          >
+            More <ArrowDraw size={26} hovered={moreHovered} />
           </a>
         </div>
 

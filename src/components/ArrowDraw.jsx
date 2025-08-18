@@ -5,7 +5,7 @@ export default function ArrowDraw({
   size = 28,
   color = "#1877ff",
   strokeWidth = 2.2,
-  visible = false,
+  hovered = false,
   flip = false,
   className = "",
 }) {
@@ -25,29 +25,11 @@ export default function ArrowDraw({
       className={className}
       style={{ transform: flip ? "scaleX(-1)" : undefined }}
       aria-hidden="true"
+      animate={hovered ? { y: -4 } : { y: 0 }}
+      transition={{ type: "spring", stiffness: 320, damping: 22 }}
     >
-      {/* main diagonal */}
-      <motion.path
-        {...common}
-        d="M6 18L18 6"
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={visible ? { pathLength: 1, opacity: 1 } : { pathLength: 0, opacity: 0 }}
-        transition={{ duration: 0.5, ease: [0.22, 0.61, 0.36, 1] }}
-      />
-      {/* corner (tail) */}
-      <motion.path
-        {...common}
-        d="M7 6h11v11"
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={visible ? { pathLength: 1, opacity: 1 } : { pathLength: 0, opacity: 0 }}
-        transition={{ duration: 0.5, ease: [0.22, 0.61, 0.36, 1], delay: 0.08 }}
-      />
-      {/* subtle idle breathe */}
-      <motion.g
-        initial={{ x: 0, y: 0 }}
-        animate={visible ? { x: [0, 1, 0], y: [0, -1, 0] } : { x: 0, y: 0 }}
-        transition={{ duration: 3.4, ease: "easeInOut", repeat: Infinity, delay: 0.6 }}
-      />
+      <motion.path {...common} d="M6 18L18 6" />
+      <motion.polyline {...common} points="7 6 18 6 18 17" />
     </motion.svg>
   );
 }

@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import "../styles/hero-anim.css";
 import SectionReveal from "./SectionReveal";
+import ArrowDraw from "./ArrowDraw";
 
 export default function Hero() {
   return (
@@ -22,10 +23,10 @@ export default function Hero() {
           </p>
           <div className="hero__actions">
             <WakoButton href="/contact" variant="solid">
-              Free Advice <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+              Free Advice <ArrowDraw size={22} />
             </WakoButton>
             <WakoButton href="mailto:thisiswako@gmail.com" variant="ghost">
-              thisiswako@gmail.com <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+              thisiswako@gmail.com <ArrowDraw size={22} />
             </WakoButton>
           </div>
         </div>

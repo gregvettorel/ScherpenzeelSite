@@ -16,6 +16,7 @@ import ilianPeek from "../assets/ilianteam_1.svg";// head/upper (goes behind)
 import "../styles/team-peek.css";
 import SectionReveal from "./SectionReveal";
 import WakoButton from "./WakoButton";
+import ArrowDraw from "./ArrowDraw";
 
 const team = [
   { name: "Gregory Vettorel", role: "FULL STACK DEVELOPER", photo: gregoryImage, head: gregPeek },
@@ -89,8 +90,7 @@ export default function TeamLetsTalk() {
         </h2>
         <div className="cta-row">
           <WakoButton href="mailto:thisiswako@gmail.com" variant="solid">
-            thisiswako@gmail.com
-            <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-sm" />
+            thisiswako@gmail.com <ArrowDraw size={22} />
           </WakoButton>
         </div>
       </div>
