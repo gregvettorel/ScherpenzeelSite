@@ -5,10 +5,13 @@
 
 /* Container: desktop spacing, mobile has no vertical padding */
 .about__wrap {
-  max-width: 72rem;           /* ~1152px */
+  max-width: 72rem;
+  /* ~1152px */
   margin: 0 auto;
-  padding-top: 0;             /* removed on mobile */
-  padding-bottom: 0;          /* removed on mobile */
+  padding-top: 0;
+  /* removed on mobile */
+  padding-bottom: 0;
+  /* removed on mobile */
   padding-left: 0 !important;
   padding-right: 0 !important;
   /* Only vertical padding if needed */
@@ -17,23 +20,34 @@
 
 
 /* Optional: keep section title color consistent */
-.about__title { color: #111827; margin: 0 0 40px; }
+.about__title {
+  color: #111827;
+  margin: 0 0 40px;
+}
 
 /* Grid layout */
 .about__grid {
   display: grid;
-  grid-template-columns: 1fr;  /* mobile: single column */
+  grid-template-columns: 1fr;
+  /* mobile: single column */
   gap: 40px;
   align-items: center;
 }
 
 @media (min-width: 1024px) {
   .about__grid {
-    grid-template-columns: repeat(12, 1fr); /* lg: 12-col grid */
+    grid-template-columns: repeat(12, 1fr);
+    /* lg: 12-col grid */
     gap: 56px;
   }
-  .about__media   { grid-column: span 6; }
-  .about__content { grid-column: span 6; }
+
+  .about__media {
+    grid-column: span 6;
+  }
+
+  .about__content {
+    grid-column: span 6;
+  }
 }
 
 /* Media block */
@@ -41,7 +55,8 @@
   position: relative;
   overflow: hidden;
   border-radius: 16px;
-  box-shadow: 0 0 0 1px rgba(0,0,0,.05); /* subtle “ring” */
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .05);
+  /* subtle “ring” */
 }
 
 .about__img {
@@ -56,24 +71,30 @@
   margin: 0 0 20px;
   font-weight: 600;
   color: #111827;
-  letter-spacing: -0.01em;
-  font-size: clamp(24px, 3.2vw, 36px); /* ~text-3xl/4xl */
+  font-size: var(--headline-size, 1.6rem);
   line-height: 1.2;
 }
 
 .about__copy {
-  color: #4b5563; /* gray-600 */
+  color: #4b5563;
+  /* gray-600 */
   font-size: clamp(16px, 2vw, 18px);
   line-height: 1.7;
   max-width: 48ch;
 }
 
-.about__copy p { margin: 0; }
-.about__copy p + p { margin-top: 12px; }
+.about__copy p {
+  margin: 0;
+}
+
+.about__copy p+p {
+  margin-top: 12px;
+}
 
 /* Mobile title spacing fix */
 @media (max-width: 767px) {
   .about__title {
-    margin-top: 40px; /* instead of ~80px */
+    margin-top: 40px;
+    /* instead of ~80px */
   }
 }

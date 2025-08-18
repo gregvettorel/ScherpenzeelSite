@@ -1,7 +1,7 @@
 /* Scope to the hero so nothing else gets touched */
 .hero-visual {
   overflow: visible !important;
-  max-width: 464px;
+  max-width: 484px;
   width: 100%;
   height: auto;
 }
@@ -233,6 +233,7 @@
   font-weight: 500; /* was 800, now medium */
   font-family: 'DM Sans', sans-serif;
   cursor: default;
+  margin:0;
 }
 .hero__accent {
   color: var(--brand);
@@ -255,7 +256,7 @@
   color: var(--muted);
   font-size: 18px;
   line-height: 1.8;
-  margin: 0 0 1.6rem 0;
+  padding: 1.6rem 0px;
   font-family: 'Inter', sans-serif;
 }
 .hero__actions {

@@ -14,9 +14,9 @@
   --shadow-soft: 0 2px 20px rgba(0, 0, 0, .06);
   --ring: rgba(0, 0, 0, .06);
 
-  --h1: clamp(40px, 6vw, 64px);
-  --h2: clamp(26px, 3vw, 34px);
-  --h3: clamp(18px, 2.2vw, 24px);
+  --h1: clamp(40px, 6vw, 4.4rem);
+  --h2: clamp(26px, 3vw, 2.2rem);
+  --h3: clamp(18px, 2.2vw, 1.6rem);
 
   --lh-tight: 1.08;
   --lh-copy: 1.7;
