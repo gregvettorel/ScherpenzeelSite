@@ -24,12 +24,13 @@ body.nav-locked {
 }
 
 .nav__inner {
-
+  max-width: var(--wrap);
+  margin: 0 auto;
+  margin: 0px 5%;
+  padding: 20px 0px;
   display: grid;
   grid-template-columns: auto 1fr auto auto;
-  padding:  2.5% 5%;
   align-items: center;
-
 }
 
 .nav__brand img {
