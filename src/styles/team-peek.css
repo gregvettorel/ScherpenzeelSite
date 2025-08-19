@@ -224,18 +224,27 @@
   margin-bottom: 2.5rem;
 }
 
+
+/**
 #team {
-  position: relative;       /* anchor the pseudo element */
+  position: relative;
   z-index: 0;
+  isolation: isolate;          
 }
 
 #team::before {
+  pointer-events: none;      
   content: "";
   position: absolute;
-  right: 0;                 /* stick the box to the right */
+  right: 0;
   top: -300px;
   bottom: -200px;
-  width: 100%;               /* keep your chosen width */
+  width: 80%;
   background: url("../assets/backgroundlogo.png") right center/contain no-repeat;
   z-index: -1;
 }
+
+@media (max-width: 640px){
+  #team::before{ display: none; }
+}
+**/

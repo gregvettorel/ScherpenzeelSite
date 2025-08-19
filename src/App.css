@@ -45,6 +45,9 @@ body {
   font-family: 'Inter', sans-serif; /* default body font */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: url("./assets/backgroundlogo.png") bottom right no-repeat;
+  background-size: 280px auto;   /* tweak size as you like */
+  background-attachment: fixed;  /* optional: keeps it in place when scrolling */
 }
 
 /* Only h1/h2 (and .section-title) use DM Sans */

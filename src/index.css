@@ -127,3 +127,9 @@ h6 {
   background: #000;
   color: #fff;
 }
+
+body {
+    background: url("./assets/backgroundlogo.png") bottom right no-repeat;
+  background-size: 1200px auto;   /* tweak size as you like */
+  background-attachment: fixed;  /* optional: keeps it in place when scrolling */
+}
