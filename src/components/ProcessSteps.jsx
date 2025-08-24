@@ -35,14 +35,18 @@ const steps = [
 ];
 
 export default function ProcessSteps() {
-	return (
-		<SectionReveal id="how-it-works" className="section section-pad">
-			<div className="wrap">
-				<h2 className="section-title text-center mb-10">How it works</h2>
-				{steps.map((step, i) => (
-					<Step key={step.number} step={step} alt={i % 2 === 1} />
-				))}
-			</div>
-		</SectionReveal>
-	);
+  return (
+    <SectionReveal id="how-it-works" className="section section-pad">
+      <div className="wrap">
+        <h2 className="section-title text-center mb-10">How it works</h2>
+
+        {/* NEW WRAPPER */}
+        <div className="process-steps">
+          {steps.map((step, i) => (
+            <Step key={step.number} step={step} alt={i % 2 === 1} />
+          ))}
+        </div>
+      </div>
+    </SectionReveal>
+  );
 }

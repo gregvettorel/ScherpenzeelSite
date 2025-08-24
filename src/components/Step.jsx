@@ -4,23 +4,28 @@ import { useInView } from "react-intersection-observer";
 export default function Step({ step, alt }) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
 
-  // Path + arrowhead tracking
+  // Arrow animation refs/states (unchanged)
   const pathRef = useRef(null);
   const [totalLen, setTotalLen] = useState(0);
   const [progress, setProgress] = useState(0);
   const [arrow, setArrow] = useState({ x: 200, y: 40, angle: 0 });
 
+  // --- NEW: tilt state ---
+  const rowRef = useRef(null);
+  const [tilt, setTilt] = useState({ x: 0, y: 0, hovered: false });
+  const [canHover, setCanHover] = useState(true);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
   useEffect(() => {
     if (pathRef.current) {
-      const len = pathRef.current.getTotalLength();
-      setTotalLen(len);
+      setTotalLen(pathRef.current.getTotalLength());
     }
   }, []);
 
   useEffect(() => {
     if (!inView || !pathRef.current || totalLen === 0) return;
 
-    const duration = 1000; // ms
+    const duration = 1000;
     const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
     let raf = 0;
     let start = 0;
@@ -44,8 +49,58 @@ export default function Step({ step, alt }) {
     return () => cancelAnimationFrame(raf);
   }, [inView, totalLen]);
 
+  // --- NEW: feature detection for hover + reduced motion
+  useEffect(() => {
+    setCanHover(window.matchMedia("(hover: hover)").matches);
+    setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
+
+  // --- NEW: tilt handlers
+  const handleEnter = () => {
+    if (!canHover || reducedMotion) return;
+    setTilt((t) => ({ ...t, hovered: true }));
+  };
+
+  const handleLeave = () => {
+    if (!canHover || reducedMotion) return;
+    setTilt({ x: 0, y: 0, hovered: false });
+  };
+
+  const handleMove = (e) => {
+    if (!canHover || reducedMotion || !rowRef.current) return;
+
+    const rect = rowRef.current.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width;  // 0..1
+    const py = (e.clientY - rect.top) / rect.height;  // 0..1
+
+    // Map to -max..+max tilt
+    const maxTilt = 6; // deg
+    const tiltY = (px - 0.5) * 2 * maxTilt;   // left/right -> rotateY
+    const tiltX = -(py - 0.5) * 2 * maxTilt;  // top/bottom -> rotateX (invert so top tilts toward you)
+
+    setTilt((t) => ({ ...t, x: tiltX, y: tiltY }));
+  };
+
+  // --- NEW: compose transform for the whole row
+  const baseLift = tilt.hovered ? -4 : 0;     // subtle lift on hover
+  const baseScale = tilt.hovered ? 1.03 : 1;  // slight scale on hover
+  const transformStyle = reducedMotion
+    ? undefined
+    : {
+        transform: `perspective(1000px) translateY(${baseLift}px) scale(${baseScale}) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+        transition: "transform .35s cubic-bezier(.22,.61,.36,1)",
+        transformStyle: "preserve-3d",
+      };
+
   return (
-    <div className={`process-steps__row${alt ? " process-steps__row--alt" : ""}`}>
+    <div
+      ref={rowRef}
+      className={`process-steps__row${alt ? " process-steps__row--alt" : ""}`}
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
+      onMouseMove={handleMove}
+      style={transformStyle}
+    >
       {/* Visual column */}
       <div className="process-steps__visual">
         <span className="process-steps__number">{step.number}</span>
@@ -55,12 +110,11 @@ export default function Step({ step, alt }) {
       {/* Arrow column */}
       <div className="process-steps__arrow" aria-hidden="true">
         <svg viewBox="0 0 220 60" width="100%" height="60" style={{ overflow: "visible" }}>
-          {/* Drawn path with manual stroke-draw */}
           <path
             ref={pathRef}
+            className="process-steps__curve"
             d="M20 40 Q110 10 200 40"
             fill="none"
-            stroke="#C2C8D0"                 // slightly softer gray
             strokeWidth="4.5"
             strokeLinecap="round"
             vectorEffect="non-scaling-stroke"
@@ -68,19 +122,16 @@ export default function Step({ step, alt }) {
             strokeDasharray={totalLen ? `${totalLen} ${totalLen}` : undefined}
             strokeDashoffset={totalLen ? totalLen * (1 - progress) : undefined}
           />
-
-          {/* Arrowhead that follows the drawn tip (chevron style) */}
           <g
             transform={`translate(${arrow.x},${arrow.y}) rotate(${arrow.angle})`}
             transformOrigin="0 0"
             style={{ opacity: progress > 0.01 ? 1 : 0, pointerEvents: "none" }}
             shapeRendering="geometricPrecision"
           >
-            {/* tip at (0,0), same stroke as the path */}
             <polyline
+              className="process-steps__chev"
               points="-14,-8 0,0 -14,8"
               fill="none"
-              stroke="#C2C8D0"
               strokeWidth="4.5"
               strokeLinecap="round"
               strokeLinejoin="round"
