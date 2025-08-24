@@ -20,7 +20,7 @@
   white-space: nowrap;
   will-change: transform;
   animation: ticker 20s linear infinite;
-  padding: 2.5% 0px; /* horizontal padding */
+  padding: 1.5% 0px; /* horizontal padding */
 }
 
 .running-banner__text {

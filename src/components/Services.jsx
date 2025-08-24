@@ -37,7 +37,7 @@ const items = [
 
 export default function Services() {
   return (
-    <SectionReveal className="section section-pad">
+<SectionReveal className="services-section">
       <div className="wrap">
         <h2 className="services-title">Services</h2>
 
@@ -51,20 +51,21 @@ export default function Services() {
 
               <p className="services-desc">{s.desc}</p>
 
-              <WakoButton
-                href="/contact"
-                variant="ghost"
-                className="services-cta"
-                aria-label={`More about ${s.title}`}
-                style={{
-                  padding: "0.75rem 1.5rem",
-                  minWidth: 56,
-                  minHeight: 56,
-                  justifyContent: "center",
-                }}
-              >
-                <ArrowDraw size={56} strokeWidth={4} />
-              </WakoButton>
+<WakoButton
+  href="/contact"
+  variant="ghost"
+  className="services-cta"
+  aria-label={`More about ${s.title}`}
+  style={{
+    padding: "0.5rem 1rem",
+    minWidth: 44,
+    minHeight: 44,
+    justifyContent: "center",
+    lineHeight: 1,
+  }}
+>
+  <ArrowDraw size={18} strokeWidth={3} />
+</WakoButton>
             </article>
           ))}
         </div>
