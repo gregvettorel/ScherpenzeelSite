@@ -18,7 +18,7 @@ function Projects() {
     <SectionReveal id="portfolio" className="projects-section section section-pad">
       <div className="projects-container wrap">
         <div className="projects-header">
-          <h2 className="section-title">PROJECTS</h2>
+          <h2 className="section-title">Projects</h2>
           <a
             href="#more"
             className="more-link"
