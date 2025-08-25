@@ -11,8 +11,6 @@ import {
   faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
 import SectionReveal from "./SectionReveal";
-import WakoButton from "./WakoButton";
-import ArrowDraw from "./ArrowDraw";
 
 const items = [
   {
