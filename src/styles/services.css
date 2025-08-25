@@ -43,16 +43,27 @@
   width: 80px;
   height: 80px;
   font-size: 30px;
-  color: #0579FE;
+  color: #6b7280;
+    transition: color .25s ease; /* smooth */
+}
+
+.services-accordion.open .services-icon {
+  color: #2563eb;
 }
 
 .services-row-title {
   font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   font-weight: 800;
   letter-spacing: -0.01em;
-  font-size: clamp(60px, 4vw, 60px); /* big */
+  font-size: clamp(60px, 4vw, 60px);
   line-height: 1.15;
-  color: #0579FE;
+  color: #6b7280; /* default grey */
+  transition: color .25s ease; /* smooth */
+}
+
+/* When accordion is open → make title blue */
+.services-accordion.open .services-row-title {
+  color: #2563eb; /* blue-600, adjust to your brand color */
 }
 
 /* Chevron */
