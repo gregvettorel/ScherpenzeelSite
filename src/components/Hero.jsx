@@ -22,7 +22,7 @@ export default function Hero() {
             fully dedicated to your product → from first sketch to final build.
           </p>
           <div className="hero__actions">
-            <WakoButton href="tel:+1234567890" variant="solid">
+            <WakoButton href="tel:+1234567890" variant="solid" hoverSound={require("../assets/sfx/hover2mp3.mp3")} clickSound={require("../assets/sfx/press.mp3")} volume={0.18}>
               Free Advice <PhoneIcon size={22} />
             </WakoButton>
             <WakoButton href="mailto:thisiswako@gmail.com" variant="ghost">
