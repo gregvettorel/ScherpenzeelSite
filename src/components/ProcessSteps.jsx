@@ -38,7 +38,7 @@ export default function ProcessSteps() {
   return (
     <SectionReveal id="how-it-works" className="section section-pad">
       <div className="wrap">
-        <h2 className="section-title text-center mb-10">HOW IT WORKS</h2>
+        <h2 className="section-title text-center mb-10">How it works</h2>
 
         {/* NEW WRAPPER */}
         <div className="process-steps">
