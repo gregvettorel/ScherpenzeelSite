@@ -454,3 +454,21 @@
     transform-origin: center;
   }
 }
+
+.hero__dot {
+  background: transparent;
+  border: 0;
+  padding: 0 .05em;              /* keeps spacing tight */
+  font: inherit;                 /* same size/weight as title */
+  color: currentColor;
+  cursor: default;
+  line-height: 1;
+  display: inline-block;
+  transform-origin: center;
+  outline: none;
+}
+.hero__dot:active { transform: scale(0.95); }
+.hero__dot:focus-visible {
+  box-shadow: 0 0 0 .22em #0579FE55;
+  border-radius: 9999px;
+}

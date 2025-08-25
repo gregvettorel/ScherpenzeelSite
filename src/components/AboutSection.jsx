@@ -10,7 +10,7 @@ export default function AboutSection() {
     <SectionReveal id="about" className="about section-pad">
       <div className="about__wrap">
         <h2 id="about-heading" className="section-title about__title">
-          About us
+          ABOUT US
         </h2>
 
         <div className="about__grid">
