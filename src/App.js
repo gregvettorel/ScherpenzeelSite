@@ -1,8 +1,8 @@
 // src/App.js
 import React from "react";
 import "./index.css";
+import bgArt from "./assets/backgroundlogo.png";
 
-// ✅ New component imports
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
@@ -16,7 +16,7 @@ import Loader from "./components/Loader";
 
 function App() {
   return (
-    <div className="bg-white text-black font-body min-h-screen">
+    <div className="site bg-white text-black font-body min-h-screen">
       <Loader />
       <Navbar />
       <Hero />
@@ -26,8 +26,8 @@ function App() {
       <Services />
       <ProcessSteps />
       <TeamLetsTalk />
-
       <Footer />
+            <img src={bgArt} alt="" className="page-art" aria-hidden="true" />
     </div>
   );
 }

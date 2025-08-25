@@ -128,8 +128,24 @@ h6 {
   color: #fff;
 }
 
-body {
-    background: url("./assets/backgroundlogo.png") bottom right no-repeat;
-  background-size: 1200px auto;   /* tweak size as you like */
-  background-attachment: fixed;  /* optional: keeps it in place when scrolling */
+.site {
+  position: relative;
+  isolation: isolate;
+  overflow-x: clip;   
+}
+
+.page-art {
+  position: absolute;
+  bottom: 0;
+  left: 60%;
+  transform: translateX(-50%);
+  width: min(1600px, 100%);
+  height: auto;
+  z-index: -1;
+  pointer-events: none;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .site { padding-bottom: 40px; } 
 }

@@ -45,9 +45,6 @@ body {
   font-family: 'Inter', sans-serif; /* default body font */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url("./assets/backgroundlogo.png") bottom right no-repeat;
-  background-size: 280px auto;   /* tweak size as you like */
-  background-attachment: fixed;  /* optional: keeps it in place when scrolling */
 }
 
 /* Only h1/h2 (and .section-title) use DM Sans */
@@ -91,4 +88,4 @@ code {
   border:1px solid #000; font-weight:600; text-decoration:none;
   transition:all .2s ease;
 }
-.btn-ghost:hover{ background:#000; color:#
+.btn-ghost:hover{ background:#000; color:#fff}
