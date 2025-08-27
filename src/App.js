@@ -13,16 +13,27 @@ import Services from "./components/Services";
 import TeamLetsTalk from "./components/TeamLetsTalk";
 import ProcessSteps from "./components/ProcessSteps"; 
 import Loader from "./components/Loader";
+import ScrollBanner from "./components/ScrollBanner";
 
 function App() {
   return (
     <div className="site bg-white text-black font-body min-h-screen">
       <Loader />
       <Navbar />
+            <ScrollBanner
+        sections={[
+          { id: "hero", label: "Home" },
+          { id: "portfolio", label: "Projects" },
+          { id: "about", label: "About" },
+          { id: "services-section", label: "Services" },
+          { id: "how-it-works", label: "Process" },
+          { id: "team", label: "Team" },
+        ]}
+      />
       <Hero />
       <Projects />
-      <RunningBanner />
       <AboutSection />
+      <RunningBanner />
       <Services />
       <ProcessSteps />
       <TeamLetsTalk />

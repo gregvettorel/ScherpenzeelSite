@@ -1,0 +1,42 @@
+/* Small “lint” tag on the left */
+.scroll-banner {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  width: 36px;
+  padding: 24px 0;
+  border-radius: 0 6px 6px 0;
+  background: var(--brand);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  pointer-events: none; /* avoid intercepting clicks */
+
+  /* animation states */
+  transform: translate(0, -50%);
+  opacity: 1;
+  transition: transform .28s ease, opacity .28s ease;
+}
+
+.scroll-banner.is-out {
+  transform: translate(-110%, -50%); /* slide left off-screen */
+  opacity: 0;
+}
+
+.scroll-banner.is-in {
+  transform: translate(0, -50%);    /* slide back in */
+  opacity: 1;
+}
+
+.scroll-banner__text {
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  text-align: center;
+  user-select: none;
+}

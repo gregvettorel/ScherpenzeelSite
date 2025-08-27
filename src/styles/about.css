@@ -1,6 +1,7 @@
 /* === ABOUT SECTION === */
 .about {
   color: var(--ink);
+  padding-bottom: 50px;
 }
 
 .about__wrap {

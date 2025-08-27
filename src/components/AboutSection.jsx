@@ -9,10 +9,6 @@ export default function AboutSection() {
   return (
     <SectionReveal id="about" className="about section-pad">
       <div className="about__wrap">
-        <h2 id="about-heading" className="section-title about__title">
-          About us
-        </h2>
-
         <div className="about__grid">
           {/* Left: image */}
           <div className="about__media">

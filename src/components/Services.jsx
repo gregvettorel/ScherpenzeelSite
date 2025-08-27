@@ -44,7 +44,7 @@ export default function Services() {
   return (
     <SectionReveal className="services-section">
       <div className="wrap">
-        <h2 className="services-title">Our services</h2>
+        <h2 className="services-title">What we do</h2>
 
         <div className="services-list" role="list">
           {items.map((s, i) => {
