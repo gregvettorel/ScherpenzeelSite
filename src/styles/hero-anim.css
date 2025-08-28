@@ -1,7 +1,8 @@
 /* Scope to the hero so nothing else gets touched */
+
 .hero-visual {
   overflow: visible !important;
-  max-width: 484px;
+  max-width: 640px;
   width: 100%;
   height: auto;
 }
@@ -327,6 +328,10 @@
     width: 100%;
     height: auto;
   }
+}
+
+.section {
+  margin-bottom: 3em;
 }
 
 /* Hero Layout */

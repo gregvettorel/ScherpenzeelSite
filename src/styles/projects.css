@@ -1,53 +1,101 @@
+/* ---------- Projects ---------- */
+
+/* Section: give more vertical room so hover pop never clips */
 .projects-section {
   width: 100%;
   overflow: hidden;
-  padding: 4rem 0;
+  padding: 5rem 0;               /* was 4rem */
+  background: #fff;              /* fades blend into white */
 }
 
 .projects-title-display {
   font-family: "DM Sans", sans-serif;
   font-weight: lighter;
-  font-size: clamp(34px, 6vw, 64px);
+  font-size: clamp(48px, 6vw, 72px);
   line-height: 1.05;
   margin: 0 0 0.5rem;
-  padding-left: 250px;
+  padding-left: 375px;
   text-align: left;
   color: #017df9;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
 }
 
-/* Full-width horizontal rail */
-.projects-rail.full-width {
+/* Viewport wrapper (holds fades; does NOT scroll) */
+.projects-viewport {
+  position: relative;
+  overflow: hidden;              /* clips the fades nicely */
+}
+
+/* The actual scroll rail */
+.projects-rail {
   display: flex;
-  gap: 32px;
+  gap: 20px;                     /* closer together (was 32px) */
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  padding: 0 32px 16px;
+  padding: 16px 32px 28px;       /* extra top/bottom so scaled cards aren't cut */
   cursor: grab;
+  scroll-snap-type: none;        /* snap makes drag jittery; keep off */
+  scrollbar-width: none;         /* Firefox */
 }
-.projects-rail.dragging {
-  cursor: grabbing;
+.projects-rail::-webkit-scrollbar { display: none; } /* WebKit */
+.projects-rail.dragging { cursor: grabbing; }
+
+/* Fixed white fades on the left/right of the viewport */
+.projects-viewport::before,
+.projects-viewport::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 120px;                  /* fade width */
+  height: 100%;
+  z-index: 5;                    /* above cards */
+  pointer-events: none;
 }
-.projects-rail::-webkit-scrollbar {
-  display: none; /* hide scrollbar */
+.projects-viewport::before {
+  left: 0;
+  background: linear-gradient(to right, #ffffff 0%, rgba(255,255,255,0) 100%);
+}
+.projects-viewport::after {
+  right: 0;
+  background: linear-gradient(to left, #ffffff 0%, rgba(255,255,255,0) 100%);
 }
 
-/* Large cards */
+/* Cards: slightly smaller by default to leave room for hover pop */
 .project-card {
   position: relative;
-  flex: 0 0 clamp(280px, 80vw, 520px);
-  height: clamp(300px, 70vh, 500px);
+  flex: 0 0 clamp(260px, 72vw, 480px);  /* was 280–520 */
+  height: clamp(280px, 58vh, 440px);    /* was 300–500 */
   border-radius: 26px;
   overflow: hidden;
-  scroll-snap-align: start;
   background: #000;
   box-shadow: 0 10px 30px rgba(0,0,0,.16);
-  transition: transform .25s ease;
+  transform: translateY(0) scale(0.985); /* subtle base shrink */
+  transform-origin: center;
+  transition:
+    transform .28s cubic-bezier(.22,.61,.36,1),
+    box-shadow .28s ease,
+    filter .28s ease;
+  will-change: transform;
 }
 
-.project-card:hover {
-  transform: translateY(-6px);
+/* Minimal hover lift as a fallback (touch/keyboard users) */
+.project-card:hover { transform: translateY(-4px) scale(0.985); }
+
+/* Spotlight effect on hover-capable devices:
+   - Shrink all cards slightly when hovering the viewport
+   - Pop the hovered card forward with scale + shadow
+*/
+@media (hover: hover) and (pointer: fine) {
+  .projects-viewport:hover .project-card {
+    transform: translateY(0) scale(0.965);
+    filter: saturate(0.95);
+  }
+  .projects-viewport .project-card:hover {
+    transform: translateY(-6px) scale(1.04);
+    box-shadow: 0 18px 48px rgba(0,0,0,.22);
+    z-index: 2; /* above neighbors */
+    filter: none;
+  }
 }
 
 .project-image {
@@ -55,6 +103,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  filter: blur(2px);
 }
 
 .project-overlay {
@@ -64,10 +113,9 @@
   display: grid;
   align-content: end;
   gap: 10px;
-  padding: 22px;
-  background: linear-gradient(to top, rgba(0,0,0,.55) 10%, rgba(0,0,0,.0) 55%);
+  padding: 30px;
+  background: linear-gradient(to top, rgba(0,0,0,.55) 10%, rgba(0,0,0,0) 55%);
 }
-
 .overlay-top-grad {
   position: absolute;
   inset: 0;
@@ -107,4 +155,10 @@
   bottom: 14px;
   font-size: 22px;
   opacity: .9;
+}
+
+/* Smaller fades on mobile */
+@media (max-width: 900px) {
+  .projects-viewport::before,
+  .projects-viewport::after { width: 64px; }
 }
