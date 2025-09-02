@@ -30,19 +30,18 @@ export default function Step({ step, alt, isLast }) {
       {/* Arrow (skip last step) */}
       {!isLast && (
         <div className="process-steps__arrow" aria-hidden="true">
-          {/* same SVG mirrored via CSS on right rows */}
-          <svg viewBox="0 0 420 150" width="100%" height="100%" style={{ overflow: "visible" }}>
-            {/* curve */}
+          <svg viewBox="0 0 480 300" width="100%" height="100%" style={{ overflow: "visible" }}>
+            {/* nice round curve */}
             <path
-              d="M 10 20 C 170 -10 270 70 410 140"
-              fill="none"
+              d="M 20 30 A 360 260 0 0 1 460 240"
               className="process-steps__curve"
-            />
-            {/* chevron */}
-            <path
-              d="M 392 126 L 410 140 L 390 148"
               fill="none"
+            />
+            {/* downward arrowhead */}
+            <path
+    d="M 460 240 L 445 210 M 460 240 L 475 210"
               className="process-steps__chev"
+              fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
             />

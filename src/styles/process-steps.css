@@ -58,35 +58,29 @@
   margin:0;
 }
 
-/* ---------- Arrows (from your sheet) ---------- */
-.process-steps__arrow {
-  position: absolute;                  /* keep our placement */
-  width: clamp(260px, 28vw, 380px);
-  height: clamp(90px, 12vw, 140px);
-  pointer-events: none;
-  top: 12px;                           /* sits between rows */
-  display: block;                      /* from your sheet */
-}
-.process-steps__arrow svg {
-  transition: transform .35s cubic-bezier(.22,.61,.36,1);
-  will-change: transform;
-}
-.process-steps__curve,
-.process-steps__chev {
-  stroke: #C2C8D0;                     /* from your sheet */
-  stroke-width: 4.5;                   /* from your sheet */
-  transition: stroke .25s ease, filter .25s ease;
-  fill: none;
-  stroke-linecap: round;               /* tidy caps */
-  stroke-linejoin: round;
+.process-steps__arrow{
+  position:absolute;
+  width: clamp(200px, 34vw, 300px);
+  height: clamp(100px, 22vw, 240px); /* taller so it “drops” into next row */
+  top: -2px;                         /* start near top of the current row */
+  pointer-events:none;
 }
 
-/* left-aligned row → arrow to the right */
+/* shared stroke look */
+.process-steps__curve,
+.process-steps__chev{
+  stroke: #C2C8D0;        /* or #111 for black like the example */
+  stroke-width: 6;       /* chunky line */
+  stroke-linecap: round;  /* rounded tips like the ref */
+  stroke-linejoin: round;
+  fill: none;
+}
+
+/* keep your mirroring as-is */
 .process-steps__row--left  .process-steps__arrow { left:  calc(100% + 24px); }
-/* right-aligned row → arrow to the left (mirror) */
 .process-steps__row--right .process-steps__arrow {
   right: calc(100% + 24px);
-  transform: scaleX(-1);               /* mirror the single SVG */
+  transform: scaleX(-1);
 }
 
 /* ---------- Hover micro-interactions ---------- */
