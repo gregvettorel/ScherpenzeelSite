@@ -1,7 +1,7 @@
 /* Scope to the hero so nothing else gets touched */
 .hero-visual {
   overflow: visible !important;
-  max-width: 484px;
+  max-width: 100%;
   width: 100%;
   height: auto;
 }
@@ -87,10 +87,15 @@
 
 /* --- EYE BLINK --- */
 .hero-visual #lefteyeilian,
-.hero-visual #righteyeilian,
+.hero-visual #righteyeilian {
+  animation: hero-blink 6s ease-in-out 2s infinite !important;
+  transform-origin: center;
+}
+
+/* Gregory's eyes blink every 6s, start at 4.2s (offset from Ilian) */
 .hero-visual #lefteye_greg,
 .hero-visual #righteye_greg {
-  animation: hero-blink 6s ease-in-out 2s infinite !important;
+  animation: hero-blink 6s ease-in-out 4.2s infinite !important;
   transform-origin: center;
 }
 
@@ -332,7 +337,7 @@
 /* Hero Layout */
 .hero__row {
   display: flex;
-  gap: 40px;
+  gap: 64px;
   align-items: center;
   justify-content: space-between;
 }
@@ -447,13 +452,8 @@
   }
 }
 
-/* Slight desktop scale-down for hero visual */
-@media (min-width: 901px) {
-  .hero__visual-wrap .hero-visual {
-    transform: scale(0.92);
-    transform-origin: center;
-  }
-}
+
+
 
 .hero__dot {
   background: transparent;
