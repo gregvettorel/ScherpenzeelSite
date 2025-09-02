@@ -1,141 +1,131 @@
-/* ---------- Services ---------- */
+/* ---------- Services (Humbleteam-inspired) ---------- */
 
-.services-section { padding-top: 40px; }
+:root {
+  --ink: #0a0a0b;
+  --muted: #6b7280;
+  --rule: #e7e7e9;
+  --brand: #2563eb; /* Wako blue */
+}
 
-/* ===== Title ===== */
+.services-section { padding-top: 60px; }
+
 .services-title {
-  margin: 0 0 32px;
-  font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  margin: 0 0 40px;
+  font-family: "DM Sans", sans-serif;
   font-weight: 800;
+  font-size: 36px;
   letter-spacing: -0.01em;
-  font-size: 32px;
   line-height: 1.1;
-  color: #000;
+  color: var(--ink);
 }
 
-/* ===== Accordion ===== */
+/* List wrapper */
+.services-list { border-top: 1px solid var(--rule); }
+
+/* Each row */
 .services-accordion {
-  border-bottom: 1px solid #e7e7e9;
+  border-bottom: 1px solid var(--rule);
+  background: transparent;
+  transition: background .25s ease;
 }
-.services-accordion:last-child { border-bottom: 0; }
+.services-accordion.open { background: #fafafa; }
 
-/* Header button (only title + chevron in collapsed state) */
+/* Header toggle */
 .services-toggle {
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr auto; /* left (icon+title) / chevron */
+  display: flex;
   align-items: center;
-  gap: 16px;
+  justify-content: space-between;
   padding: 28px 0;
-  background: transparent;
+  background: none;
   border: 0;
   cursor: pointer;
   text-align: left;
 }
 
-.services-left {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.services-icon {
-  width: 80px;
-  height: 80px;
-  font-size: 30px;
-  color: #6b7280;
-    transition: color .25s ease; /* smooth */
-}
-
-.services-accordion.open .services-icon {
-  color: #2563eb;
-}
-
 .services-row-title {
-  font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  font-weight: 800;
-  font-size: 2rem;
-  line-height: 1.15;
-  color: #6b7280; /* default grey */
-  transition: color .25s ease; /* smooth */
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--ink);
+  transition: color .25s ease;
 }
+.services-accordion.open .services-row-title { color: var(--brand); }
 
-/* When accordion is open → make title blue */
-.services-accordion.open .services-row-title {
-  color: #2563eb; /* blue-600, adjust to your brand color */
-}
-
-/* Chevron */
 .services-chevron {
-  width: 22px;
-  height: 22px;
+  width: 22px; height: 22px;
+  color: var(--muted);
   transition: transform .25s ease;
 }
-.services-accordion.open .services-chevron { transform: rotate(180deg); }
+.services-accordion.open .services-chevron { transform: rotate(180deg); color: var(--brand); }
 
-/* Collapsible content wrapper (animates height) */
+/* Content reveal */
 .services-content {
   overflow: hidden;
   max-height: 0;
-  padding-top: 10px;
-  padding-left: 40px;
-  padding-bottom:10px;
   opacity: 0;
   transform: translateY(-6px);
-  transition: max-height .35s ease, opacity .25s ease, transform .35s ease;
-  will-change: max-height, opacity, transform;
+  transition: max-height .4s ease, opacity .3s ease, transform .3s ease;
 }
-
-/* When open, reveal and push others down naturally */
 .services-accordion.open .services-content {
-  max-height: 320px; /* large enough to fit text+CTA; adjust if needed */
+  max-height: 800px;
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Inner content styling */
+/* Inner 2-column layout */
+.services-inner {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 32px;
+  padding: 0 0 40px;
+}
+
 .services-desc {
-  margin: 0 0 16px;
-  color: #6b7280;
   font-size: 17px;
   line-height: 1.7;
-  max-width: 70ch;
+  color: var(--muted);
+  margin: 0 0 18px;
+  max-width: 65ch;
 }
 
-.services-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  padding: 0.5rem 1rem !important;
-  min-width: 44px !important;
-  min-height: 44px !important;
+.services-tags {
+  display: flex; gap: 10px; flex-wrap: wrap;
+}
+.services-tag {
+  font-size: 13px;
+  padding: 7px 12px;
   border-radius: 999px;
-  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+  background: #f6f7f8;
+  border: 1px solid var(--rule);
+  color: #374151;
 }
-.services-cta:hover { background: #f6f7f8; border-color: #000; transform: translateX(2px); }
-.services-cta svg {
-  width: 18px; height: 18px; display: block;
-  transform-origin: 50% 50%; transform-box: fill-box;
-  transition: transform .25s cubic-bezier(.22,.61,.36,1);
-}
-.services-cta:hover svg, .services-cta:focus-visible svg { transform: rotate(45deg) !important; }
 
-/* Hover affordance on header */
-.services-toggle:hover .services-row-title { text-decoration: none; }
-.services-toggle:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
+/* Image mockup */
+.services-media {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--rule);
+  display: block;
+}
+.services-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
 
 /* Responsive */
 @media (max-width: 900px) {
-  .services-toggle { padding: 22px 0; }
-  .services-row-title { font-size: clamp(24px, 6vw, 32px); }
-  .services-icon { width: 40px; height: 40px; }
-  .services-content { max-height: 0; } /* same collapsed */
-  .services-accordion.open .services-content { max-height: 420px; } /* extra room on mobile */
+  .services-inner { grid-template-columns: 1fr; }
 }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .services-chevron,
-  .services-content { transition: none; }
+/* Section background based on open index */
+.services-section {
+  background: #fff;
+  transition: background 0.5s;
+}
+.services-section.open {
+  background: var(--brand);
 }
