@@ -11,6 +11,7 @@
   display: flex; /* ensures vertical centering */
   align-items: center;
   margin-bottom: 5%;
+  margin-top: 5%;
 }
 
 .running-banner__inner {
@@ -26,7 +27,7 @@
 .running-banner__text {
   color: white;
   letter-spacing: 0.05em;
-  font-size: clamp(2.5rem, 5vw, 6rem); /* responsive size */
+  font-size: clamp(2.5rem, 10vw, 8rem); /* responsive size */
   font-family: DM Sans, sans-serif;
   /* make sure there is no spacing between letters*/
   letter-spacing: 0;
