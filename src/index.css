@@ -1,6 +1,6 @@
 /* === TOKENS & GLOBALS === */
 :root {
-  --wrap: 72rem;
+  --wrap: 80rem;
   --px: clamp(16px, 2.6vw, 28px);
 
   --brand: #0579FE;

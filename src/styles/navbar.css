@@ -1,8 +1,5 @@
 /* ===== basic reset for this component only ===== */
-.nav,
-.nav * {
-  box-sizing: border-box;
-}
+
 
 body.nav-locked {
   overflow: hidden;
