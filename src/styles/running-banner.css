@@ -10,8 +10,8 @@
 
   display: flex; /* ensures vertical centering */
   align-items: center;
-  margin-bottom: 5%;
-  margin-top: 5%;
+  margin-bottom: 6vw;
+  margin-top: 6vw;
 }
 
 .running-banner__inner {

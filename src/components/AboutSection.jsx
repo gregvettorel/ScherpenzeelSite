@@ -4,12 +4,15 @@ import "../styles/about.css";
 import macbookImage from "../assets/macbookwako.png";
 import SectionReveal from "./SectionReveal";
 import AboutIcon from "./AboutIcon";
+import index from "../index";
+//import index
+
 
 export default function AboutSection() {
   return (
-    <SectionReveal id="about" className="about section-pad">
-      <div className="about__wrap">
-        <h2 id="about-heading" className="section-title about__title">
+    <SectionReveal id="about" className="about">
+      <div className="about__wrap section section-pad">
+        <h2 id="about-heading" className="section-title about__title ">
           About us
         </h2>
 
