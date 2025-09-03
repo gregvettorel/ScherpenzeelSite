@@ -50,7 +50,17 @@
   color: var(--ink);
   transition: color .25s ease;
 }
-.services-accordion.open .services-row-title { color: var(--brand); }
+
+/* Make title blue on hover */
+.services-toggle:hover .services-row-title,
+.services-toggle:focus-visible .services-row-title {
+  color: var(--brand);
+}
+
+/* Keep open state blue as well */
+.services-accordion.open .services-row-title {
+  color: var(--brand);
+}
 
 .services-chevron {
   width: 22px; height: 22px;
@@ -58,6 +68,12 @@
   transition: transform .25s ease;
 }
 .services-accordion.open .services-chevron { transform: rotate(180deg); color: var(--brand); }
+
+/* Make chevron blue on hover */
+.services-toggle:hover .services-chevron,
+.services-toggle:focus-visible .services-chevron {
+  color: var(--brand);
+}
 
 /* Content reveal */
 .services-content {
