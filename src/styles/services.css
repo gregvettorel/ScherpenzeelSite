@@ -28,7 +28,7 @@
   background: transparent;
   transition: background .25s ease;
 }
-.services-accordion.open { background: #fafafa; }
+
 
 /* Header toggle */
 .services-toggle {
@@ -36,7 +36,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 28px 0;
+  padding: 64px 0;
   background: none;
   border: 0;
   cursor: pointer;
@@ -76,8 +76,8 @@
 /* Inner 2-column layout */
 .services-inner {
   display: grid;
-  grid-template-columns: 1fr 420px;
-  gap: 32px;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
   padding: 0 0 40px;
 }
 
@@ -112,7 +112,7 @@
 .services-media img {
   display: block;
   width: 100%;
-  height: auto;
+  max-height: 500px;
   object-fit: cover;
 }
 
