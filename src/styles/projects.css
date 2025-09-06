@@ -1,11 +1,11 @@
 /* ---------- Projects ---------- */
 
-/* Section: give more vertical room so hover pop never clips */
+/* Section */
 .projects-section {
   width: 100%;
   overflow: hidden;
-  padding: 5rem 0;               /* was 4rem */
-  background: #fff;              /* fades blend into white */
+  padding: 3.5rem 0;
+  background: #fff;
 }
 
 .projects-title-display {
@@ -20,145 +20,112 @@
   padding-bottom: 10px;
 }
 
-/* Viewport wrapper (holds fades; does NOT scroll) */
+/* Viewport */
 .projects-viewport {
   position: relative;
-  overflow: hidden;              /* clips the fades nicely */
+  overflow: hidden;
 }
 
-/* The actual scroll rail */
+/* No side fades */
+.projects-viewport::before,
+.projects-viewport::after { display: none; }
+
+/* Rail */
 .projects-rail {
   display: flex;
-  gap: 20px;                     /* closer together (was 32px) */
+  gap: 12px;                 /* tighter spacing */
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 16px 32px 28px;       /* extra top/bottom so scaled cards aren't cut */
+  padding: 10px 16px;        /* tighter padding */
   cursor: grab;
-  scroll-snap-type: none;        /* snap makes drag jittery; keep off */
-  scrollbar-width: none;         /* Firefox */
+  scroll-snap-type: none;
+  scrollbar-width: none;
 }
-.projects-rail::-webkit-scrollbar { display: none; } /* WebKit */
+.projects-rail::-webkit-scrollbar { display: none; }
 .projects-rail.dragging { cursor: grabbing; }
 
-/* Fixed white fades on the left/right of the viewport */
-.projects-viewport::before,
-.projects-viewport::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 120px;                  /* fade width */
-  height: 100%;
-  z-index: 5;                    /* above cards */
-  pointer-events: none;
-}
-.projects-viewport::before {
-  left: 0;
-  background: linear-gradient(to right, #ffffff 0%, rgba(255,255,255,0) 100%);
-}
-.projects-viewport::after {
-  right: 0;
-  background: linear-gradient(to left, #ffffff 0%, rgba(255,255,255,0) 100%);
-}
-
-/* Cards: slightly smaller by default to leave room for hover pop */
+/* Cards: thinner + taller; no hover movement */
 .project-card {
   position: relative;
-  flex: 0 0 clamp(260px, 72vw, 480px);  /* was 280–520 */
-  height: clamp(280px, 58vh, 440px);    /* was 300–500 */
-  border-radius: 26px;
+  flex: 0 0 clamp(220px, 46vw, 500px);
+  height: clamp(360px, 64vh, 520px);
+  border-radius: 12px;
   overflow: hidden;
   background: #000;
-  box-shadow: 0 10px 30px rgba(0,0,0,.16);
-  transform: translateY(0) scale(0.985); /* subtle base shrink */
-  transform-origin: center;
-  transition:
-    transform .28s cubic-bezier(.22,.61,.36,1),
-    box-shadow .28s ease,
-    filter .28s ease;
-  will-change: transform;
+  box-shadow: 0 8px 26px rgba(0,0,0,.14);
+  transform: none;
+  transition: box-shadow .25s ease;
 }
+.project-card:hover { box-shadow: 0 16px 40px rgba(0,0,0,.2); }
 
-/* Minimal hover lift as a fallback (touch/keyboard users) */
-.project-card:hover { transform: translateY(-4px) scale(0.985); }
-
-/* Spotlight effect on hover-capable devices:
-   - Shrink all cards slightly when hovering the viewport
-   - Pop the hovered card forward with scale + shadow
-*/
-@media (hover: hover) and (pointer: fine) {
-  .projects-viewport:hover .project-card {
-    transform: translateY(0) scale(0.965);
-    filter: saturate(0.95);
-  }
-  .projects-viewport .project-card:hover {
-    transform: translateY(-6px) scale(1.04);
-    box-shadow: 0 18px 48px rgba(0,0,0,.22);
-    z-index: 2; /* above neighbors */
-    filter: none;
-  }
-}
-
+/* Image (no blur) */
 .project-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: blur(2px);
+  filter: none;
 }
 
+/* Overlay: title only (no gradients) */
 .project-overlay {
   position: absolute;
-  inset: 0;
-  color: #fff;
-  display: grid;
-  align-content: end;
-  gap: 10px;
-  padding: 30px;
-  background: linear-gradient(to top, rgba(0,0,0,.55) 10%, rgba(0,0,0,0) 55%);
+  inset: auto 0 0 0;
+  padding: 22px 24px;
+  background: transparent;
+  display: flex;
+  align-items: flex-end;
 }
-.overlay-top-grad {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(70% 50% at 50% 0%, rgba(0,0,0,.5), transparent 60%);
-  pointer-events: none;
-}
+.overlay-top-grad { display: none; }
 
 .project-card-title {
-  font-weight: 800;
-  font-size: clamp(18px, 2.6vw, 28px);
   margin: 0;
-}
-.project-desc {
-  margin: 0 0 8px;
-  font-size: clamp(13px, 1.6vw, 15px);
-  opacity: .95;
-}
-
-.project-tags {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.project-tag {
-  background: rgba(255,255,255,.18);
-  border: 1px solid rgba(255,255,255,.25);
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-size: 12px;
-  line-height: 1;
-  backdrop-filter: blur(2px);
+  font-weight: 800;
+  font-size: clamp(18px, 2.4vw, 26px);
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,.45);
 }
 
-.project-chevron {
+/* Hide extras */
+.project-desc,
+.project-tags,
+.project-chevron { display: none !important; }
+
+/* ---------- Custom drag cursor ---------- */
+
+/* Always visible bubble */
+.drag-cursor {
   position: absolute;
-  right: 16px;
-  bottom: 14px;
-  font-size: 22px;
-  opacity: .9;
+  left: 50%;
+  top: 50%;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: #017df9;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  box-shadow: 0 6px 20px rgba(1,125,249,.35);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 1;                 /* always visible */
+  z-index: 10;
 }
 
-/* Smaller fades on mobile */
-@media (max-width: 900px) {
-  .projects-viewport::before,
-  .projects-viewport::after { width: 64px; }
+/* Hide native cursor on desktop so only the bubble is seen */
+@media (hover: hover) and (pointer: fine) {
+  .projects-viewport,
+  .projects-rail {
+    cursor: none !important;
+  }
+  .projects-rail.dragging { cursor: none !important; }
 }
+
+/* Cards only move while dragging: keep these */
+.projects-rail { cursor: grab; }           /* this is overridden by the media query above, which hides it visually */
+.projects-rail.dragging { cursor: grabbing; }
+

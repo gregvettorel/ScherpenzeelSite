@@ -1,47 +1,32 @@
 .running-banner {
   position: relative;
   width: 100%;
-  background-color: #0579FE; /* blue-600 */
   overflow: hidden;
-
-  /* Taller banner */
-  padding-top: 0px;
-  padding-bottom: 0px;
-
-  margin-bottom: 25px;
-
-  display: flex; /* ensures vertical centering */
-  align-items: center;
+  padding: 8px 0;
+  line-height: 1;
 }
 
 .running-banner__inner {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  width: max-content;
   white-space: nowrap;
   will-change: transform;
-  animation: ticker 20s linear infinite;
-  padding: 1.5% 0px; /* horizontal padding */
+  transform: translate3d(0,0,0);
 }
 
 .running-banner__text {
-  color: white;
-  letter-spacing: 0.05em;
-  font-size: clamp(2.5rem, 5vw, 6rem); /* responsive size */
-  font-family: DM Sans, sans-serif;
-  /* make sure there is no spacing between letters*/
-  letter-spacing: 0;
+  margin: 0 2.25rem;
+  font-size: 32px;     /* 32px text */
+  font-weight: 100;
 }
 
-@keyframes ticker {
-  from { transform: translateX(100%); }
-  to   { transform: translateX(-100%); }
+.running-banner__icon {
+  margin: 0 2.25rem;
+  display: inline-block;
+  font-size: 16px;     /* small icons */
+  line-height: 1;
 }
 
-/* Mobile padding adjustment */
-@media (max-width: 768px) {
-  .running-banner {
-    padding-top: 10px;   /* still larger than before */
-    padding-bottom: 10px;
-  }
+@media (prefers-reduced-motion: reduce) {
+  .running-banner__inner { transform: none !important; }
 }

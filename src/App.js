@@ -32,7 +32,6 @@ function App() {
       />
       <Hero />
       <Projects />
-      <AboutSection />
       <RunningBanner />
       <Services />
       <ProcessSteps />
