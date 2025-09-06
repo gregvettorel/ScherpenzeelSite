@@ -32,8 +32,8 @@ function App() {
       />
       <Hero />
       <Projects />
-      <RunningBanner />
       <Services />
+      <RunningBanner />
       <ProcessSteps />
       <TeamLetsTalk />
       <Footer />

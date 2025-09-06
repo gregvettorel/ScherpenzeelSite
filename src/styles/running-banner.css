@@ -4,6 +4,7 @@
   overflow: hidden;
   padding: 8px 0;
   line-height: 1;
+  margin-top: 5rem;
 }
 
 .running-banner__inner {
@@ -14,17 +15,16 @@
   transform: translate3d(0,0,0);
 }
 
-.running-banner__text {
-  margin: 0 2.25rem;
-  font-size: 32px;     /* 32px text */
-  font-weight: 100;
-}
-
-.running-banner__icon {
-  margin: 0 2.25rem;
-  display: inline-block;
-  font-size: 16px;     /* small icons */
-  line-height: 1;
+/* Logo appearance + spacing */
+.running-banner__logo {
+  margin: 0 6.25rem;
+  height: 60px;            /* adjust to taste */
+  width: auto;
+  /* prevent selection/drag across browsers */
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;    /* purely decorative */
+  opacity:  0.8;
 }
 
 @media (prefers-reduced-motion: reduce) {

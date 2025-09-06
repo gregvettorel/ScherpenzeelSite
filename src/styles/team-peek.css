@@ -1,5 +1,5 @@
 /* ========== Layout primitives (Tailwind-free) ========== */
-.team-section { position: relative; }
+.team-section { position: relative; margin-top: 5rem;}
 
 .container {
   max-width: 80rem; /* ~1280px (Tailwind max-w-7xl) */

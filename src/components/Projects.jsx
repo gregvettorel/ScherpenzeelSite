@@ -109,7 +109,7 @@ function Projects() {
         <div className="projects-rail" ref={railRef}>
           {list.map((p, i) => (
             <article key={`${p.title}-${i}`} className="project-card">
-              <img src={p.image} alt={p.title} className="project-image" />
+              <img src={p.image} alt={p.title} className="project-image" draggable="false"/>
               <div className="project-overlay">
                 <h3 className="project-card-title">{p.title}</h3>
               </div>

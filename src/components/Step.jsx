@@ -37,14 +37,15 @@ export default function Step({ step, alt, isLast }) {
               className="process-steps__curve"
               fill="none"
             />
-            {/* downward arrowhead */}
-            <path
-    d="M 460 240 L 445 210 M 460 240 L 475 210"
-              className="process-steps__chev"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
+<path
+  d="M 460 240 L 435 218  M 460 240 L 470 210"
+  className="process-steps__chev"
+  fill="none"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+/>
+
+
           </svg>
         </div>
       )}

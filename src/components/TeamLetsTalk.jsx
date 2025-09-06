@@ -41,7 +41,6 @@ export default function TeamLetsTalk() {
     <SectionReveal id="team" className="team-section section-pad">
       <div className="container pad-y-lg">
         <div className="text-center mb-lg">
-          <h2 className="section-title">Team</h2>
         </div>
 
         {/* Grid */}
