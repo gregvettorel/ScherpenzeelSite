@@ -1,0 +1,67 @@
+/* lock scroll while intro plays */
+html.is-intro, html.is-intro body { overflow: hidden; }
+
+/* base */
+.intro{
+  position: fixed; inset: 0; z-index: 99999;
+  display: grid; place-items: center;
+  background: #fff;
+  opacity: 0; pointer-events: none;  /* becomes visible with .intro--play */
+}
+
+/* blue stage that wipes up */
+.intro__wrap{
+  position: absolute; inset: 0; overflow: hidden;
+  background: #0579FE;
+  transform: translateZ(0);
+}
+
+/* top/bottom panels scale in (gives a quick branded beat) */
+.intro__panel {
+  position: absolute;
+  left: 0; right: 0;
+  height: 50%;
+  background: #0579FE;
+  transform-origin: center;
+  transform: scaleY(0);
+  z-index: 1; /* panels below */
+}
+.intro__panel--top { top: 0; }
+.intro__panel--btm { bottom: 0; }
+
+.intro__center {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 2; /* logo above */
+}
+
+.intro__logo {
+  display: block;
+  filter: drop-shadow(0 10px 30px rgba(0,0,0,.25));
+}
+
+/* play state triggers animations */
+.intro--play{ opacity: 1; pointer-events: auto; }
+
+.intro--play .intro__panel--top{ animation: panelIn .45s ease forwards; }
+.intro--play .intro__panel--btm{ animation: panelIn .45s ease .04s forwards; }
+.intro--play .intro__logo       { animation: logoPop .5s ease .28s both; }
+.intro--play .intro__wrap       { animation: wipeUp .52s cubic-bezier(.3,.7,.5,1) .95s forwards; }
+.intro--play                    { animation: fadeOut .15s linear 1.43s forwards; }
+
+/* keyframes */
+@keyframes panelIn { to { transform: scaleY(1); } }
+@keyframes logoPop {
+  from { transform: scale(.86); filter: blur(4px); opacity: 0; }
+  to   { transform: scale(1);    filter: blur(0);   opacity: 1; }
+}
+@keyframes wipeUp  { to { transform: translateY(-100%); } }
+@keyframes fadeOut { to { opacity: 0; pointer-events: none; } }
+
+/* respect users */
+@media (prefers-reduced-motion: reduce){
+  .intro{ display:none; }
+  html.is-intro, html.is-intro body { overflow: auto; }
+}

@@ -1,5 +1,6 @@
 // src/components/Navbar.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
 import "../styles/navbar.css";
 import WakoButton from "./WakoButton";
 
@@ -11,6 +12,7 @@ const LINKS = [
 ];
 
 export default function Navbar() {
+  const navRef = useRef();
   const [open, setOpen] = useState(false);
 
   // lock/unlock page scroll only while open
@@ -26,10 +28,18 @@ export default function Navbar() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  useEffect(() => {
+    gsap.fromTo(
+      navRef.current,
+      { y: -40, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
+    );
+  }, []);
+
   return (
     <>
       {/* HEADER (glass) */}
-      <header className="nav">
+      <header className="nav" ref={navRef}>
         <div className="nav__inner wrap">
           <a href="/" className="nav__brand" aria-label="Home">
             <img src="/logo_site.svg" alt="" />

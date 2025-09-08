@@ -1,6 +1,7 @@
 // src/App.js
 import React from "react";
 import "./index.css";
+import "./styles/intro.css";
 import bgArt from "./assets/backgroundlogo.png";
 
 import Navbar from "./components/Navbar";
@@ -12,12 +13,12 @@ import AboutSection from "./components/AboutSection";
 import Services from "./components/Services";
 import TeamLetsTalk from "./components/TeamLetsTalk";
 import ProcessSteps from "./components/ProcessSteps"; 
-import Loader from "./components/Loader";
+import IntroReveal from "./components/IntroReveal";
 
 function App() {
   return (
     <div className="site bg-white text-black font-body min-h-screen">
-      <Loader />
+      <IntroReveal />
       <Navbar />
       <Hero />
       <Projects />
