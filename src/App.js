@@ -9,7 +9,6 @@ import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import Projects from "./components/Projects";
 import RunningBanner from "./components/RunningBanner";
-import AboutSection from "./components/AboutSection";
 import Services from "./components/Services";
 import TeamLetsTalk from "./components/TeamLetsTalk";
 import ProcessSteps from "./components/ProcessSteps"; 
@@ -23,7 +22,6 @@ function App() {
       <Hero />
       <Projects />
       <RunningBanner />
-      <AboutSection />
       <Services />
       <ProcessSteps />
       <TeamLetsTalk />

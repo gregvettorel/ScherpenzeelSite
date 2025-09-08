@@ -1,47 +1,32 @@
 .running-banner {
   position: relative;
   width: 100%;
-  background-color: #0579FE; /* blue-600 */
   overflow: hidden;
-
-  /* Taller banner */
-  padding-top: 0px;
-  padding-bottom: 0px;
-
-  display: flex; /* ensures vertical centering */
-  align-items: center;
-  margin-bottom: 6vw;
-  margin-top: 6vw;
+  padding: 8px 0;
+  line-height: 1;
+  margin-top: 5rem;
 }
 
 .running-banner__inner {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  width: max-content;
   white-space: nowrap;
   will-change: transform;
-  animation: ticker 20s linear infinite;
-  padding: 1.5% 0px; /* horizontal padding */
+  transform: translate3d(0,0,0);
 }
 
-.running-banner__text {
-  color: white;
-  letter-spacing: 0.05em;
-  font-size: clamp(2.5rem, 8vw, 8rem); /* responsive size */
-  font-family: DM Sans, sans-serif;
-  /* make sure there is no spacing between letters*/
-  letter-spacing: 0;
+/* Logo appearance + spacing */
+.running-banner__logo {
+  margin: 0 6.25rem;
+  height: 60px;            /* adjust to taste */
+  width: auto;
+  /* prevent selection/drag across browsers */
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;    /* purely decorative */
+  opacity:  0.8;
 }
 
-@keyframes ticker {
-  from { transform: translateX(100%); }
-  to   { transform: translateX(-100%); }
-}
-
-/* Mobile padding adjustment */
-@media (max-width: 768px) {
-  .running-banner {
-    padding-top: 10px;   /* still larger than before */
-    padding-bottom: 10px;
-  }
+@media (prefers-reduced-motion: reduce) {
+  .running-banner__inner { transform: none !important; }
 }

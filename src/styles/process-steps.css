@@ -1,143 +1,114 @@
 /* =========================================================
-   Process Steps Component
+   How it works — alternating left/right + arrows (with your arrow styles)
    ========================================================= */
 
-/* Wrapper for global scaling */
 .process-steps {
-  --ps-scale: 1.1;
-}
-
-/* ---------- Base Layout ---------- */
-.process-steps__row {
   display: grid;
-  grid-template-columns: 1.15fr 220px 0.85fr; /* slightly offset from center */
-  align-items: center;
-  gap: calc(56px * var(--ps-scale));
-  padding-top: calc(56px * var(--ps-scale));
-  border-radius: 14px; /* subtle rounding to feel like a unit */
-  transition: transform .35s cubic-bezier(.22,.61,.36,1),
-              box-shadow .35s cubic-bezier(.22,.61,.36,1),
-              background-color .35s ease;
-  will-change: transform;
+  row-gap: clamp(28px, 5vw, 44px);     /* tighter vertical spacing */
+  overflow: visible;                   /* allow arrows to extend */
 }
-.process-steps__row:first-child { border-top: 0; }
 
-/* Alternate rows: mirror the offset + flip arrow */
-.process-steps__row--alt {
-  grid-template-columns: 0.85fr 220px 1.15fr;
+.section-title {
+  font-family: "DM Sans", sans-serif;
+  font-weight: lighter;
+  font-size: clamp(34px, 6vw, 64px);
+  line-height: 1.05;
+  margin: 0 0 0.5rem;
+  text-align: left;
+  color: #017df9;
+  padding-bottom: 30px;
 }
-.process-steps__row--alt .process-steps__arrow {
+
+
+/* ---------- Row layout ---------- */
+.process-steps__row {
+  position: relative;                  /* anchor arrow absolutely */
+  display: grid;
+  grid-template-columns: auto auto 1fr;/* [number] [image] [text] */
+  align-items: center;
+  column-gap: clamp(16px, 3vw, 28px);  /* closer columns */
+  max-width: auto;                    /* keep rows compact */
+  justify-content: flex-start;
+  margin-top: 2%;
+  text-align: left;
+}
+
+.process-steps__row--left  { margin-left: 0; }
+.process-steps__row--right { margin-left: auto; }
+
+/* ---------- Number ---------- */
+.process-steps__number{
+  font-family:"DM Sans",system-ui,-apple-system,Segoe UI,sans-serif;
+  font-weight:600;
+  font-size:clamp(40px,5.5vw,72px);
+  color:#1877ff;
+}
+
+/* ---------- Image ---------- */
+.process-steps__img{
+  width:clamp(120px,18vw,160px);
+  height:auto;
+  display:block;
+  user-select:none;
+}
+
+/* ---------- Text ---------- */
+.process-steps__text{ max-width:460px; }
+.process-steps__heading{
+  font-family:"DM Sans",system-ui,-apple-system,Segoe UI,sans-serif;
+  font-weight:700;
+  font-size:clamp(22px,2.5vw,28px);
+  line-height:1.2;
+  color:#0f172a;
+  margin:0 0 6px 0;
+}
+.process-steps__desc{
+  font-family:"Inter",system-ui,-apple-system,Segoe UI,sans-serif;
+  font-size:clamp(15px,1.7vw,16px);
+  line-height:1.6;
+  color:#6b7280;
+  margin:0;
+}
+
+.process-steps__arrow{
+  position:absolute;
+  width: clamp(200px, 34vw, 300px);
+  height: clamp(100px, 22vw, 240px); /* taller so it “drops” into next row */
+  top: -2px;                         /* start near top of the current row */
+  pointer-events:none;
+}
+
+/* shared stroke look */
+.process-steps__curve,
+.process-steps__chev{
+  stroke: #C2C8D0;        /* or #111 for black like the example */
+  stroke-width: 6;       /* chunky line */
+  stroke-linecap: round;  /* rounded tips like the ref */
+  stroke-linejoin: round;
+  fill: none;
+}
+
+/* keep your mirroring as-is */
+.process-steps__row--left  .process-steps__arrow { left:  calc(100% + 24px); }
+.process-steps__row--right .process-steps__arrow {
+  right: calc(100% + 24px);
   transform: scaleX(-1);
 }
 
-/* Visual (number + image) */
-.process-steps__visual {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-self: end;
-  justify-content: flex-start;
-  gap: 24px;
-  min-width: 200px;
-  margin: 0;
-}
-.process-steps__row--alt .process-steps__visual {
-  justify-self: start;        
-  justify-content: flex-start;
-}
-
-/* Heading (section) */
-.process-steps__heading {
-  font-family: 'DM Sans', system-ui, -apple-system, Segoe UI, sans-serif;
-  font-weight: 700;
-  font-size: calc(clamp(28px, 3.2vw, 34px) * var(--ps-scale));
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  color: #0f172a;
-  margin: 0;
-}
-
-/* Big number */
-.process-steps__number {
-  font-family: 'DM Sans', system-ui, -apple-system, Segoe UI, sans-serif;
-  font-weight: 500;
-  font-size: calc(clamp(56px, 6vw, 84px) * var(--ps-scale));
-  color: #1877ff;
-  line-height: 1;
-  letter-spacing: -0.01em;
-  margin: 0;
-}
-
-/* Illustration */
-.process-steps__img {
-  width: calc(190px * var(--ps-scale));
-  max-width: 100%;
-  height: auto;
-  display: block;
-  user-select: none;
-  margin: 0;
-
-  /* Keep sharp during transforms */
-  backface-visibility: hidden;
-  transform: translateZ(0);
-  will-change: transform;
-  image-rendering: auto;
-}
-
-/* Text column */
-.process-steps__text {
-  max-width: 520px;
-  margin: 0;
-  padding: 0;
-}
-.process-steps__title {
-  font-family: 'Inter', system-ui, -apple-system, Segoe UI, sans-serif;
-  font-size: calc(clamp(20px, 2vw, 24px) * var(--ps-scale));
-  font-weight: 500;
-  color: #111827;
-  line-height: 1.3;
-  margin: 0 0 10px 0;
-}
-.process-steps__desc {
-  font-family: 'Inter', system-ui, -apple-system, Segoe UI, sans-serif;
-  font-size: calc(clamp(16px, 2vw, 17px) * var(--ps-scale));
-  color: #6b7280;
-  line-height: 1.7;
-  margin: 0;
-}
-
-/* ---------- Arrow Styles ---------- */
-.process-steps__arrow { display: block; }
-.process-steps__arrow svg {
-  transition: transform .35s cubic-bezier(.22,.61,.36,1);
-  will-change: transform;
-}
-.process-steps__curve,
-.process-steps__chev {
-  stroke: #C2C8D0;
-  stroke-width: 4.5;
-  transition: stroke .25s ease, filter .25s ease;
-}
-
 /* ---------- Hover micro-interactions ---------- */
-@media (hover: hover) {
-  .process-steps__row:hover .process-steps__img {
-    transform: translateY(-2px); /* no scale -> no blur */
+@media (hover:hover){
+  .process-steps__row:hover .process-steps__img{
+    transform: translateY(-2px);
+    transition: transform .25s ease;
   }
-  .process-steps__row:hover .process-steps__number {
+  .process-steps__row:hover .process-steps__number{
     transform: translateY(-1px);
-    transition: transform .35s cubic-bezier(.22,.61,.36,1);
+    transition: transform .25s ease;
   }
 
-  /* Arrow tilt */
-  .process-steps__row:hover .process-steps__arrow svg {
-    transform: rotate(4deg);
-  }
-  .process-steps__row--alt:hover .process-steps__arrow svg {
-    transform: rotate(-4deg);
-  }
-
-  /* Arrow highlight */
+  /* Arrow tilt + highlight (from your sheet) */
+  .process-steps__row:hover .process-steps__arrow svg { transform: rotate(4deg); }
+  .process-steps__row--right:hover .process-steps__arrow svg { transform: rotate(-4deg); }
   .process-steps__row:hover .process-steps__curve,
   .process-steps__row:hover .process-steps__chev {
     stroke: #1877ff;
@@ -146,29 +117,33 @@
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 900px) {
-  .process-steps__row,
-  .process-steps__row--alt {
+@media (max-width:900px){
+  .process-steps__row{
     grid-template-columns: 1fr;
-    gap: 24px;
+    text-align: left;
+    row-gap: 12px;
+    margin-left: 0;
   }
-  .process-steps__visual,
-  .process-steps__row--alt .process-steps__visual {
-    justify-content: flex-start;
-  }
-  .process-steps__img { width: 160px; }
-  .process-steps__text { max-width: 100%; }
-  .process-steps__arrow { display: none; } /* hide arrows on mobile */
+  .process-steps__row--right{ margin-left: 0; }
+  .process-steps__arrow{ display: none; } /* hide arrows on mobile */
 }
 
-/* ---------- Reduced Motion ---------- */
-@media (prefers-reduced-motion: reduce) {
-  .process-steps__row,
-  .process-steps__visual,
-  .process-steps__text,
-  .process-steps__arrow svg,
-  .process-steps__curve,
-  .process-steps__chev {
-    transition: none !important;
-  }
+.process-steps__row {
+  transition: transform 0.3s ease;
+}
+
+.process-steps__text_image--left {
+  -webkit-transform: skewY(-1deg);
+}
+
+.process-steps__text_image--right {
+  -webkit-transform: skewY(-1deg);
+}
+
+.process-steps__row:hover {
+  transform: scale(1.02);
+}
+
+.process-steps__row:hover .process-steps__row-inner {
+  transform: scale(1); /* snaps back to 100% */
 }
