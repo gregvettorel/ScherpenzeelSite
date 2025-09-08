@@ -40,6 +40,8 @@ html.is-intro, html.is-intro body { overflow: hidden; }
 .intro__logo {
   display: block;
   filter: drop-shadow(0 10px 30px rgba(0,0,0,.25));
+  max-width: 90vw;
+  height: auto;
 }
 
 /* play state triggers animations */

@@ -38,9 +38,9 @@ export default function IntroReveal() {
           {/* YOUR W PATH INLINE – fill set to white so it’s visible on blue */}
           <svg
             className="intro__logo"
-            viewBox="0 0 183 158"
-            width="220"
-            height="190"
+            viewBox="-30 -30 243 218"   // expanded viewBox for more breathing room
+            width="200"
+            height="160"
             aria-hidden="true"
             style={{ display: "block" }}
           >
