@@ -20,13 +20,8 @@ export default function CustomCursor() {
     const animateCursor = () => {
       cursorX += (mouseX - cursorX) * 0.32;
       cursorY += (mouseY - cursorY) * 0.32;
-      cursor.style.transform = `translate(${cursorX - 12}px, ${cursorY - 12}px)`; // -12 for 24px base
+      cursor.style.transform = `translate(${cursorX - 12}px, ${cursorY - 12}px)`;
       requestAnimationFrame(animateCursor);
-    };
-
-    const handleMouseMove = e => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
     };
 
     const hoverSelectors = [
@@ -34,22 +29,33 @@ export default function CustomCursor() {
     ];
     const handlePointerOver = e => {
       if (hoverSelectors.some(sel => e.target.closest(sel))) setIsHovering(true);
-      if (e.target.closest(".project-card")) setShowArrow(true);
+      if (e.target.closest(".wako-btn, .project-card, .olc__card, .btn--pill, .case-nav__back")) setShowArrow(true);
     };
     const handlePointerOut = e => {
       if (hoverSelectors.some(sel => e.target.closest(sel))) setIsHovering(false);
-      if (e.target.closest(".project-card")) setShowArrow(false);
+      if (e.target.closest(".wako-btn, .project-card, .olc__card, .btn--pill, .case-nav__back")) setShowArrow(false);
     };
 
-    document.addEventListener("mousemove", handleMouseMove);
+    // NEW: Always reset arrow on mouseup (after click)
+    const handleMouseUp = () => setShowArrow(false);
+
+    document.addEventListener("mousemove", e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
     document.addEventListener("pointerover", handlePointerOver);
     document.addEventListener("pointerout", handlePointerOut);
+    document.addEventListener("mouseup", handleMouseUp);
     animateCursor();
 
     return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mousemove", e => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
       document.removeEventListener("pointerover", handlePointerOver);
       document.removeEventListener("pointerout", handlePointerOut);
+      document.removeEventListener("mouseup", handleMouseUp);
     };
   }, []);
 

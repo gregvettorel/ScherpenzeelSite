@@ -1,0 +1,98 @@
+/* Root tokens already exist in your main CSS */
+
+/* Layout */
+.project { max-width: 1200px; margin: 0 auto; }
+.project-hero { padding-top: calc(var(--px) * 0.6); text-align: left; }
+
+.project-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.project-title-xxl {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(42px, 6vw, 80px);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.02em;
+  margin: 0 0 10px 0;
+  color: var(--ink);
+}
+
+.project-subtitle {
+  font-size: clamp(16px, 2vw, 20px);
+  color: var(--muted);
+  max-width: 58ch;
+  margin: 0 0 28px 0;
+}
+
+.project-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 24px;
+  margin: 28px 0 36px;
+}
+
+.pill {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--ink);
+  border: 1px solid var(--ring);
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: var(--surface);
+}
+
+.meta-list {
+  margin: 10px 0 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ink);
+  opacity: .9;
+  line-height: 1.7;
+}
+
+.project-cover {
+  margin: 32px 0 0 0;
+  border-radius: var(--radius-3);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+.project-cover img { width: 100%; display: block; }
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: clamp(24px, 4vw, 60px);
+}
+
+.project-h2 {
+  font-size: var(--h2);
+  line-height: var(--lh-tight);
+  margin: 0 0 10px 0;
+}
+.project-h3 { font-size: var(--h3); margin: 0 0 8px 0; }
+
+.project-copy { color: var(--ink); opacity: .9; line-height: var(--lh-copy); }
+.project-ul { margin: 0; padding-left: 18px; line-height: var(--lh-copy); }
+
+.shot {
+  border-radius: var(--radius-3);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+.shot img { width: 100%; display: block; }
+
+.project-cta-stack { display: grid; gap: 12px; align-content: start; }
+
+/* Responsive */
+@media (max-width: 960px) {
+  .project-meta { grid-template-columns: 1fr 1fr; }
+  .two-col { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .project-meta { grid-template-columns: 1fr; }
+}

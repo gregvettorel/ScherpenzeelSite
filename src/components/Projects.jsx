@@ -1,12 +1,17 @@
 import React, { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import "../styles/projects.css";
+import respireThumb from "../assets/respirethumb.png"; // add this
+//imort swear thumb
+import swearThumb from "../assets/swearthumb.png";
 
-// Updated projects data (ensure images are high-quality and add slugs for links)
 const projects = [
-  { title: "Crty", category: "Mobile App", image: "/projects/critly.png", slug: "crty" },
-  { title: "Tansto", category: "Web Design", image: "/projects/tansto.png", slug: "tansto" },
-  { title: "Senta", category: "Mobile App & Branding", image: "/projects/senta.png", slug: "senta" },
-  { title: "Crint", category: "Mobile App", image: "/projects/crint.png", slug: "crint" },
+  { title: "Crty",   category: "Mobile App",            image: "/projects/critly.png", slug: "crty" },
+  { title: "Tansto", category: "Web Design",            image: "/projects/tansto.png", slug: "tansto" },
+  { title: "Senta",  category: "Mobile App & Branding", image: "/projects/senta.png",  slug: "senta" },
+  { title: "Crint",  category: "Mobile App",            image: "/projects/crint.png",  slug: "crint" },
+  { title: "Respire",category: "Case Study",            image: respireThumb,           slug: "respire" }, // fix
+  { title: "Swear Jar", category: "Mobile App",         image: swearThumb,            slug: "swear" } // fix
 ];
 
 export default function Projects() {
@@ -14,28 +19,14 @@ export default function Projects() {
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      cardsRef.current.forEach(el => el?.classList.add("in"));
-      return;
-    }
-
-    const io = new IntersectionObserver(
-      entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.classList.add("in");
-            io.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.35 }
-    );
-
+    if (reduce) { cardsRef.current.forEach(el => el?.classList.add("in")); return; }
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }});
+    }, { threshold: 0.35 });
     cardsRef.current.forEach(el => el && io.observe(el));
     return () => io.disconnect();
   }, []);
 
-  // Optional: Add subtle 3D tilt on hover (like Form & Fun's interactive feel)
   useEffect(() => {
     const cleanups = cardsRef.current.map(card => {
       if (!card) return null;
@@ -67,22 +58,18 @@ export default function Projects() {
 
         <div className="projects-grid">
           {projects.map((p, i) => (
-            <article
-              key={p.title + i}
-              ref={el => (cardsRef.current[i] = el)}
-              className="project-card"
-            >
-              <div className="project-media" style={{ backgroundColor: "#F7F7F7" }}>
-                <div className="reveal-curtain" />
-                <img className="project-img" src={p.image} alt={p.title} loading="lazy" />
-                {/* Remove project-overlay and project-link */}
-              </div>
-
-              <div className="project-info">
-                <h3 className="project-title">{p.title}</h3>
-                <span className="project-category">{p.category}</span>
-              </div>
-            </article>
+            <Link key={p.title+i} to={`/work/${p.slug}`} className="project-card-link">
+              <article ref={el => (cardsRef.current[i] = el)} className="project-card">
+                <div className="project-media" style={{ backgroundColor: "#F7F7F7" }}>
+                  <div className="reveal-curtain" />
+                  <img className="project-img" src={p.image} alt={p.title} loading="lazy" />
+                </div>
+                <div className="project-info">
+                  <h3 className="project-title">{p.title}</h3>
+                  <span className="project-category">{p.category}</span>
+                </div>
+              </article>
+            </Link>
           ))}
         </div>
       </div>
