@@ -2,9 +2,12 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  padding: 8px 0;
   line-height: 1;
-  margin-top: 5rem;
+  /* Explicitly add padding to ensure section-pad is visible */
+  padding-inline: var(--px); /* Matches section-pad */
+  padding-top: 10rem; /* Optional: Add vertical padding for breathing room */
+  padding-bottom: 10rem;
+  box-sizing: border-box; /* Ensure padding is included in width calculations */
 }
 
 .running-banner__inner {
@@ -12,7 +15,7 @@
   align-items: center;
   white-space: nowrap;
   will-change: transform;
-  transform: translate3d(0,0,0);
+  transform: translate3d(0, 0, 0);
 }
 
 /* Logo appearance + spacing */

@@ -1,5 +1,6 @@
 // src/components/RunningBanner.jsx
 import React, { useEffect, useRef, useState } from "react";
+//
 import "../styles/running-banner.css";
 
 export default function RunningBanner({
@@ -103,7 +104,7 @@ export default function RunningBanner({
   }, [loopWidth, scrollerSelector, speed, direction]);
 
   return (
-    <div className="running-banner" ref={containerRef} aria-label={`${imageAlt} marquee`}>
+    <div className="running-banner section-pad" ref={containerRef} aria-label={`${imageAlt} marquee`}>
       <div className="running-banner__inner" ref={trackRef} aria-hidden="true">
         <Sequence />
         <Sequence />
