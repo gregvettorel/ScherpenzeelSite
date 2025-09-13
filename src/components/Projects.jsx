@@ -75,9 +75,7 @@ export default function Projects() {
               <div className="project-media" style={{ backgroundColor: "#F7F7F7" }}>
                 <div className="reveal-curtain" />
                 <img className="project-img" src={p.image} alt={p.title} loading="lazy" />
-                <div className="project-overlay">
-                  <a className="project-link" href={`/work/${p.slug}`}>View Project</a>
-                </div>
+                {/* Remove project-overlay and project-link */}
               </div>
 
               <div className="project-info">

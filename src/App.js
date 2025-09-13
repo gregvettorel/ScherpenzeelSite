@@ -1,7 +1,8 @@
 // src/App.js
-import React from "react";
+import React, { useEffect } from "react";
 import "./index.css";
 import "./styles/intro.css";
+import "./styles/custom-cursor.css";
 import bgArt from "./assets/backgroundlogo.png";
 
 import Navbar from "./components/Navbar";
@@ -13,10 +14,16 @@ import Services from "./components/Services";
 import TeamLetsTalk from "./components/TeamLetsTalk";
 import ProcessSteps from "./components/ProcessSteps"; 
 import IntroReveal from "./components/IntroReveal";
+import CustomCursor from "./components/CustomCursor";
 
 function App() {
+  useEffect(() => {
+    return () => document.body.classList.remove("custom-cursor-active");
+  }, []);
+
   return (
     <div className="site bg-white text-black font-body min-h-screen">
+      <CustomCursor />
       <IntroReveal />
       <Navbar />
       <Hero />
@@ -26,7 +33,7 @@ function App() {
       <ProcessSteps />
       <TeamLetsTalk />
       <Footer />
-            <img src={bgArt} alt="" className="page-art" aria-hidden="true" />
+      <img src={bgArt} alt="" className="page-art" aria-hidden="true" />
     </div>
   );
 }
