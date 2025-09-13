@@ -153,10 +153,10 @@
 
 .services-media {
   width: 100%;
-  min-height: 260px;           /* or: aspect-ratio: 4 / 3; */
+  min-height: 260px;
   display: grid;
   place-items: center;
-  border-radius: 16px;
   overflow: hidden;
+  border: hidden;
 }
 .services-media canvas { width: 100% !important; height: 100% !important; }
