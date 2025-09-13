@@ -1,7 +1,7 @@
 /* Scope to the hero so nothing else gets touched */
 .hero-visual {
   overflow: visible !important;
-  max-width: 100%;
+  max-width: 90%;
   width: 100%;
   height: auto;
 }
@@ -372,7 +372,7 @@
 
 .hero__accent {
   color: var(--brand);
-  background: linear-gradient(90deg, #0579FE 60%, #00E0FF 100%);
+  background: #0579FE;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
@@ -403,10 +403,11 @@
 }
 
 .hero__lead {
-  color: var(--muted);
-  font-size: 18px;
+  color: var(--ink);
+  font-size: 1.5rem;
   line-height: 1.8;
   padding: 1.6rem 0px;
+  font-weight: 400;
   font-family: 'Inter', sans-serif;
 }
 

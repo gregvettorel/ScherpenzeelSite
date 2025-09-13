@@ -40,7 +40,7 @@ export default function Navbar() {
     <>
       {/* HEADER (glass) */}
       <header className="nav" ref={navRef}>
-        <div className="nav__inner wrap">
+        <div className="nav__inner wrap section-pad" cl>
           <a href="/" className="nav__brand" aria-label="Home">
             <img src="/logo_site.svg" alt="" />
           </a>

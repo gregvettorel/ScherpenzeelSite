@@ -1,7 +1,7 @@
 /* === TOKENS & GLOBALS === */
 :root {
-  --wrap: 90rem;
-  --px: clamp(16px, 2.6vw, 28px);
+ 
+  --px: 5%;
 
   --brand: #0579FE;
   --ink: #111318;
@@ -14,20 +14,12 @@
   --shadow-soft: 0 2px 20px rgba(0, 0, 0, .06);
   --ring: rgba(0, 0, 0, .06);
 
-  --h1: clamp(40px, 6vw, 4.4rem);
+  --h1: clamp(40px, 6vw, 5.25rem);
   --h2: clamp(26px, 3vw, 2.2rem);
   --h3: clamp(18px, 2.2vw, 1.6rem);
 
-  --lh-tight: 1.08;
+  --lh-tight: 1.24;
   --lh-copy: 1.7;
-}
-
-/* container helper */
-.wrap {
-  max-width: var(--wrap);
-  margin-inline: auto;
-  padding-inline: var(--px);
-  /* ensures consistent side padding everywhere */
 }
 
 /* section rhythm */
