@@ -45,6 +45,10 @@
   font-weight: 400;
   letter-spacing: .005em;
 }
+.explainer .word {
+  display: inline-block;   /* needed for translateY */
+  color: inherit;          /* your CSS controls color */
+}
 .explainer-cta{ display:flex; flex-direction:column; gap:1rem; margin-left:3vw; justify-content:center; }
 
 @media (min-width:700px){

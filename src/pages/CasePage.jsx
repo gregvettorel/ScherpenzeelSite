@@ -43,16 +43,19 @@ export default function CasePage() {
           explainerEl.dataset.split = "1";
         }
         const words = explainerEl.querySelectorAll(".word");
-        gsap.set(words, { y: 14, opacity: 0, filter: "blur(0.3px)", scale: 0.985, willChange: "transform,opacity" });
+
+        // Only set transform/opacity (no blur/scale/color)
+        gsap.set(words, { y: 14, opacity: 0 });
+
         gsap.to(words, {
           y: 0,
           opacity: 1,
-          filter: "blur(0px)",
-          scale: 1,
           duration: 1.1,
           ease: "power3.out",
-          stagger: { each: 0.06, from: "start" },   // slower, smoother
-          scrollTrigger: { trigger: explainerEl, start: "top 72%", once: true }
+          stagger: { each: 0.06, from: "start" },
+          scrollTrigger: { trigger: explainerEl, start: "top 72%", once: true },
+          // IMPORTANT: remove the inline styles GSAP added
+          onComplete: () => gsap.set(words, { clearProps: "transform,opacity" })
         });
       }
 
@@ -69,7 +72,7 @@ export default function CasePage() {
         let start = 0, end = 1;
         const clamp01 = v => Math.max(0, Math.min(1, v));
         const map = (v, a, b, c, d) => (c + (d - c) * (Math.max(0, Math.min(1, (v - a) / Math.max(1e-6, b - a)))));
-        
+
         const measure = () => {
           const r = main.getBoundingClientRect();
           const y = window.scrollY || window.pageYOffset;
@@ -141,10 +144,9 @@ export default function CasePage() {
             flexDirection: "row",
             gap: "4vw",
             alignItems: "center",
-            // removed: maxWidth: "1100px"
           }}
         >
-          <div className="explainer" id="explainer" style={{ color: "var(--muted)", fontSize: "1.18rem", lineHeight: "1.7" }}>
+          <div className="explainer" id="explainer">
             {data.explainer}
           </div>
           <div className="explainer-cta">
@@ -175,7 +177,7 @@ export default function CasePage() {
       {/* Info grid */}
       <section className="case-info section section-pad" style={{ background: "var(--surface)" }}>
         <div className="wrap"
-          // removed: style={{ maxWidth: "1100px" }}
+        // removed: style={{ maxWidth: "1100px" }}
         >
           <div className="case-info__row">
             <div className="case-info__label">Year</div>

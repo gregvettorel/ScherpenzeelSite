@@ -3,6 +3,13 @@ import flowchartImg from "../assets/flowchart.png";
 import blenderVideo from "../assets/respire.mp4";
 import desktopVideo from "../assets/desktop.mp4";
 
+// NEW: Brains Coffee assets
+import bcLaptop from "../assets/brainscoffeelaptop.png";
+import bcIpad from "../assets/brainscoffeeipad.png";
+import bcIpad2 from "../assets/brinscoffeeipad2.png";
+import bcBrandboard from "../assets/brandingbrainscofeee.png";
+import bcVideo from "../assets/brainscoffeevideo.mp4";
+
 // NEW: Swear assets
 import swearHero from "../assets/swear-1.png";
 import swearShot2 from "../assets/swear-2.png";
@@ -10,6 +17,38 @@ import swearShot3 from "../assets/swear-3.png";
 import swearVideo from "../assets/swearvideo.mp4";
 
 export const cases = {
+  // NEW CASE: Brains Coffee
+  brainscoffee: {
+    slug: "brainscoffee",
+    title: "Brains Coffee",
+    subtitle: "Concept coffee store — branding, website and packaging",
+    hero: bcLaptop,
+    figmaUrl: "https://www.figma.com/design/VkbA514SVDRTELkhxtHT2e/Brains-coffee?node-id=0-1&t=NNY9nmc999mxsM7j-1",
+    explainer: `Brains Coffee is a concept coffee store designed in Figma. I created the brand identity, a responsive marketing website and packaging. The focus is a warm, modern identity, clear product storytelling, and consistency across web and packaging.`,
+    year: "2025",
+    deliverables: [
+      "Branding & identity",
+      "Marketing website (UI/UX)",
+      "Packaging design",
+      "Design system & components",
+    ],
+    stackTags: ["Figma", "Illustrator", "UI/UX", "Prototype"],
+    features: [
+      "Friendly, modern identity",
+      "Responsive web design",
+      "Reusable UI kit",
+      "Consistent packaging system",
+    ],
+    cards: [
+      { type: "video", src: bcVideo },
+      { type: "image", src: bcLaptop },
+      { type: "image", src: bcIpad },
+      { type: "image", src: bcBrandboard },
+      { type: "image", src: bcIpad2 },
+    ],
+    nextHref: "/work/respire",
+  },
+
   respire: {
     slug: "respire",
     title: "Respire: Marketplace App",

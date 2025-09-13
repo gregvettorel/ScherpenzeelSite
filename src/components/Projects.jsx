@@ -1,17 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "../styles/projects.css";
-import respireThumb from "../assets/respirethumb.png"; // add this
-//imort swear thumb
+import respireThumb from "../assets/respirethumb.png";
 import swearThumb from "../assets/swearthumb.png";
+import brainsCoffeeThumb from "../assets/brainscoffeelaptop.png"; // NEW
 
 const projects = [
-  { title: "Crty",   category: "Mobile App",            image: "/projects/critly.png", slug: "crty" },
-  { title: "Tansto", category: "Web Design",            image: "/projects/tansto.png", slug: "tansto" },
-  { title: "Senta",  category: "Mobile App & Branding", image: "/projects/senta.png",  slug: "senta" },
-  { title: "Crint",  category: "Mobile App",            image: "/projects/crint.png",  slug: "crint" },
-  { title: "Respire",category: "Case Study",            image: respireThumb,           slug: "respire" }, // fix
-  { title: "Swear Jar", category: "Mobile App",         image: swearThumb,            slug: "swear" } // fix
+  { title: "Brains Coffee", category: "Branding & Web", image: brainsCoffeeThumb, slug: "brainscoffee" }, // NEW
+  { title: "Respire",category: "Case Study",            image: respireThumb,           slug: "respire" },
+  { title: "Swear", category: "Mobile App",         image: swearThumb,             slug: "swear" }
 ];
 
 export default function Projects() {
