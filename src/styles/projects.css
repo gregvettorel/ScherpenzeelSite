@@ -157,10 +157,3 @@
   }
 }
 
-/* Prevent overflow */
-html, body {
-  overflow-x: hidden;
-}
-.wrap {
-  overflow-x: hidden;
-}
