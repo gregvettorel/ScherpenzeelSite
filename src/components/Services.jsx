@@ -45,7 +45,7 @@ export default function Services() {
 	return (
 		<SectionReveal className={sectionClass}>
 			<div className={`wrap${openIndex !== -1 ? " wrap--full" : ""} `}>
-        		<h2 className="section-title text-center mb-10">What we do</h2>
+        		<h2 className="section-title  mb-10">What we do</h2>
 				<div className="services-list">
 					{items.map((s, i) => {
 						const isOpen = i === openIndex;

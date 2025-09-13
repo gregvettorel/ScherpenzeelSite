@@ -20,7 +20,7 @@ export default function ProcessSteps() {
   return (
     <SectionReveal id="how-it-works" className="section section-pad">
       <div className="wrap">
-        <h2 className="section-title text-center mb-10">How it works</h2>
+        <h2 className="section-title mb-10">How it works</h2>
 
         <div className="process-steps">
           {steps.map((s, i) => (
