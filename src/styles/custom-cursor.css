@@ -13,8 +13,12 @@
     transform 0.09s cubic-bezier(.22,.61,.36,1),
     width 0.22s cubic-bezier(.22,.61,.36,1),
     height 0.22s cubic-bezier(.22,.61,.36,1),
-    background 0.18s, border 0.18s;
-  box-shadow: 0 0 12px rgba(5,121,254,0.13);
+    background 0.18s, border 0.18s, box-shadow 0.18s;
+  /* Dual outline for legibility on light/dark/blue backgrounds */
+  box-shadow:
+    0 0 0 1.4px #ffffff,              /* white ring */
+    0 0 0 3px rgba(17,19,24,0.55),    /* dark ring */
+    0 0 12px rgba(5,121,254,0.13);    /* glow */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,36 +27,36 @@
   border: none;
 }
 
-/* Hover state: Scale up */
+/* Slight grow for any clickable (set via JS) */
 .custom-cursor.hover {
-  width: 48px;
-  height: 48px;
-}
-
-/* Arrow cursor style */
-.cursor-arrow {
-  display: block;
   width: 36px;
   height: 36px;
-  pointer-events: none;
-  transition: stroke 0.18s;
 }
 
+/* Arrow mode (projects/external only) */
 .custom-cursor.arrow {
   width: 88px;
   height: 88px;
   background: #fff;
   border: 3px solid #0579FE;
-  box-shadow: 0 0 0 4px rgba(5,121,254,0.08);
+  /* keep outer dark ring for contrast */
+  box-shadow:
+    0 0 0 1.2px rgba(17,19,24,0.55),
+    0 0 0 4px rgba(5,121,254,0.08);
 }
+.custom-cursor.arrow .cursor-arrow { stroke: #0579FE; }
 
-.custom-cursor.arrow .cursor-arrow {
-  stroke: #0579FE;
-}
+.custom-cursor:not(.arrow) .cursor-arrow { display: none; }
 
-.custom-cursor:not(.arrow) .cursor-arrow {
-  display: none;
+/* Optional extra-contrast skin (toggled on nav or data-cursor-contrast) */
+.custom-cursor.contrast {
+  background: #fff;
+  border: 2px solid #0579FE;
+  box-shadow:
+    0 0 0 1.2px rgba(17,19,24,0.55),
+    0 0 0 4px rgba(5,121,254,0.08);
 }
+.custom-cursor.contrast .cursor-arrow { stroke: #0579FE; }
 
 /* Hide default cursor on body when custom cursor is active */
 

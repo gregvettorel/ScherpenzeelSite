@@ -24,25 +24,30 @@ export default function CustomCursor() {
       requestAnimationFrame(animateCursor);
     };
 
-    // Only show grow + arrow on projects or true external links
+    // Grow over any clickable
+    const clickableSelector = "a, button, [role='button'], .wako-btn, .project-card, .project-card-link, .nav__link, .nav__brand";
+
+    // Arrow only on project cards or true external links
     const arrowSelector = ".project-card-link, .project-card, a[target='_blank'], a[rel~='external'], [data-cursor='external']";
 
     const onMove = (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
 
+      const clickable = !!e.target.closest(clickableSelector);
+      setIsHovering(clickable);
+
       const arrowTarget = e.target.closest(arrowSelector);
       const isExternal =
         arrowTarget &&
         arrowTarget.tagName === "A" &&
         !/^mailto:|^tel:/i.test(arrowTarget.getAttribute("href") || "");
-
       const isProject = !!e.target.closest(".project-card-link, .project-card");
+      setShowArrow(isProject || isExternal);
 
-      const show = isProject || isExternal;
-
-      setIsHovering(show);  // grow only for allowed targets
-      setShowArrow(show);   // svg only for allowed targets
+      // High-contrast over marked areas (nav or any [data-cursor-contrast] container)
+      const needsContrast = !!e.target.closest(".nav, .navbar, [data-cursor-contrast='true']");
+      cursorRef.current?.classList.toggle("contrast", needsContrast);
     };
 
     const onUp = () => setShowArrow(false);

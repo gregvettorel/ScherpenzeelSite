@@ -54,7 +54,7 @@ export default function Navbar() {
           </nav>
 
           <div className="nav__right">
-            <WakoButton href="#contact" variant="ghost" className="nav__btn">
+            <WakoButton variant="ghost" showArrow={false}>
               Contact
             </WakoButton>
           </div>
