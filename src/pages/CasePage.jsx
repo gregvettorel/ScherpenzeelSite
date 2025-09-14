@@ -235,7 +235,7 @@ export default function CasePage() {
             variant="solid"
             onClick={() => nav(data.nextHref || "/")}
           >
-            Next project →
+            Next project
           </WakoButton>
         </div>
       </section>

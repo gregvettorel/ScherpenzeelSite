@@ -1,33 +1,99 @@
+/* Clean Wako button with bottom-fill hover. Unused layers removed. */
 .wako-btn {
+  /* theme vars */
+  --btn-bg: #0a0a0a;
+  --btn-fg: #ffffff;
+  --btn-border: #0a0a0a;
+  --btn-fill: #0579FE;
+  --btn-fg-onfill: #ffffff;
+
+  /* layout var */
+  --arrow-w: 1.25rem; /* reserved space when arrow is present */
+
+  position: relative;
   display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+  align-items: stretch;
   border-radius: 9999px;
   font-weight: 600;
   font-size: 1rem;
   line-height: 1;
   text-decoration: none;
   cursor: pointer;
-  border: 2px solid transparent;
-  padding: 1.5rem 2rem;
-  transition: background 0.18s, color 0.18s, border 0.18s;
+  border: 2px solid var(--btn-border);
+  padding: 1.25rem 1.75rem; /* symmetric; grid handles arrow */
   outline: none;
+  overflow: hidden;
+  isolation: isolate;
+  transform: translate3d(var(--magX, 0), var(--magY, 0), 0);
+  transition: transform .18s ease, background .18s ease, color .18s ease, border .18s ease;
 }
 
-.wako-btn--solid {
-  background: #000;
-  color: #fff;
-  border-color: #000;
+/* variants */
+.wako-btn--solid { background: var(--btn-bg); color: var(--btn-fg); }
+.wako-btn--ghost { background: transparent; color: var(--btn-bg); }
+
+/* Centered grid: left spacer | label | arrow-space */
+.wb-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto var(--arrow-w);
+  align-items: center;
+  justify-items: center; /* center middle cell */
+  gap: .6rem;
+  z-index: 2;
+  width: 100%;
 }
 
-.wako-btn--ghost {
-  background: transparent;
-  color: #000;
-  border-color: #000;
-  border-width: 2px; /* Ensure 2px border */
+/* If no arrow, collapse the third column */
+.wako-btn.no-arrow .wb-inner {
+  grid-template-columns: 1fr auto 0;
 }
 
+/* label always centered in column 2 */
+.wb-label {
+  grid-column: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+/* arrow in column 3; no absolute positioning */
+.wb-arrow {
+  grid-column: 3;
+  justify-self: end;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: transform .25s ease, opacity .25s ease;
+  pointer-events: none;
+}
+.wako-btn.has-arrow:hover .wb-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* bottom fill */
+.wb-fill { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.wb-fill::before {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: 0; height: 100%;
+  background: var(--btn-fill);
+  transform-origin: bottom center;
+  transform: scaleY(0);
+  transition: transform .36s cubic-bezier(.2,.8,.2,1);
+}
+.wako-btn:hover .wb-fill::before { transform: scaleY(1); }
+
+/* color swap on hover */
+.wako-btn--solid:hover { color: var(--btn-fg-onfill); border-color: var(--btn-fill); }
+.wako-btn--ghost:hover { color: var(--btn-fg-onfill); border-color: var(--btn-fill); }
+
+/* focus ring */
 .wako-btn:focus-visible {
-  box-shadow: 0 0 0 2px #0579FE55;
-  border-color: #0579FE;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--btn-fill) 60%, transparent);
+  border-color: var(--btn-fill);
+}
+
+/* motion safety */
+@media (prefers-reduced-motion: reduce) {
+  .wako-btn, .wb-fill::before, .wb-arrow { transition: none !important; }
 }

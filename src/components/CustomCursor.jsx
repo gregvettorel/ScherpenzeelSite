@@ -24,38 +24,36 @@ export default function CustomCursor() {
       requestAnimationFrame(animateCursor);
     };
 
-    const hoverSelectors = [
-      "a", "button", "input", "textarea", "select", "[role='button']", ".hoverable"
-    ];
-    const handlePointerOver = e => {
-      if (hoverSelectors.some(sel => e.target.closest(sel))) setIsHovering(true);
-      if (e.target.closest(".wako-btn, .project-card, .olc__card, .btn--pill, .case-nav__back")) setShowArrow(true);
-    };
-    const handlePointerOut = e => {
-      if (hoverSelectors.some(sel => e.target.closest(sel))) setIsHovering(false);
-      if (e.target.closest(".wako-btn, .project-card, .olc__card, .btn--pill, .case-nav__back")) setShowArrow(false);
-    };
+    // Only show grow + arrow on projects or true external links
+    const arrowSelector = ".project-card-link, .project-card, a[target='_blank'], a[rel~='external'], [data-cursor='external']";
 
-    // NEW: Always reset arrow on mouseup (after click)
-    const handleMouseUp = () => setShowArrow(false);
-
-    document.addEventListener("mousemove", e => {
+    const onMove = (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-    });
-    document.addEventListener("pointerover", handlePointerOver);
-    document.addEventListener("pointerout", handlePointerOut);
-    document.addEventListener("mouseup", handleMouseUp);
+
+      const arrowTarget = e.target.closest(arrowSelector);
+      const isExternal =
+        arrowTarget &&
+        arrowTarget.tagName === "A" &&
+        !/^mailto:|^tel:/i.test(arrowTarget.getAttribute("href") || "");
+
+      const isProject = !!e.target.closest(".project-card-link, .project-card");
+
+      const show = isProject || isExternal;
+
+      setIsHovering(show);  // grow only for allowed targets
+      setShowArrow(show);   // svg only for allowed targets
+    };
+
+    const onUp = () => setShowArrow(false);
+
+    document.addEventListener("pointermove", onMove, { passive: true });
+    document.addEventListener("mouseup", onUp, { passive: true });
     animateCursor();
 
     return () => {
-      document.removeEventListener("mousemove", e => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-      });
-      document.removeEventListener("pointerover", handlePointerOver);
-      document.removeEventListener("pointerout", handlePointerOut);
-      document.removeEventListener("mouseup", handleMouseUp);
+      document.removeEventListener("pointermove", onMove);
+      document.removeEventListener("mouseup", onUp);
     };
   }, []);
 
