@@ -16,6 +16,7 @@ import RunningBanner from "./components/RunningBanner";
 import Services from "./components/Services";
 import TeamLetsTalk from "./components/TeamLetsTalk";
 import ProcessSteps from "./components/ProcessSteps";
+import About from "./components/AboutSection";
 import IntroReveal from "./components/IntroReveal";
 import CustomCursor from "./components/CustomCursor";
 
@@ -26,6 +27,7 @@ function Home() {
     <>
       <Hero />
       <Projects />
+      <About />
       <RunningBanner />
       <Services />
       <ProcessSteps />

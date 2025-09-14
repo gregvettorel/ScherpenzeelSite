@@ -50,7 +50,6 @@ export default function Projects() {
       <div className="projects-container wrap">
         <div className="projects-header">
           <h2 className="section-title">Projects</h2>
-          <a className="more-link" href="/work">More →</a>
         </div>
 
         <div className="projects-grid">

@@ -57,7 +57,7 @@
 }
 .process-steps__desc {
   font-family:"Inter",system-ui,-apple-system,Segoe UI,sans-serif;
-  font-size:clamp(15px,1.7vw,16px);
+  font-size:20px;
   line-height:1.6;
   color:#6b7280;
   margin:0;
@@ -93,7 +93,7 @@
 
 /* ---------- Hover micro-interactions ---------- */
 @media (hover:hover) {
-  .process-steps__row:hover { transform: scale(1.02); cursor:default; }
+  .process-steps__row:hover { transform: scale(1.04); cursor:default; }
   .process-steps__row:hover .process-steps__img {
     transform: translateY(-2px);
     transition: transform .25s ease;

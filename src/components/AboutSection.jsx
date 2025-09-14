@@ -5,6 +5,7 @@ import macbookImage from "../assets/macbookwako.png";
 import SectionReveal from "./SectionReveal";
 import AboutIcon from "./AboutIcon";
 import index from "../index";
+import ReactCountryFlag from "react-country-flag";
 //import index
 
 
@@ -13,8 +14,8 @@ export default function AboutSection() {
     <SectionReveal id="about" className="about">
       <div className="about__wrap section section-pad">
         <h2 id="about-heading" className="section-title about__title ">
-          About us
-        </h2>
+          Who are we?
+       </h2>
 
         <div className="about__grid">
           {/* Left: image */}
@@ -30,21 +31,14 @@ export default function AboutSection() {
 
           {/* Right: content */}
           <div className="about__content">
-            <h3 className="about__headline">Small team. Big impact.</h3>
+              <h3 className="about__headline">Small team. Big impact.</h3>
             <div className="about__copy">
               <p>
-                We’re two specialists blending design, code, and marketing into digital
-                products that stand out.
+                We're two young professionals starting out in the world of development. 
+                Our goal is to provide our customers a unique and fresh looking digital presence tailored to their needs.
               </p>
               <p>
-                We started Wako to bridge design and development — offering the clarity of
-                design and the reliability of engineering, without the overhead of a big
-                agency.
-              </p>
-              <p>
-                Every project gets our full attention from first sketch to launch. No layers
-                of management. No handoffs. Just direct collaboration, sharp ideas, and
-                results you can see.
+                As a team of two every project receives our full attention as we only take on one project at a time.
               </p>
 
               <div className="about__chips">
@@ -59,6 +53,18 @@ export default function AboutSection() {
                 <span className="about__chip">
                   <AboutIcon type="degree" />
                   Degrees in design & tech
+                </span>
+                  <span className="about__chip">
+                  <ReactCountryFlag countryCode="GB" svg style={{ width: "1.5em", height: "1.5em" }} />
+                  English
+                </span>
+                <span className="about__chip">
+                  <ReactCountryFlag countryCode="FR" svg style={{ width: "1.5em", height: "1.5em" }} />
+                  Français
+                </span>
+                <span className="about__chip">
+                  <ReactCountryFlag countryCode="NL" svg style={{ width: "1.5em", height: "1.5em" }} />
+                  Nederlands
                 </span>
               </div>
             </div>

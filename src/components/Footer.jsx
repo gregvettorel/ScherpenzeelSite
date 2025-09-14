@@ -4,7 +4,7 @@ import "../styles/footer.css";
 function Footer() {
   return (
     <footer className="footer">
-      <p>2023 © — Made by Wako design</p>
+      <p>2025 © — Made by Wako design</p>
       <div className="footer-links">
         <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer">
           Dribbble
