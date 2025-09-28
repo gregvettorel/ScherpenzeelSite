@@ -5,82 +5,136 @@
   --muted: #6b7280;
   --rule: #e7e7e9;
   --brand: #2563eb; /* Wako blue */
+  --container: 1200px;         /* content max width */
+  --pad-x: 24px;               /* horizontal padding */
 }
 
+/* One continuous gradient on the whole section */
+.services-section {
+  background: linear-gradient(180deg, #4da3ff 0%, #2563eb 55%, #1f56c0 100%);
+  width: 100%;
+  overflow: visible; /* allow white 'open' row to bleed full width */
+}
 
+/* Keep the CONTENT centered and constrained.
+   (We previously forced max-width:100% which caused the image to feel off-screen.) */
+.services-section .wrap,
+.services-section .wrap--full {
+  max-width: min(var(--container), 100%);
+  padding-left: var(--pad-x);
+  padding-right: var(--pad-x);
+}
 
-
-/* Make the media area have a height/aspect so the Canvas can fill */
+/* -------- Media area (shared) -------- */
 .services-media {
   width: 100%;
   min-height: 260px;           /* or use: aspect-ratio: 4 / 3; */
   display: grid;
   place-items: center;
+  overflow: hidden;
 }
 .services-media canvas {
   width: 100% !important;
   height: 100% !important;
 }
 
-
-/* List wrapper */
-.services-list { border-top: 1px solid var(--rule); }
-
-/* Each row */
-.services-accordion {
-  border-bottom: 1px solid var(--rule);
-  background: transparent;
-  transition: background .25s ease;
+/* -------- List wrapper -------- */
+.services-list {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  border-top: none;
+  overflow: visible;
 }
 
+/* -------- Each row -------- */
+.services-accordion {
+  position: relative;
+  background: transparent; /* closed rows blend with gradient */
+  border: none;
+  box-shadow: none;
+  transition: background .25s ease, box-shadow .25s ease, transform .25s ease;
+  overflow: visible;
+}
+
+/* OPEN ROW: full-bleed white background across viewport (no blue gutters) */
+.services-accordion.open {
+  background: transparent; /* white handled by ::before */
+  isolation: isolate;       /* keep the pseudo behind only this row */
+}
+.services-accordion.open::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 55% ;  
+  width: 100vw;                 /* span the viewport */
+  transform: translateX(-50%);  /* center under the row */
+  background: #fff;
+  z-index: -1;                  /* behind content */
+  pointer-events: none;
+}
 
 /* Header toggle */
 .services-toggle {
+  position: relative; /* above ::before */
+  z-index: 1;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 64px 0;
+  padding: 64px 0;              /* horizontal padding comes from .wrap */
   background: none;
   border: 0;
   cursor: pointer;
   text-align: left;
 }
+.services-toggle:focus { outline: none; }
 
+/* Title */
 .services-row-title {
   font-family: "DM Sans", sans-serif;
   font-weight: 700;
-  font-size: 28px;
-  color: var(--ink);
+  font-size: 32px;
+  color: #fff; /* closed = white over gradient */
   transition: color .25s ease;
 }
-
-/* Make title blue on hover */
-.services-toggle:hover .services-row-title,
-.services-toggle:focus-visible .services-row-title {
-  color: var(--brand);
+.services-accordion:not(.open) .services-toggle:hover .services-row-title,
+.services-accordion:not(.open) .services-toggle:focus-visible .services-row-title {
+  color: #e8f1ff;
 }
 
-/* Keep open state blue as well */
+/* Chevron — ensure it ALWAYS shows and sits above the white pseudo */
+.services-chevron,
+.services-toggle svg {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  color: #fff; /* closed = white */
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;                 /* above ::before */
+  transition: transform .25s ease, color .25s ease;
+}
+.services-accordion:not(.open) .services-toggle:hover .services-chevron,
+.services-accordion:not(.open) .services-toggle:focus-visible .services-chevron {
+  color: #e8f1ff;
+}
+
+/* Colors when open (over white) */
 .services-accordion.open .services-row-title {
   color: var(--brand);
 }
-
-.services-chevron {
-  width: 22px; height: 22px;
-  color: var(--muted);
-  transition: transform .25s ease;
-}
-.services-accordion.open .services-chevron { transform: rotate(180deg); color: var(--brand); }
-
-/* Make chevron blue on hover */
-.services-toggle:hover .services-chevron,
-.services-toggle:focus-visible .services-chevron {
+.services-accordion.open .services-chevron {
+  transform: rotate(180deg);
   color: var(--brand);
 }
 
-/* Content reveal */
+/* -------- Content reveal -------- */
 .services-content {
+  position: relative; /* above ::before */
+  z-index: 1;
   overflow: hidden;
   max-height: 0;
   opacity: 0;
@@ -93,14 +147,15 @@
   transform: translateY(0);
 }
 
-/* Inner 2-column layout */
+/* Inner 2-column layout (content remains within centered container) */
 .services-inner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr); /* prevent overflow */
   gap: 64px;
-  padding: 0 0 40px;
+  padding: 0 0 40px;     /* horizontal padding is from .wrap */
 }
 
+/* Text */
 .services-desc {
   font-size: 17px;
   line-height: 1.7;
@@ -109,6 +164,7 @@
   max-width: 65ch;
 }
 
+/* Tags */
 .services-tags {
   display: flex; gap: 10px; flex-wrap: wrap;
 }
@@ -121,32 +177,25 @@
   color: #374151;
 }
 
-/* Image mockup */
+/* Image/media card inside open content */
 .services-media {
   border-radius: 16px;
   overflow: hidden;
   background: #fff;
   border: 1px solid var(--rule);
   display: block;
+  max-width: 100%;
 }
+
 .services-media img {
   display: block;
   width: 100%;
-  max-height: 500px;
-  object-fit: cover;
+  height: auto;        /* prevents run-off */
+  max-height: 400px;
+  object-fit: cover;   /* fills the frame neatly */
 }
 
 /* Responsive */
 @media (max-width: 900px) {
   .services-inner { grid-template-columns: 1fr; }
 }
-
-.services-media {
-  width: 100%;
-  min-height: 260px;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  border: hidden;
-}
-.services-media canvas { width: 100% !important; height: 100% !important; }

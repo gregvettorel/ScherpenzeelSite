@@ -76,7 +76,7 @@ h6 {
 
 .section-title {
   font-weight: 800;
-  font-size: clamp(28px, 3.2vw, 34px);
+  font-size:48px;
   line-height: 1.15;
   margin-bottom: 5%;
 }

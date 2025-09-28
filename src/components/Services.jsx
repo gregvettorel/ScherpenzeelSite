@@ -14,7 +14,7 @@ const items = [
 		desc: "From first sketch to a clickable prototype. We craft identities and interfaces that feel sharp, friendly, and on-point.",
 		tags: ["Brand & Identity", "UI/UX", "Design Systems"],
 		img: designImg,
-		bg: "#F0F6FF", // light blue or your brand tint
+		bg: "#F0F6FF",
 	},
 		{
 		title: "Build your brand",
