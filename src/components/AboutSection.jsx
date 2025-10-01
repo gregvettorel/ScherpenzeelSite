@@ -4,7 +4,6 @@ import "../styles/about.css";
 import macbookImage from "../assets/macbookwako.png";
 import SectionReveal from "./SectionReveal";
 import AboutIcon from "./AboutIcon";
-import index from "../index";
 import ReactCountryFlag from "react-country-flag";
 //import index
 

@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import defaultHoverSfx from "../assets/sfx/hover2mp3.mp3";
 import defaultClickSfx from "../assets/sfx/press.mp3";
