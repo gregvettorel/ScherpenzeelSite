@@ -6,7 +6,7 @@ import SectionReveal from "./SectionReveal";
 import "../index.css";
 import designImg from "../assets/design.png";
 import Logo3D from "./Logo3D";
-import logoW from "../assets/logoW.png";
+import logoW from "../assets/tinker.obj";
 
 const items = [
 	{
@@ -24,7 +24,7 @@ const items = [
 	},
 		{
 		title: "3D Integrations",
-		desc: "We are always up to date with the newest trends in web development, which is why we offer 3D implementations in websites. This will either provide a helpful tool for your customer or to simply blow them away!",
+		desc: "We are always up to date with the newest trends in web development, which is why we offer 3D implementations in websites. This will either provide a helpful tool for your customer or simply blow them away!",
 		tags: ["3D Modelling", "Arts"],
 		img: designImg,
 	},
@@ -37,15 +37,13 @@ const items = [
 ];
 
 export default function Services() {
-	const [openIndex, setOpenIndex] = useState(0);
+	const [openIndex, setOpenIndex] = useState(-1);
 
-	// Add .open-section class when any service is open
 	const sectionClass = "services-section section section-pad";
 
 	return (
 		<SectionReveal className={sectionClass}>
 			<div className={`wrap${openIndex !== -1 ? " wrap--full" : ""} `}>
-        		<h2 className="section-title mb-10">What we do</h2>
 				<div className="services-list">
 					{items.map((s, i) => {
 						const isOpen = i === openIndex;
@@ -93,10 +91,10 @@ export default function Services() {
 
 										<div className="services-media">
 											<div className="services-media">
-											{s.title === "3D Integrations" ? (
-												<Logo3D src={logoW} />
+											{ s.title === "3D Integrations" ? (
+											<Logo3D src={logoW} />
 											) : (
-												<img src={s.img} alt={s.title} />
+											<img src={s.img} alt={s.title} />
 											)}
 											</div>
 										</div>

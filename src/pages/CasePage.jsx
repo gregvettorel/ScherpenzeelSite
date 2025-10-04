@@ -4,6 +4,7 @@ import { cases } from "../data/cases";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import WakoButton from "../components/WakoButton";
+import AboutChip from "../components/AboutChip";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -192,7 +193,9 @@ export default function CasePage() {
           <div className="case-info__row">
             <div className="case-info__label">Stack</div>
             <div className="case-info__value case-info__tags">
-              {data.stackTags.map(t => <span key={t}>{t}</span>)}
+              {data.stackTags.map(t => (
+                <AboutChip key={t}>{t}</AboutChip>
+              ))}
             </div>
           </div>
           <div className="case-info__row">

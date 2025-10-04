@@ -12,8 +12,6 @@
 /* One continuous gradient on the whole section */
 .services-section {
   background: linear-gradient(180deg, #4da3ff 0%, #2563eb 55%, #1f56c0 100%);
-  width: 100%;
-  overflow: visible; /* allow white 'open' row to bleed full width */
 }
 
 /* Keep the CONTENT centered and constrained.
@@ -94,8 +92,8 @@
 /* Title */
 .services-row-title {
   font-family: "DM Sans", sans-serif;
-  font-weight: 700;
-  font-size: 32px;
+  font-weight: 600;
+  font-size: 24px;
   color: #fff; /* closed = white over gradient */
   transition: color .25s ease;
 }
@@ -185,6 +183,7 @@
   border: 1px solid var(--rule);
   display: block;
   max-width: 100%;
+  border-color: white;
 }
 
 .services-media img {
@@ -198,4 +197,7 @@
 /* Responsive */
 @media (max-width: 900px) {
   .services-inner { grid-template-columns: 1fr; }
+  .services-accordion {
+    padding-left: 10px;
+  }
 }

@@ -1,0 +1,45 @@
+.about-chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  border: 1.5px solid var(--brand);
+  background: #fff;
+  border-radius: 999px;
+  padding: 8px 16px;
+  transition: transform .25s ease, box-shadow .25s ease;
+  overflow: hidden;
+  cursor: default;
+}
+
+.about-chip::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    rgba(255,255,255,.4) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  transition: transform .6s ease;
+}
+
+.about-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0,0,0,.08);
+}
+
+.about-chip:hover::after {
+  transform: translateX(100%);
+}
+
+.about-chip svg {
+  flex-shrink: 0;
+  display: block;
+  opacity: .7;
+}

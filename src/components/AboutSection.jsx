@@ -5,7 +5,7 @@ import macbookImage from "../assets/macbookwako.png";
 import SectionReveal from "./SectionReveal";
 import AboutIcon from "./AboutIcon";
 import ReactCountryFlag from "react-country-flag";
-//import index
+import AboutChip from "./AboutChip";
 
 
 export default function AboutSection() {
@@ -30,7 +30,7 @@ export default function AboutSection() {
 
           {/* Right: content */}
           <div className="about__content">
-              <h3 className="about__headline">Small team. Big impact.</h3>
+              <h3 className="about__headline">Small team. <strong>Big</strong> impact.</h3>
             <div className="about__copy">
               <p>
                 We're two young professionals starting out in the world of development. 
@@ -41,30 +41,30 @@ export default function AboutSection() {
               </p>
 
               <div className="about__chips">
-                <span className="about__chip">
+                <AboutChip>
                   <AboutIcon type="design" />
                   3 years UI/UX & marketing
-                </span>
-                <span className="about__chip">
+                </AboutChip>
+                <AboutChip>
                   <AboutIcon type="dev" />
                   3.5 years full-stack dev
-                </span>
-                <span className="about__chip">
+                </AboutChip>
+                <AboutChip>
                   <AboutIcon type="degree" />
                   Degrees in design & tech
-                </span>
-                  <span className="about__chip">
+                </AboutChip>
+                <AboutChip>
                   <ReactCountryFlag countryCode="GB" svg style={{ width: "1.5em", height: "1.5em" }} />
                   English
-                </span>
-                <span className="about__chip">
+                </AboutChip>
+                <AboutChip>
                   <ReactCountryFlag countryCode="FR" svg style={{ width: "1.5em", height: "1.5em" }} />
                   Français
-                </span>
-                <span className="about__chip">
+                </AboutChip>
+                <AboutChip>
                   <ReactCountryFlag countryCode="NL" svg style={{ width: "1.5em", height: "1.5em" }} />
                   Nederlands
-                </span>
+                </AboutChip>
               </div>
             </div>
 

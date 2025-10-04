@@ -59,7 +59,8 @@
 /* === TEXT BLOCK === */
 .about__headline {
   margin: 0 0 20px;
-  font-weight: 600;
+  font-weight: 200;
+  font-style: italic;
   font-size: var(--h3);
   line-height: var(--lh-tight);
   color: var(--ink);

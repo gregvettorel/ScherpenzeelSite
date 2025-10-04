@@ -1,33 +1,64 @@
 // src/components/Logo3D.jsx
-import React, { Suspense } from "react";
-import { Canvas, useLoader } from "@react-three/fiber";
-import { OrbitControls, Environment, Float } from "@react-three/drei";
+import React, { Suspense, useRef, useState } from "react";
+import { Canvas, useLoader, useFrame } from "@react-three/fiber";
+import { OrbitControls, Environment } from "@react-three/drei";
+import { OBJLoader } from "three-stdlib";
 import * as THREE from "three";
 
-function SpinnableLogo({ src }) {
-  const tex = useLoader(THREE.TextureLoader, src);
-  const ratio = tex.image ? tex.image.height / tex.image.width : 1;
+function LogoMesh({ src, isInteracting }) {
+  const obj = useLoader(OBJLoader, src);
+  const ref = useRef();
+
+  const wakoBlue = new THREE.Color("#007CFF");
+
+  obj.traverse((child) => {
+    if (child instanceof THREE.Mesh) {
+      child.material = new THREE.MeshStandardMaterial({
+        color: wakoBlue,
+        roughness: 0.4,
+        metalness: 0.2,
+      });
+    }
+  });
+
+  // Auto-spin when not interacting
+  useFrame(() => {
+    if (ref.current && !isInteracting) {
+      ref.current.rotation.y += 0.003;
+    }
+  });
+
   return (
-    <Float speed={1} rotationIntensity={0.25} floatIntensity={0.4}>
-      <mesh>
-        <planeGeometry args={[2, 2 * ratio]} />
-        <meshStandardMaterial map={tex} transparent roughness={0.5} metalness={0.1} />
-      </mesh>
-    </Float>
+    <group ref={ref}>
+      <primitive
+        object={obj}
+        scale={[0.02, 0.02, 0.02]}
+        position={[0, 0, 0]}
+        rotation={[0, Math.PI, 0]}
+      />
+    </group>
   );
 }
 
 export default function Logo3D({ src, className }) {
+  const [isInteracting, setIsInteracting] = useState(false);
+  const controlsRef = useRef();
+
   return (
     <div className={className} style={{ width: "100%", aspectRatio: "4 / 3" }}>
-      <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 3], fov: 35 }}>
-        <ambientLight intensity={0.9} />
-        <directionalLight position={[2, 3, 4]} intensity={1.1} />
+      <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
+        <ambientLight intensity={1.2} />
+        <directionalLight position={[3, 3, 3]} />
         <Suspense fallback={null}>
-          <SpinnableLogo src={src} />
+          <LogoMesh src={src} isInteracting={isInteracting} />
           <Environment preset="city" />
         </Suspense>
-        <OrbitControls enableZoom={false} />
+        <OrbitControls
+          ref={controlsRef}
+          enableZoom={false}
+          onStart={() => setIsInteracting(true)}
+          onEnd={() => setIsInteracting(false)}
+        />
       </Canvas>
     </div>
   );

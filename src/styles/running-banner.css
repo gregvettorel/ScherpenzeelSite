@@ -5,8 +5,8 @@
   line-height: 1;
   /* Explicitly add padding to ensure section-pad is visible */
   padding-inline: var(--px); /* Matches section-pad */
-  padding-top: 10rem; /* Optional: Add vertical padding for breathing room */
-  padding-bottom: 10rem;
+  padding-top: 1rem; /* Optional: Add vertical padding for breathing room */
+  padding-bottom: 1rem;
   box-sizing: border-box; /* Ensure padding is included in width calculations */
 }
 
@@ -21,7 +21,7 @@
 /* Logo appearance + spacing */
 .running-banner__logo {
   margin: 0 6.25rem;
-  height: 60px;            /* adjust to taste */
+  height: 35px;            /* adjust to taste */
   width: auto;
   /* prevent selection/drag across browsers */
   user-select: none;

@@ -27,8 +27,10 @@ function Home() {
     <>
       <Hero />
       <Projects />
+      <RunningBanner speed={0.6} direction={1} initialOffset={0} />
+      <RunningBanner speed={0.8} direction={1} initialOffset={160} />
+    
       <About />
-      <RunningBanner />
       <Services />
       <ProcessSteps />
       <TeamLetsTalk />

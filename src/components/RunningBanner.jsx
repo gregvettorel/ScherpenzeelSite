@@ -1,6 +1,5 @@
 // src/components/RunningBanner.jsx
 import React, { useEffect, useRef, useState } from "react";
-//
 import "../styles/running-banner.css";
 
 export default function RunningBanner({
@@ -11,6 +10,7 @@ export default function RunningBanner({
   imageAlt = "WAKO Design",
   segments = 10,           // how many logos per sequence
   logoWidth = 120,         // px width of each logo (CSS can override)
+  initialOffset = 0,       // new prop to stagger banners
 }) {
   const containerRef = useRef(null);
   const trackRef = useRef(null);
@@ -77,7 +77,8 @@ export default function RunningBanner({
     const update = () => {
       if (!trackRef.current || !loopWidth) return;
       const y = getScrollY();
-      const x = (y * speed * direction) % loopWidth;
+      // include initial offset so multiple banners don't overlap
+      const x = (y * speed * direction + initialOffset) % loopWidth;
       const wrapped = ((x % loopWidth) + loopWidth) % loopWidth;
       trackRef.current.style.transform = `translate3d(${-wrapped}px, 0, 0)`;
     };
@@ -101,10 +102,14 @@ export default function RunningBanner({
         window.removeEventListener("resize", update);
       }
     };
-  }, [loopWidth, scrollerSelector, speed, direction]);
+  }, [loopWidth, scrollerSelector, speed, direction, initialOffset]);
 
   return (
-    <div className="running-banner section-pad" ref={containerRef} aria-label={`${imageAlt} marquee`}>
+    <div
+      className="running-banner section-pad"
+      ref={containerRef}
+      aria-label={`${imageAlt} marquee`}
+    >
       <div className="running-banner__inner" ref={trackRef} aria-hidden="true">
         <Sequence />
         <Sequence />

@@ -80,15 +80,39 @@
    (wil je blauw? zet --tag-border: var(--brand); --tag-ink: var(--brand);) */
 .case-info__tags{ display:flex; flex-wrap:wrap; gap:.55em; }
 .case-info__tags span{
-  --tag-border: var(--ink);
-  --tag-ink: var(--ink);
-  display:inline-flex; align-items:center; gap:.4em;
-  padding:.38em .9em; border-radius:999px;
-  font-size:.9rem; font-weight:600; letter-spacing:.01em;
-  color:var(--tag-ink); background:transparent; border:1px solid var(--tag-border);
-  transition:background .2s ease, color .2s ease;
+    position: relative;
+    display: inline-flex
+;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    border: 1.5px solid var(--brand);
+    background: #fff;
+    border-radius: 999px;
+    padding: 8px 16px;
+    transition: transform .25s 
+ease, box-shadow .25s 
+ease;
+    overflow: hidden;
+    cursor: default;
 }
-.case-info__tags span:hover{ background:var(--ink); color:#fff; }
+
+.case-info__tages span::after{
+    content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    rgba(255,255,255,.4) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  transition: transform .6s ease;
+}
+
 
 /* PARALLAX CARDS */
 
