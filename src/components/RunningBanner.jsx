@@ -2,6 +2,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../styles/running-banner.css";
 
+/**
+ * RunningBanner: Add a `size` prop to control the height (number, px, rem, etc). Example: size={80} or size="3rem"
+ */
 export default function RunningBanner({
   scrollerSelector,
   speed = 0.6,
@@ -11,6 +14,9 @@ export default function RunningBanner({
   segments = 10,           // how many logos per sequence
   logoWidth = 120,         // px width of each logo (CSS can override)
   initialOffset = 0,       // new prop to stagger banners
+  size,                    // new: height of the logo images (number or string)
+  style = {},              // allow custom style
+  ...rest
 }) {
   const containerRef = useRef(null);
   const trackRef = useRef(null);
@@ -25,7 +31,8 @@ export default function RunningBanner({
           src={imageSrc}
           alt={imageAlt}
           width={logoWidth}
-          height="auto"
+          height={size ? (typeof size === "number" ? size : undefined) : "auto"}
+          style={size ? { height: typeof size === "number" ? `${size}px` : size, width: "auto" } : undefined}
           draggable={false}
           onDragStart={(e) => e.preventDefault()}
           decoding="async"
@@ -109,6 +116,8 @@ export default function RunningBanner({
       className="running-banner section-pad"
       ref={containerRef}
       aria-label={`${imageAlt} marquee`}
+      style={style}
+      {...rest}
     >
       <div className="running-banner__inner" ref={trackRef} aria-hidden="true">
         <Sequence />
