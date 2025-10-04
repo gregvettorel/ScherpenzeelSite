@@ -99,8 +99,12 @@
     transition: transform .25s ease;
   }
   .process-steps__row:hover .process-steps__number {
-    transform: translateY(-1px);
-    transition: transform .25s ease;
+    transform: translateY(-1px) scale(1.08);
+    transition: transform .25s cubic-bezier(.2,.8,.2,1);
+  }
+  /* Animate the arrow tilt on hover */
+  .process-steps__arrow svg {
+    transition: transform 0.32s cubic-bezier(.2,.8,.2,1);
   }
   .process-steps__row:hover .process-steps__arrow svg { transform: rotate(10deg); }
   .process-steps__row--right:hover .process-steps__arrow svg { transform: rotate(-10deg); }

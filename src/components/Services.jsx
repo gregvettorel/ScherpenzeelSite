@@ -7,6 +7,7 @@ import "../index.css";
 import designImg from "../assets/design.png";
 import Logo3D from "./Logo3D";
 import logoW from "../assets/tinker.obj";
+import AboutChip from "./AboutChip";
 
 const items = [
 	{
@@ -80,13 +81,11 @@ export default function Services() {
 									<div className="services-inner service-pad">
 										<div>
 											<p className="services-desc">{s.desc}</p>
-											<div className="services-tags">
-												{s.tags.map((t) => (
-													<span className="services-tag" key={t}>
-														{t}
-													</span>
-												))}
-											</div>
+																	<div className="services-tags">
+																		{s.tags.map((t) => (
+																			<AboutChip key={t} className="services-tag">{t}</AboutChip>
+																		))}
+																	</div>
 										</div>
 
 										<div className="services-media">

@@ -1,4 +1,34 @@
-/* ---------- Services (Humbleteam-inspired) ---------- */
+@media (max-width: 640px) {
+  /* Make the open accordion's white background span the full viewport and align left */
+  .services-accordion.open::before {
+    left: 0;
+    width: 100vw;
+    transform: none;
+    border-radius: 0;
+  }
+  /* Remove left padding from .wrap when an accordion is open so white background is flush */
+  .wrap.wrap--full {
+    padding-left: 0 !important;
+  }
+  /* Reduce vertical padding for service titles so they're closer together */
+  .services-toggle {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+}
+@media (max-width: 640px) {
+  /* Make the open accordion's white background span the full viewport and align left */
+  .services-accordion.open::before {
+    left: 0;
+    width: 100vw;
+    transform: none;
+    border-radius: 0;
+  }
+  /* Remove left padding from .wrap when an accordion is open so white background is flush */
+  .wrap.wrap--full {
+    padding-left: 0 !important;
+  }
+}
 
 :root {
   --ink: #0a0a0b;
