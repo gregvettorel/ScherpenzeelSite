@@ -1,3 +1,5 @@
+
+/* (Mouth hover/animation CSS removed: mouth will always be visible) */
 /* Scope to the hero so nothing else gets touched */
 .hero-visual {
   overflow: visible !important;
@@ -197,13 +199,18 @@
   }
 }
 
+
+/* Animate fingers from the tip (top center) for a more natural press */
 .hero-visual #fingersilian path,
 .hero-visual #fingersgreg path {
   transform-box: fill-box;
-  transform-origin: bottom center;
+  transform-origin: top center;
   animation: finger-type-natural var(--press-speed, 1.08s) cubic-bezier(.7, 0, .3, 1) infinite;
   animation-delay: var(--press-delay, 0s);
 }
+
+/* --- MOUTH SMILE ANIMATION --- */
+
 
 .hero-visual #fingersilian #LOWERFINGER {
   --press-delay: 0.00s;

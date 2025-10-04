@@ -27,9 +27,12 @@ function Home() {
     <>
       <Hero />
       <Projects />
+
+      {/** three banners tussen secties, kunnen we moven */}
       <RunningBanner speed={0.6} direction={1} initialOffset={0} size={60} />
       <RunningBanner speed={1.2} direction={1} initialOffset={180} size={20} />    
       <RunningBanner speed={0.8} direction={1} initialOffset={160} />
+
       <About />
       <Services />
       <ProcessSteps />

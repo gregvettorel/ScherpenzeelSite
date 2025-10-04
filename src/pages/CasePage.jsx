@@ -147,7 +147,7 @@ export default function CasePage() {
             alignItems: "center",
           }}
         >
-          <div className="explainer" id="explainer">
+          <div className="explainer hero__lead" id="explainer">
             {data.explainer}
           </div>
           <div className="explainer-cta">
