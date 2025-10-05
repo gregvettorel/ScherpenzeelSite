@@ -12,7 +12,7 @@ import AboutChip from "./AboutChip";
 const items = [
 	{
 		title: "Custom made designs",
-		desc: "From first sketch to a clickable prototype. We craft identities and interfaces that feel sharp, friendly, and on-point.",
+		desc: "From the first sketch to a fully interactive prototype, we guide you through every step of the design journey. We craft unique brand identities and intuitive interfaces that not only look sharp and friendly, but also resonate with your audience.\n\nOur collaborative approach ensures your vision is translated into a design system that’s both beautiful and effective—setting the stage for your project’s success.",
 		tags: ["Brand & Identity", "UI/UX", "Design Systems"],
 		img: designImg,
 		bg: "#F0F6FF",
@@ -80,13 +80,13 @@ export default function Services() {
 								>
 									<div className="services-inner service-pad">
 															<div>
-																{s.title === "Build your brand" && s.desc.includes("\n\n") ? (
-																	s.desc.split("\n\n").map((part, idx) => (
-																		<p className="services-desc" key={idx}>{part}</p>
-																	))
-																) : (
-																	<p className="services-desc">{s.desc}</p>
-																)}
+																						{(s.title === "Build your brand" || s.title === "Host your website") && s.desc.includes("\n\n") ? (
+																							s.desc.split("\n\n").map((part, idx) => (
+																								<p className="services-desc" key={idx}>{part}</p>
+																							))
+																						) : (
+																							<p className="services-desc">{s.desc}</p>
+																						)}
 																<div className="services-tags">
 																	{s.tags.map((t) => (
 																		<AboutChip key={t} className="services-tag">{t}</AboutChip>
@@ -113,4 +113,3 @@ export default function Services() {
 		</SectionReveal>
 	);
 }
-
