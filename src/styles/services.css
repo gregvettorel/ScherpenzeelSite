@@ -45,7 +45,7 @@
 
 /* One continuous gradient on the whole section */
 .services-section {
-  background: linear-gradient(180deg, #4da3ff 0%, #2563eb 55%, #1f56c0 100%); 
+  background: linear-gradient(180deg, #1f56c0 0%, #2563eb 55%, #1f56c0 100%); 
 /** background: #1f56c0; **/
  margin-top: 50px;
  margin-bottom: 35px;
