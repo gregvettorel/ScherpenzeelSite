@@ -52,8 +52,42 @@
 .explainer-cta{ display:flex; flex-direction:column; gap:1rem; margin-left:3vw; justify-content:center; }
 
 @media (min-width:700px){
-  .explainer-wrap{ flex-direction:row; align-items:center; gap:4vw; }
+  .explainer-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4vw;
+  }
   .explainer-cta{ gap:1.2rem; margin-left:4vw; margin-top:0; }
+}
+
+@media (max-width:699px) {
+  .explainer-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.2rem;
+  }
+  .explainer {
+    font-size: 1.02rem;
+    line-height: 1.6;
+  }
+  .explainer-cta {
+    margin-left: 0;
+    margin-top: 0.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .explainer-cta .btn--pill, .explainer-cta a {
+    width: auto;
+    min-width: 120px;
+    max-width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+    margin: 0 auto;
+  }
 }
 
 /* BUTTON (keep Wako) */

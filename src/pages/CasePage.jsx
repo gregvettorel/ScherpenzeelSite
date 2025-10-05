@@ -138,15 +138,7 @@ export default function CasePage() {
 
       {/* Explainer */}
       <section className="explainer-wrap section section-pad" style={{ background: "var(--surface)" }}>
-        <div
-          className="wrap"
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            gap: "4vw",
-            alignItems: "center",
-          }}
-        >
+        <div className="wrap explainer-flex">
           <div className="explainer hero__lead" id="explainer">
             {data.explainer}
           </div>
