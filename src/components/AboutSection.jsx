@@ -18,15 +18,6 @@ export default function AboutSection() {
 
         <div className="about__grid">
           {/* Left: image */}
-          <div className="about__media">
-            <div className="about__mediaInner">
-              <img
-                src={macbookImage}
-                alt="Wako brand displayed on a laptop screen"
-                className="about__img"
-              />
-            </div>
-          </div>
 
           {/* Right: content */}
           <div className="about__content">
@@ -68,6 +59,15 @@ export default function AboutSection() {
               </div>
             </div>
 
+          </div>
+                    <div className="about__media">
+            <div className="about__mediaInner">
+              <img
+                src={macbookImage}
+                alt="Wako brand displayed on a laptop screen"
+                className="about__img"
+              />
+            </div>
           </div>
         </div>
       </div>

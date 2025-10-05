@@ -1,13 +1,15 @@
+.process-steps__row--left:nth-of-type(odd) .process-steps__arrow {
+  top: 82%;
+}
 /* =========================================================
    How it works — alternating left/right + arrows (full-width, padded edges)
    ========================================================= */
 
 .process-steps {
   display: grid;
-  row-gap: clamp(28px, 5vw, 44px);
   overflow: visible;
   width: 100%;                         /* take full width */
-  padding-inline: 50px;                /* 50px left/right edge breathing room */
+  padding-inline: 100px;                /* 50px left/right edge breathing room */
   box-sizing: border-box;
 }
 
@@ -18,11 +20,9 @@
   display: grid;
   grid-template-columns: auto auto 1fr;   /* [number] [image] [text] */
   align-items: center;
-  column-gap: clamp(16px, 3vw, 28px);
   max-width: 1024px;                     
   text-align: left;
   transition: transform 0.3s ease;
-  padding-bottom: clamp(6px, 1.2vw, 12px);
 }
 
 /* Alternate placement: left rows hug left edge, right rows hug right edge */
@@ -154,12 +154,9 @@
     flex-shrink: 0;
   }
   .process-steps__img {
-    width: 110px;
-    min-width: 90px;
-    max-width: 140px;
+    width: 90px;
     margin: 0;
     display: block;
-    object-fit: contain;
   }
   .process-steps__row--left,
   .process-steps__row--right {

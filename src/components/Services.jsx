@@ -19,7 +19,7 @@ const items = [
 	},
 		{
 		title: "Build your brand",
-		desc: "We shape your roadmap, help you pick what to ship first, and measure the right things to keep momentum post-launch.",
+	desc: "Branding often forms the first impression of your company. We help you shape your roadmap, decide what to launch first, and measure the right things to keep momentum after launch. With a strong brand foundation, you’ll stand out and connect with your audience from the very start.\n\nAt Wako, we can help you shape this image to fit your unique needs.",
 		tags: ["Roadmapping", "MVP Scope", "Analytics"],
 		img: designImg,
 	},
@@ -30,11 +30,11 @@ const items = [
 		img: designImg,
 	},
 	{
-		title: "Host your website",
-		desc: "We offor you a hands off, stress free, approach to having an online website. We will handle everything for you, from hosting the website, to applying any changes you need, which is never more than a phone call away!",
-		tags: ["Website Hosting", "Deployment", "People Oriented"],
-		img: designImg,
-	},
+	title: "Host your website",
+	desc: "We offor you a hands off, stress free, approach to having an online website. We will handle everything for you, from hosting the website, to applying any changes you need, which is never more than a phone call away!\n\nThink of us as your single point of contact for all your digital needs.",
+	tags: ["Website Hosting", "Deployment", "People Oriented"],
+	img: designImg,
+},
 ];
 
 export default function Services() {
@@ -79,14 +79,20 @@ export default function Services() {
 									aria-labelledby={buttonId}
 								>
 									<div className="services-inner service-pad">
-										<div>
-											<p className="services-desc">{s.desc}</p>
-																	<div className="services-tags">
-																		{s.tags.map((t) => (
-																			<AboutChip key={t} className="services-tag">{t}</AboutChip>
-																		))}
-																	</div>
-										</div>
+															<div>
+																{s.title === "Build your brand" && s.desc.includes("\n\n") ? (
+																	s.desc.split("\n\n").map((part, idx) => (
+																		<p className="services-desc" key={idx}>{part}</p>
+																	))
+																) : (
+																	<p className="services-desc">{s.desc}</p>
+																)}
+																<div className="services-tags">
+																	{s.tags.map((t) => (
+																		<AboutChip key={t} className="services-tag">{t}</AboutChip>
+																	))}
+																</div>
+															</div>
 
 										<div className="services-media">
 											<div className="services-media">

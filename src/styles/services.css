@@ -1,3 +1,8 @@
+.services-section {
+  background: #f8fafd;
+  box-shadow: 1px 2px 12px 0 lightgray;
+  padding: 3vw 0;
+}
 @media (max-width: 640px) {
   /* Make the open accordion's white background span the full viewport and align left */
   .services-accordion.open::before {
@@ -36,12 +41,18 @@
   --rule: #e7e7e9;
   --brand: #2563eb; /* Wako blue */
   --container: 1200px;         /* content max width */
-  --pad-x: 24px;               /* horizontal padding */
 }
 
 /* One continuous gradient on the whole section */
 .services-section {
-  background: linear-gradient(180deg, #4da3ff 0%, #2563eb 55%, #1f56c0 100%);
+ /** background: linear-gradient(180deg, #4da3ff 0%, #2563eb 55%, #1f56c0 100%); **/
+ background: #1f56c0;
+ margin-top: 50px;
+ margin-bottom: 35px;
+ padding-left: 15%;
+  padding-right: 15%;
+  padding-bottom: 25px;
+    padding-top: 25px;
 }
 
 /* Keep the CONTENT centered and constrained.
@@ -112,7 +123,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 64px 0;              /* horizontal padding comes from .wrap */
+  padding: 42px 0;              /* horizontal padding comes from .wrap */
   background: none;
   border: 0;
   cursor: pointer;
@@ -123,8 +134,8 @@
 /* Title */
 .services-row-title {
   font-family: "DM Sans", sans-serif;
-  font-weight: 600;
-  font-size: 24px;
+  font-weight: 500;
+  font-size: 20px;
   color: #fff; /* closed = white over gradient */
   transition: color .25s ease;
 }
