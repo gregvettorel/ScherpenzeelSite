@@ -44,7 +44,7 @@ export default function Services() {
 
 	return (
 		<SectionReveal className={sectionClass}>
-						<h2 className="section-title" style={{ color: "white" }}>What we do</h2>
+			<h2 className="section-title-about">What we do</h2>
 			<div className={`wrap${openIndex !== -1 ? " wrap--full" : ""} `}>
 				<div className="services-list">
 					{items.map((s, i) => {

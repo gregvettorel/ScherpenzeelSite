@@ -4,32 +4,27 @@
   padding: 3vw 0;
 }
 @media (max-width: 640px) {
-  /* Make the open accordion's white background span the full viewport and align left */
   .services-accordion.open::before {
     left: 0;
     width: 100vw;
     transform: none;
     border-radius: 0;
   }
-  /* Remove left padding from .wrap when an accordion is open so white background is flush */
   .wrap.wrap--full {
     padding-left: 0 !important;
   }
-  /* Reduce vertical padding for service titles so they're closer together */
   .services-toggle {
     padding-top: 14px;
     padding-bottom: 14px;
   }
 }
 @media (max-width: 640px) {
-  /* Make the open accordion's white background span the full viewport and align left */
   .services-accordion.open::before {
     left: 0;
     width: 100vw;
     transform: none;
     border-radius: 0;
   }
-  /* Remove left padding from .wrap when an accordion is open so white background is flush */
   .wrap.wrap--full {
     padding-left: 0 !important;
   }
@@ -39,35 +34,34 @@
   --ink: #0a0a0b;
   --muted: #6b7280;
   --rule: #e7e7e9;
-  --brand: #2563eb; /* Wako blue */
-  --container: 1200px;         /* content max width */
+  --brand: #2563eb;
+  --container: 1200px;
 }
 
-/* One continuous gradient on the whole section */
+.section-title-about {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-left: 5%;
+  color: white;
+}
+
 .services-section {
   background: linear-gradient(180deg, #1f56c0 0%, #2563eb 55%, #1f56c0 100%); 
-/** background: #1f56c0; **/
  margin-top: 50px;
  margin-bottom: 35px;
- padding-left: 15%;
-  padding-right: 15%;
   padding-bottom: 25px;
     padding-top: 25px;
 }
 
-/* Keep the CONTENT centered and constrained.
-   (We previously forced max-width:100% which caused the image to feel off-screen.) */
 .services-section .wrap,
 .services-section .wrap--full {
   max-width: min(var(--container), 100%);
-  padding-left: var(--pad-x);
-  padding-right: var(--pad-x);
 }
 
-/* -------- Media area (shared) -------- */
 .services-media {
   width: 100%;
-  min-height: 260px;           /* or use: aspect-ratio: 4 / 3; */
+  min-height: 260px;
   display: grid;
   place-items: center;
   overflow: hidden;
@@ -77,29 +71,25 @@
   height: 100% !important;
 }
 
-/* -------- List wrapper -------- */
 .services-list {
-  margin: 0;
-  padding: 0;
   width: 100%;
   border-top: none;
   overflow: visible;
 }
 
-/* -------- Each row -------- */
 .services-accordion {
   position: relative;
-  background: transparent; /* closed rows blend with gradient */
+  background: transparent;
   border: none;
+  margin-left: 15%;
   box-shadow: none;
   transition: background .25s ease, box-shadow .25s ease, transform .25s ease;
   overflow: visible;
 }
 
-/* OPEN ROW: full-bleed white background across viewport (no blue gutters) */
 .services-accordion.open {
-  background: transparent; /* white handled by ::before */
-  isolation: isolate;       /* keep the pseudo behind only this row */
+  background: transparent;
+  isolation: isolate;
 }
 .services-accordion.open::before {
   content: "";
@@ -111,19 +101,18 @@
   width: 100vw;
   transform: translateX(-50%);
   background: #fff;
-  z-index: -1;                  /* behind content */
+  z-index: -1;
   pointer-events: none;
 }
 
-/* Header toggle */
 .services-toggle {
-  position: relative; /* above ::before */
+  position: relative; 
   z-index: 1;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 42px 0;              /* horizontal padding comes from .wrap */
+  padding: 42px 0;            
   background: none;
   border: 0;
   cursor: pointer;
@@ -131,12 +120,11 @@
 }
 .services-toggle:focus { outline: none; }
 
-/* Title */
 .services-row-title {
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 20px;
-  color: #fff; /* closed = white over gradient */
+  color: #fff; 
   transition: color .25s ease;
 }
 .services-accordion:not(.open) .services-toggle:hover .services-row-title,
@@ -144,17 +132,16 @@
   color: #e8f1ff;
 }
 
-/* Chevron — ensure it ALWAYS shows and sits above the white pseudo */
 .services-chevron,
 .services-toggle svg {
   display: inline-block;
   flex: 0 0 auto;
   width: 22px;
   height: 22px;
-  color: #fff; /* closed = white */
+  color: #fff; 
   opacity: 1;
   visibility: visible;
-  z-index: 1;                 /* above ::before */
+  z-index: 1;               
   transition: transform .25s ease, color .25s ease;
 }
 .services-accordion:not(.open) .services-toggle:hover .services-chevron,
@@ -162,7 +149,6 @@
   color: #e8f1ff;
 }
 
-/* Colors when open (over white) */
 .services-accordion.open .services-row-title {
   color: var(--brand);
 }
@@ -171,9 +157,8 @@
   color: var(--brand);
 }
 
-/* -------- Content reveal -------- */
 .services-content {
-  position: relative; /* above ::before */
+  position: relative;
   z-index: 1;
   overflow: hidden;
   max-height: 0;
@@ -187,15 +172,13 @@
   transform: translateY(0);
 }
 
-/* Inner 2-column layout (content remains within centered container) */
 .services-inner {
   display: grid;
-  grid-template-columns: minmax(0,1fr) minmax(0,1fr); /* prevent overflow */
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr); 
   gap: 64px;
-  padding: 0 0 40px;     /* horizontal padding is from .wrap */
+  padding: 0 0 40px;  
 }
 
-/* Text */
 .services-desc {
   font-size: 17px;
   line-height: 1.7;
@@ -204,7 +187,6 @@
   max-width: 65ch;
 }
 
-/* Tags */
 .services-tags {
   display: flex; gap: 10px; flex-wrap: wrap;
 }
@@ -217,7 +199,6 @@
   color: #374151;
 }
 
-/* Image/media card inside open content */
 .services-media {
   border-radius: 16px;
   overflow: hidden;
@@ -231,12 +212,11 @@
 .services-media img {
   display: block;
   width: 100%;
-  height: auto;        /* prevents run-off */
+  height: auto;     
   max-height: 400px;
-  object-fit: cover;   /* fills the frame neatly */
+  object-fit: cover;
 }
 
-/* Responsive */
 @media (max-width: 900px) {
   .services-inner { grid-template-columns: 1fr; }
   .services-accordion {
