@@ -126,13 +126,11 @@ export default function Services() {
 										</div>
 
 										<div className="services-media">
-											<div className="services-media">
-												{s.title === "3D Integrations" ? (
-													<Logo3D src={logoW} />
-												) : (
-													<img src={s.img} alt={s.title} />
-												)}
-											</div>
+											{(s.title === "3D Integrations" ? (
+												<Logo3D src={logoW} />
+											) : (
+												<img src={s.img} alt={s.title} />
+											))}
 										</div>
 									</div>
 								</div>

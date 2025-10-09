@@ -44,7 +44,7 @@
   transition: background .25s ease;
   position: relative;   /* NEW */
   z-index: 0;           /* NEW */
-  padding: 0% 5%;
+  padding: 0;
 }
 
 
@@ -124,6 +124,7 @@ color: white;
   grid-template-columns: 1fr 1fr;
   gap: 64px;
   padding: 0 0 40px;
+  padding-inline: clamp(14px, var(--px), 28px);
 }
 
 .services-desc {
@@ -246,16 +247,10 @@ color: white;
 
 /* Mobile: don’t full‑bleed */
 @media (max-width: 900px) {
-  .services-inner { grid-template-columns: 1fr; }
-  .services-accordion {
-    padding-left: 10px;
-  }
-  .services-accordion.open::before {
-    left: 0; right: 0; margin: 0;
-  }
-  .services-accordion::before {
-    left: 0; right: 0; margin: 0;
-  }
+  .services-inner {
+    grid-template-columns: 1fr;
+    padding-inline: 16px; /* comfy mobile gutter */
+   }
 }
 
 /* Motion safety */
@@ -313,4 +308,19 @@ color: white;
 /* Optional: add a touch more space on very large screens */
 @media (min-width: 1280px) {
   .services-row-title::after { bottom: -8px; }
+}
+
+/* Mobile: allow full content height and show full image */
+@media (max-width: 900px) {
+  /* Let open panels expand more so nothing gets clipped */
+  .services-accordion.open .services-content {
+    max-height: 2000px; /* large enough for stacked text + image */
+  }
+
+  /* Show full image (no crop) */
+  .services-media img {
+    max-height: none;
+    height: auto;
+    object-fit: contain;
+  }
 }
