@@ -1,35 +1,24 @@
-.process-steps__row--left:nth-of-type(odd) .process-steps__arrow {
-  top: 82%;
-}
-/* =========================================================
-   How it works — alternating left/right + arrows (full-width, padded edges)
-   ========================================================= */
-
 .process-steps {
   display: grid;
   overflow: visible;
-  width: 100%;                         /* take full width */
-  padding-inline: 100px;                /* 50px left/right edge breathing room */
+  width: 100%;
+  padding-inline: 100px;
   box-sizing: border-box;
 }
 
-
-/* ---------- Row layout ---------- */
 .process-steps__row {
   position: relative;
   display: grid;
-  grid-template-columns: auto auto 1fr;   /* [number] [image] [text] */
+  grid-template-columns: auto auto 1fr;
   align-items: center;
   max-width: 1024px;                     
   text-align: left;
   transition: transform 0.3s ease;
 }
 
-/* Alternate placement: left rows hug left edge, right rows hug right edge */
 .process-steps__row--left  { justify-self: start; }
 .process-steps__row--right { justify-self: end;   }
 
-/* ---------- Number ---------- */
 .process-steps__number {
   font-family:"DM Sans",system-ui,-apple-system,Segoe UI,sans-serif;
   font-weight:600;
@@ -37,7 +26,6 @@
   color:#1877ff;
 }
 
-/* ---------- Image ---------- */
 .process-steps__img {
   width:clamp(120px,18vw,160px);
   height:auto;
@@ -45,7 +33,6 @@
   user-select:none;
 }
 
-/* ---------- Text ---------- */
 .process-steps__text { max-width:460px; }
 .process-steps__heading {
   font-family:"DM Sans",system-ui,-apple-system,Segoe UI,sans-serif;
@@ -65,7 +52,7 @@
 
 .process-steps__arrow {
   position:absolute;
-  width: clamp(180px, 26vw, 260px);
+  width: clamp(240px, 38vw, 340px);
   height: clamp(100px, 18vw, 180px);
   top: 50%;
   transform: translateY(-50%);
@@ -76,7 +63,7 @@
 .process-steps__curve,
 .process-steps__chev {
   stroke: #C2C8D0;
-  stroke-width: 6;
+  stroke-width: 8;
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: none;
@@ -84,14 +71,20 @@
 
 .process-steps__row--left  .process-steps__arrow {
   left:  calc(100% + 16px);
+  padding-left: 20%;
   transform: translateY(-50%);
+    top: 82%;
 }
+
 .process-steps__row--right .process-steps__arrow {
   right: calc(100% + 16px);
   transform: translateY(-50%) scaleX(-1);
 }
+.process-steps__row--right {
+  margin-top: 50px;
+}
 
-/* ---------- Hover micro-interactions ---------- */
+/** Hover animaties **/
 @media (hover:hover) {
   .process-steps__row:hover { transform: scale(1.04); cursor:default; }
   .process-steps__row:hover .process-steps__img {
@@ -102,7 +95,6 @@
     transform: translateY(-1px) scale(1.08);
     transition: transform .25s cubic-bezier(.2,.8,.2,1);
   }
-  /* Animate the arrow tilt on hover */
   .process-steps__arrow svg {
     transition: transform 0.32s cubic-bezier(.2,.8,.2,1);
   }
@@ -115,8 +107,7 @@
   }
 }
 
-/* ---------- Responsive ---------- */
-
+/** Responsive kleine schermen **/
 @media (max-width:900px) {
   .process-steps {
     padding-inline: 8px;
@@ -186,9 +177,19 @@
   .process-steps__arrow { display: none; }
 }
 
-@media (max-width:1290px) {
-  .process-steps__arrow { display: none; }
+/** Groter scherm -> meer spacing voor arrows **/
+@media (min-width:1850px) {
+.process-steps__row--left  .process-steps__arrow {
+  padding-left: 20%;
+  margin-bottom:5%;
+}
+.process-steps__row--right  .process-steps__arrow {
+  margin-right: 20%;
+  top: 60%;
+}
 }
 
-.process-steps__text_image--left  { -webkit-transform: skewY(-1deg); }
-.process-steps__text_image--right { -webkit-transform: skewY(-1deg); }
+/** Remove arrows bij kleinere schermen **/
+@media (max-width:1500px) {
+  .process-steps__arrow { display: none; }
+}
