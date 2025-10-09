@@ -5,8 +5,8 @@
   line-height: 1;
   /* Explicitly add padding to ensure section-pad is visible */
   padding-inline: var(--px); /* Matches section-pad */
-  padding-top: 1rem; /* Optional: Add vertical padding for breathing room */
-  padding-bottom: 1rem;
+  padding-top: 1.5rem; /* Optional: Add vertical padding for breathing room */
+  padding-bottom: 1.5rem;
   box-sizing: border-box; /* Ensure padding is included in width calculations */
 }
 

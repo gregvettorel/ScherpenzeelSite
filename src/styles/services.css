@@ -44,6 +44,7 @@
   transition: background .25s ease;
   position: relative;   /* NEW */
   z-index: 0;           /* NEW */
+  padding: 0% 5%;
 }
 
 
@@ -191,16 +192,8 @@ color: white;
 
 /* Header hover highlight only (no sticky focus) */
 .services-toggle::before {
-  content: "";
-  position: absolute;
-  inset: 8px -12px;
-  border-radius: 14px;
-  background: rgba(255,255,255,.06);
-  opacity: 0;
-  transition: opacity .25s ease;
-  pointer-events: none;
+  content: none !important;
 }
-.services-toggle:hover::before { opacity: 1; }
 
 /* Title stays white; animate brand underline on hover */
 .services-row-title {
@@ -209,7 +202,7 @@ color: white;
   font-size: 1.5rem;
   color: #fff;
   text-shadow: 0 1px 1px rgba(0,0,0,.18);
-  background-image: linear-gradient(var(--brand), var(--brand));
+  background-image: linear-gradient(#fff, #fff); /* underline color = white */
   background-size: 0% 2px;
   background-position: 0 100%;
   background-repeat: no-repeat;
@@ -218,18 +211,17 @@ color: white;
     text-shadow .28s ease,
     background-size .35s cubic-bezier(.22,.61,.36,1);
 }
-/* Only animate the underline on hover (no color swap, no focus-within) */
+/* Hover = keep title white, only reveal the underline */
 .services-accordion:hover .services-row-title {
-  color: #fff;
+  color: #fff !important;
   text-shadow: none;
   background-size: 100% 2px;
 }
 
-/* Keep title white on gradient; no blue on focus/hover (only underline on hover) */
+/* Remove/override any earlier “blue on hover” rule */
+.services-accordion:hover .services-row-title,
 .services-accordion:focus-within .services-row-title {
-  color: #fff;
-  text-shadow: none;
-  background-size: 0% 2px; /* no underline on keyboard focus */
+  /* kept for specificity; overridden by the rule above */
 }
 
 /* Chevron stays white on hover/focus; turns blue only when open */
@@ -264,3 +256,48 @@ color: white;
   .services-row-title,
   .services-chevron { transition: none !important; }
 }
+
+/* Remove translucent hover tint */
+.services-toggle::before { content: none !important; }
+
+/* Make underline via ::after (nav-style) instead of background-image */
+.services-row-title {
+  position: relative;
+  display: inline-block;
+  background-image: none !important; /* stop bg-underline conflicts */
+}
+
+/* White underline with extra spacing */
+.services-row-title::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  bottom: -4px;                 /* matches nav spacing */
+  background: #fff;
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .22s cubic-bezier(.22,.61,.36,1);
+  pointer-events: none;
+}
+
+/* Reveal underline on hover (and keyboard focus on the button) */
+.services-accordion:hover .services-row-title::after,
+.services-toggle:focus-visible .services-row-title::after {
+  transform: scaleX(1);
+}
+
+/* Closed-row hover: keep text white (no color flip) */
+.services-accordion:not(.open):hover .services-row-title {
+  color: #fff !important;
+  text-shadow: none;
+}
+
+/* Open row: keep title blue even on hover, but still show underline */
+.services-accordion.open .services-row-title { color: var(--brand) !important; text-shadow: none; }
+.services-accordion.open:hover .services-row-title { color: var(--brand) !important; }
+.services-accordion.open:hover .services-row-title::after { transform: scaleX(1); background: #fff; }
+
+/* Optional: neutralize any older “blue on hover” rules */
+.services-accordion:hover .services-row-title { color: inherit; }
