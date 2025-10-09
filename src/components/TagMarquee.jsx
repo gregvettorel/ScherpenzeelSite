@@ -7,6 +7,7 @@ export default function TagMarquee({
   speed = 26,
   pauseOnHover = true,
   ariaLabel = "Skills and facts",
+  direction = 1, // 1 = auto scroll left (current), -1 = auto scroll right
 }) {
   const rootRef = useRef(null);
   const scrollerRef = useRef(null);
@@ -61,7 +62,7 @@ export default function TagMarquee({
 
       const w = loopW.current;
       // px/s: half-loop over `speed` seconds
-      const autoV = w > 0 ? (w / speed) : 0;
+      const autoV = w > 0 ? (w / speed) * direction : 0;
 
       if (!dragging.current) {
         if (Math.abs(vx.current) > 1) {
@@ -85,7 +86,7 @@ export default function TagMarquee({
 
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
-  }, [speed]);
+  }, [speed, direction]);
 
   const releaseCaptureSafely = () => {
     const el = rootRef.current;
@@ -125,7 +126,7 @@ export default function TagMarquee({
     const nowT = e.timeStamp ?? performance.now();
     const dx = nowX - lastX.current;
     const dt = Math.max(1e-3, (nowT - lastT.current) / 1000);
-    dragDX.current -= dx;
+    dragDX.current += dx;   // natural: drag right -> content moves right
     vx.current = dx / dt;
     lastX.current = nowX;
     lastT.current = nowT;
