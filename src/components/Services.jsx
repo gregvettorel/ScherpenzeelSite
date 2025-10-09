@@ -17,13 +17,13 @@ const items = [
 		img: designImg,
 		bg: "#F0F6FF",
 	},
-		{
+	{
 		title: "Build your brand",
-	desc: "Branding often forms the first impression of your company. We help you shape your roadmap, decide what to launch first, and measure the right things to keep momentum after launch. With a strong brand foundation, you’ll stand out and connect with your audience from the very start.\n\nAt Wako, we can help you shape this image to fit your unique needs.",
+		desc: "Branding often forms the first impression of your company. We help you shape your roadmap, decide what to launch first, and measure the right things to keep momentum after launch. With a strong brand foundation, you’ll stand out and connect with your audience from the very start.\n\nAt Wako, we can help you shape this image to fit your unique needs.",
 		tags: ["Roadmapping", "MVP Scope", "Analytics"],
 		img: designImg,
 	},
-		{
+	{
 		title: "3D Integrations",
 		desc: (
 			<>
@@ -59,11 +59,11 @@ const items = [
 		img: designImg,
 	},
 	{
-	title: "Host your website",
-	desc: "We offor you a hands off, stress free, approach to having an online website. We will handle everything for you, from hosting the website, to applying any changes you need, which is never more than a phone call away!\n\nThink of us as your single point of contact for all your digital needs.",
-	tags: ["Website Hosting", "Deployment", "People Oriented"],
-	img: designImg,
-},
+		title: "Host your website",
+		desc: "We offor you a hands off, stress free, approach to having an online website. We will handle everything for you, from hosting the website, to applying any changes you need, which is never more than a phone call away!\n\nThink of us as your single point of contact for all your digital needs.",
+		tags: ["Website Hosting", "Deployment", "People Oriented"],
+		img: designImg,
+	},
 ];
 
 export default function Services() {
@@ -72,8 +72,8 @@ export default function Services() {
 	const sectionClass = "services-section section section-pad";
 
 	return (
-		<SectionReveal className={sectionClass}>
-			<h2 className="section-title-about">What we do</h2>
+		<SectionReveal className={`${sectionClass}${openIndex !== -1 ? " is-open" : ""}`}>
+			<h2 className="section-title services-title">What we do</h2>
 			<div className={`wrap${openIndex !== -1 ? " wrap--full" : ""} `}>
 				<div className="services-list">
 					{items.map((s, i) => {
@@ -91,9 +91,10 @@ export default function Services() {
 									className="services-toggle"
 									aria-expanded={isOpen}
 									aria-controls={panelId}
-									onClick={() =>
-										setOpenIndex((cur) => (cur === i ? -1 : i))
-									}
+									onClick={(e) => {
+										setOpenIndex((cur) => (cur === i ? -1 : i));
+										e.currentTarget.blur();           // clear focus -> no sticky state
+									}}
 								>
 									<span className="services-row-title">{s.title}</span>
 									<FontAwesomeIcon
@@ -109,28 +110,28 @@ export default function Services() {
 									aria-labelledby={buttonId}
 								>
 									<div className="services-inner service-pad">
-															<div>
-																						{(s.title === "Build your brand" || s.title === "Host your website") && typeof s.desc === "string" && s.desc.includes("\n\n") ? (
-																							s.desc.split("\n\n").map((part, idx) => (
-																								<p className="services-desc" key={idx}>{part}</p>
-																							))
-																						) : (
-																							<p className="services-desc">{s.desc}</p>
-																						)}
-																<div className="services-tags">
-																	{s.tags.map((t) => (
-																		<AboutChip key={t} className="services-tag">{t}</AboutChip>
-																	))}
-																</div>
-															</div>
+										<div>
+											{(s.title === "Build your brand" || s.title === "Host your website") && typeof s.desc === "string" && s.desc.includes("\n\n") ? (
+												s.desc.split("\n\n").map((part, idx) => (
+													<p className="services-desc" key={idx}>{part}</p>
+												))
+											) : (
+												<p className="services-desc">{s.desc}</p>
+											)}
+											<div className="services-tags">
+												{s.tags.map((t) => (
+													<AboutChip key={t} className="services-tag">{t}</AboutChip>
+												))}
+											</div>
+										</div>
 
 										<div className="services-media">
 											<div className="services-media">
-											{ s.title === "3D Integrations" ? (
-											<Logo3D src={logoW} />
-											) : (
-											<img src={s.img} alt={s.title} />
-											)}
+												{s.title === "3D Integrations" ? (
+													<Logo3D src={logoW} />
+												) : (
+													<img src={s.img} alt={s.title} />
+												)}
 											</div>
 										</div>
 									</div>

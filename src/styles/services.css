@@ -1,165 +1,110 @@
-.services-section {
-  background: #f8fafd;
-  box-shadow: 1px 2px 12px 0 lightgray;
-  padding: 3vw 0;
-}
-@media (max-width: 640px) {
-  .services-accordion.open::before {
-    left: 0;
-    width: 100vw;
-    transform: none;
-    border-radius: 0;
-  }
-  .wrap.wrap--full {
-    padding-left: 0 !important;
-  }
-  .services-toggle {
-    padding-top: 14px;
-    padding-bottom: 14px;
-  }
-}
-@media (max-width: 640px) {
-  .services-accordion.open::before {
-    left: 0;
-    width: 100vw;
-    transform: none;
-    border-radius: 0;
-  }
-  .wrap.wrap--full {
-    padding-left: 0 !important;
-  }
-}
+/* ---------- Services (Humbleteam-inspired) ---------- */
 
 :root {
   --ink: #0a0a0b;
   --muted: #6b7280;
   --rule: #e7e7e9;
-  --brand: #2563eb;
-  --container: 1200px;
+  --brand: #2563eb; /* Wako blue */
 }
 
-.section-title-about {
+
+
+.section-title {
   font-family: "DM Sans", sans-serif;
-  font-weight: 700;
-  font-size: 2rem;
-  margin-left: 5%;
-  color: white;
+  font-weight: lighter;
+  font-size: clamp(34px, 6vw, 64px);
+  line-height: 1.05;
+  margin: 0 0 0.5rem;
+
+  padding-bottom: 30px;
 }
 
-.services-section {
-  background: linear-gradient(180deg, #1f56c0 0%, #2563eb 55%, #1f56c0 100%); 
- margin-top: 50px;
- margin-bottom: 35px;
-  padding-bottom: 25px;
-    padding-top: 25px;
-}
-
-.services-section .wrap,
-.services-section .wrap--full {
-  max-width: min(var(--container), 100%);
-}
-
+/* Make the media area have a height/aspect so the Canvas can fill */
 .services-media {
   width: 100%;
-  min-height: 260px;
+  min-height: 260px;           /* or use: aspect-ratio: 4 / 3; */
   display: grid;
   place-items: center;
-  overflow: hidden;
 }
 .services-media canvas {
   width: 100% !important;
   height: 100% !important;
 }
 
-.services-list {
-  width: 100%;
-  border-top: none;
-  overflow: visible;
+.services-title{
+  color: white;
+
 }
 
+
+/* Each row */
 .services-accordion {
-  position: relative;
+  
   background: transparent;
-  border: none;
-  margin-left: 15%;
-  box-shadow: none;
-  transition: background .25s ease, box-shadow .25s ease, transform .25s ease;
-  overflow: visible;
+  transition: background .25s ease;
+  position: relative;   /* NEW */
+  z-index: 0;           /* NEW */
 }
 
-.services-accordion.open {
-  background: transparent;
-  isolation: isolate;
-}
-.services-accordion.open::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  right: 0;
-  width: 100vw;
-  transform: translateX(-50%);
-  background: #fff;
-  z-index: -1;
-  pointer-events: none;
-}
 
+/* Header toggle */
 .services-toggle {
-  position: relative; 
-  z-index: 1;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 42px 0;            
+  padding: 64px 0;
   background: none;
   border: 0;
   cursor: pointer;
   text-align: left;
 }
-.services-toggle:focus { outline: none; }
 
 .services-row-title {
   font-family: "DM Sans", sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-  color: #fff; 
-  transition: color .25s ease;
-}
-.services-accordion:not(.open) .services-toggle:hover .services-row-title,
-.services-accordion:not(.open) .services-toggle:focus-visible .services-row-title {
-  color: #e8f1ff;
-}
-
-.services-chevron,
-.services-toggle svg {
-  display: inline-block;
-  flex: 0 0 auto;
-  width: 22px;
-  height: 22px;
-  color: #fff; 
-  opacity: 1;
-  visibility: visible;
-  z-index: 1;               
-  transition: transform .25s ease, color .25s ease;
-}
-.services-accordion:not(.open) .services-toggle:hover .services-chevron,
-.services-accordion:not(.open) .services-toggle:focus-visible .services-chevron {
-  color: #e8f1ff;
-}
-
-.services-accordion.open .services-row-title {
-  color: var(--brand);
-}
-.services-accordion.open .services-chevron {
-  transform: rotate(180deg);
-  color: var(--brand);
+  font-weight: 700;
+  font-size: 1.5rem;
+color: white;
+  transition: color .28s cubic-bezier(.22,.61,.36,1), text-shadow .28s ease;
 }
 
 .services-content {
-  position: relative;
-  z-index: 1;
+ background-color: #fff;;
+} 
+
+/* Keep open state blue as well */
+.services-accordion.open .services-row-title {
+  color: var(--brand);
+}
+
+.services-chevron {
+  width: 22px; height: 22px;
+  color: #fff;
+  transition: transform .28s cubic-bezier(.22,.61,.36,1), color .28s cubic-bezier(.22,.61,.36,1);
+}
+.services-accordion.open .services-chevron { transform: rotate(180deg); color: var(--brand); }
+
+/* Make chevron blue on hover */
+.services-toggle:hover .services-chevron,
+.services-toggle:focus-visible .services-chevron {
+  color: var(--brand);
+}
+
+/* Turn text blue when the row is hovered (and for keyboard focus) */
+.services-accordion:hover .services-row-title,
+.services-accordion:focus-within .services-row-title {
+  color: var(--brand);
+  text-shadow: none;
+}
+
+/* Also switch chevron on row hover/focus (not only on button hover) */
+.services-accordion:hover .services-chevron,
+.services-accordion:focus-within .services-chevron {
+  color: var(--brand);
+}
+
+/* Content reveal */
+.services-content {
   overflow: hidden;
   max-height: 0;
   opacity: 0;
@@ -172,11 +117,12 @@
   transform: translateY(0);
 }
 
+/* Inner 2-column layout */
 .services-inner {
   display: grid;
-  grid-template-columns: minmax(0,1fr) minmax(0,1fr); 
+  grid-template-columns: 1fr 1fr;
   gap: 64px;
-  padding: 0 0 40px;  
+  padding: 0 0 40px;
 }
 
 .services-desc {
@@ -199,27 +145,122 @@
   color: #374151;
 }
 
+/* Image mockup */
 .services-media {
   border-radius: 16px;
   overflow: hidden;
-  background: #fff;
-  border: 1px solid var(--rule);
   display: block;
-  max-width: 100%;
-  border-color: white;
 }
-
 .services-media img {
   display: block;
   width: 100%;
-  height: auto;     
-  max-height: 400px;
+  max-height: 500px;
   object-fit: cover;
 }
+.services-section{
+  background: linear-gradient(180deg, #1f56c0 0%, #2563eb 55%, #1f56c0 100%);
+}
 
+/* Base sheet (invisible). Keeps layout stable to avoid “pop”. */
+.services-accordion::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%; right: 50%;
+  margin-left: -50vw;            /* full‑bleed */
+  margin-right: -50vw;
+  background: #fff;
+  box-shadow: 0 1px 0 var(--rule) inset, 0 -1px 0 var(--rule) inset;
+  opacity: 0;
+  transform: translateZ(0) scaleY(0.985);
+  transform-origin: center top;
+  z-index: -1;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition:
+    opacity .28s ease,
+    transform .42s cubic-bezier(.22,.61,.36,1),
+    box-shadow .28s ease;
+}
+
+/* Smoothly reveal on hover and keep when open */
+.services-accordion.open::before {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+/* Header hover highlight only (no sticky focus) */
+.services-toggle::before {
+  content: "";
+  position: absolute;
+  inset: 8px -12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.06);
+  opacity: 0;
+  transition: opacity .25s ease;
+  pointer-events: none;
+}
+.services-toggle:hover::before { opacity: 1; }
+
+/* Title stays white; animate brand underline on hover */
+.services-row-title {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0,0,0,.18);
+  background-image: linear-gradient(var(--brand), var(--brand));
+  background-size: 0% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition:
+    color .28s cubic-bezier(.22,.61,.36,1),
+    text-shadow .28s ease,
+    background-size .35s cubic-bezier(.22,.61,.36,1);
+}
+/* Only animate the underline on hover (no color swap, no focus-within) */
+.services-accordion:hover .services-row-title {
+  color: #fff;
+  text-shadow: none;
+  background-size: 100% 2px;
+}
+
+/* Keep title white on gradient; no blue on focus/hover (only underline on hover) */
+.services-accordion:focus-within .services-row-title {
+  color: #fff;
+  text-shadow: none;
+  background-size: 0% 2px; /* no underline on keyboard focus */
+}
+
+/* Chevron stays white on hover/focus; turns blue only when open */
+.services-toggle:hover .services-chevron,
+.services-toggle:focus-visible .services-chevron,
+.services-accordion:focus-within .services-chevron {
+  color: #fff;
+}
+
+/* Open state remains blue (title + chevron) */
+.services-accordion.open .services-row-title { color: var(--brand); }
+.services-accordion.open .services-chevron   { color: var(--brand); }
+
+
+/* Mobile: don’t full‑bleed */
 @media (max-width: 900px) {
   .services-inner { grid-template-columns: 1fr; }
   .services-accordion {
     padding-left: 10px;
   }
+  .services-accordion.open::before {
+    left: 0; right: 0; margin: 0;
+  }
+  .services-accordion::before {
+    left: 0; right: 0; margin: 0;
+  }
+}
+
+/* Motion safety */
+@media (prefers-reduced-motion: reduce) {
+  .services-accordion::before,
+  .services-row-title,
+  .services-chevron { transition: none !important; }
 }

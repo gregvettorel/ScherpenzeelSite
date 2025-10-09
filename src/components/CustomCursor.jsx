@@ -6,11 +6,16 @@ export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [showArrow, setShowArrow] = useState(false);
 
-  const isTouchDevice = () => "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  // Safer: only treat as touch if the primary pointer is coarse AND doesn’t hover
+  const isTouchDevice = () =>
+    window.matchMedia &&
+    window.matchMedia("(hover: none) and (pointer: coarse)").matches;
 
   useEffect(() => {
     const cursor = cursorRef.current;
     if (!cursor || isTouchDevice()) return;
+    // Hide OS cursor while custom cursor is active
+    document.body.classList.add("custom-cursor-active");
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion) return;
@@ -25,10 +30,12 @@ export default function CustomCursor() {
     };
 
     // Grow over any clickable
-    const clickableSelector = "a, button, [role='button'], .wako-btn, .project-card, .project-card-link, .nav__link, .nav__brand";
+    const clickableSelector =
+      "a, button, [role='button'], .wako-btn, .project-card, .project-card-link, .nav__link, .nav__brand, .services-toggle";
 
-    // Arrow only on project cards or true external links
-    const arrowSelector = ".project-card-link, .project-card, a[target='_blank'], a[rel~='external'], [data-cursor='external']";
+    // Arrow on project cards, true external links, and Services toggles (to suggest “open”)
+    const arrowSelector =
+      ".project-card-link, .project-card, .services-toggle, a[target='_blank'], a[rel~='external'], [data-cursor='external']";
 
     const onMove = (e) => {
       mouseX = e.clientX;
@@ -43,7 +50,8 @@ export default function CustomCursor() {
         arrowTarget.tagName === "A" &&
         !/^mailto:|^tel:/i.test(arrowTarget.getAttribute("href") || "");
       const isProject = !!e.target.closest(".project-card-link, .project-card");
-      setShowArrow(isProject || isExternal);
+      const isService = !!e.target.closest(".services-toggle");
+      setShowArrow(isProject || isExternal || isService);
 
       // High-contrast over marked areas (nav or any [data-cursor-contrast] container)
       const needsContrast = !!e.target.closest(".nav, .navbar, [data-cursor-contrast='true']");
@@ -59,6 +67,7 @@ export default function CustomCursor() {
     return () => {
       document.removeEventListener("pointermove", onMove);
       document.removeEventListener("mouseup", onUp);
+      document.body.classList.remove("custom-cursor-active");
     };
   }, []);
 
