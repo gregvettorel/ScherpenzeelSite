@@ -3,21 +3,28 @@ import React from "react";
 import "../styles/about.css";
 import macbookImage from "../assets/macbookwako.png";
 import SectionReveal from "./SectionReveal";
+import TagMarquee from "./TagMarquee";
 import AboutIcon from "./AboutIcon";
 import ReactCountryFlag from "react-country-flag";
-import AboutChip from "./AboutChip";
 
 
 export default function AboutSection() {
+  const tags = [
+    (<><AboutIcon type="design" /> 3 years UI/UX & marketing</>),
+    (<><AboutIcon type="dev" /> 3.5 years full-stack dev</>),
+    (<><AboutIcon type="degree" /> Degrees in design & tech</>),
+    (<><ReactCountryFlag countryCode="GB" svg style={{ width: 18, height: 18 }} /> English</>),
+    (<><ReactCountryFlag countryCode="FR" svg style={{ width: 18, height: 18 }} /> Français</>),
+    (<><ReactCountryFlag countryCode="NL" svg style={{ width: 18, height: 18 }} /> Nederlands</>),
+  ];
+
   return (
     <SectionReveal id="about" className="about">
       <div className="about__wrap section section-pad">
         <div className="about__grid">
-          {/* Left: image */}
-
           {/* Right: content */}
           <div className="about__content">
-      <div className="section-title">Who we are</div>
+            <div className="section-title">Who we are</div>
             <div className="about__copy">
               <p>
                 We're two passionate web developers who love crafting fresh, tailored digital experiences.
@@ -27,36 +34,12 @@ export default function AboutSection() {
                 As a team of two every project receives our full attention as we only take on one project at a time.
               </p>
 
-              <div className="about__chips">
-                <AboutChip>
-                  <AboutIcon type="design" />
-                  3 years UI/UX & marketing
-                </AboutChip>
-                <AboutChip>
-                  <AboutIcon type="dev" />
-                  3.5 years full-stack dev
-                </AboutChip>
-                <AboutChip>
-                  <AboutIcon type="degree" />
-                  Degrees in design & tech
-                </AboutChip>
-                <AboutChip>
-                  <ReactCountryFlag countryCode="GB" svg style={{ width: "1.5em", height: "1.5em" }} />
-                  English
-                </AboutChip>
-                <AboutChip>
-                  <ReactCountryFlag countryCode="FR" svg style={{ width: "1.5em", height: "1.5em" }} />
-                  Français
-                </AboutChip>
-                <AboutChip>
-                  <ReactCountryFlag countryCode="NL" svg style={{ width: "1.5em", height: "1.5em" }} />
-                  Nederlands
-                </AboutChip>
-              </div>
+              {/* Endless looping tags with edge fades */}
+              <TagMarquee items={tags} speed={24} />
             </div>
-
           </div>
-                    <div className="about__media">
+          {/* Left: image */}
+          <div className="about__media">
             <div className="about__mediaInner">
               <img
                 src={macbookImage}

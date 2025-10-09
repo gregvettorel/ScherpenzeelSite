@@ -1,0 +1,60 @@
+.tagmarquee {
+  --fade-bg: var(--surface, #fff);
+  --gap: 10px;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-block: 6px;
+  touch-action: pan-y;
+  cursor: grab;
+}
+.tagmarquee.tagmarquee--dragging { cursor: grabbing; user-select: none; }
+
+/* JS controls transform on the scroller */
+.tagmarquee__scroller {
+  transform: translate3d(0,0,0);
+  will-change: transform;
+}
+
+/* When JS is active, turn off the CSS loop animation */
+.tagmarquee--js .tagmarquee__track { animation: none !important; }
+
+/* Edge fades */
+.tagmarquee::before,
+.tagmarquee::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  width: clamp(24px, 8vw, 100px);
+  pointer-events: none;
+  z-index: 2;
+}
+.tagmarquee::before { left: 0;  background: linear-gradient(to right, var(--fade-bg), rgba(255,255,255,0)); }
+.tagmarquee::after  { right: 0; background: linear-gradient(to left,  var(--fade-bg), rgba(255,255,255,0)); }
+
+/* Track layout */
+.tagmarquee__track {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap);
+  white-space: nowrap;
+}
+.tagmarquee__row {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tagmarquee__item { flex: 0 0 auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tagmarquee__scroller { transform: none !important; }
+}
+
+.tagmarquee img, .tagmarquee svg {
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+}

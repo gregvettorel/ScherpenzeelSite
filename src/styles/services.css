@@ -159,7 +159,15 @@ color: white;
   object-fit: cover;
 }
 .services-section{
-  background: linear-gradient(180deg, #1f56c0 0%, #2563eb 55%, #1f56c0 100%);
+  /* Fallback: solid brand-centric gradient */
+  background: linear-gradient(180deg, #0458C6 0%, #0579FE 55%, #0349AE 100%);
+  /* Preferred: token-driven mix around --brand */
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--brand) 92%, #0349AE) 0%,
+    var(--brand) 55%,
+    color-mix(in srgb, var(--brand) 88%, #023D92) 100%
+  );
 }
 
 /* Base sheet (invisible). Keeps layout stable to avoid “pop”. */
@@ -273,7 +281,7 @@ color: white;
   position: absolute;
   left: 0; right: 0;
   height: 2px;
-  bottom: -4px;                 /* matches nav spacing */
+  bottom: -6px;                 /* matches nav spacing */
   background: #fff;
   border-radius: 1px;
   transform: scaleX(0);
@@ -301,3 +309,8 @@ color: white;
 
 /* Optional: neutralize any older “blue on hover” rules */
 .services-accordion:hover .services-row-title { color: inherit; }
+
+/* Optional: add a touch more space on very large screens */
+@media (min-width: 1280px) {
+  .services-row-title::after { bottom: -8px; }
+}

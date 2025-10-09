@@ -114,7 +114,7 @@ export default function CasePage() {
 
 
       {/* HERO */}
-      <header className="case-hero section section-pad" style={{ background: "var(--surface)" }}>
+      <header className="case-hero section-pad" style={{ background: "var(--surface)" }}>
         <div className="wrap">
           <div className="case">
             <figure className="case-hero__media">
