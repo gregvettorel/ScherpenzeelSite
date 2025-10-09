@@ -156,7 +156,7 @@
 
 /* Extra small screen tweaks */
 @media (max-width: 640px) {
-  .team-cards-grid { gap: 5.5rem !important; } /* more vertical gap */
+  .team-cards-grid { gap: 6.5rem !important; } /* more vertical gap */
   .peek-body, .peek-hands {
     width: 120px !important;   /* Make heads/hands smaller */
   }
