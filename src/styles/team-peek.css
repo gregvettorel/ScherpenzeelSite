@@ -156,18 +156,19 @@
 
 /* Extra small screen tweaks */
 @media (max-width: 640px) {
-  .team-cards-grid { gap: 5.5rem !important; } /* more vertical gap */
+  .team-cards-grid { gap: 6.5rem !important; } /* more vertical gap */
   .peek-body, .peek-hands {
-    width: 70px !important;   /* Make heads/hands smaller */
+    width: 120px !important;   /* Make heads/hands smaller */
   }
   .peek-body {
-    top: -44px !important;    /* Move heads further up */
+    top: -80px !important;    /* Move heads further up */
   }
   .team-card {
     padding-top: 3.2rem !important; /* More space above the photo */
   }
   #team .section-title {
     margin-top: 80px !important;
+    padding-bottom: 30px;
     position: relative;
     z-index: 2;
   }
