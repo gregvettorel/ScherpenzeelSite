@@ -17,7 +17,7 @@ export default function AboutSection() {
 
           {/* Right: content */}
           <div className="about__content">
-              <h3 className="about__headline">Small team. <strong>Big</strong> impact.</h3>
+      <div className="section-title">Who we are</div>
             <div className="about__copy">
               <p>
                 We're two passionate web developers who love crafting fresh, tailored digital experiences.

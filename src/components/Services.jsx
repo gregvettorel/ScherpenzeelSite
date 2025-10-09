@@ -12,7 +12,7 @@ import AboutChip from "./AboutChip";
 const items = [
 	{
 		title: "Custom made designs",
-		desc: "From the first sketch to a fully interactive prototype, we guide you through every step of the design journey. We craft unique brand identities and intuitive interfaces that not only look sharp and friendly, but also resonate with your audience.\n\nOur collaborative approach ensures your vision is translated into a design system that’s both beautiful and effective—setting the stage for your project’s success.",
+		desc: (<>"From the first sketch to a fully interactive prototype, we guide you through every step of the design journey. We craft unique brand identities and intuitive interfaces that not only look sharp and friendly, but also resonate with your audience.<br></br><br></br>Our collaborative approach ensures your vision is translated into a design system that’s both beautiful and effective—setting the stage for your project’s success."</>),
 		tags: ["Brand & Identity", "UI/UX", "Design Systems"],
 		img: designImg,
 		bg: "#F0F6FF",
@@ -25,7 +25,36 @@ const items = [
 	},
 		{
 		title: "3D Integrations",
-		desc: "We are always up to date with the newest trends in web development, which is why we offer 3D implementations in websites. This will either provide a helpful tool for your customer or simply blow them away!",
+		desc: (
+			<>
+				We are always up to date with the newest trends in web development, which is why we offer 3D implementations in websites.<br /><br />
+				This will either provide a helpful tool for your customer, check our customisable sneaker store as an example:&nbsp;
+				<a
+					href="/work/swear"
+					target="_blank"
+					rel="noopener noreferrer"
+					style={{
+						color: "#2563eb",
+						background: "#f0f6ff",
+						padding: "2px 8px",
+						borderRadius: "6px",
+						textDecoration: "none",
+						fontWeight: 600,
+						transition: "background 0.2s, color 0.2s"
+					}}
+					onMouseOver={e => {
+						e.target.style.background = "#2563eb";
+						e.target.style.color = "#fff";
+					}}
+					onMouseOut={e => {
+						e.target.style.background = "#f0f6ff";
+						e.target.style.color = "#2563eb";
+					}}
+				>
+					Swear Sneaker Store
+				</a>
+			</>
+		),
 		tags: ["3D Modelling", "Arts"],
 		img: designImg,
 	},
@@ -81,7 +110,7 @@ export default function Services() {
 								>
 									<div className="services-inner service-pad">
 															<div>
-																						{(s.title === "Build your brand" || s.title === "Host your website") && s.desc.includes("\n\n") ? (
+																						{(s.title === "Build your brand" || s.title === "Host your website") && typeof s.desc === "string" && s.desc.includes("\n\n") ? (
 																							s.desc.split("\n\n").map((part, idx) => (
 																								<p className="services-desc" key={idx}>{part}</p>
 																							))
