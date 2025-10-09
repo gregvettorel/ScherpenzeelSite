@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import "../styles/custom-cursor.css";
 
 export default function CustomCursor() {
   const cursorRef = useRef(null);
   const [isHovering, setIsHovering] = useState(false);
   const [showArrow, setShowArrow] = useState(false);
+  const location = useLocation();
 
   // Safer: only treat as touch if the primary pointer is coarse AND doesn’t hover
   const isTouchDevice = () =>
@@ -17,16 +19,16 @@ export default function CustomCursor() {
     // Hide OS cursor while custom cursor is active
     document.body.classList.add("custom-cursor-active");
 
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) return;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
 
-    let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+    let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0, rafId = 0;
 
-    const animateCursor = () => {
+    const animate = () => {
       cursorX += (mouseX - cursorX) * 0.32;
       cursorY += (mouseY - cursorY) * 0.32;
       cursor.style.transform = `translate(${cursorX - 12}px, ${cursorY - 12}px)`;
-      requestAnimationFrame(animateCursor);
+      rafId = requestAnimationFrame(animate);
     };
 
     // Grow over any clickable
@@ -36,6 +38,12 @@ export default function CustomCursor() {
     // Arrow on project cards, true external links, and Services toggles (to suggest “open”)
     const arrowSelector =
       ".project-card-link, .project-card, .services-toggle, a[target='_blank'], a[rel~='external'], [data-cursor='external']";
+
+    const reset = () => {
+      setIsHovering(false);
+      setShowArrow(false);
+      cursor.classList.remove("contrast");
+    };
 
     const onMove = (e) => {
       mouseX = e.clientX;
@@ -53,23 +61,38 @@ export default function CustomCursor() {
       const isService = !!e.target.closest(".services-toggle");
       setShowArrow(isProject || isExternal || isService);
 
-      // High-contrast over marked areas (nav or any [data-cursor-contrast] container)
       const needsContrast = !!e.target.closest(".nav, .navbar, [data-cursor-contrast='true']");
-      cursorRef.current?.classList.toggle("contrast", needsContrast);
+      cursor.classList.toggle("contrast", needsContrast);
     };
 
-    const onUp = () => setShowArrow(false);
+    const onDown = reset;          // collapse when pressing
+    const onLeave = reset;         // leaving window
+    const onClick = reset;         // navigating via Link/anchor
 
     document.addEventListener("pointermove", onMove, { passive: true });
-    document.addEventListener("mouseup", onUp, { passive: true });
-    animateCursor();
+    document.addEventListener("pointerdown", onDown, { passive: true });
+    document.addEventListener("pointerleave", onLeave, { passive: true });
+    document.addEventListener("click", onClick, true);
+
+    animate();
 
     return () => {
       document.removeEventListener("pointermove", onMove);
-      document.removeEventListener("mouseup", onUp);
+      document.removeEventListener("pointerdown", onDown);
+      document.removeEventListener("pointerleave", onLeave);
+      document.removeEventListener("click", onClick, true);
+      cancelAnimationFrame(rafId);
       document.body.classList.remove("custom-cursor-active");
     };
   }, []);
+
+  // Reset state on route change (e.g., clicking “Swear”)
+  useEffect(() => {
+    if (isTouchDevice()) return;
+    setIsHovering(false);
+    setShowArrow(false);
+    cursorRef.current?.classList.remove("contrast");
+  }, [location.pathname]);
 
   if (isTouchDevice()) return null;
 
