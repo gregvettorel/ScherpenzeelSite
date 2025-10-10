@@ -231,14 +231,480 @@ body.nav-locked {
   color: #fff;
 }
 
-/* ===== responsive ===== */
+/* Language switcher */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  overflow: hidden;
+  background: transparent;
+  height: 34px;
+  margin-right: 6px;
+}
+.lang-switch__btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: 600 12px/1 Inter, system-ui, sans-serif;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.lang-switch__btn:hover { background: rgba(0,0,0,.06); }
+.lang-switch__btn.is-active {
+  background: var(--brand);
+  color: #fff;
+}
+
+/* Language as regular nav links */
+.nav__langs { display: flex; gap: 14px; align-items: center; }
+.nav__link--lang { font-weight: 600; opacity: .9; }
+.nav__link--lang.is-active { color: #0579fe; }
+.nav__link--lang.is-active::after { transform: scaleX(1); }
+
+/* Drawer language links styled like drawer links but inline */
+.drawer__langs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 8px 6px 12px;
+}
+.drawer__link--lang {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 0;
+  background: transparent;
+  color: #111;
+  font-weight: 600;
+  cursor: pointer;
+}
+.drawer__link--lang.is-active { background: #f0f6ff; color: #0579fe; }
+
+/* Hide old pill switcher if it remains in DOM */
+.lang-switch { display: none !important; }
+
+/* Mobile header: hide desktop right group, but drawer has its own */
 @media (max-width: 960px) {
-  .nav__links,
-  .nav__right {
-    display: none;
+  .nav__inner {
+    display: flex;                 /* override grid on mobile */
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 16px;
+    padding-right: 16px;
+    column-gap: 12px;
   }
-  .nav__burger {
-    display: block;
-    justify-self: end;
+  .nav__links { display: none !important; }
+  .nav__right { display: none !important; }
+  .nav__burger { display: inline-flex !important; align-items: center; justify-content: center; }
+}
+
+/* Desktop: restore links/right, hide burger */
+@media (min-width: 961px) {
+  .nav__links { display: flex !important; }
+  .nav__right { display: flex !important; }
+  .nav__burger { display: none !important; }
+}
+
+/* ===== Language dropdown (desktop) ===== */
+.langdd { position: relative; }
+.langdd__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;             /* use nav link spacing */
+  position: relative;
+}
+.langdd__btn.nav__link::after { content: none; } /* remove underline on caret button */
+
+/* Ensure custom dropdown shows; kill native select on desktop */
+.langdd { display: inline-block !important; }
+
+@media (min-width: 961px) {
+  .nav__select-wrap,
+  .nav__select { display: none !important; }
+}
+
+/* Caret stays branded + rotates */
+.langdd__btn.nav__link::after { content: none; }
+.langdd__caret {
+  margin-left: 6px;
+  vertical-align: middle;
+  transform: translateY(1px) rotate(0deg);
+  transform-origin: 50% 45%;
+  opacity: .9;
+  transition: transform .22s cubic-bezier(.22,.61,.36,1), opacity .18s ease;
+  pointer-events: none;
+}
+.langdd__btn:hover .langdd__caret,
+.langdd__btn:focus-visible .langdd__caret { opacity: 1; }
+.langdd__btn.is-open .langdd__caret { transform: translateY(1px) rotate(180deg); }
+
+.langdd__menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 140px;
+  padding: 6px;
+  margin: 0;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  box-shadow: 0 10px 28px rgba(16,30,54,.16);
+  z-index: 1002;
+}
+.langdd__opt {
+  width: 100%;
+  text-align: left;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: #111;
+  font: 600 14px/1.2 Inter, system-ui, sans-serif;
+  padding: 10px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.langdd__opt:hover,
+.langdd__opt:focus-visible {
+  background: #f6f7f8;
+  outline: none;
+}
+.langdd__opt.is-active {
+  color: #0579fe;
+  background: #f0f6ff;
+}
+
+/* Drawer select */
+.drawer__label {
+  display: block;
+  font-size: 12px;
+  color: #6b7280;
+  margin: 2px 0 6px;
+}
+.drawer__select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-weight: 600;
+  color: #111;
+}
+
+/* Remove old pill switch visuals if any remain */
+.lang-switch { display: none !important; }
+/* Styled language select to look like a nav link */
+.nav__select-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  /* inherits .nav__link underline via this class already */
+}
+.nav__select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  border: 0;
+  color: inherit;             /* same as links */
+  font: inherit;
+  font-weight: 500;
+  line-height: 1;
+  padding: 0 18px 0 0;        /* space for caret */
+  cursor: pointer;
+}
+.nav__select:focus { outline: none; }
+.nav__select::-ms-expand { display: none; } /* old Edge/IE */
+
+/* caret */
+.nav__select-wrap::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 0; height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid currentColor;
+  transform: translateY(-30%);
+  opacity: .9;
+  pointer-events: none;
+}
+
+/* hover = brand color + underline (uses .nav__link::after) */
+.nav__select-wrap:hover { color: #0579fe; font-weight: 600; }
+.nav__select-wrap:hover::after { transform: scaleX(1); }
+
+/* remove legacy pill and custom dropdown styles */
+.lang-switch { display: none !important; }
+.langdd { display: inline-block !important; }
+/* Remove native select in the header (keep drawer select) */
+.nav__select-wrap,
+.nav__select { display: none !important; }
+
+/* Enable custom dropdown */
+.langdd { position: relative; display: inline-block; }
+
+.langdd__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  position: relative;
+}
+/* no underline bar on the button itself */
+.langdd__btn.nav__link::after { content: none; }
+
+/* SVG caret styling */
+.langdd__caret {
+  margin-left: 6px;
+  vertical-align: middle;
+  transform: translateY(1px) rotate(0deg);
+  transform-origin: 50% 45%;
+  opacity: .9;
+  transition: transform .22s cubic-bezier(.22,.61,.36,1), opacity .18s ease;
+  pointer-events: none;
+}
+.langdd__btn:hover .langdd__caret,
+.langdd__btn:focus-visible .langdd__caret { opacity: 1; }
+.langdd__btn.is-open .langdd__caret { transform: translateY(1px) rotate(180deg); }
+
+/* Dropdown menu */
+.langdd__menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 140px;
+  padding: 6px;
+  margin: 0;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  box-shadow: 0 10px 28px rgba(16,30,54,.16);
+  z-index: 1003;
+}
+.langdd__opt {
+  width: 100%;
+  text-align: left;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: #111;
+  font: 600 14px/1.2 Inter, system-ui, sans-serif;
+  padding: 10px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.langdd__opt:hover,
+.langdd__opt:focus-visible { background: #f6f7f8; outline: none; }
+.langdd__opt.is-active { color: #0579fe; background: #f0f6ff; }
+
+/* Compact Contact button for navbar */
+.nav__btn.wako-btn {
+  --arrow-w: 0;           /* no reserved arrow space */
+  padding: 10px 14px;     /* tighter */
+  font-size: 14px;
+  line-height: 1;
+  border-width: 2px;
+}
+
+/* Reset/native-killer + align with nav link styling */
+.nav .langdd__btn,
+.langdd__btn {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0 6px 0 0;   /* small space before caret */
+  margin: 0;
+  height: 28px;         /* align with header visuals */
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: inherit;
+  color: inherit;
+  font-weight: 600;     /* same weight as nav hover */
+  cursor: pointer;
+}
+
+.langdd__btn:hover,
+.langdd__btn:focus-visible {
+  color: #0579fe;       /* same hover color as nav links */
+  outline: none;
+}
+
+/* Firefox inner focus padding reset */
+.langdd__btn::-moz-focus-inner { border: 0; padding: 0; }
+
+/* keep underline off this nav link button */
+.langdd__btn.nav__link::after { content: none; }
+
+/* caret tweak */
+.langdd__caret { display: inline-block; margin-left: 6px; vertical-align: middle; }
+
+/* Mobile header: hide desktop right group, but drawer has its own */
+@media (max-width: 960px) {
+  .nav__right .lang-switch { display: none; }
+}
+
+/* ===== Mobile drawer (links + language buttons + CTA) ===== */
+#mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1001;
+  /* above backdrop */
+  width: 320px;
+  max-width: 86vw;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border-left: 1px solid rgba(255, 255, 255, 0.30);
+  transform: translateX(100%);
+  transition: transform .3s ease;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  box-shadow: -16px 0 36px rgba(0, 0, 0, 0.12);
+}
+
+#mobile-drawer.is-open {
+  transform: translateX(0);
+}
+
+.drawer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid #eee;
+}
+
+.drawer__head img {
+  height: 28px;
+}
+
+.drawer__close {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  border-radius: 8px;
+  font-size: 18px;
+}
+
+.drawer__close:hover {
+  background: rgba(0, 0, 0, .06);
+}
+
+.drawer__links {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  gap: 6px;
+}
+
+.drawer__link {
+  text-decoration: none;
+  color: #111;
+  font-weight: 500;
+  padding: 12px 10px;
+  border-radius: 10px;
+}
+
+.drawer__link:hover {
+  background: #f6f7f8;
+}
+
+.drawer__rule {
+  border: 0;
+  height: 1px;
+  background: #eee;
+  margin: 10px 0;
+}
+
+.drawer__btn {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: #111;
+  font-weight: 600;
+  border: 1px solid #111;
+  border-radius: 999px;
+  padding: 10px 14px;
+}
+
+.drawer__btn:hover {
+  background: #111;
+  color: #fff;
+}
+
+/* Language buttons under the links in mobile drawer */
+.drawer__langs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 8px 6px 12px;
+}
+.drawer__link--lang {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 0;
+  background: transparent;
+  color: #111;
+  font-weight: 600;
+  cursor: pointer;
+}
+.drawer__link--lang.is-active { background: #f0f6ff; color: #0579fe; }
+
+/* Make sure there’s breathing room on mobile */
+@media (max-width: 960px) {
+  .nav__inner {
+    padding-left: 16px;
+    padding-right: 16px;
+    column-gap: 12px;
   }
 }
+
+/* Burger: draw 3 lines even if only one span is in the button */
+.nav__burger {
+  display: inline-grid;            /* ensure centered icon */
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: transparent;
+  border-radius: 8px;
+}
+.nav__burger:hover { background: rgba(0,0,0,.06); }
+
+/* remove old single-line styling */
+.nav__burger span { background: none; height: auto; width: auto; margin: 0; }
+
+/* new lines */
+.nav__burger .burger-lines {
+  position: relative;
+  width: 22px;
+  height: 2px;
+  background: #111;
+  border-radius: 2px;
+}
+.nav__burger .burger-lines::before,
+.nav__burger .burger-lines::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 22px;
+  height: 2px;
+  background: #111;
+  border-radius: 2px;
+}
+.nav__burger .burger-lines::before { top: -6px; }
+.nav__burger .burger-lines::after  { top:  6px; }

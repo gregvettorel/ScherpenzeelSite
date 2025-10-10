@@ -5,6 +5,7 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import WakoButton from "../components/WakoButton";
 import AboutChip from "../components/AboutChip";
+import { useLang } from "../context/LangContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,6 +14,7 @@ export default function CasePage() {
   const data = cases[slug];
   const nav = useNavigate();
   const rootRef = useRef(null);
+  const { t, lang } = useLang();
 
   useEffect(() => {
     if (!data) return;
@@ -109,26 +111,31 @@ export default function CasePage() {
 
   if (!data) return null;
 
+  const L = (data.i18n && (data.i18n[lang] || data.i18n.en)) || null;
+  const title = L?.title ?? data.title;
+  const subtitle = L?.subtitle ?? data.subtitle;
+  const explainer = L?.explainer ?? data.explainer;
+  const deliverables = Array.isArray(L?.deliverables) ? L.deliverables : data.deliverables;
+  const features = Array.isArray(L?.features) ? L.features : data.features;
+
   return (
     <main ref={rootRef}>
-
-
       {/* HERO */}
       <header className="case-hero section-pad" style={{ background: "var(--surface)" }}>
         <div className="wrap">
           <div className="case">
             <figure className="case-hero__media">
-              <img src={data.hero} alt={`${data.title} hero`} loading="eager" />
+              <img src={data.hero} alt={`${title} hero`} loading="eager" />
               <figcaption className="case-hero__caption">
                 <h1
                   className="section-title"
                   style={{ color: "#fff", textShadow: "0 20px 46px rgba(0,0,0,.6)" }}
                   dangerouslySetInnerHTML={{
-                    __html: data.title.replace(": ", ": <span class='soft-break'>") + "</span>",
+                    __html: title.replace(": ", ": <span class='soft-break'>") + "</span>",
                   }}
                 />
                 <p className="subtitle" style={{ color: "rgba(255,255,255,.95)" }}>
-                  {data.subtitle}
+                  {subtitle}
                 </p>
               </figcaption>
             </figure>
@@ -140,7 +147,7 @@ export default function CasePage() {
       <section className="explainer-wrap section section-pad" style={{ background: "var(--surface)" }}>
         <div className="wrap explainer-flex">
           <div className="explainer hero__lead" id="explainer">
-            {data.explainer}
+            {explainer}
           </div>
           <div className="explainer-cta">
             {Array.isArray(data.ctas) && data.ctas.length > 0 ? (
@@ -159,7 +166,7 @@ export default function CasePage() {
             ) : (
               data.figmaUrl && (
                 <WakoButton as="a" href={data.figmaUrl} target="_blank" rel="noreferrer" variant="solid">
-                  Figma
+                  {t("case.figma")}
                 </WakoButton>
               )
             )}
@@ -169,51 +176,60 @@ export default function CasePage() {
 
       {/* Info grid */}
       <section className="case-info section section-pad" style={{ background: "var(--surface)" }}>
-        <div className="wrap"
-        // removed: style={{ maxWidth: "1100px" }}
-        >
+        <div className="wrap">
           <div className="case-info__row">
-            <div className="case-info__label">Year</div>
+            <div className="case-info__label">{t("case.year")}</div>
             <div className="case-info__value">{data.year}</div>
           </div>
           <div className="case-info__row">
-            <div className="case-info__label">Deliverables</div>
+            <div className="case-info__label">{t("case.deliverables")}</div>
             <div className="case-info__value">
-              {data.deliverables.map((d, i) => (<span key={i}>{d}<br /></span>))}
+              {deliverables.map((d, i) => (<span key={i}>{d}<br /></span>))}
             </div>
           </div>
           <div className="case-info__row">
-            <div className="case-info__label">Stack</div>
+            <div className="case-info__label">{t("case.stack")}</div>
             <div className="case-info__value case-info__tags">
-              {data.stackTags.map(t => (
-                <AboutChip key={t}>{t}</AboutChip>
-              ))}
+              {data.stackTags.map(tg => (<AboutChip key={tg}>{tg}</AboutChip>))}
             </div>
           </div>
           <div className="case-info__row">
-            <div className="case-info__label">Features</div>
+            <div className="case-info__label">{t("case.features")}</div>
             <div className="case-info__value">
-              {data.features.map((f, i) => (<span key={i}>{f}<br /></span>))}
+              {features.map((f, i) => (<span key={i}>{f}<br /></span>))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Cards Parallax */}
-      <section className="olc section section-pad" data-olc-cards>
+      {/* OLC: stacked sticky cards */}
+      <section className="olc section section-pad" data-olc-cards >
         <div className="wrap">
           <div className="olc__main">
-            {data.cards.map((c, i) => (
-              <div className="olc__card-container" key={i}>
-                <figure className="olc__card">
-                  {c.type === "video" ? (
-                    <video src={c.src} autoPlay muted loop playsInline />
-                  ) : (
-                    <img src={c.src} alt="" />
-                  )}
-                </figure>
-              </div>
-            ))}
+            {Array.isArray(data.cards) &&
+              data.cards.map((c, i) => (
+                <div key={i} className="olc__card-container">
+                  <figure className="olc__card">
+                    {c.type === "video" ? (
+                      <video
+                        src={c.src}
+                        muted
+                        playsInline
+                        loop
+                        autoPlay
+                        preload="metadata"
+                      />
+                    ) : (
+                      <img
+                        src={c.src}
+                        alt={`${data.title} shot ${i + 1}`}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    )}
+                  </figure>
+                </div>
+              ))}
           </div>
         </div>
       </section>
@@ -222,15 +238,11 @@ export default function CasePage() {
       <section className="enjoy-more section section-pad">
         <div className="wrap" style={{ textAlign: "center" }}>
           <h3 className="section-title" style={{ color: "var(--ink)", fontWeight: 800, marginBottom: "0.2em" }}>
-            Enjoyed it?
+            {t("case.enjoyed")}
           </h3>
-          <p style={{ color: "var(--muted)", marginBottom: "1.5em", fontSize: "1.1rem" }}>Explore more projects!</p>
-          <WakoButton
-            as="button"
-            variant="solid"
-            onClick={() => nav(data.nextHref || "/")}
-          >
-            Next project
+          <p style={{ color: "var(--muted)", marginBottom: "1.5em", fontSize: "1.1rem" }}>{t("case.explore")}</p>
+          <WakoButton as="button" variant="solid" onClick={() => nav(data.nextHref || "/")}>
+            {t("case.next")}
           </WakoButton>
         </div>
       </section>

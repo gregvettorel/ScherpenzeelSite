@@ -1,17 +1,18 @@
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "../styles/projects.css";
+import { useLang } from "../context/LangContext";
 import respireThumb from "../assets/respirethumb.png";
 import swearThumb from "../assets/swearthumb.png";
-import brainsCoffeeThumb from "../assets/brainscoffeelaptop.png"; // NEW
-
-const projects = [
-  { title: "Brains Coffee", category: "Branding & Web", image: brainsCoffeeThumb, slug: "brainscoffee" }, // NEW
-  { title: "Respire",category: "Case Study",            image: respireThumb,           slug: "respire" },
-  { title: "Swear", category: "Mobile App",         image: swearThumb,             slug: "swear" }
-];
+import brainsCoffeeThumb from "../assets/brainscoffeelaptop.png";
 
 export default function Projects() {
+  const { t } = useLang();
+  const projects = [
+    { title: "Brains Coffee", categoryKey: "projects.cat.brandingweb", image: brainsCoffeeThumb, slug: "brainscoffee" },
+    { title: "Respire", categoryKey: "projects.cat.case", image: respireThumb, slug: "respire" },
+    { title: "Swear", categoryKey: "projects.cat.mobile", image: swearThumb, slug: "swear" }
+  ];
   const cardsRef = useRef([]);
 
   useEffect(() => {
@@ -49,9 +50,8 @@ export default function Projects() {
     <section id="portfolio" className="projects-section section section-pad">
       <div className="projects-container wrap">
         <div className="projects-header">
-          <h2 className="section-title">Projects</h2>
+          <h2 className="section-title">{t("projects.title")}</h2>
         </div>
-
         <div className="projects-grid">
           {projects.map((p, i) => (
             <Link key={p.title+i} to={`/work/${p.slug}`} className="project-card-link">
@@ -62,7 +62,7 @@ export default function Projects() {
                 </div>
                 <div className="project-info">
                   <h3 className="project-title">{p.title}</h3>
-                  <span className="project-category">{p.category}</span>
+                  <span className="project-category">{t(p.categoryKey)}</span>
                 </div>
               </article>
             </Link>

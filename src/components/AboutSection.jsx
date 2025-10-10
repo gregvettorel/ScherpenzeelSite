@@ -6,9 +6,11 @@ import SectionReveal from "./SectionReveal";
 import TagMarquee from "./TagMarquee";
 import AboutIcon from "./AboutIcon";
 import ReactCountryFlag from "react-country-flag";
+import { useLang } from "../context/LangContext";
 
 
 export default function AboutSection() {
+  const { t } = useLang();
   const tags = [
     (<><AboutIcon type="design" /> 3 years UI/UX & marketing</>),
     (<><AboutIcon type="dev" /> 3.5 years full-stack dev</>),
@@ -24,15 +26,10 @@ export default function AboutSection() {
         <div className="about__grid">
           {/* Right: content */}
           <div className="about__content">
-            <div className="section-title">Who we are</div>
+            <div className="section-title">{t("about.title")}</div>
             <div className="about__copy">
-              <p>
-                We're two passionate web developers who love crafting fresh, tailored digital experiences.
-                Our goal is to provide each customer with a unique, modern online presence designed specifically for their needs.
-              </p>
-              <p>
-                As a team of two every project receives our full attention as we only take on one project at a time.
-              </p>
+              <p>{t("about.p1")}</p>
+              <p>{t("about.p2")}</p>
 
               {/* Endless looping tags with edge fades */}
               <TagMarquee items={tags} speed={24} />

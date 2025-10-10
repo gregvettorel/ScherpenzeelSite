@@ -19,6 +19,7 @@ import ProcessSteps from "./components/ProcessSteps";
 import About from "./components/AboutSection";
 import IntroReveal from "./components/IntroReveal";
 import CustomCursor from "./components/CustomCursor";
+import { LangProvider } from "./context/LangContext";
 
 import CasePage from "./pages/CasePage"; // NEW
 
@@ -46,19 +47,19 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <LangProvider>
       <div className="site bg-white text-black font-body min-h-screen">
         <CustomCursor />
         <IntroReveal />
         <Navbar />
-
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/work/:slug" element={<CasePage />} />
         </Routes>
-
         <Footer />
         <img src={bgArt} alt="" className="page-art" aria-hidden="true" />
       </div>
+      </LangProvider>
     </BrowserRouter>
   );
 }

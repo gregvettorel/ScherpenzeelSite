@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from "react";
 import Step from "./Step";
 import SectionReveal from "./SectionReveal";
@@ -9,18 +8,15 @@ import step2 from "../assets/step2.svg";
 import step3 from "../assets/step3.svg";
 import step4 from "../assets/step4.svg";
 import "../styles/process-steps.css";
+import { useLang } from "../context/LangContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const steps = [
-  { number: "01", title: "Discover", desc: "We start with a conversation to understand your goals, audience, and vision. This helps us create a clear plan for your project.", image: step1 },
-  { number: "02", title: "Design",   desc: "We translate your vision into a tailored visual concept in Figma. You'll see exactly how your product will look and function before we start building.", image: step2 },
-  { number: "03", title: "Develop",  desc: "Once you approve the design, we turn it into a fully functional product with attention to detail and smooth performance.", image: step3 },
-  { number: "04", title: "Launch",   desc: "Your product goes live, ready to make an impact. We stay available for adjustments, optimizations, and ongoing improvements.", image: step4 },
-];
-
 export default function ProcessSteps() {
   const stepsRef = useRef(null);
+  const { t } = useLang();
+  const rawSteps = t("process.steps");
+  const steps = Array.isArray(rawSteps) ? rawSteps : [];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -43,19 +39,22 @@ export default function ProcessSteps() {
     return () => ctx.revert();
   }, []);
 
+  const images = [step1, step2, step3, step4];
+
   return (
     <SectionReveal id="how-it-works" className="section section-pad">
       <div className="wrap">
-        <h2 className="section-title mb-10">How it works</h2>
+        <h2 className="section-title mb-10">{t("process.title")}</h2>
         <div className="process-steps" ref={stepsRef}>
           {steps.map((s, i) => (
             <Step
-              key={s.number}
-              step={s}
+              key={s.number || i}
+              step={{ ...s, image: images[i % images.length] }}
               alt={i % 2 === 1}
               isLast={i === steps.length - 1}
             />
           ))}
+          {!steps.length && null}
         </div>
       </div>
     </SectionReveal>
