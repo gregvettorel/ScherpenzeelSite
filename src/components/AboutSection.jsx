@@ -26,12 +26,10 @@ export default function AboutSection() {
         <div className="about__grid">
           {/* Right: content */}
           <div className="about__content">
-            <div className="section-title">{t("about.title")}</div>
+            <h2 className="section-title">{t("about.title")}</h2>
             <div className="about__copy">
               <p>{t("about.p1")}</p>
               <p>{t("about.p2")}</p>
-
-              {/* Endless looping tags with edge fades */}
               <TagMarquee items={tags} speed={24} />
             </div>
           </div>

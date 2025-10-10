@@ -6,7 +6,7 @@ import respireThumb from "../assets/respirethumb.png";
 import swearThumb from "../assets/swearthumb.png";
 import brainsCoffeeThumb from "../assets/brainscoffeelaptop.png";
 
-export default function Projects() {
+export default function Projects({ showTitle = true }) {
   const { t } = useLang();
   const projects = [
     { title: "Brains Coffee", categoryKey: "projects.cat.brandingweb", image: brainsCoffeeThumb, slug: "brainscoffee" },
@@ -49,16 +49,24 @@ export default function Projects() {
   return (
     <section id="portfolio" className="projects-section section section-pad">
       <div className="projects-container wrap">
-        <div className="projects-header">
-          <h2 className="section-title">{t("projects.title")}</h2>
-        </div>
+        {showTitle && (
+          <div className="projects-header">
+            <h2 className="section-title">{t("projects.title")}</h2>
+          </div>
+        )}
         <div className="projects-grid">
           {projects.map((p, i) => (
             <Link key={p.title+i} to={`/work/${p.slug}`} className="project-card-link">
               <article ref={el => (cardsRef.current[i] = el)} className="project-card">
                 <div className="project-media" style={{ backgroundColor: "#F7F7F7" }}>
                   <div className="reveal-curtain" />
-                  <img className="project-img" src={p.image} alt={p.title} loading="lazy" />
+                  <img
+                    className="project-img"
+                    src={p.image}
+                    alt={`Project: ${p.title} — ${t(p.categoryKey)}`}
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
                 <div className="project-info">
                   <h3 className="project-title">{p.title}</h3>
