@@ -4,19 +4,20 @@ import { useLang } from "../context/LangContext";
 import gsap from "gsap";
 import "../styles/navbar.css";
 import WakoButton from "./WakoButton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LINKS = [
-  { href: "/work", key: "nav.work" },
-  { href: "/process", key: "nav.process" },
-  { href: "/about", key: "nav.about" },
-  { href: "#team", key: "nav.team" }, // keep as on-page anchor
+  { hash: "portfolio",     key: "nav.work" },
+  { hash: "how-it-works",  key: "nav.process" },
+  { hash: "about",         key: "nav.about" },
+  { hash: "team",          key: "nav.team" },
 ];
 
 export default function Navbar() {
   const navRef = useRef();
   const [open, setOpen] = useState(false);
   const { lang, setLang, t } = useLang();
+  const navigate = useNavigate();
 
   // language dropdown state
   const [langOpen, setLangOpen] = useState(false);
@@ -63,26 +64,27 @@ export default function Navbar() {
     );
   }, []);
 
+  const goSection = (id) => { navigate(`/#${id}`); setOpen(false); };
+
   return (
     <>
       <header className="nav" ref={navRef}>
         <div className="nav__inner wrap section-pad">
-          <a href="/" className="nav__brand" aria-label="Home">
+          <Link to="/" className="nav__brand" aria-label="Home">
             <img src="/logo_site.svg" alt="" />
-          </a>
+          </Link>
 
           <nav className="nav__links" aria-label="Primary">
-            {LINKS.map((l) =>
-              l.href.startsWith("/") ? (
-                <Link key={l.href} to={l.href} className="nav__link">
-                  {t(l.key)}
-                </Link>
-              ) : (
-                <a key={l.href} href={l.href} className="nav__link">
-                  {t(l.key)}
-                </a>
-              )
-            )}
+            {LINKS.map((l) => (
+              <a
+                key={l.hash}
+                href={`/#${l.hash}`}
+                className="nav__link"
+                onClick={(e) => { e.preventDefault(); goSection(l.hash); }}
+              >
+                {t(l.key)}
+              </a>
+            ))}
           </nav>
 
           <div className="nav__right">
@@ -152,17 +154,16 @@ export default function Navbar() {
           <button className="drawer__close" aria-label="Close menu" onClick={() => setOpen(false)}>✕</button>
         </div>
         <nav className="drawer__links">
-          {LINKS.map((l) =>
-            l.href.startsWith("/") ? (
-              <Link key={l.href} to={l.href} className="drawer__link" onClick={() => setOpen(false)}>
-                {t(l.key)}
-              </Link>
-            ) : (
-              <a key={l.href} href={l.href} className="drawer__link" onClick={() => setOpen(false)}>
-                {t(l.key)}
-              </a>
-            )
-          )}
+          {LINKS.map((l) => (
+            <a
+              key={l.hash}
+              href={`/#${l.hash}`}
+              className="drawer__link"
+              onClick={(e) => { e.preventDefault(); goSection(l.hash); }}
+            >
+              {t(l.key)}
+            </a>
+          ))}
           <hr className="drawer__rule" />
           {/* Language buttons under the links */}
           <div className="drawer__langs" role="group" aria-label="Language">

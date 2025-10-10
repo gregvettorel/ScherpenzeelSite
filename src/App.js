@@ -1,6 +1,6 @@
 // src/App.js
 import React, { useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import SeoHead from "./components/SeoHead";
 
 import "./index.css";
@@ -47,6 +47,18 @@ function Home() {
   );
 }
 
+function ScrollToHash() {
+  const { hash, pathname } = useLocation();
+  useEffect(() => {
+    if (hash) {
+      const id = hash.slice(1);
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [hash, pathname]);
+  return null;
+}
+
 export default function App() {
   useEffect(() => () => document.body.classList.remove("custom-cursor-active"), []);
   return (
@@ -56,6 +68,7 @@ export default function App() {
            <CustomCursor />
            <IntroReveal />
            <Navbar />
+          <ScrollToHash />
            <Routes>
              <Route path="/" element={<Home />} />
              <Route path="/services" element={<ServicesPage />} />
