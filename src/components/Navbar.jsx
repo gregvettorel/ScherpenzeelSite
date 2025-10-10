@@ -4,12 +4,13 @@ import { useLang } from "../context/LangContext";
 import gsap from "gsap";
 import "../styles/navbar.css";
 import WakoButton from "./WakoButton";
+import { Link } from "react-router-dom";
 
 const LINKS = [
-  { href: "#portfolio", key: "nav.work" },
-  { href: "#how-it-works", key: "nav.process" },
-  { href: "#about", key: "nav.about" },
-  { href: "#team", key: "nav.team" },
+  { href: "/work", key: "nav.work" },
+  { href: "/process", key: "nav.process" },
+  { href: "/about", key: "nav.about" },
+  { href: "#team", key: "nav.team" }, // keep as on-page anchor
 ];
 
 export default function Navbar() {
@@ -71,11 +72,17 @@ export default function Navbar() {
           </a>
 
           <nav className="nav__links" aria-label="Primary">
-            {LINKS.map((l) => (
-              <a key={l.href} href={l.href} className="nav__link">
-                {t(l.key)}
-              </a>
-            ))}
+            {LINKS.map((l) =>
+              l.href.startsWith("/") ? (
+                <Link key={l.href} to={l.href} className="nav__link">
+                  {t(l.key)}
+                </Link>
+              ) : (
+                <a key={l.href} href={l.href} className="nav__link">
+                  {t(l.key)}
+                </a>
+              )
+            )}
           </nav>
 
           <div className="nav__right">
@@ -113,7 +120,7 @@ export default function Navbar() {
               )}
             </div>
 
-            <WakoButton className="nav__btn" variant="ghost" showArrow={false}>
+            <WakoButton className="nav__btn" variant="ghost" showArrow={false} href="/contact">
               {t("nav.contact")}
             </WakoButton>
           </div>
@@ -145,11 +152,17 @@ export default function Navbar() {
           <button className="drawer__close" aria-label="Close menu" onClick={() => setOpen(false)}>✕</button>
         </div>
         <nav className="drawer__links">
-          {LINKS.map((l) => (
-            <a key={l.href} href={l.href} className="drawer__link" onClick={() => setOpen(false)}>
-              {t(l.key)}
-            </a>
-          ))}
+          {LINKS.map((l) =>
+            l.href.startsWith("/") ? (
+              <Link key={l.href} to={l.href} className="drawer__link" onClick={() => setOpen(false)}>
+                {t(l.key)}
+              </Link>
+            ) : (
+              <a key={l.href} href={l.href} className="drawer__link" onClick={() => setOpen(false)}>
+                {t(l.key)}
+              </a>
+            )
+          )}
           <hr className="drawer__rule" />
           {/* Language buttons under the links */}
           <div className="drawer__langs" role="group" aria-label="Language">
@@ -169,9 +182,9 @@ export default function Navbar() {
               </button>
             ))}
           </div>
-          <a href="#contact" className="drawer__btn" onClick={() => setOpen(false)}>
+          <Link to="/contact" className="drawer__btn" onClick={() => setOpen(false)}>
             {t("nav.contact")}
-          </a>
+          </Link>
         </nav>
       </aside>
     </>

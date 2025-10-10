@@ -23,6 +23,12 @@ import CustomCursor from "./components/CustomCursor";
 import { LangProvider } from "./context/LangContext";
 
 import CasePage from "./pages/CasePage"; // NEW
+import ServicesPage from "./pages/ServicesPage";
+import AboutPage from "./pages/AboutPage";
+import ProcessPage from "./pages/ProcessPage";
+import ContactPage from "./pages/ContactPage";
+import WorkPage from "./pages/WorkPage";
+import { WebdesignBrussel, WebdesignAntwerpen, WebdesignLeuven } from "./pages/LocationPage";
 
 function Home() {
   return (
@@ -52,7 +58,15 @@ export default function App() {
            <Navbar />
            <Routes>
              <Route path="/" element={<Home />} />
+             <Route path="/services" element={<ServicesPage />} />
+             <Route path="/about" element={<AboutPage />} />
+             <Route path="/process" element={<ProcessPage />} />
+             <Route path="/contact" element={<ContactPage />} />
+             <Route path="/work" element={<WorkPage />} />
              <Route path="/work/:slug" element={<CasePage />} />
+             <Route path="/webdesign/brussel" element={<WebdesignBrussel />} />
+             <Route path="/webdesign/antwerpen" element={<WebdesignAntwerpen />} />
+             <Route path="/webdesign/leuven" element={<WebdesignLeuven />} />
            </Routes>
            <Footer />
            <img src={bgArt} alt="" className="page-art" aria-hidden="true" />

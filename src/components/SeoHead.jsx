@@ -80,6 +80,25 @@ export default function SeoHead({
       name: "Wako",
       url: BASE_URL,
       logo: `${BASE_URL}/wako-icon.png`,
+      sameAs: [
+        "https://www.instagram.com/thisiswako",
+        "https://www.linkedin.com",
+        "https://dribbble.com"
+      ]
+    }));
+
+    // JSON‑LD: LocalBusiness (adds explicit NAP)
+    add("script", { type: "application/ld+json" }, JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      name: "Wako",
+      url: BASE_URL,
+      telephone: "+1 234 567 890",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Brussels",
+        addressCountry: "Belgium"
+      }
     }));
 
     // JSON‑LD: Local/areas served
@@ -109,6 +128,20 @@ export default function SeoHead({
         })),
       }));
     }
+
+    // JSON-LD: WebSite (helps branded queries “wako”)
+    add("script", { type: "application/ld+json" }, JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": BASE_URL,
+      "name": "Wako",
+      "inLanguage": ["nl","en","fr"],
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": `${BASE_URL}/?q={search_term_string}`,
+        "query-input": "required name=search_term_string"
+      }
+    }));
 
     return () => {
       document.head.querySelectorAll("[data-seo='wako']").forEach(n => n.remove());
