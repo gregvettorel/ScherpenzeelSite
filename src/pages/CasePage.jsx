@@ -6,6 +6,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import WakoButton from "../components/WakoButton";
 import AboutChip from "../components/AboutChip";
 import { useLang } from "../context/LangContext";
+import SeoHead from "../components/SeoHead";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -119,133 +120,147 @@ export default function CasePage() {
   const features = Array.isArray(L?.features) ? L.features : data.features;
 
   return (
-    <main ref={rootRef}>
-      {/* HERO */}
-      <header className="case-hero section-pad" style={{ background: "var(--surface)" }}>
-        <div className="wrap">
-          <div className="case">
-            <figure className="case-hero__media">
-              <img src={data.hero} alt={`${title} hero`} loading="eager" />
-              <figcaption className="case-hero__caption">
-                <h1
-                  className="section-title"
-                  style={{ color: "#fff", textShadow: "0 20px 46px rgba(0,0,0,.6)" }}
-                  dangerouslySetInnerHTML={{
-                    __html: title.replace(": ", ": <span class='soft-break'>") + "</span>",
-                  }}
-                />
-                <p className="subtitle" style={{ color: "rgba(255,255,255,.95)" }}>
-                  {subtitle}
-                </p>
-              </figcaption>
-            </figure>
-          </div>
-        </div>
-      </header>
-
-      {/* Explainer */}
-      <section className="explainer-wrap section section-pad" style={{ background: "var(--surface)" }}>
-        <div className="wrap explainer-flex">
-          <div className="explainer hero__lead" id="explainer">
-            {explainer}
-          </div>
-          <div className="explainer-cta">
-            {Array.isArray(data.ctas) && data.ctas.length > 0 ? (
-              data.ctas.map((cta, i) => (
-                <WakoButton
-                  key={i}
-                  as="a"
-                  href={cta.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  variant={cta.variant || "solid"}
-                >
-                  {cta.label}
-                </WakoButton>
-              ))
-            ) : (
-              data.figmaUrl && (
-                <WakoButton as="a" href={data.figmaUrl} target="_blank" rel="noreferrer" variant="solid">
-                  {t("case.figma")}
-                </WakoButton>
-              )
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* Info grid */}
-      <section className="case-info section section-pad" style={{ background: "var(--surface)" }}>
-        <div className="wrap">
-          <div className="case-info__row">
-            <div className="case-info__label">{t("case.year")}</div>
-            <div className="case-info__value">{data.year}</div>
-          </div>
-          <div className="case-info__row">
-            <div className="case-info__label">{t("case.deliverables")}</div>
-            <div className="case-info__value">
-              {deliverables.map((d, i) => (<span key={i}>{d}<br /></span>))}
+    <>
+      <SeoHead
+        kind="case"
+        type="article"
+        title={`${title} — Case | Wako`}
+        description={subtitle}
+        canonicalPath={`/work/${slug}`}
+        breadcrumbs={[
+          { name: "Home", urlPath: "/" },
+          { name: "Work", urlPath: "/#portfolio" },
+          { name: title, urlPath: `/work/${slug}` },
+        ]}
+      />
+      <main ref={rootRef}>
+        {/* HERO */}
+        <header className="case-hero section-pad" style={{ background: "var(--surface)" }}>
+          <div className="wrap">
+            <div className="case">
+              <figure className="case-hero__media">
+                <img src={data.hero} alt={`${title} hero`} loading="eager" />
+                <figcaption className="case-hero__caption">
+                  <h1
+                    className="section-title"
+                    style={{ color: "#fff", textShadow: "0 20px 46px rgba(0,0,0,.6)" }}
+                    dangerouslySetInnerHTML={{
+                      __html: title.replace(": ", ": <span class='soft-break'>") + "</span>",
+                    }}
+                  />
+                  <p className="subtitle" style={{ color: "rgba(255,255,255,.95)" }}>
+                    {subtitle}
+                  </p>
+                </figcaption>
+              </figure>
             </div>
           </div>
-          <div className="case-info__row">
-            <div className="case-info__label">{t("case.stack")}</div>
-            <div className="case-info__value case-info__tags">
-              {data.stackTags.map(tg => (<AboutChip key={tg}>{tg}</AboutChip>))}
+        </header>
+
+        {/* Explainer */}
+        <section className="explainer-wrap section section-pad" style={{ background: "var(--surface)" }}>
+          <div className="wrap explainer-flex">
+            <div className="explainer hero__lead" id="explainer">
+              {explainer}
+            </div>
+            <div className="explainer-cta">
+              {Array.isArray(data.ctas) && data.ctas.length > 0 ? (
+                data.ctas.map((cta, i) => (
+                  <WakoButton
+                    key={i}
+                    as="a"
+                    href={cta.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    variant={cta.variant || "solid"}
+                  >
+                    {cta.label}
+                  </WakoButton>
+                ))
+              ) : (
+                data.figmaUrl && (
+                  <WakoButton as="a" href={data.figmaUrl} target="_blank" rel="noreferrer" variant="solid">
+                    {t("case.figma")}
+                  </WakoButton>
+                )
+              )}
             </div>
           </div>
-          <div className="case-info__row">
-            <div className="case-info__label">{t("case.features")}</div>
-            <div className="case-info__value">
-              {features.map((f, i) => (<span key={i}>{f}<br /></span>))}
+        </section>
+
+        {/* Info grid */}
+        <section className="case-info section section-pad" style={{ background: "var(--surface)" }}>
+          <div className="wrap">
+            <div className="case-info__row">
+              <div className="case-info__label">{t("case.year")}</div>
+              <div className="case-info__value">{data.year}</div>
+            </div>
+            <div className="case-info__row">
+              <div className="case-info__label">{t("case.deliverables")}</div>
+              <div className="case-info__value">
+                {deliverables.map((d, i) => (<span key={i}>{d}<br /></span>))}
+              </div>
+            </div>
+            <div className="case-info__row">
+              <div className="case-info__label">{t("case.stack")}</div>
+              <div className="case-info__value case-info__tags">
+                {data.stackTags.map(tg => (<AboutChip key={tg}>{tg}</AboutChip>))}
+              </div>
+            </div>
+            <div className="case-info__row">
+              <div className="case-info__label">{t("case.features")}</div>
+              <div className="case-info__value">
+                {features.map((f, i) => (<span key={i}>{f}<br /></span>))}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* OLC: stacked sticky cards */}
-      <section className="olc section section-pad" data-olc-cards >
-        <div className="wrap">
-          <div className="olc__main">
-            {Array.isArray(data.cards) &&
-              data.cards.map((c, i) => (
-                <div key={i} className="olc__card-container">
-                  <figure className="olc__card">
-                    {c.type === "video" ? (
-                      <video
-                        src={c.src}
-                        muted
-                        playsInline
-                        loop
-                        autoPlay
-                        preload="metadata"
-                      />
-                    ) : (
-                      <img
-                        src={c.src}
-                        alt={`${data.title} shot ${i + 1}`}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    )}
-                  </figure>
-                </div>
-              ))}
+        {/* OLC: stacked sticky cards */}
+        <section className="olc section section-pad" data-olc-cards >
+          <div className="wrap">
+            <div className="olc__main">
+              {Array.isArray(data.cards) &&
+                data.cards.map((c, i) => (
+                  <div key={i} className="olc__card-container">
+                    <figure className="olc__card">
+                      {c.type === "video" ? (
+                        <video
+                          src={c.src}
+                          muted
+                          playsInline
+                          loop
+                          autoPlay
+                          preload="metadata"
+                        />
+                      ) : (
+                        <img
+                          src={c.src}
+                          alt={`${data.title} shot ${i + 1}`}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      )}
+                    </figure>
+                  </div>
+                ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Enjoy more */}
-      <section className="enjoy-more section section-pad">
-        <div className="wrap" style={{ textAlign: "center" }}>
-          <h3 className="section-title" style={{ color: "var(--ink)", fontWeight: 800, marginBottom: "0.2em" }}>
-            {t("case.enjoyed")}
-          </h3>
-          <p style={{ color: "var(--muted)", marginBottom: "1.5em", fontSize: "1.1rem" }}>{t("case.explore")}</p>
-          <WakoButton as="button" variant="solid" onClick={() => nav(data.nextHref || "/")}>
-            {t("case.next")}
-          </WakoButton>
-        </div>
-      </section>
-    </main>
+        {/* Enjoy more */}
+        <section className="enjoy-more section section-pad">
+          <div className="wrap" style={{ textAlign: "center" }}>
+            <h3 className="section-title" style={{ color: "var(--ink)", fontWeight: 800, marginBottom: "0.2em" }}>
+              {t("case.enjoyed")}
+            </h3>
+            <p style={{ color: "var(--muted)", marginBottom: "1.5em", fontSize: "1.1rem" }}>{t("case.explore")}</p>
+            <WakoButton as="button" variant="solid" onClick={() => nav(data.nextHref || "/")}>
+              {t("case.next")}
+            </WakoButton>
+          </div>
+        </section>
+      </main>
+    </>
   );
 }

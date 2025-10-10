@@ -4,6 +4,8 @@ import { STR } from "../i18n/strings";
 const LangCtx = createContext({ lang: "en", setLang: () => {}, t: (k) => k });
 
 const detect = () => {
+  const urlLang = new URLSearchParams(window.location.search).get("lang");
+  if (["en","nl","fr"].includes(urlLang)) return urlLang;
   const saved = localStorage.getItem("lang");
   if (saved) return saved;
   const n = (navigator.language || "en").slice(0, 2).toLowerCase();
@@ -27,7 +29,18 @@ export function LangProvider({ children }) {
     return en != null ? en : key;
   };
 
-  const value = useMemo(() => ({ lang, setLang: (l) => setLangState(l), t }), [lang]);
+  const value = useMemo(() => ({
+    lang,
+    setLang: (l) => {
+      setLangState(l);
+      try {
+        const u = new URL(window.location.href);
+        u.searchParams.set("lang", l);
+        window.history.replaceState({}, "", u);
+      } catch {}
+    },
+    t
+  }), [lang]);
   return <LangCtx.Provider value={value}>{children}</LangCtx.Provider>;
 }
 

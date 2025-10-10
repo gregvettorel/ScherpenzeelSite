@@ -1,4 +1,3 @@
-
 /* (Mouth hover/animation CSS removed: mouth will always be visible) */
 /* Scope to the hero so nothing else gets touched */
 .hero-visual {
@@ -380,7 +379,8 @@
 .hero__accent {
   color: var(--brand);
   background: #0579FE;
-  -webkit-background-clip: text;
+  background-clip: text;            /* standard */
+  -webkit-background-clip: text;    /* Safari */
   -webkit-text-fill-color: transparent;
   display: inline-block;
   transition: transform 0.3s ease, color 0.3s ease;

@@ -1,6 +1,7 @@
 // src/App.js
 import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SeoHead from "./components/SeoHead";
 
 import "./index.css";
 import "./styles/intro.css";
@@ -26,14 +27,12 @@ import CasePage from "./pages/CasePage"; // NEW
 function Home() {
   return (
     <>
+      <SeoHead kind="home" />
       <Hero />
       <Projects />
-
-      {/** three banners tussen secties, kunnen we moven */}
       <RunningBanner speed={0.8} direction={1} initialOffset={0} size={60} />
       <RunningBanner speed={0.6} direction={1} initialOffset={180} size={20} />    
       <RunningBanner speed={0.9} direction={1} initialOffset={160} />
-
       <About />
       <Services />
       <ProcessSteps />
@@ -44,22 +43,21 @@ function Home() {
 
 export default function App() {
   useEffect(() => () => document.body.classList.remove("custom-cursor-active"), []);
-
   return (
     <BrowserRouter>
-      <LangProvider>
-      <div className="site bg-white text-black font-body min-h-screen">
-        <CustomCursor />
-        <IntroReveal />
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/work/:slug" element={<CasePage />} />
-        </Routes>
-        <Footer />
-        <img src={bgArt} alt="" className="page-art" aria-hidden="true" />
-      </div>
-      </LangProvider>
-    </BrowserRouter>
-  );
-}
+       <LangProvider>
+         <div className="site bg-white text-black font-body min-h-screen">
+           <CustomCursor />
+           <IntroReveal />
+           <Navbar />
+           <Routes>
+             <Route path="/" element={<Home />} />
+             <Route path="/work/:slug" element={<CasePage />} />
+           </Routes>
+           <Footer />
+           <img src={bgArt} alt="" className="page-art" aria-hidden="true" />
+         </div>
+        </LangProvider>
+     </BrowserRouter>
+   );
+ }

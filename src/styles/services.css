@@ -302,9 +302,6 @@ color: white;
 .services-accordion.open:hover .services-row-title { color: var(--brand) !important; }
 .services-accordion.open:hover .services-row-title::after { transform: scaleX(1); background: #fff; }
 
-/* Optional: neutralize any older “blue on hover” rules */
-.services-accordion:hover .services-row-title { color: inherit; }
-
 /* Optional: add a touch more space on very large screens */
 @media (min-width: 1280px) {
   .services-row-title::after { bottom: -8px; }
