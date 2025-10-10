@@ -1,12 +1,15 @@
 /* === ABOUT SECTION === */
 .about {
   color: var(--ink);
+  overflow-x: hidden; /* prevent horizontal scroll caused by inner transforms */
 }
 
 .about__wrap {
-  max-width: var(--wrap);
+  max-width: var(--wrap, 1200px); /* fallback if --wrap is missing */
+  width: 100%;
   margin: 0 auto;
   padding-inline: var(--px);
+  box-sizing: border-box; /* padding won’t push width past viewport */
 }
 
 /* grid: image left, text right */
@@ -34,11 +37,12 @@
 .about__mediaInner:hover { transform: translateY(-4px); }
 .about__img {
   display: block;
-  width: 80%;
+  width: 100%; /* full width on small screens */
   height: auto;
   object-fit: cover;
   border-radius: inherit;
 }
+
 /* subtle shine on hover */
 .about__mediaInner::after {
   content: "";
@@ -55,7 +59,8 @@
   font-size: clamp(16px, 2vw, 18px);
   line-height: var(--lh-copy);
   max-width: 48ch;
-  margin-left: 5%;
+  margin-left: 0;              /* no horizontal push on mobile */
+  overflow-wrap: anywhere;     /* long words won’t cause overflow */
 }
 .about__copy p { margin: 0 0 16px; }
 .about__copy p:last-child { margin-bottom: 0; }
@@ -121,4 +126,26 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Mobile-specific tightening */
+@media (max-width: 768px) {
+  .about__wrap { padding-left: 16px; padding-right: 16px; }
+  .about__grid {
+    display: flex;              /* override grid to avoid implicit columns */
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+  .about__content, .about__media { width: 100%; max-width: 100%; }
+  .about__copy { max-width: 100%; font-size: 15px; }
+  .about__mediaInner { margin: 0; }
+  .about__img { width: 100%; height: auto; }
+  /* Chips shrink on small screens */
+  .about__chip {
+    font-size: clamp(11px, 3.2vw, 13px);
+    padding: 6px 12px;
+  }
+  /* Marquee stays inside container */
+  .about .tagmarquee { width: 100%; overflow: hidden; }
 }
