@@ -1,6 +1,6 @@
 // src/App.js
-import React, { useEffect } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import SeoHead from "./components/SeoHead";
 
 import "./index.css";
@@ -22,13 +22,7 @@ import IntroReveal from "./components/IntroReveal";
 import CustomCursor from "./components/CustomCursor";
 import { LangProvider } from "./context/LangContext";
 
-import CasePage from "./pages/CasePage"; // NEW
-import ServicesPage from "./pages/ServicesPage";
-import AboutPage from "./pages/AboutPage";
-import ProcessPage from "./pages/ProcessPage";
-import ContactPage from "./pages/ContactPage";
-import WorkPage from "./pages/WorkPage";
-import { WebdesignBrussel, WebdesignAntwerpen, WebdesignLeuven } from "./pages/LocationPage";
+const CasePage = React.lazy(() => import("./pages/CasePage"));
 
 function Home() {
   return (
@@ -54,6 +48,9 @@ function ScrollToHash() {
       const id = hash.slice(1);
       const el = document.getElementById(id);
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      // ensure we land at top between routes (e.g., when opening a project)
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     }
   }, [hash, pathname]);
   return null;
@@ -61,26 +58,33 @@ function ScrollToHash() {
 
 export default function App() {
   useEffect(() => () => document.body.classList.remove("custom-cursor-active"), []);
+  // defer custom cursor to improve TTI
+  const [cursorReady, setCursorReady] = useState(false);
+  useEffect(() => {
+    const h = setTimeout(() => setCursorReady(true), 800);
+    return () => clearTimeout(h);
+  }, []);
   return (
     <BrowserRouter>
        <LangProvider>
          <div className="site bg-white text-black font-body min-h-screen">
-           <CustomCursor />
+-           <CustomCursor />
++           {cursorReady && <CustomCursor />}
            <IntroReveal />
            <Navbar />
-          <ScrollToHash />
-           <Routes>
-             <Route path="/" element={<Home />} />
-             <Route path="/services" element={<ServicesPage />} />
-             <Route path="/about" element={<AboutPage />} />
-             <Route path="/process" element={<ProcessPage />} />
-             <Route path="/contact" element={<ContactPage />} />
-             <Route path="/work" element={<WorkPage />} />
-             <Route path="/work/:slug" element={<CasePage />} />
-             <Route path="/webdesign/brussel" element={<WebdesignBrussel />} />
-             <Route path="/webdesign/antwerpen" element={<WebdesignAntwerpen />} />
-             <Route path="/webdesign/leuven" element={<WebdesignLeuven />} />
-           </Routes>
+           <ScrollToHash />
+-          <Routes>
+-            <Route path="/" element={<Home />} />
+-            <Route path="/work/:slug" element={<CasePage />} />
+-            <Route path="*" element={<Navigate to="/" replace />} />
+-          </Routes>
++          <React.Suspense fallback={null}>
++            <Routes>
++              <Route path="/" element={<Home />} />
++              <Route path="/work/:slug" element={<CasePage />} />
++              <Route path="*" element={<Navigate to="/" replace />} />
++            </Routes>
++          </React.Suspense>
            <Footer />
            <img src={bgArt} alt="" className="page-art" aria-hidden="true" />
          </div>

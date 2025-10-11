@@ -36,7 +36,7 @@ export default function RunningBanner({
           draggable={false}
           onDragStart={(e) => e.preventDefault()}
           decoding="async"
-          loading="eager"
+          loading="lazy"
           aria-hidden="true"
         />
       ))}

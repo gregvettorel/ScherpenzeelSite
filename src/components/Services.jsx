@@ -1,25 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import "../styles/services.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import SectionReveal from "./SectionReveal";
 import "../index.css";
 import designImg from "../assets/design.png";
-import Logo3D from "./Logo3D";
-import logoW from "../assets/tinker.obj";
-import AboutChip from "./AboutChip";
 import { useLang } from "../context/LangContext";
 
 // fallback images per row
 const rowImg = [designImg, designImg, designImg, designImg];
 
+const Logo3D = React.lazy(() => import("./Logo3D")); // load Three.js only if needed
+// remove eager OBJ import to avoid pulling it on first load
+
 export default function Services() {
 	const [openIndex, setOpenIndex] = useState(-1);
+	const [objSrc, setObjSrc] = useState(null); // lazy-load OBJ when a 3D row opens
 	const { t } = useLang();
 	const sectionClass = "services-section section section-pad";
 
 	// Get localized items; fallback to EN structure if missing
 	const items = t("services.items") || [];
+
+	useEffect(() => {
+		// if a panel opens and it's the 3D row, lazy-import the OBJ
+		if (openIndex === -1) return;
+		const title = (t("services.items")?.[openIndex]?.title || "").toString().toLowerCase();
+		if (!title.includes("3d")) return;
+		let canceled = false;
+		import("../assets/tinker.obj").then(m => { if (!canceled) setObjSrc(m.default); });
+		return () => { canceled = true; };
+	}, [openIndex, t]);
 
 	return (
 		<SectionReveal className={`${sectionClass}${openIndex !== -1 ? " is-open" : ""}`}>
@@ -97,10 +108,17 @@ export default function Services() {
 										</div>
 
 										<div className="services-media">
-											{s.title?.toLowerCase().includes("3d")
-												? <Logo3D src={logoW} />
-												: <img src={rowImg[i] || designImg} alt={s.title} />
-											}
+											{s.title?.toLowerCase().includes("3d") ? (
+												isOpen ? (
+													<Suspense fallback={<img src={rowImg[i] || designImg} alt={s.title} loading="lazy" decoding="async" />}>
+														<Logo3D src={objSrc || ""} />
+													</Suspense>
+												) : (
+													<img src={rowImg[i] || designImg} alt={s.title} loading="lazy" decoding="async" />
+												)
+											) : (
+												<img src={rowImg[i] || designImg} alt={s.title} loading="lazy" decoding="async" />
+											)}
 										</div>
 									</div>
 								</div>

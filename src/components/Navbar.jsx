@@ -122,7 +122,7 @@ export default function Navbar() {
               )}
             </div>
 
-            <WakoButton className="nav__btn" variant="ghost" showArrow={false} href="/contact">
+            <WakoButton className="nav__btn" variant="ghost" showArrow={false} href="mailto:thisiswako@gmail.com">
               {t("nav.contact")}
             </WakoButton>
           </div>
@@ -183,9 +183,9 @@ export default function Navbar() {
               </button>
             ))}
           </div>
-          <Link to="/contact" className="drawer__btn" onClick={() => setOpen(false)}>
+          <a href="mailto:thisiswako@gmail.com" className="drawer__btn" onClick={() => setOpen(false)}>
             {t("nav.contact")}
-          </Link>
+          </a>
         </nav>
       </aside>
     </>

@@ -11,9 +11,9 @@ export default function WakoButton({
   href,
   onClick,
   className = "",
-  sfx = true,
-  hoverSound = defaultHoverSfx,
-  clickSound = defaultClickSfx,
+  sfx = false,                 // default OFF for performance
+  hoverSound,
+  clickSound,
   volume = 0.25,
   rate = 1,
   showArrow = "auto", // NEW: "auto" | true | false
@@ -34,23 +34,25 @@ export default function WakoButton({
     };
   }, [unlocked]);
 
-  const hoverAudio = useMemo(() => {
-    if (!sfx || !hoverSound) return null;
-    const a = new Audio(hoverSound);
-    a.preload = "auto";
-    a.volume = volume;
-    a.playbackRate = rate;
-    return a;
-  }, [sfx, hoverSound, volume, rate]);
-
-  const clickAudio = useMemo(() => {
-    if (!sfx || !clickSound) return null;
-    const a = new Audio(clickSound);
-    a.preload = "auto";
-    a.volume = volume;
-    a.playbackRate = rate;
-    return a;
-  }, [sfx, clickSound, volume, rate]);
+  // Load audio only when needed
+  const [hoverAudio, setHoverAudio] = useState(null);
+  const [clickAudio, setClickAudio] = useState(null);
+  useEffect(() => {
+    if (!sfx) return;
+    let stop = false;
+    const load = async () => {
+      const [h, c] = await Promise.all([
+        hoverSound ? Promise.resolve({ default: hoverSound }) : import("../assets/sfx/hover2mp3.mp3"),
+        clickSound ? Promise.resolve({ default: clickSound }) : import("../assets/sfx/press.mp3"),
+      ]);
+      if (stop) return;
+      const ha = new Audio(h.default); ha.preload = "auto"; ha.volume = volume; ha.playbackRate = rate;
+      const ca = new Audio(c.default); ca.preload = "auto"; ca.volume = volume; ca.playbackRate = rate;
+      setHoverAudio(ha); setClickAudio(ca);
+    };
+    load();
+    return () => { stop = true; };
+  }, [sfx, hoverSound, clickSound, volume, rate]);
 
   const play = (audio) => {
     if (!audio) return;

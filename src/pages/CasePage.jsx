@@ -255,9 +255,14 @@ export default function CasePage() {
               {t("case.enjoyed")}
             </h3>
             <p style={{ color: "var(--muted)", marginBottom: "1.5em", fontSize: "1.1rem" }}>{t("case.explore")}</p>
-            <WakoButton as="button" variant="solid" onClick={() => nav(data.nextHref || "/")}>
-              {t("case.next")}
-            </WakoButton>
+            <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+              <WakoButton as="button" variant="solid" onClick={() => nav(data.nextHref || "/")}>
+                {t("case.next")}
+              </WakoButton>
+              <WakoButton as="a" href="mailto:thisiswako@gmail.com" variant="ghost" showArrow={false}>
+                Get in touch
+              </WakoButton>
+            </div>
           </div>
         </section>
       </main>

@@ -8,25 +8,25 @@ import "../styles/hero-anim.css";
 import SectionReveal from "./SectionReveal";
 import { useLang } from "../context/LangContext";
 
-// import the sound
-import welcomeSfx from "../assets/sfx/welcometowako.mp3";
+// Defer welcome sound until user clicks
 
 export default function Hero() {
   const { t } = useLang();
 
-  // create one Audio instance for this component
-  const welcomeAudio = useMemo(() => {
-    const a = new Audio(welcomeSfx);
-    a.preload = "auto";
-    a.volume = 0.6;      // taste: 0..1
-    return a;
-  }, []);
+  const audioRef = React.useRef(null);
 
   const playWelcome = () => {
     try {
-      welcomeAudio.currentTime = 0;
-      const p = welcomeAudio.play();
-      if (p?.catch) p.catch(() => {}); // avoid console noise if blocked
+      const playIt = (a) => { a.volume = 0.6; a.currentTime = 0; return a.play(); };
+      if (!audioRef.current) {
+        import("../assets/sfx/welcometowako.mp3").then(m => {
+          audioRef.current = new Audio(m.default);
+          return playIt(audioRef.current);
+        });
+        return;
+      }
+      const p = playIt(audioRef.current);
+      if (p?.catch) p.catch(() => {});
     } catch (_) {}
   };
 
@@ -62,10 +62,10 @@ export default function Hero() {
           <p className="hero__lead">{t("hero.lead")}</p>
 
           <div className="hero__actions">
-            <WakoButton href="tel:+1234567890" variant="solid" hoverSound={require("../assets/sfx/hover2mp3.mp3")} clickSound={require("../assets/sfx/press.mp3")} volume={0.18}>
+            <WakoButton href="tel:+1234567890" variant="solid" sfx={false}>
               {t("hero.ctaFreeAdvice")} <PhoneIcon size={22} />
             </WakoButton>
-            <WakoButton href="mailto:thisiswako@gmail.com" variant="ghost">
+            <WakoButton href="mailto:thisiswako@gmail.com" variant="ghost" sfx={false}>
               {t("hero.email")} <EnvelopeIcon size={22} />
             </WakoButton>
           </div>
