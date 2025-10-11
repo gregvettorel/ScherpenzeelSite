@@ -68,23 +68,17 @@ export default function App() {
     <BrowserRouter>
        <LangProvider>
          <div className="site bg-white text-black font-body min-h-screen">
--           <CustomCursor />
-+           {cursorReady && <CustomCursor />}
+           {cursorReady && <CustomCursor />}
            <IntroReveal />
            <Navbar />
            <ScrollToHash />
--          <Routes>
--            <Route path="/" element={<Home />} />
--            <Route path="/work/:slug" element={<CasePage />} />
--            <Route path="*" element={<Navigate to="/" replace />} />
--          </Routes>
-+          <React.Suspense fallback={null}>
-+            <Routes>
-+              <Route path="/" element={<Home />} />
-+              <Route path="/work/:slug" element={<CasePage />} />
-+              <Route path="*" element={<Navigate to="/" replace />} />
-+            </Routes>
-+          </React.Suspense>
+          <React.Suspense fallback={null}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+             <Route path="/work/:slug" element={<CasePage />} />
+             <Route path="*" element={<Navigate to="/" replace />} />
+           </Routes>
+         </React.Suspense>
            <Footer />
            <img src={bgArt} alt="" className="page-art" aria-hidden="true" />
          </div>

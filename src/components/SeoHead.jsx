@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useLang } from "../context/LangContext";
 
 const BASE_URL = "https://thisiswako.com";

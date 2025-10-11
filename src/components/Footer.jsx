@@ -10,9 +10,11 @@ function Footer() {
           <span itemProp="addressLocality">Brussels</span>, <span itemProp="addressCountry">Belgium</span>
         </span>
         {" · "}
-        <a href="mailto:thisiswako@gmail.com" itemProp="email">thisiswako@gmail.com</a>
+        <a className="email">thisiswako@gmail.com</a>
         {" · "}
-        <a href="tel:+1234567890" itemProp="telephone">+1 234 567 890</a>
+        <a className="tel">+32 479 95 44 00 </a>
+        {" · "}
+        <a className="tel"> +32 472 28 79 04</a>
       </address>
     </footer>
   );

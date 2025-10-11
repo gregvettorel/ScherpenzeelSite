@@ -6,6 +6,7 @@ import SectionReveal from "./SectionReveal";
 import "../index.css";
 import designImg from "../assets/design.png";
 import { useLang } from "../context/LangContext";
+import AboutChip from "./AboutChip";
 
 // fallback images per row
 const rowImg = [designImg, designImg, designImg, designImg];
