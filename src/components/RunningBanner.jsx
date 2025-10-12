@@ -22,7 +22,6 @@ export default function RunningBanner({
   const trackRef = useRef(null);
   const [loopWidth, setLoopWidth] = useState(0);
 
-  // Detect iOS (includes iPadOS on M1 with touch)
   const isIOS = useMemo(() => {
     if (typeof navigator === "undefined") return false;
     const ua = navigator.userAgent || "";
@@ -46,9 +45,8 @@ export default function RunningBanner({
           style={{
             ...(size ? { height: typeof size === "number" ? `${size}px` : size, width: "auto" } : undefined),
             opacity: varyOpacity ? OPAC[i % OPAC.length] : 0.8,
-            // IMPORTANT: avoid filter/blend on iOS to prevent flicker
             filter: !isIOS && grayscale ? "grayscale(1) contrast(1.05)" : undefined,
-            mixBlendMode: !isIOS ? (blend || "normal") : "normal"
+            mixBlendMode: !isIOS ? (blend || "normal") : "normal",
           }}
           draggable={false}
           onDragStart={(e) => e.preventDefault()}
@@ -60,39 +58,34 @@ export default function RunningBanner({
     </>
   );
 
+  // Measure loop and set CSS vars for CSS marquee
   useEffect(() => {
     const measure = () => {
-      if (!trackRef.current) return;
+      if (!trackRef.current || !containerRef.current) return;
       const half = trackRef.current.scrollWidth / 2;
       setLoopWidth(half || 0);
+      // duration ~ distance / speed (px/s). Tune px/s from `speed`.
+      const pxPerSec = Math.max(20, 80 * Math.max(0.3, speed));
+      const dur = Math.max(10, Math.round((half / pxPerSec) * 10) / 10);
+      containerRef.current.style.setProperty("--rb-loop", `${half}px`);
+      containerRef.current.style.setProperty("--rb-duration", `${dur}s`);
     };
     measure();
-
     const ro = new ResizeObserver(measure);
     if (trackRef.current) ro.observe(trackRef.current);
-    const raf = requestAnimationFrame(measure);
     window.addEventListener("load", measure);
+    return () => { ro.disconnect(); window.removeEventListener("load", measure); };
+  }, [speed]);
 
-    return () => {
-      ro.disconnect();
-      cancelAnimationFrame(raf);
-      window.removeEventListener("load", measure);
-    };
-  }, []);
-
+  // JS scroll-coupled motion (non‑iOS only)
   useEffect(() => {
-    const prefersReduced =
-      window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (isIOS) return; // iOS uses CSS keyframes instead
+    const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
 
-    const scroller =
-      (scrollerSelector && document.querySelector(scrollerSelector)) || window;
-
+    const scroller = (scrollerSelector && document.querySelector(scrollerSelector)) || window;
     const getScrollY = () =>
-      scroller === window
-        ? window.scrollY || window.pageYOffset || 0
-        : scroller.scrollTop || 0;
+      scroller === window ? window.scrollY || window.pageYOffset || 0 : scroller.scrollTop || 0;
 
     let raf = 0;
     const tick = () => {
@@ -102,11 +95,8 @@ export default function RunningBanner({
       const x = y * speed * direction + initialOffset;
       const w = loopWidth;
       const wrapped = ((x % w) + w) % w;
-      const px = Math.round(wrapped); // pixel-snap
-      // Use 2D transform on iOS (avoid 3D compositing glitches)
-      trackRef.current.style.transform = isIOS
-        ? `translateX(${-px}px)`
-        : `translate3d(${-px}px, 0, 0)`;
+      const px = Math.round(wrapped);
+      trackRef.current.style.transform = `translate3d(${-px}px, 0, 0)`;
     };
     const schedule = () => { if (!raf) raf = requestAnimationFrame(tick); };
 
@@ -119,7 +109,6 @@ export default function RunningBanner({
       scroller.addEventListener("scroll", schedule, opts);
       window.addEventListener("resize", schedule, opts);
     }
-
     return () => {
       if (scroller === window) {
         window.removeEventListener("scroll", schedule);
@@ -132,9 +121,14 @@ export default function RunningBanner({
     };
   }, [loopWidth, scrollerSelector, speed, direction, initialOffset, isIOS]);
 
+  const rootClass =
+    "running-banner section-pad" +
+    (isIOS ? " running-banner--ios running-banner--css" : "") +
+    (direction === -1 ? " running-banner--reverse" : "");
+
   return (
     <div
-      className={`running-banner section-pad${isIOS ? " running-banner--ios" : ""}`}
+      className={rootClass}
       ref={containerRef}
       aria-label={`${imageAlt} marquee`}
       style={{ "--rb-gap": "64px", ...style }}

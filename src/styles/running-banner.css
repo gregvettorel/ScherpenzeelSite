@@ -12,9 +12,17 @@
   backface-visibility: hidden;
   contain: paint;
 }
-/* On iOS, explicitly keep it 2D */
-.running-banner--ios {
-  transform: none;
+/* iOS: use 2D keyframes (no JS scroll) and relax contain */
+.running-banner--ios { contain: content; }
+.running-banner--css .running-banner__inner {
+  animation: rb-marquee var(--rb-duration, 18s) linear infinite;
+  will-change: transform;
+}
+.running-banner--reverse .running-banner__inner { animation-direction: reverse; }
+
+@keyframes rb-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-1 * var(--rb-loop, 1000px))); }
 }
 
 .running-banner__inner {
@@ -47,5 +55,5 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .running-banner__inner { transform: none !important; }
+  .running-banner__inner { animation: none !important; transform: none !important; }
 }
