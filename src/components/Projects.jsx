@@ -10,7 +10,7 @@ export default function Projects({ showTitle = true }) {
   const { t } = useLang();
   const projects = [
     { title: "Brains Coffee", categoryKey: "projects.cat.brandingweb", image: brainsCoffeeThumb, slug: "brainscoffee" },
-    { title: "Respire", categoryKey: "projects.cat.case", image: respireThumb, slug: "respire" },
+    { title: "Respire", categoryKey: "projects.cat.brandingweb", image: respireThumb, slug: "respire" },
     { title: "Swear", categoryKey: "projects.cat.mobile", image: swearThumb, slug: "swear" }
   ];
   const cardsRef = useRef([]);

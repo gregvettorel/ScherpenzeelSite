@@ -10,8 +10,11 @@
   /* Help iOS compositing */
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  transform: translateZ(0);
-  contain: paint; /* isolate paints */
+  contain: paint;
+}
+/* On iOS, explicitly keep it 2D */
+.running-banner--ios {
+  transform: none;
 }
 
 .running-banner__inner {
@@ -19,7 +22,6 @@
   align-items: center;
   white-space: nowrap;
   will-change: transform;
-  transform: translate3d(0, 0, 0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }

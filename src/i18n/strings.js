@@ -13,7 +13,7 @@ export const STR = {
     },
     projects: {
       title: "Projecten",
-      cat: { brandingweb: "Branding & Web", case: "Case study", mobile: "Mobiele app" }
+      cat: { brandingweb: "Branding & Web", case: "Case study", mobile: "3D-configurator" }
     },
     services: {
       title: "Wat we doen",
@@ -91,7 +91,7 @@ export const STR = {
     },
     projects: {
       title: "Projects",
-      cat: { brandingweb: "Branding & Web", case: "Case Study", mobile: "Mobile App" }
+      cat: { brandingweb: "Branding & Web", case: "Case Study", mobile: "3D Configurator" }
     },
     services: {
       title: "What we do",
@@ -169,7 +169,7 @@ export const STR = {
     },
     projects: {
       title: "Projets",
-      cat: { brandingweb: "Branding & Web", case: "Étude de cas", mobile: "Application mobile" }
+      cat: { brandingweb: "Branding & Web", case: "Étude de cas", mobile: "Configurateur 3D" }
     },
     services: {
       title: "Ce que nous faisons",

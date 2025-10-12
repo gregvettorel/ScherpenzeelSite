@@ -1,31 +1,37 @@
 // src/components/RunningBanner.jsx
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import "../styles/running-banner.css";
 
-/**
- * RunningBanner: Add a `size` prop to control the height (number, px, rem, etc). Example: size={80} or size="3rem"
- */
 export default function RunningBanner({
   scrollerSelector,
   speed = 0.6,
   direction = 1,
-  imageSrc = "/wakoicon.svg",   // use favicon by default
+  imageSrc = "/favicon.png",
   imageAlt = "WAKO Design",
   segments = 16,
   logoWidth = 80,
   initialOffset = 0,
   size,
   style = {},
-  varyOpacity = true,           // stagger opacity for “gallery” vibe
-  grayscale = true,             // monochrome look
-  blend = "multiply",           // Awwwards-friendly blending
+  varyOpacity = true,
+  grayscale = true,
+  blend = "multiply",
   ...rest
 }) {
   const containerRef = useRef(null);
   const trackRef = useRef(null);
   const [loopWidth, setLoopWidth] = useState(0);
 
-  const OPAC = [0.22, 0.32, 0.48, 0.7, 0.48, 0.32]; // repeating opacity pattern
+  // Detect iOS (includes iPadOS on M1 with touch)
+  const isIOS = useMemo(() => {
+    if (typeof navigator === "undefined") return false;
+    const ua = navigator.userAgent || "";
+    const iOSDev = /iPad|iPhone|iPod/.test(ua);
+    const iPadOS = navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1;
+    return iOSDev || iPadOS;
+  }, []);
+
+  const OPAC = [0.22, 0.32, 0.48, 0.7, 0.48, 0.32];
 
   const Sequence = () => (
     <>
@@ -40,8 +46,9 @@ export default function RunningBanner({
           style={{
             ...(size ? { height: typeof size === "number" ? `${size}px` : size, width: "auto" } : undefined),
             opacity: varyOpacity ? OPAC[i % OPAC.length] : 0.8,
-            filter: grayscale ? "grayscale(1) contrast(1.05)" : undefined,
-            mixBlendMode: blend || "normal"
+            // IMPORTANT: avoid filter/blend on iOS to prevent flicker
+            filter: !isIOS && grayscale ? "grayscale(1) contrast(1.05)" : undefined,
+            mixBlendMode: !isIOS ? (blend || "normal") : "normal"
           }}
           draggable={false}
           onDragStart={(e) => e.preventDefault()}
@@ -53,7 +60,6 @@ export default function RunningBanner({
     </>
   );
 
-  // Measure width of one sequence (half of duplicated track)
   useEffect(() => {
     const measure = () => {
       if (!trackRef.current) return;
@@ -64,8 +70,6 @@ export default function RunningBanner({
 
     const ro = new ResizeObserver(measure);
     if (trackRef.current) ro.observe(trackRef.current);
-
-    // re-measure after resources load (in case non-SVG is used)
     const raf = requestAnimationFrame(measure);
     window.addEventListener("load", measure);
 
@@ -76,7 +80,6 @@ export default function RunningBanner({
     };
   }, []);
 
-  // Map vertical scroll to horizontal offset
   useEffect(() => {
     const prefersReduced =
       window.matchMedia &&
@@ -98,10 +101,12 @@ export default function RunningBanner({
       const y = getScrollY();
       const x = y * speed * direction + initialOffset;
       const w = loopWidth;
-      // normalize and PIXEL-SNAP to avoid iOS sub-pixel flicker
       const wrapped = ((x % w) + w) % w;
-      const px = Math.round(wrapped);
-      trackRef.current.style.transform = `translate3d(${-px}px, 0, 0)`;
+      const px = Math.round(wrapped); // pixel-snap
+      // Use 2D transform on iOS (avoid 3D compositing glitches)
+      trackRef.current.style.transform = isIOS
+        ? `translateX(${-px}px)`
+        : `translate3d(${-px}px, 0, 0)`;
     };
     const schedule = () => { if (!raf) raf = requestAnimationFrame(tick); };
 
@@ -125,11 +130,11 @@ export default function RunningBanner({
       }
       if (raf) cancelAnimationFrame(raf);
     };
-  }, [loopWidth, scrollerSelector, speed, direction, initialOffset]);
+  }, [loopWidth, scrollerSelector, speed, direction, initialOffset, isIOS]);
 
   return (
     <div
-      className="running-banner section-pad"
+      className={`running-banner section-pad${isIOS ? " running-banner--ios" : ""}`}
       ref={containerRef}
       aria-label={`${imageAlt} marquee`}
       style={{ "--rb-gap": "64px", ...style }}

@@ -107,28 +107,26 @@ export const cases = {
 
   respire: {
     slug: "respire",
-    title: "Respire: Marketplace App",
-    subtitle: "A fresh take on second-hand shopping",
+    title: "Respire: Branding & Landing Page",
+    subtitle: "Brand identity and conversion‑focused landing page for a marketplace app",
     hero: heroImg,
-    explainer: `Respire is a platform designed to encourage the sharing and discovery of second-hand outfits, with a focus on style and community engagement. The platform distinguishes itself by allowing users to share their outfits and express their personal style without necessarily buying or selling items, making it more than just a marketplace.`,
+    explainer: `For Respire, we created a warm, fashion‑forward brand and a landing page that clearly explains the concept and drives sign‑ups. The page focuses on the value prop, social proof and clean visuals — built to be fast, responsive and easy to expand.`,
     figmaUrl: "https://www.figma.com/design/T3oxiZitmf2KdoAEfKaHhm/Respire?node-id=1-113",
     year: "2025",
     deliverables: [
       "Branding & logo",
-      "UI/UX Design",
-      "Mobile App Prototype",
-      "Figma File",
-      "User Flows & Wireframes",
-      "Website Development",
+      "Landing page (UI/UX)",
+      "Design system & components",
+      "Copy guidance",
+      "Figma file",
     ],
-    stackTags: ["Figma", "UI/UX", "Prototyping", "Mobile", "Web"],
+    stackTags: ["Figma", "Branding", "UI/UX", "Web"],
     features: [
-      "Clean, modern UI",
-      "Instant chat",
-      "Secure payments",
-      "Personalized recommendations",
-      "Easy listing & search",
-      "Community-driven marketplace",
+      "Clear value proposition",
+      "Hero visuals and storytelling",
+      "Trust and feature sections",
+      "Responsive and fast",
+      "SEO‑ready structure",
     ],
     cards: [
       { type: "video", src: blenderVideo },
@@ -138,69 +136,63 @@ export const cases = {
     ],
     i18n: {
       en: {
-        title: "Respire: Marketplace App",
-        subtitle: "A fresh take on second-hand shopping",
+        title: "Respire: Branding & Landing Page",
+        subtitle: "Brand identity and landing page for a marketplace app",
         explainer:
-          "Respire is a platform designed to encourage the sharing and discovery of second-hand outfits, with a focus on style and community engagement.",
+          "We designed Respire’s brand and a fast, conversion‑focused landing page that explains the concept clearly and drives sign‑ups.",
         deliverables: [
           "Branding & logo",
-          "UI/UX Design",
-          "Mobile App Prototype",
-          "Figma File",
-          "User Flows & Wireframes",
-          "Website Development",
+          "Landing page (UI/UX)",
+          "Design system & components",
+          "Copy guidance",
+          "Figma file",
         ],
         features: [
-          "Clean, modern UI",
-          "Instant chat",
-          "Secure payments",
-          "Personalized recommendations",
-          "Easy listing & search",
-          "Community-driven marketplace",
+          "Clear value proposition",
+          "Hero visuals and storytelling",
+          "Trust and feature sections",
+          "Responsive and fast",
+          "SEO‑ready structure",
         ],
       },
       nl: {
-        title: "Respire: Marketplace‑app",
-        subtitle: "Een frisse kijk op tweedehands shoppen",
+        title: "Respire: Branding & landingspagina",
+        subtitle: "Branding en landingspagina voor een marketplace‑app",
         explainer:
-          "Respire is een platform om tweedehands outfits te delen en te ontdekken, met focus op stijl en community.",
+          "We bouwden een herkenbare stijl en een snelle landingspagina die het concept helder maakt en aanzet tot inschrijving.",
         deliverables: [
           "Branding & logo",
-          "UI/UX‑design",
-          "Mobiele app‑prototype",
+          "Landingspagina (UI/UX)",
+          "Designsysteem & componenten",
+          "Copy‑advies",
           "Figma‑bestand",
-          "User flows & wireframes",
-          "Website‑ontwikkeling",
         ],
         features: [
-          "Strakke, moderne UI",
-          "Directe chat",
-          "Veilige betalingen",
-          "Persoonlijke aanbevelingen",
-          "Makkelijk plaatsen & zoeken",
-          "Community‑gedreven marketplace",
+          "Heldere value proposition",
+          "Sterke hero‑visuals en verhaal",
+          "Trust‑ en featuresecties",
+          "Snel en responsief",
+          "SEO‑vriendelijke structuur",
         ],
       },
       fr: {
-        title: "Respire : application marketplace",
-        subtitle: "Un regard nouveau sur la seconde main",
+        title: "Respire : branding & landing page",
+        subtitle: "Identité de marque et landing page pour une app marketplace",
         explainer:
-          "Respire est une plateforme qui encourage le partage et la découverte de tenues de seconde main, avec un focus sur le style et la communauté.",
+          "Nous avons conçu l’identité de Respire et une landing page rapide orientée conversion pour expliquer clairement le concept et générer des inscriptions.",
         deliverables: [
           "Branding & logo",
-          "Design UI/UX",
-          "Prototype d’app mobile",
+          "Landing page (UI/UX)",
+          "Design system & composants",
+          "Conseil rédactionnel",
           "Fichier Figma",
-          "User flows & wireframes",
-          "Développement du site",
         ],
         features: [
-          "UI moderne et épurée",
-          "Chat instantané",
-          "Paiements sécurisés",
-          "Recommandations personnalisées",
-          "Publication & recherche faciles",
-          "Marketplace orientée communauté",
+          "Proposition de valeur claire",
+          "Visuels hero et storytelling",
+          "Sections confiance et fonctionnalités",
+          "Rapide et responsive",
+          "Structure prête pour le SEO",
         ],
       },
     },
@@ -211,7 +203,7 @@ export const cases = {
   swear: {
     slug: "swear",
     title: "Swear: 3D Sneaker Store",
-    subtitle: "Immersive e‑commerce experience with Three.js",
+    subtitle: "Interactive 3D sneaker configurator",
     hero: swearHero,
     explainer: `SWEAR is a 3D sneaker store built with Three.js and Vue.js, created for Swear London. Users can explore, customize, and order sneakers in real time, all within an immersive web experience. The project focuses on smooth 3D visuals, fast performance, and seamless integration between frontend and backend.`,
     // New: multiple CTAs (CasePage supports this below)
@@ -248,7 +240,7 @@ export const cases = {
     i18n: {
       en: {
         title: "Swear: 3D Sneaker Store",
-        subtitle: "Immersive e‑commerce experience with Three.js",
+        subtitle: "Interactive 3D sneaker configurator",
         explainer:
           "SWEAR is a 3D sneaker store built with Three.js and Vue.js. Users explore, customize and order sneakers in real time, with smooth visuals and fast performance.",
         deliverables: [
@@ -271,7 +263,7 @@ export const cases = {
       },
       nl: {
         title: "Swear: 3D Sneaker Store",
-        subtitle: "Immersieve e‑commerce ervaring met Three.js",
+        subtitle: "Interactieve 3D‑sneakerconfigurator",
         explainer:
           "SWEAR is een 3D‑sneakerwinkel met Three.js en Vue.js. Bezoekers verkennen, personaliseren en bestellen sneakers realtime, met vloeiende visuals en hoge performance.",
         deliverables: [
@@ -294,7 +286,7 @@ export const cases = {
       },
       fr: {
         title: "Swear : boutique de baskets 3D",
-        subtitle: "Expérience e‑commerce immersive avec Three.js",
+        subtitle: "Configurateur 3D interactif pour baskets",
         explainer:
           "SWEAR est une boutique 3D construite avec Three.js et Vue.js. Les utilisateurs explorent, personnalisent et commandent en temps réel, avec des visuels fluides et des performances rapides.",
         deliverables: [
