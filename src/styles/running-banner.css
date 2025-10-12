@@ -2,12 +2,16 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  line-height: 1;
   /* Explicitly add padding to ensure section-pad is visible */
   padding-inline: var(--px); /* Matches section-pad */
   padding-top: 1.5rem; /* Optional: Add vertical padding for breathing room */
   padding-bottom: 1.5rem;
   box-sizing: border-box; /* Ensure padding is included in width calculations */
+  /* Help iOS compositing */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  contain: paint; /* isolate paints */
 }
 
 .running-banner__inner {
@@ -16,6 +20,8 @@
   white-space: nowrap;
   will-change: transform;
   transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 /* Logo appearance + spacing */

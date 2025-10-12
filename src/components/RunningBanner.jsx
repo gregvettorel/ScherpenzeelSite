@@ -81,33 +81,39 @@ export default function RunningBanner({
         ? window.scrollY || window.pageYOffset || 0
         : scroller.scrollTop || 0;
 
-    const update = () => {
+    let raf = 0;
+    const tick = () => {
+      raf = 0;
       if (!trackRef.current || !loopWidth) return;
       const y = getScrollY();
-      // include initial offset so multiple banners don't overlap
-      const x = (y * speed * direction + initialOffset) % loopWidth;
-      const wrapped = ((x % loopWidth) + loopWidth) % loopWidth;
-      trackRef.current.style.transform = `translate3d(${-wrapped}px, 0, 0)`;
+      const x = y * speed * direction + initialOffset;
+      const w = loopWidth;
+      // normalize and PIXEL-SNAP to avoid iOS sub-pixel flicker
+      const wrapped = ((x % w) + w) % w;
+      const px = Math.round(wrapped);
+      trackRef.current.style.transform = `translate3d(${-px}px, 0, 0)`;
     };
+    const schedule = () => { if (!raf) raf = requestAnimationFrame(tick); };
 
-    update();
+    schedule();
     const opts = { passive: true };
     if (scroller === window) {
-      window.addEventListener("scroll", update, opts);
-      window.addEventListener("resize", update, opts);
+      window.addEventListener("scroll", schedule, opts);
+      window.addEventListener("resize", schedule, opts);
     } else {
-      scroller.addEventListener("scroll", update, opts);
-      window.addEventListener("resize", update, opts);
+      scroller.addEventListener("scroll", schedule, opts);
+      window.addEventListener("resize", schedule, opts);
     }
 
     return () => {
       if (scroller === window) {
-        window.removeEventListener("scroll", update);
-        window.removeEventListener("resize", update);
+        window.removeEventListener("scroll", schedule);
+        window.removeEventListener("resize", schedule);
       } else {
-        scroller.removeEventListener("scroll", update);
-        window.removeEventListener("resize", update);
+        scroller.removeEventListener("scroll", schedule);
+        window.removeEventListener("resize", schedule);
       }
+      if (raf) cancelAnimationFrame(raf);
     };
   }, [loopWidth, scrollerSelector, speed, direction, initialOffset]);
 
