@@ -50,8 +50,8 @@ export default function RunningBanner({
           }}
           draggable={false}
           onDragStart={(e) => e.preventDefault()}
-          decoding="async"
-          loading="lazy"
+          decoding={isIOS ? "sync" : "async"}
+          loading={isIOS ? "eager" : "lazy"}
           aria-hidden="true"
         />
       ))}

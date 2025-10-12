@@ -11,7 +11,7 @@
   contain: paint;
 }
 /* iOS: use 2D keyframes (no JS scroll) and relax contain */
-.running-banner--ios { contain: content; }
+.running-banner--ios { contain: none; }
 .running-banner--css .running-banner__inner {
   animation: rb-marquee var(--rb-duration, 18s) linear infinite;
   will-change: transform;
@@ -19,8 +19,8 @@
 .running-banner--reverse .running-banner__inner { animation-direction: reverse; }
 
 @keyframes rb-marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(calc(-1 * var(--rb-loop, 1000px))); }
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(calc(-1 * var(--rb-loop, 1000px)), 0, 0); }
 }
 
 .running-banner__inner {
@@ -36,10 +36,14 @@
   margin: 0 var(--rb-gap, 4.5rem);
   height: 28px;
   width: auto;
+  display: block;                /* avoid baseline jitters */
   user-select: none;
   -webkit-user-drag: none;
   pointer-events: none;
   transition: opacity .25s ease, transform .25s ease, filter .25s ease;
+  transform: translateZ(0);      /* promote to separate layer */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 @media (hover:hover) {
