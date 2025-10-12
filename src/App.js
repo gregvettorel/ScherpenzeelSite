@@ -30,9 +30,28 @@ function Home() {
       <SeoHead kind="home" />
       <Hero />
       <Projects />
-      <RunningBanner speed={0.8} direction={1} initialOffset={0} size={60} />
-      <RunningBanner speed={0.6} direction={1} initialOffset={180} size={20} />    
-      <RunningBanner speed={0.9} direction={1} initialOffset={160} />
+      <RunningBanner
+        imageSrc="/favicon.png"
+        speed={0.65}
+        direction={1}
+        initialOffset={0}
+        size={28}
+        segments={18}
+        grayscale={false}
+        blend="normal"
+        style={{ paddingTop: "5%" }}
+      />
+      <RunningBanner
+        imageSrc="/favicon.png"
+        speed={0.9}
+        direction={-1}
+        initialOffset={180}
+        size={22}
+        segments={16}
+        style={{ opacity: 0.95, paddingBottom: "5%" }}
+        grayscale={false}
+        blend="normal"
+      />
       <About />
       <Services />
       <ProcessSteps />

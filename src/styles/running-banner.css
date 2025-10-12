@@ -26,14 +26,22 @@
 
 /* Logo appearance + spacing */
 .running-banner__logo {
-  margin: 0 6.25rem;
-  height: 35px;            /* adjust to taste */
+  margin: 0 var(--rb-gap, 4.5rem);
+  height: 28px;                 /* tighter, refined */
   width: auto;
   /* prevent selection/drag across browsers */
   user-select: none;
   -webkit-user-drag: none;
   pointer-events: none;    /* purely decorative */
-  opacity:  0.8;
+  transition: opacity .25s ease, transform .25s ease, filter .25s ease;
+}
+
+@media (hover:hover) {
+  .running-banner__logo:hover {
+    opacity: 1 !important;
+    transform: translateY(-1px);
+    filter: grayscale(0) contrast(1.05); /* slight reveal on hover */
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

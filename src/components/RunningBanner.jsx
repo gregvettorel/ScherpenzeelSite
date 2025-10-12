@@ -9,18 +9,23 @@ export default function RunningBanner({
   scrollerSelector,
   speed = 0.6,
   direction = 1,
-  imageSrc = "/logo_site.svg",
+  imageSrc = "/wakoicon.svg",   // use favicon by default
   imageAlt = "WAKO Design",
-  segments = 10,           // how many logos per sequence
-  logoWidth = 120,         // px width of each logo (CSS can override)
-  initialOffset = 0,       // new prop to stagger banners
-  size,                    // new: height of the logo images (number or string)
-  style = {},              // allow custom style
+  segments = 16,
+  logoWidth = 80,
+  initialOffset = 0,
+  size,
+  style = {},
+  varyOpacity = true,           // stagger opacity for “gallery” vibe
+  grayscale = true,             // monochrome look
+  blend = "multiply",           // Awwwards-friendly blending
   ...rest
 }) {
   const containerRef = useRef(null);
   const trackRef = useRef(null);
   const [loopWidth, setLoopWidth] = useState(0);
+
+  const OPAC = [0.22, 0.32, 0.48, 0.7, 0.48, 0.32]; // repeating opacity pattern
 
   const Sequence = () => (
     <>
@@ -32,7 +37,12 @@ export default function RunningBanner({
           alt={imageAlt}
           width={logoWidth}
           height={size ? (typeof size === "number" ? size : undefined) : "auto"}
-          style={size ? { height: typeof size === "number" ? `${size}px` : size, width: "auto" } : undefined}
+          style={{
+            ...(size ? { height: typeof size === "number" ? `${size}px` : size, width: "auto" } : undefined),
+            opacity: varyOpacity ? OPAC[i % OPAC.length] : 0.8,
+            filter: grayscale ? "grayscale(1) contrast(1.05)" : undefined,
+            mixBlendMode: blend || "normal"
+          }}
           draggable={false}
           onDragStart={(e) => e.preventDefault()}
           decoding="async"
@@ -122,7 +132,7 @@ export default function RunningBanner({
       className="running-banner section-pad"
       ref={containerRef}
       aria-label={`${imageAlt} marquee`}
-      style={style}
+      style={{ "--rb-gap": "64px", ...style }}
       {...rest}
     >
       <div className="running-banner__inner" ref={trackRef} aria-hidden="true">
