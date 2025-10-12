@@ -66,11 +66,13 @@ export default function CustomCursor() {
       const isService = !!e.target.closest(".services-toggle");
       const drag = !!e.target.closest(".services-media canvas, .tagmarquee, [data-cursor='drag']");
       const tap  = !!e.target.closest(".services-toggle, [data-cursor='tap']");
+      const inNav = !!e.target.closest(".nav, .nav__link, .drawer__link, .nav__brand");
       setIsDrag(drag);
       setIsTap(tap);
       setShowArrow(!drag && !tap && (isProject || isExternal || isService));
 
-      const ring = !!e.target.closest(".nav, .nav__link, .drawer__link, .nav__brand, [data-cursor-contrast='true']");
+      // Limit ring to navbar/explicit contrast zones; buttons can grow with .hover
+      const ring = inNav || !!e.target.closest("[data-cursor-contrast='true']");
       setIsRing(ring);
     };
 
