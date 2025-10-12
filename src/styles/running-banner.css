@@ -2,12 +2,10 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  /* Explicitly add padding to ensure section-pad is visible */
-  padding-inline: var(--px); /* Matches section-pad */
-  padding-top: 1.5rem; /* Optional: Add vertical padding for breathing room */
+  padding-inline: var(--px);
+  padding-top: 1.5rem;
   padding-bottom: 1.5rem;
-  box-sizing: border-box; /* Ensure padding is included in width calculations */
-  /* Help iOS compositing */
+  box-sizing: border-box;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   contain: paint;
@@ -34,15 +32,13 @@
   backface-visibility: hidden;
 }
 
-/* Logo appearance + spacing */
 .running-banner__logo {
   margin: 0 var(--rb-gap, 4.5rem);
-  height: 28px;                 /* tighter, refined */
+  height: 28px;
   width: auto;
-  /* prevent selection/drag across browsers */
   user-select: none;
   -webkit-user-drag: none;
-  pointer-events: none;    /* purely decorative */
+  pointer-events: none;
   transition: opacity .25s ease, transform .25s ease, filter .25s ease;
 }
 
@@ -50,7 +46,7 @@
   .running-banner__logo:hover {
     opacity: 1 !important;
     transform: translateY(-1px);
-    filter: grayscale(0) contrast(1.05); /* slight reveal on hover */
+    filter: grayscale(0) contrast(1.05);
   }
 }
 
