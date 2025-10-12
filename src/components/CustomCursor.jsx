@@ -6,6 +6,9 @@ export default function CustomCursor() {
   const cursorRef = useRef(null);
   const [isHovering, setIsHovering] = useState(false);
   const [showArrow, setShowArrow] = useState(false);
+  const [isRing, setIsRing] = useState(false);
+  const [isDrag, setIsDrag] = useState(false);
+  const [isTap, setIsTap] = useState(false);
   const location = useLocation();
 
   // Safer: only treat as touch if the primary pointer is coarse AND doesn’t hover
@@ -42,7 +45,9 @@ export default function CustomCursor() {
     const reset = () => {
       setIsHovering(false);
       setShowArrow(false);
-      cursor.classList.remove("contrast");
+      setIsRing(false);
+      setIsDrag(false);
+      setIsTap(false);
     };
 
     const onMove = (e) => {
@@ -59,10 +64,14 @@ export default function CustomCursor() {
         !/^mailto:|^tel:/i.test(arrowTarget.getAttribute("href") || "");
       const isProject = !!e.target.closest(".project-card-link, .project-card");
       const isService = !!e.target.closest(".services-toggle");
-      setShowArrow(isProject || isExternal || isService);
+      const drag = !!e.target.closest(".services-media canvas, .tagmarquee, [data-cursor='drag']");
+      const tap  = !!e.target.closest(".services-toggle, [data-cursor='tap']");
+      setIsDrag(drag);
+      setIsTap(tap);
+      setShowArrow(!drag && !tap && (isProject || isExternal || isService));
 
-      const needsContrast = !!e.target.closest(".nav, .navbar, [data-cursor-contrast='true']");
-      cursor.classList.toggle("contrast", needsContrast);
+      const ring = !!e.target.closest(".nav, .nav__link, .drawer__link, .nav__brand, [data-cursor-contrast='true']");
+      setIsRing(ring);
     };
 
     const onDown = reset;          // collapse when pressing
@@ -91,7 +100,9 @@ export default function CustomCursor() {
     if (isTouchDevice()) return;
     setIsHovering(false);
     setShowArrow(false);
-    cursorRef.current?.classList.remove("contrast");
+    setIsRing(false);
+    setIsDrag(false);
+    setIsTap(false);
   }, [location.pathname]);
 
   if (isTouchDevice()) return null;
@@ -99,7 +110,14 @@ export default function CustomCursor() {
   return (
     <div
       ref={cursorRef}
-      className={`custom-cursor${isHovering ? " hover" : ""}${showArrow ? " arrow" : ""}`}
+      className={
+        `custom-cursor` +
+        (isHovering ? " hover" : "") +
+        (showArrow ? " arrow" : "") +
+        (isRing ? " ring" : "") +
+        (isDrag ? " drag" : "") +
+        (isTap ? " tap" : "")
+      }
       aria-hidden="true"
     >
       {showArrow && (

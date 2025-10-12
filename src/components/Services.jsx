@@ -48,6 +48,7 @@ export default function Services() {
 								<button
 									id={buttonId}
 									className="services-toggle"
+									data-cursor="tap"
 									aria-expanded={isOpen}
 									aria-controls={panelId}
 									onClick={(e) => {
@@ -108,7 +109,7 @@ export default function Services() {
 											</div>
 										</div>
 
-										<div className="services-media">
+										<div className="services-media" data-cursor="drag">
 											{s.title?.toLowerCase().includes("3d") ? (
 												isOpen ? (
 													<Suspense fallback={<img src={rowImg[i] || designImg} alt={s.title} loading="lazy" decoding="async" />}>
