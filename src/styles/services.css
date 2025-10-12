@@ -7,10 +7,12 @@
   --brand: #2563eb; /* Wako blue */
 }
 
-/* remove the global override (was changing all section titles site‑wide) */
-/* .section-title { ... } */
 
-.services-title { color: white; }
+
+.services-title { color: white; 
+  margin-bottom: 5%;
+
+}
 
 /* Make the media area have a height/aspect so the Canvas can fill */
 .services-media {
