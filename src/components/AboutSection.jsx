@@ -21,8 +21,8 @@ export default function AboutSection() {
   ];
 
   return (
-    <SectionReveal id="about" className="about">
-      <div className="about__wrap section section-pad">
+    <SectionReveal id="about" className="about section section-pad">
+      <div className="wrap about__wrap">
         <div className="about__grid">
           {/* Right: content */}
           <div className="about__content">

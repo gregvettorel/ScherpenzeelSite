@@ -5,10 +5,9 @@
 }
 
 .about__wrap {
-  max-width: var(--wrap, 1200px); /* fallback if --wrap is missing */
+
   width: 100%;
   margin: 0 auto;
-  padding-inline: var(--px);
   box-sizing: border-box; /* padding won’t push width past viewport */
 }
 
