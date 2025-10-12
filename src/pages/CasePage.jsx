@@ -24,6 +24,11 @@ export default function CasePage() {
   }, [data]);
 
   useEffect(() => {
+    // ensure case pages always start at top
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, []);
+
+  useEffect(() => {
     if (!data) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;

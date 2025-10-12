@@ -44,13 +44,27 @@ function Home() {
 function ScrollToHash() {
   const { hash, pathname } = useLocation();
   useEffect(() => {
+    // disable browser scroll restore
+    try {
+      if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+      }
+    } catch {}
+    const toTop = () => window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+
     if (hash) {
       const id = hash.slice(1);
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      // wait a tick so DOM for the target exists
+      requestAnimationFrame(() => {
+        const el = document.getElementById(id);
+        el?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
     } else {
-      // ensure we land at top between routes (e.g., when opening a project)
-      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      // double-tap toTop to beat late layout shifts/resources
+      requestAnimationFrame(() => {
+        toTop();
+        requestAnimationFrame(toTop);
+      });
     }
   }, [hash, pathname]);
   return null;
