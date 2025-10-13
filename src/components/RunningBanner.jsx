@@ -30,6 +30,13 @@ export default function RunningBanner({
     return iOSDev || iPadOS;
   }, []);
 
+  const isSafariDesktop = useMemo(() => {
+    if (typeof navigator === "undefined") return false;
+    const ua = navigator.userAgent || "";
+    return !/android|crios|fxios|edgios|chrome/i.test(ua) && /safari/i.test(ua) && !isIOS;
+  }, [isIOS]);
+  const isWebKit = isIOS || isSafariDesktop;
+
   const OPAC = [0.22, 0.32, 0.48, 0.7, 0.48, 0.32];
 
   const Sequence = () => (
@@ -50,8 +57,8 @@ export default function RunningBanner({
           }}
           draggable={false}
           onDragStart={(e) => e.preventDefault()}
-          decoding={isIOS ? "sync" : "async"}
-          loading={isIOS ? "eager" : "lazy"}
+          decoding={isWebKit ? "sync" : "async"}
+          loading={isWebKit ? "eager" : "lazy"}
           aria-hidden="true"
         />
       ))}
@@ -79,7 +86,7 @@ export default function RunningBanner({
 
   // JS scroll-coupled motion (non‑iOS only)
   useEffect(() => {
-    if (isIOS) return; // iOS uses CSS keyframes instead
+    if (isWebKit) return; // iOS uses CSS keyframes instead
     const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
 
@@ -119,11 +126,11 @@ export default function RunningBanner({
       }
       if (raf) cancelAnimationFrame(raf);
     };
-  }, [loopWidth, scrollerSelector, speed, direction, initialOffset, isIOS]);
+  }, [loopWidth, scrollerSelector, speed, direction, initialOffset, isWebKit]);
 
   const rootClass =
     "running-banner section-pad" +
-    (isIOS ? " running-banner--ios running-banner--css" : "") +
+    (isWebKit ? " running-banner--webkit running-banner--css" : "") +
     (direction === -1 ? " running-banner--reverse" : "");
 
   return (
