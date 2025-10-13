@@ -64,13 +64,14 @@ export const STR = {
     },
     case: {
       year: "Jaar",
-      deliverables: "Wat we leverden",
-      stack: "Technologie",
+      deliverables: "Wat we hebben opgeleverd",
+      stack: "Technische details",
       features: "Functies",
+      results: "Resultaten",
       enjoyed: "Tevreden?",
       explore: "Ontdek meer projecten!",
       next: "Volgend project",
-      figma: "Figma"
+      figma: "Bekijk het ontwerp"
     },
     about: {
       title: "Wie we zijn",
@@ -142,13 +143,14 @@ export const STR = {
     },
     case: {
       year: "Year",
-      deliverables: "Deliverables",
-      stack: "Technology",
+      deliverables: "What we delivered",
+      stack: "Technical details",
       features: "Features",
+      results: "Results",
       enjoyed: "Satisfied?",
       explore: "Discover more projects!",
       next: "Next project",
-      figma: "Figma"
+      figma: "View design"
     },
     about: {
       title: "Who we are",
@@ -177,7 +179,7 @@ export const STR = {
         {
           title: "Sites qui performent",
           desc: [
-            "Nous créons des sites qui ne sont pas seulement esthétiques, mais qui convertissent. La structure, le design et les fonctionnalités sont alignés sur vos objectifs.",
+            "Nous créons des sites qui ne sont pas seulement esthétiques, mais qui convertissent. La structuur, le design et les fonctionnalités sont alignés sur vos objectifs.",
             "Votre site sera rapide, bien référencé et facile à gérer. Vous gardez le contrôle, nous gérons la technique."
           ],
           tags: ["Webdesign", "Développement", "Ergonomique"]
@@ -220,13 +222,14 @@ export const STR = {
     },
     case: {
       year: "Année",
-      deliverables: "Livrables",
-      stack: "Technologie",
+      deliverables: "Ce que nous avons livré",
+      stack: "Détails techniques",
       features: "Fonctionnalités",
+      results: "Résultats",
       enjoyed: "Satisfait ?",
       explore: "Découvrez plus de projets !",
       next: "Projet suivant",
-      figma: "Figma"
+      figma: "Voir le design"
     },
     about: {
       title: "Qui nous sommes",

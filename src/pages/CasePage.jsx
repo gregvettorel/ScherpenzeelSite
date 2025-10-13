@@ -7,6 +7,7 @@ import WakoButton from "../components/WakoButton";
 import AboutChip from "../components/AboutChip";
 import { useLang } from "../context/LangContext";
 import SeoHead from "../components/SeoHead";
+import EnvelopeIcon from "../components/EnvelopeIcon";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,7 +25,6 @@ export default function CasePage() {
   }, [data]);
 
   useEffect(() => {
-    // ensure case pages always start at top
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, []);
 
@@ -34,16 +34,18 @@ export default function CasePage() {
     if (reduce) return;
 
     const ctx = gsap.context(() => {
-      gsap.set([".navbar", ".case-hero", ".explainer-wrap", ".case-info", ".olc", ".enjoy-more", ".footer"], { opacity: 0, y: 80 });
-      gsap.to(".navbar", { opacity: 1, y: 0, duration: .7, ease: "expo.out" });
-      gsap.to(".case-hero", { opacity: 1, y: 0, duration: .9, delay: .1, ease: "expo.out" });
-      gsap.to(".explainer-wrap", { opacity: 1, y: 0, duration: .9, delay: .2, ease: "expo.out" });
-      gsap.to(".case-info", { opacity: 1, y: 0, duration: .9, delay: .3, ease: "expo.out" });
-      gsap.to(".olc", { opacity: 1, y: 0, duration: .9, delay: .4, ease: "expo.out" });
-      gsap.to(".enjoy-more", { opacity: 1, y: 0, duration: .9, delay: .5, ease: "expo.out" });
-      gsap.to(".footer", { opacity: 1, y: 0, duration: .9, delay: .6, ease: "expo.out" });
+      gsap.set(
+        [".navbar", ".case-hero", ".explainer-wrap", ".case-info", ".olc", ".enjoy-more", ".footer"],
+        { opacity: 0, y: 80 }
+      );
+      gsap.to(".navbar", { opacity: 1, y: 0, duration: 0.7, ease: "expo.out" });
+      gsap.to(".case-hero", { opacity: 1, y: 0, duration: 0.9, delay: 0.1, ease: "expo.out" });
+      gsap.to(".explainer-wrap", { opacity: 1, y: 0, duration: 0.9, delay: 0.2, ease: "expo.out" });
+      gsap.to(".case-info", { opacity: 1, y: 0, duration: 0.9, delay: 0.3, ease: "expo.out" });
+      gsap.to(".olc", { opacity: 1, y: 0, duration: 0.9, delay: 0.4, ease: "expo.out" });
+      gsap.to(".enjoy-more", { opacity: 1, y: 0, duration: 0.9, delay: 0.5, ease: "expo.out" });
+      gsap.to(".footer", { opacity: 1, y: 0, duration: 0.9, delay: 0.6, ease: "expo.out" });
 
-      // ---------- Explainer: auto <span> + smooth reveal ----------
       const explainerEl = document.getElementById("explainer");
       if (explainerEl) {
         if (!explainerEl.dataset.split) {
@@ -52,10 +54,7 @@ export default function CasePage() {
           explainerEl.dataset.split = "1";
         }
         const words = explainerEl.querySelectorAll(".word");
-
-        // Only set transform/opacity (no blur/scale/color)
         gsap.set(words, { y: 14, opacity: 0 });
-
         gsap.to(words, {
           y: 0,
           opacity: 1,
@@ -63,12 +62,10 @@ export default function CasePage() {
           ease: "power3.out",
           stagger: { each: 0.06, from: "start" },
           scrollTrigger: { trigger: explainerEl, start: "top 72%", once: true },
-          // IMPORTANT: remove the inline styles GSAP added
           onComplete: () => gsap.set(words, { clearProps: "transform,opacity" })
         });
       }
 
-      // Stacked sticky cards
       const section = document.querySelector("[data-olc-cards]");
       if (section) {
         const main = section.querySelector(".olc__main");
@@ -80,12 +77,13 @@ export default function CasePage() {
 
         let start = 0, end = 1;
         const clamp01 = v => Math.max(0, Math.min(1, v));
-        const map = (v, a, b, c, d) => (c + (d - c) * (Math.max(0, Math.min(1, (v - a) / Math.max(1e-6, b - a)))));
+        const map = (v, a, b, c, d) => c + (d - c) * (Math.max(0, Math.min(1, (v - a) / Math.max(1e-6, b - a))));
 
         const measure = () => {
           const r = main.getBoundingClientRect();
           const y = window.scrollY || window.pageYOffset;
-          start = r.top + y; end = start + main.offsetHeight - window.innerHeight;
+          start = r.top + y;
+          end = start + main.offsetHeight - window.innerHeight;
         };
 
         let target = 0, smooth = 0;
@@ -96,10 +94,10 @@ export default function CasePage() {
 
           cards.forEach((card, i) => {
             const n = cards.length;
-            const targetScale = 1 - ((n - i) * 0.05);
+            const targetScale = 1 - (n - i) * 0.05;
             const rangeStart = i / n;
-            const s = (smooth <= rangeStart) ? 1 : map(smooth, rangeStart, 1, 1, targetScale);
-            const fade = (s < 0.92) ? map(s, targetScale, 0.92, 0, 1) : 1;
+            const s = smooth <= rangeStart ? 1 : map(smooth, rangeStart, 1, 1, targetScale);
+            const fade = s < 0.92 ? map(s, targetScale, 0.92, 0, 1) : 1;
             card.style.transform = `scale(${s})`;
             card.style.opacity = fade;
           });
@@ -107,7 +105,8 @@ export default function CasePage() {
           requestAnimationFrame(render);
         };
 
-        measure(); render();
+        measure();
+        render();
         window.addEventListener("resize", measure);
       }
     }, rootRef);
@@ -121,15 +120,37 @@ export default function CasePage() {
   const title = L?.title ?? data.title;
   const subtitle = L?.subtitle ?? data.subtitle;
   const explainer = L?.explainer ?? data.explainer;
-  const deliverables = Array.isArray(L?.deliverables) ? L.deliverables : data.deliverables;
-  const features = Array.isArray(L?.features) ? L.features : data.features;
+  const deliverables = Array.isArray(L?.deliverables) ? L.deliverables
+                    : Array.isArray(data.deliverables) ? data.deliverables
+                    : [];
+  const features = Array.isArray(L?.features) ? L.features
+                : Array.isArray(data.features) ? data.features
+                : [];
+  const story = {
+    challenge: L?.story?.challenge ?? data.story?.challenge ?? "",
+    approach:  L?.story?.approach  ?? data.story?.approach  ?? "",
+    outcome:   L?.story?.outcome   ?? data.story?.outcome   ?? "",
+  };
+  const results = Array.isArray(L?.results) ? L.results
+                : Array.isArray(data.results) ? data.results
+                : [];
+  const stackTags = Array.isArray(data.stackTags) ? data.stackTags : [];
+
+  const studySuffix = ({ en: "case study", nl: "case study", fr: "étude de cas" }[lang]) || "case study";
+  const abs = (p) => (typeof window !== "undefined" ? `${window.location.origin}${p}` : p);
+
+  const labels = {
+    nl: { challenge: "Uitdaging", approach: "Aanpak", outcome: "Resultaat", related: "Gerelateerde diensten:" },
+    en: { challenge: "Challenge", approach: "Approach", outcome: "Outcome", related: "Related services:" },
+    fr: { challenge: "Défi", approach: "Approche", outcome: "Résultat", related: "Services liés :" }
+  }[lang] || { challenge: "Challenge", approach: "Approach", outcome: "Outcome", related: "Related services:" };
 
   return (
     <>
       <SeoHead
         kind="case"
         type="article"
-        title={`${title} — Case | Wako`}
+        title={`${title} — ${studySuffix} | Wako`}
         description={subtitle}
         canonicalPath={`/work/${slug}`}
         breadcrumbs={[
@@ -137,6 +158,18 @@ export default function CasePage() {
           { name: "Work", urlPath: "/#portfolio" },
           { name: title, urlPath: `/work/${slug}` },
         ]}
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "CreativeWork",
+          name: title,
+          headline: title,
+          description: subtitle,
+          inLanguage: lang,
+          author: { "@type": "Organization", name: "Wako" },
+          datePublished: data.year ? `${data.year}-01-01` : undefined,
+          image: data.hero ? abs(data.hero) : undefined,
+          url: abs(`/work/${slug}`)
+        }}
       />
       <main ref={rootRef}>
         {/* HERO */}
@@ -144,17 +177,13 @@ export default function CasePage() {
           <div className="wrap">
             <div className="case">
               <figure className="case-hero__media">
-                <img src={data.hero} alt={`${title} hero`} loading="eager" />
+                <img src={data.hero} alt={`${title} — ${studySuffix}`} loading="eager" />
                 <figcaption className="case-hero__caption">
-                  <h1
-                    className="section-title"
-                    style={{ color: "#fff", textShadow: "0 20px 46px rgba(0,0,0,.6)" }}
-                    dangerouslySetInnerHTML={{
-                      __html: title.replace(": ", ": <span class='soft-break'>") + "</span>",
-                    }}
-                  />
-                  <p className="subtitle" style={{ color: "rgba(255,255,255,.95)" }}>
-                    {subtitle}
+                  <h1 className="section-title case-hero__title" style={{ color: "#fff", textShadow: "0 20px 46px rgba(0,0,0,.6)" }}>
+                    {title}
+                  </h1>
+                  <p className="subtitle case-hero__subtitle" style={{ color: "rgba(255,255,255,.95)" }}>
+                    {data.heroLead || subtitle}
                   </p>
                 </figcaption>
               </figure>
@@ -170,28 +199,68 @@ export default function CasePage() {
             </div>
             <div className="explainer-cta">
               {Array.isArray(data.ctas) && data.ctas.length > 0 ? (
-                data.ctas.map((cta, i) => (
-                  <WakoButton
-                    key={i}
-                    as="a"
-                    href={cta.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    variant={cta.variant || "solid"}
-                  >
-                    {cta.label}
-                  </WakoButton>
-                ))
+                data.ctas
+                  .filter(c => c.label !== "Code")
+                  .map((cta, i) => (
+                    <WakoButton
+                      key={i}
+                      as="a"
+                      href={cta.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      variant={cta.variant ?? (i === 0 ? "solid" : "ghost")}
+                    >
+                      {cta.label}
+                    </WakoButton>
+                  ))
               ) : (
-                data.figmaUrl && (
-                  <WakoButton as="a" href={data.figmaUrl} target="_blank" rel="noreferrer" variant="solid">
-                    {t("case.figma")}
+                <>
+                  {data.figmaUrl ? (
+                    <WakoButton as="a" href={data.figmaUrl} target="_blank" rel="noreferrer" variant="solid">
+                      {t("case.figma")}
+                    </WakoButton>
+                  ) : null}
+                  <WakoButton as="a" href="mailto:thisiswako@gmail.com" variant="ghost" showArrow={false}>
+                    {lang === "nl" ? "Vraag een prijsindicatie" : lang === "fr" ? "Demander une estimation" : "Request a quote"} <EnvelopeIcon size={20} />
                   </WakoButton>
-                )
+                </>
               )}
             </div>
           </div>
         </section>
+
+        {/* Journey (Uitdaging / Aanpak / Resultaat) */}
+        {(story.challenge || story.approach || story.outcome || results.length) && (
+          <section className="case-journey section section-pad" style={{ background: "var(--surface)" }}>
+            <div className="wrap">
+              {story.challenge && (
+                <div className="case-info__row">
+                  <div className="case-info__label">{labels.challenge}</div>
+                  <div className="case-info__value"><p>{story.challenge}</p></div>
+                </div>
+              )}
+              {story.approach && (
+                <div className="case-info__row">
+                  <div className="case-info__label">{labels.approach}</div>
+                  <div className="case-info__value"><p>{story.approach}</p></div>
+                </div>
+              )}
+              {(story.outcome || results.length > 0) && (
+                <div className="case-info__row">
+                  <div className="case-info__label">{labels.outcome}</div>
+                  <div className="case-info__value">
+                    {story.outcome && <p>{story.outcome}</p>}
+                    {results.length > 0 && (
+                      <div className="case-kpis">
+                        {results.map((r, i) => <span key={i}>{r}</span>)}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
 
         {/* Info grid */}
         <section className="case-info section section-pad" style={{ background: "var(--surface)" }}>
@@ -200,6 +269,14 @@ export default function CasePage() {
               <div className="case-info__label">{t("case.year")}</div>
               <div className="case-info__value">{data.year}</div>
             </div>
+            {results.length > 0 && (
+              <div className="case-info__row">
+                <div className="case-info__label">{t("case.results")}</div>
+                <div className="case-info__value">
+                  {results.map((r, i) => (<span key={i}>{r}<br /></span>))}
+                </div>
+              </div>
+            )}
             <div className="case-info__row">
               <div className="case-info__label">{t("case.deliverables")}</div>
               <div className="case-info__value">
@@ -209,20 +286,22 @@ export default function CasePage() {
             <div className="case-info__row">
               <div className="case-info__label">{t("case.stack")}</div>
               <div className="case-info__value case-info__tags">
-                {data.stackTags.map(tg => (<AboutChip key={tg}>{tg}</AboutChip>))}
+                {stackTags.map(tg => (<AboutChip key={tg}>{tg}</AboutChip>))}
               </div>
             </div>
-            <div className="case-info__row">
-              <div className="case-info__label">{t("case.features")}</div>
-              <div className="case-info__value">
-                {features.map((f, i) => (<span key={i}>{f}<br /></span>))}
+            {features.length > 0 && (
+              <div className="case-info__row">
+                <div className="case-info__label">{t("case.features")}</div>
+                <div className="case-info__value">
+                  {features.map((f, i) => (<span key={i}>{f}<br /></span>))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </section>
 
         {/* OLC: stacked sticky cards */}
-        <section className="olc section section-pad" data-olc-cards >
+        <section className="olc section section-pad" data-olc-cards>
           <div className="wrap">
             <div className="olc__main">
               {Array.isArray(data.cards) &&
@@ -237,11 +316,12 @@ export default function CasePage() {
                           loop
                           autoPlay
                           preload="metadata"
+                          aria-label={`${title} — short product demo`}
                         />
                       ) : (
                         <img
                           src={c.src}
-                          alt={`${data.title} shot ${i + 1}`}
+                          alt={`${title} — screen ${i + 1}`}
                           loading="lazy"
                           decoding="async"
                         />
@@ -265,9 +345,12 @@ export default function CasePage() {
                 {t("case.next")}
               </WakoButton>
               <WakoButton as="a" href="mailto:thisiswako@gmail.com" variant="ghost" showArrow={false}>
-                Get in touch
+                {lang === "nl" ? "Plan een gratis gesprek" : lang === "fr" ? "Planifier un appel gratuit" : "Book a free call"}
               </WakoButton>
             </div>
+            <p className="case-related" style={{ marginTop: 16, color: "var(--muted)" }}>
+              {labels.related} <a href="/webdesign-brussel">Webdesign Brussel</a> · <a href="/3d-integraties">3D op het web</a>
+            </p>
           </div>
         </section>
       </main>

@@ -17,6 +17,7 @@ export default function SeoHead({
   image = "/wako-og.png",
   breadcrumbs,
   type = "website",
+  schema, // NEW: optional JSON-LD schema
 }) {
   const { lang } = useLang();
 
@@ -142,6 +143,10 @@ export default function SeoHead({
         "query-input": "required name=search_term_string"
       }
     }));
+
+    if (schema && typeof schema === "object") {
+      add("script", { type: "application/ld+json" }, JSON.stringify(schema));
+    }
 
     return () => {
       document.head.querySelectorAll("[data-seo='wako']").forEach(n => n.remove());
