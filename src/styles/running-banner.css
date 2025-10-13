@@ -10,42 +10,44 @@
   backface-visibility: hidden;
   contain: paint;
 }
-/* iOS: use 2D keyframes (no JS scroll) and relax contain */
-.running-banner--ios { contain: none; }
+/* WebKit (Safari macOS + iOS): use CSS keyframes and relax contain */
+.running-banner--webkit { contain: none; }
+
 .running-banner--css .running-banner__inner {
   animation: rb-marquee var(--rb-duration, 18s) linear infinite;
   will-change: transform;
 }
-.running-banner--reverse .running-banner__inner { animation-direction: reverse; }
 
-@keyframes rb-marquee {
-  from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(calc(-1 * var(--rb-loop, 1000px)), 0, 0); }
-}
-
+/* Force a single horizontal row */
 .running-banner__inner {
-  display: inline-flex;
+  display: flex;                /* was inline-flex in some versions */
+  flex-direction: row;
+  flex-wrap: nowrap;            /* prevent wrapping (no vertical stack) */
   align-items: center;
-  white-space: nowrap;
-  will-change: transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 .running-banner__logo {
   margin: 0 var(--rb-gap, 4.5rem);
   height: 28px;
   width: auto;
-  display: block;                /* avoid baseline jitters */
+  display: block;
+  flex: 0 0 auto;               /* never shrink/wrap */
   user-select: none;
   -webkit-user-drag: none;
   pointer-events: none;
   transition: opacity .25s ease, transform .25s ease, filter .25s ease;
-  transform: translateZ(0);      /* promote to separate layer */
+  transform: translateZ(0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
+/* Disable filters/blend effects on WebKit to reduce flicker */
+.running-banner--webkit .running-banner__logo {
+  filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+/* Optional hover (kept for non-WebKit) */
 @media (hover:hover) {
   .running-banner__logo:hover {
     opacity: 1 !important;

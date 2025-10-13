@@ -30,7 +30,11 @@
   width:clamp(120px,18vw,160px);
   height:auto;
   display:block;
-  user-select:none;
+  image-rendering:-webkit-optimize-contrast; /* Safari hint */
+  image-rendering:crisp-edges;               /* other engines fallback */
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+  transform:translateZ(0);                   /* stable layer */
 }
 
 .process-steps__text { max-width:460px; }
@@ -146,6 +150,10 @@
   }
   .process-steps__img {
     width: 90px;
+    height: auto;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    transform: translateZ(0);
     margin: 0;
     display: block;
   }
@@ -160,6 +168,10 @@
   }
   .process-steps__img {
     width: 90px;
+    height: auto;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    transform: translateZ(0);
     margin: 0 auto 6px auto;
   }
   .process-steps__text {

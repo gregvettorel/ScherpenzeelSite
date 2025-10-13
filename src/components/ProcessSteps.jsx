@@ -21,7 +21,7 @@ export default function ProcessSteps() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       const rows = gsap.utils.toArray(".process-steps__row");
-      gsap.set(rows, { opacity: 0, y: 60, scale: 0.96 });
+      gsap.set(rows, { opacity: 0, y: 60, scale: 0.96, force3D: false });
       gsap.to(rows, {
         opacity: 1,
         y: 0,
@@ -33,6 +33,10 @@ export default function ProcessSteps() {
           trigger: stepsRef.current,
           start: "top 80%",
           once: true,
+        },
+        onComplete: () => {
+          // remove inline transform so Safari stops soft-scaling the row
+          gsap.set(rows, { clearProps: "transform" });
         },
       });
     }, stepsRef);
