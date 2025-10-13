@@ -118,7 +118,7 @@ body.custom-cursor-active textarea {
   box-shadow: 0 0 0 3px rgba(5,121,254,0.16);
 }
 .custom-cursor.tap::after {
-  content: "Click";
+  content: attr(data-label, "Click");
   color: #fff;
   font: 600 10px/1 Inter, system-ui, sans-serif;
 }

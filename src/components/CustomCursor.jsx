@@ -48,6 +48,7 @@ export default function CustomCursor() {
       setIsRing(false);
       setIsDrag(false);
       setIsTap(false);
+      cursorRef.current?.removeAttribute("data-label");
     };
 
     const onMove = (e) => {
@@ -65,7 +66,8 @@ export default function CustomCursor() {
       const isProject = !!e.target.closest(".project-card-link, .project-card");
       const isService = !!e.target.closest(".services-toggle");
       const drag = !!e.target.closest(".services-media canvas, .tagmarquee, [data-cursor='drag']");
-      const tap  = !!e.target.closest(".services-toggle, [data-cursor='tap']");
+      const toggle = e.target.closest(".services-toggle");
+      const tap = !!toggle || !!e.target.closest("[data-cursor='tap']");
       const inNav = !!e.target.closest(".nav, .nav__link, .drawer__link, .nav__brand");
       setIsDrag(drag);
       setIsTap(tap);
@@ -74,6 +76,18 @@ export default function CustomCursor() {
       // Limit ring to navbar/explicit contrast zones; buttons can grow with .hover
       const ring = inNav || !!e.target.closest("[data-cursor-contrast='true']");
       setIsRing(ring);
+
+      // Dynamic label: Open/Hide on Services toggle
+      if (cursorRef.current) {
+        if (toggle) {
+          const acc = toggle.closest(".services-accordion");
+          const opened = !!acc && acc.classList.contains("open");
+          cursorRef.current.setAttribute("data-label", opened ? "Close" : "Open");
+        } else {
+          cursorRef.current.removeAttribute("data-label");
+        }
+        if (drag) cursorRef.current.removeAttribute("data-label"); // no label while dragging
+      }
     };
 
     const onDown = reset;          // collapse when pressing
@@ -105,6 +119,7 @@ export default function CustomCursor() {
     setIsRing(false);
     setIsDrag(false);
     setIsTap(false);
+    cursorRef.current?.removeAttribute("data-label");
   }, [location.pathname]);
 
   if (isTouchDevice()) return null;
