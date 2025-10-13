@@ -2,7 +2,6 @@
 import React, { useMemo } from "react";
 import { ReactComponent as HeroVisual } from "../assets/hero.svg";
 import WakoButton from "./WakoButton";
-import PhoneIcon from "./PhoneIcon";
 import EnvelopeIcon from "./EnvelopeIcon";
 import "../styles/hero-anim.css";
 import SectionReveal from "./SectionReveal";
@@ -68,9 +67,6 @@ export default function Hero() {
               sfx={false}
             >
               {t("hero.ctaFreeAdvice")} <EnvelopeIcon size={20} />
-            </WakoButton>
-            <WakoButton href="tel:+32479954400" variant="ghost" sfx={false}>
-              +32 479 95 44 00 <PhoneIcon size={20} />
             </WakoButton>
           </div>
         </div>
