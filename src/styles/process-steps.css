@@ -30,12 +30,24 @@
   width:clamp(120px,18vw,160px);
   height:auto;
   display:block;
-  image-rendering:-webkit-optimize-contrast; /* Safari hint */
-  image-rendering:crisp-edges;               /* other engines fallback */
-  -webkit-backface-visibility:hidden;
-  backface-visibility:hidden;
-  transform:translateZ(0);                   /* stable layer */
+  /* SVGs get blurry when promoted to GPU; keep them 2D and crisp */
+  image-rendering: auto;
+  -webkit-backface-visibility: visible;
+  backface-visibility: visible;
+  transform: none;
 }
+
+/* Sharper arrows: keep strokes from scaling = no blur */
+.process-steps__curve,
+.process-steps__chev {
+  stroke: #C2C8D0;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+.process-steps__arrow svg { shape-rendering: geometricPrecision; text-rendering: optimizeLegibility; }
 
 .process-steps__text { max-width:460px; }
 .process-steps__heading {
@@ -64,15 +76,6 @@
   z-index:0;
 }
 
-.process-steps__curve,
-.process-steps__chev {
-  stroke: #C2C8D0;
-  stroke-width: 8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  fill: none;
-}
-
 .process-steps__row--left  .process-steps__arrow {
   left:  calc(100% + 16px);
   padding-left: 20%;
@@ -90,13 +93,12 @@
 
 /** Hover animaties **/
 @media (hover:hover) {
-  .process-steps__row:hover { transform: scale(1.04); cursor:default; }
-  .process-steps__row:hover .process-steps__img {
-    transform: translateY(-2px);
-    transition: transform .25s ease;
-  }
+  /* Avoid scaling the row (it rasterizes SVGs) */
+  .process-steps__row:hover { transform: translateY(-2px); cursor:default; }
+  /* Don’t transform the SVG image at all */
+  .process-steps__row:hover .process-steps__img { transform: none; }
   .process-steps__row:hover .process-steps__number {
-    transform: translateY(-1px) scale(1.08);
+    transform: translateY(-1px);
     transition: transform .25s cubic-bezier(.2,.8,.2,1);
   }
   .process-steps__arrow svg {
@@ -151,9 +153,8 @@
   .process-steps__img {
     width: 90px;
     height: auto;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    transform: translateZ(0);
+    image-rendering: auto;
+    transform: none;
     margin: 0;
     display: block;
   }
@@ -169,9 +170,8 @@
   .process-steps__img {
     width: 90px;
     height: auto;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    transform: translateZ(0);
+    image-rendering: auto;
+    transform: none;
     margin: 0 auto 6px auto;
   }
   .process-steps__text {
