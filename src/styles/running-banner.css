@@ -18,20 +18,27 @@
   will-change: transform;
 }
 
+/* WebKit uses CSS keyframes -> ensure keyframes exist */
+@keyframes rb-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(calc(-1 * var(--rb-loop, 1000px)), 0, 0); }
+}
+
 /* Force a single horizontal row */
 .running-banner__inner {
-  display: flex;                /* was inline-flex in some versions */
+  display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;            /* prevent wrapping (no vertical stack) */
+  flex-wrap: nowrap;
   align-items: center;
 }
 
+/* Logo rendering: crisper and stable */
 .running-banner__logo {
   margin: 0 var(--rb-gap, 4.5rem);
   height: 28px;
   width: auto;
   display: block;
-  flex: 0 0 auto;               /* never shrink/wrap */
+  flex: 0 0 auto;
   user-select: none;
   -webkit-user-drag: none;
   pointer-events: none;
@@ -39,6 +46,12 @@
   transform: translateZ(0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+@media (max-width: 900px) {
+  .running-banner__logo { height: 24px; }
 }
 
 /* Disable filters/blend effects on WebKit to reduce flicker */

@@ -52,8 +52,9 @@ export default function RunningBanner({
           style={{
             ...(size ? { height: typeof size === "number" ? `${size}px` : size, width: "auto" } : undefined),
             opacity: varyOpacity ? OPAC[i % OPAC.length] : 0.8,
-            filter: !isIOS && grayscale ? "grayscale(1) contrast(1.05)" : undefined,
-            mixBlendMode: !isIOS ? (blend || "normal") : "normal",
+            // disable filter/blend on WebKit to avoid flicker/blur
+            filter: !isWebKit && grayscale ? "grayscale(1) contrast(1.05)" : undefined,
+            mixBlendMode: !isWebKit ? (blend || "normal") : "normal",
           }}
           draggable={false}
           onDragStart={(e) => e.preventDefault()}
