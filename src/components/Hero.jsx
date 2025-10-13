@@ -62,11 +62,15 @@ export default function Hero() {
           <p className="hero__lead">{t("hero.lead")}</p>
 
           <div className="hero__actions">
-            <WakoButton href="tel:+1234567890" variant="solid" sfx={false}>
-              {t("hero.ctaFreeAdvice")} <PhoneIcon size={22} />
+            <WakoButton
+              href={`mailto:${t("hero.email")}?subject=Book%20a%20call%20with%20Wako`}
+              variant="solid"
+              sfx={false}
+            >
+              {t("hero.ctaFreeAdvice")} <EnvelopeIcon size={20} />
             </WakoButton>
-            <WakoButton href="mailto:thisiswako@gmail.com" variant="ghost" sfx={false}>
-              {t("hero.email")} <EnvelopeIcon size={22} />
+            <WakoButton href="tel:+32479954400" variant="ghost" sfx={false}>
+              +32 479 95 44 00 <PhoneIcon size={20} />
             </WakoButton>
           </div>
         </div>

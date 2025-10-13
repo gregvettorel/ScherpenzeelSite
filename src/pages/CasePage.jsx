@@ -18,6 +18,15 @@ export default function CasePage() {
   const rootRef = useRef(null);
   const { t, lang } = useLang();
 
+  // Load ../assets/{slug}vector.png at build-time (works with CRA/Webpack)
+  let journeySrc = null;
+  try {
+    const ctx = require.context("../assets", false, /^\.\/.*vector\.png$/);
+    journeySrc = ctx(`./${slug}vector.png`);
+  } catch (_) {
+    journeySrc = null;
+  }
+
   useEffect(() => {
     if (!data) return;
     document.body.classList.add("case-page");
@@ -109,6 +118,15 @@ export default function CasePage() {
         render();
         window.addEventListener("resize", measure);
       }
+
+      // soft reveal for optional sections
+      gsap.utils.toArray(".case-facts, .case-quote, .case-metrics, .case-compare, .case-timeline").forEach((el, i) => {
+        gsap.fromTo(el, { opacity: 0, y: 18 }, {
+          opacity: 1, y: 0, duration: 0.6, ease: "power2.out",
+          delay: 0.05 * i,
+          scrollTrigger: { trigger: el, start: "top 82%", once: true }
+        });
+      });
     }, rootRef);
 
     return () => ctx.revert();
@@ -135,6 +153,18 @@ export default function CasePage() {
                 : Array.isArray(data.results) ? data.results
                 : [];
   const stackTags = Array.isArray(data.stackTags) ? data.stackTags : [];
+  const facts = Array.isArray(L?.facts) ? L.facts
+              : Array.isArray(data.facts) ? data.facts
+              : [];
+  const quote = L?.quote ?? data.quote ?? "";
+  const metrics = Array.isArray(L?.metrics) ? L.metrics
+                : Array.isArray(data.metrics) ? data.metrics
+                : [];
+  const compare = data.compare && data.compare.before && data.compare.after ? data.compare : null;
+  const timeline = Array.isArray(L?.timeline) ? L.timeline
+                 : Array.isArray(data.timeline) ? data.timeline
+                 : [];
+  const showResultsRow = results.length > 0 && metrics.length === 0;
 
   const studySuffix = ({ en: "case study", nl: "case study", fr: "étude de cas" }[lang]) || "case study";
   const abs = (p) => (typeof window !== "undefined" ? `${window.location.origin}${p}` : p);
@@ -175,9 +205,22 @@ export default function CasePage() {
         {/* HERO */}
         <header className="case-hero section-pad" style={{ background: "var(--surface)" }}>
           <div className="wrap">
+            {/* Back home link (top-left) */}
+            <div className="case-nav">
+              <WakoButton
+                as="a"
+                href="/"
+                variant="ghost"
+                showArrow={false}
+                className="case-nav__back"
+                aria-label={lang === "nl" ? "Naar home" : lang === "fr" ? "Vers l’accueil" : "Go to home"}
+              >
+                ← {lang === "nl" ? "Home" : lang === "fr" ? "Accueil" : "Home"}
+              </WakoButton>
+            </div>
             <div className="case">
               <figure className="case-hero__media">
-                <img src={data.hero} alt={`${title} — ${studySuffix}`} loading="eager" />
+                <img src={data.hero} alt={`${title}`} loading="eager" />
                 <figcaption className="case-hero__caption">
                   <h1 className="section-title case-hero__title" style={{ color: "#fff", textShadow: "0 20px 46px rgba(0,0,0,.6)" }}>
                     {title}
@@ -191,12 +234,26 @@ export default function CasePage() {
           </div>
         </header>
 
+        {/* FACT STRIP (optional) */}
+        {facts.length > 0 && (
+          <section className="case-facts section">
+            <div className="wrap">
+              <ul className="case-facts__list">
+                {facts.map((f, i) => {
+                  const isObj = f && typeof f === "object";
+                  const icon = isObj ? (f.icon ?? "•") : "•";
+                  const text = isObj ? (f.text ?? "") : f;
+                  return (<li key={i}><span aria-hidden="true">{icon}</span>{text}</li>);
+                })}
+              </ul>
+            </div>
+          </section>
+        )}
+
         {/* Explainer */}
         <section className="explainer-wrap section section-pad" style={{ background: "var(--surface)" }}>
           <div className="wrap explainer-flex">
-            <div className="explainer hero__lead" id="explainer">
-              {explainer}
-            </div>
+            <div className="explainer hero__lead" id="explainer">{explainer}</div>
             <div className="explainer-cta">
               {Array.isArray(data.ctas) && data.ctas.length > 0 ? (
                 data.ctas
@@ -229,47 +286,14 @@ export default function CasePage() {
           </div>
         </section>
 
-        {/* Journey (Uitdaging / Aanpak / Resultaat) */}
-        {(story.challenge || story.approach || story.outcome || results.length) && (
-          <section className="case-journey section section-pad" style={{ background: "var(--surface)" }}>
-            <div className="wrap">
-              {story.challenge && (
-                <div className="case-info__row">
-                  <div className="case-info__label">{labels.challenge}</div>
-                  <div className="case-info__value"><p>{story.challenge}</p></div>
-                </div>
-              )}
-              {story.approach && (
-                <div className="case-info__row">
-                  <div className="case-info__label">{labels.approach}</div>
-                  <div className="case-info__value"><p>{story.approach}</p></div>
-                </div>
-              )}
-              {(story.outcome || results.length > 0) && (
-                <div className="case-info__row">
-                  <div className="case-info__label">{labels.outcome}</div>
-                  <div className="case-info__value">
-                    {story.outcome && <p>{story.outcome}</p>}
-                    {results.length > 0 && (
-                      <div className="case-kpis">
-                        {results.map((r, i) => <span key={i}>{r}</span>)}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
-            </div>
-          </section>
-        )}
-
-        {/* Info grid */}
-        <section className="case-info section section-pad" style={{ background: "var(--surface)" }}>
+        {/* Case info directly under explainer */}
+        <section className="case-info section-pad" style={{ background: "var(--surface)" }}>
           <div className="wrap">
             <div className="case-info__row">
               <div className="case-info__label">{t("case.year")}</div>
               <div className="case-info__value">{data.year}</div>
             </div>
-            {results.length > 0 && (
+            {showResultsRow && (
               <div className="case-info__row">
                 <div className="case-info__label">{t("case.results")}</div>
                 <div className="case-info__value">
@@ -300,8 +324,56 @@ export default function CasePage() {
           </div>
         </section>
 
+        {/* Journey (Uitdaging / Aanpak / Resultaat) */}
+        {(story.challenge || story.approach || story.outcome || results.length) && (
+          <section className={`case-journey section section-pad${journeySrc ? " case-journey--rail" : ""}`} style={{ background: "var(--surface)" }}>
+            <div className="wrap">
+              {journeySrc && (
+                <aside className="rail">
+                  <img
+                    className="journey-rail__img"
+                    src={journeySrc}
+                    alt={`${title} vector`}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </aside>
+              )}
+               <div className="journey">
+                 {story.challenge && (
+                   <div className="case-info__row">
+                     <div className="case-info__label">{labels.challenge}</div>
+                     <div className="case-info__value"><p>{story.challenge}</p></div>
+                   </div>
+                 )}
+                 {story.approach && (
+                   <div className="case-info__row">
+                     <div className="case-info__label">{labels.approach}</div>
+                     <div className="case-info__value"><p>{story.approach}</p></div>
+                   </div>
+                 )}
+                 {(story.outcome || results.length > 0) && (
+                   <div className="case-info__row">
+                     <div className="case-info__label">{labels.outcome}</div>
+                     <div className="case-info__value">
+                       {story.outcome && <p>{story.outcome}</p>}
+                       {results.length > 0 && (
+                         <div className="case-kpis">
+                           {results.map((r, i) => <span key={i}>{r}</span>)}
+                         </div>
+                       )}
+                     </div>
+                   </div>
+                 )}
+               </div>
+             </div>
+           </section>
+         )}
+
+
+
         {/* OLC: stacked sticky cards */}
-        <section className="olc section section-pad" data-olc-cards>
+        <section className="olc section-pad" data-olc-cards>
           <div className="wrap">
             <div className="olc__main">
               {Array.isArray(data.cards) &&
@@ -344,13 +416,11 @@ export default function CasePage() {
               <WakoButton as="button" variant="solid" onClick={() => nav(data.nextHref || "/")}>
                 {t("case.next")}
               </WakoButton>
-              <WakoButton as="a" href="mailto:thisiswako@gmail.com" variant="ghost" showArrow={false}>
-                {lang === "nl" ? "Plan een gratis gesprek" : lang === "fr" ? "Planifier un appel gratuit" : "Book a free call"}
+              <WakoButton as="a" href="mailto:thisiswako@gmail.com?subject=Plan%20een%20gesprek" variant="ghost">
+                {lang === "nl" ? "Plan een gratis gesprek" : lang === "fr" ? "Planifier un appel gratuit" : "Book a free call"} <EnvelopeIcon size={20} />
               </WakoButton>
             </div>
-            <p className="case-related" style={{ marginTop: 16, color: "var(--muted)" }}>
-              {labels.related} <a href="/webdesign-brussel">Webdesign Brussel</a> · <a href="/3d-integraties">3D op het web</a>
-            </p>
+            {/* Related services removed (no real targets). Add back when you have real links. */}
           </div>
         </section>
       </main>
