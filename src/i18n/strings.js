@@ -163,7 +163,7 @@ export const STR = {
     nav: { work: "Projets", process: "Processus", about: "À propos", team: "Équipe", contact: "Contact" },
     hero: {
       title1: "Votre produit,",
-      accent: "prêt à être lancé",
+      accent: "prêt à être lancé.",
       lead:
         "Deux spécialistes qui prennent votre site ou votre marque à cœur, du concept au résultat concret. Clarté, professionnalisme et orientation vers les résultats.",
       ctaFreeAdvice: "Conseil gratuit",

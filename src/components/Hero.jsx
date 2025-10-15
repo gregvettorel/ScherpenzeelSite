@@ -1,5 +1,5 @@
 // src/components/Hero.jsx
-import React, { useMemo } from "react";
+import  { useMemo } from "react";
 import { ReactComponent as HeroVisual } from "../assets/hero.svg";
 import WakoButton from "./WakoButton";
 import EnvelopeIcon from "./EnvelopeIcon";
@@ -12,24 +12,6 @@ import { useLang } from "../context/LangContext";
 export default function Hero() {
   const { t } = useLang();
 
-  const audioRef = React.useRef(null);
-
-  const playWelcome = () => {
-    try {
-      const playIt = (a) => { a.volume = 0.6; a.currentTime = 0; return a.play(); };
-      if (!audioRef.current) {
-        import("../assets/sfx/welcometowako.mp3").then(m => {
-          audioRef.current = new Audio(m.default);
-          return playIt(audioRef.current);
-        });
-        return;
-      }
-      const p = playIt(audioRef.current);
-      if (p?.catch) p.catch(() => {});
-    } catch (_) {}
-  };
-
-  // Split accent phrase -> before (normal) + lastWord (blue)
   const accent = t("hero.accent") || "";
   const [before, lastWord] = useMemo(() => {
     const s = accent.trim();
@@ -46,15 +28,6 @@ export default function Hero() {
             {before}
             <span className="hero__accent">
               {lastWord}
-              <button
-                type="button"
-                className="hero__dot"
-                aria-label="Play welcome to Wako sound"
-                onClick={playWelcome}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") { e.preventDefault(); playWelcome(); }
-                }}
-              >.</button>
             </span>
           </h1>
 
