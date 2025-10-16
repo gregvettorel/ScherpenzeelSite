@@ -1,12 +1,14 @@
 /* === TOKENS & GLOBALS === */
 :root {
- 
   --px: 5%;
 
-  --brand: #0579FE;
+  /* Brand / theme tokens */
+  --brand: #0579FE; /* wako blue */
   --ink: #111318;
   --muted: #6b7280;
   --surface: #fff;
+  --text: var(--ink);
+  --svg-foreground: var(--brand); /* map black SVGs to brand by default */
 
   --radius-2: 12px;
   --radius-3: 18px;
@@ -21,6 +23,30 @@
   --lh-tight: 1.24;
   --lh-copy: 1.7;
 }
+
+/* Dark theme: add class 'theme-dark' on documentElement to enable */
+.theme-dark {
+  --surface: #071025; /* dark background */
+  --text: #f8fbff;
+  --muted: #9aa6b8;
+  --svg-foreground: #fff; /* in dark theme, svg foreground becomes white */
+  /* UI tokens for components */
+  --chip-bg: rgba(255,255,255,0.03);
+  --hover-surface: rgba(255,255,255,0.04);
+  --card-outline: rgba(255,255,255,0.04);
+}
+
+/* Map SVG elements that have black/near-black fills or strokes to the svg-foreground token.
+   This targets common hard-coded presentation attributes and forces them to use our colors.
+   Use with !important because some SVGs include presentation attributes. */
+svg [fill="#000"], svg [fill="#000000"], svg [fill="#111"], svg [fill="#111318"],
+svg [stroke="#000"], svg [stroke="#000000"], svg [stroke="#111"], svg [stroke="#111318"] {
+  fill: var(--svg-foreground) !important;
+  stroke: var(--svg-foreground) !important;
+}
+
+/* Also normalize icons that use currentColor to follow text color */
+svg { color: var(--svg-foreground); }
 
 /* section rhythm */
 .section {
@@ -58,6 +84,9 @@ body {
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--surface);
+  color: var(--text);
+  transition: background 220ms ease, color 220ms ease;
 }
 
 h1,
@@ -86,37 +115,35 @@ h6 {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #000;
-  color: #fff;
+  background: var(--text);
+  color: var(--surface);
   padding: 12px 18px;
   border-radius: 999px;
   font-weight: 600;
   text-decoration: none;
-  border: 1px solid #000;
-  transition: opacity .2s ease;
+  border: 1px solid var(--text);
+  transition: background 180ms ease, color 180ms ease, opacity .2s ease;
 }
 
-.btn-solid:hover {
-  opacity: .9;
-}
+.btn-solid:hover { opacity: .95; }
 
 .btn-ghost {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   background: transparent;
-  color: #000;
+  color: var(--text);
   padding: 1.2em;
   border-radius: 999px;
-  border: 1px solid #000;
+  border: 1px solid var(--text);
   font-weight: 600;
   text-decoration: none;
-  transition: all .2s ease;
+  transition: background 180ms ease, color 180ms ease;
 }
 
 .btn-ghost:hover {
-  background: #000;
-  color: #fff;
+  background: var(--text);
+  color: var(--surface);
 }
 
 .site {
@@ -135,7 +162,10 @@ h6 {
   z-index: -1;
   pointer-events: none;
   display: block;
+  transition: opacity 220ms ease, filter 220ms ease;
 }
+
+.theme-dark .page-art { opacity: 0.35; filter: brightness(.8) saturate(.9); }
 
 @media (min-width: 768px) {
   .site { padding-bottom: 40px; } 

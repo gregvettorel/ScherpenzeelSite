@@ -378,7 +378,7 @@
 
 .hero__accent {
   color: var(--brand);
-  background: #0579FE;
+  background: var(--brand);
   background-clip: text;            /* standard */
   -webkit-background-clip: text;    /* Safari */
   -webkit-text-fill-color: transparent;
@@ -410,7 +410,7 @@
 }
 
 .hero__lead {
-  color: var(--ink);
+  color: var(--text);
   font-size: 1.5rem;
   line-height: 1.8;
   padding: 1.6rem 0px;
@@ -488,4 +488,23 @@
 .hero__dot:focus-visible {
   box-shadow: 0 0 0 .22em #0579FE55;
   border-radius: 9999px;
+}
+
+/* Theme toggle in hero */
+.theme-toggle {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.theme-toggle:hover { background: rgba(255,255,255,0.04); }
+
+/* When theme is dark (documentElement has .theme-dark) make toggle look inverted */
+.theme-dark .theme-toggle {
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.12);
+  color: var(--svg-foreground);
 }

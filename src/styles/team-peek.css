@@ -53,8 +53,9 @@
   height: auto;
   overflow: visible;
   border-radius: 1rem;           /* rounded-2xl */
-  background: #fff;
-  outline: 1px solid rgba(0,0,0,0.05); /* ring-1 ring-black/5 */
+  /* theme-aware surface + subtle outline (fallbacks included) */
+  background: var(--surface, #fff);
+  outline: 1px solid var(--card-outline, rgba(0,0,0,0.05)); /* ring-1 ring-black/5 */
   padding: 4rem 0rem;                 /* p-8 */
   text-align: center;
   transition:
@@ -69,7 +70,7 @@
   height: 11rem;
   border-radius: 9999px;
   overflow: hidden;
-  outline: 1px solid #e5e7eb; /* ring-gray-200 */
+  outline: 1px solid var(--avatar-outline, rgba(0,0,0,0.06)); /* fallback */
 }
 
 .avatar {
@@ -85,13 +86,14 @@
   font-weight: 500;  
   line-height: 32px;
   font-family: DM Sans, system-ui, -apple-system, Segoe UI, sans-serif;
+  color: var(--text, #111827);
 }
 
 .member-role {
   margin-top: 0.5rem;
   font-size: 11px;                 /* text-[11px] */
   letter-spacing: 0.2em;           /* tracking-[0.2em] */
-  color: #6b7280;                  /* text-gray-500 */
+  color: var(--muted, #6b7280);    /* theme-aware muted text */
   text-transform: uppercase;
 }
 

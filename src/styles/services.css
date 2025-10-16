@@ -9,9 +9,9 @@
 
 
 
-.services-title { color: white; 
+.services-title { 
+  color: var(--text);
   margin-bottom: 3%;
-
 }
 
 /* Make the media area have a height/aspect so the Canvas can fill */
@@ -23,7 +23,7 @@
   position: relative;
 }
 /* Maintenance row: neutral bg + fit image so no jump in backgrounds */
-.services-media[data-kind="maintenance"] { background: #F9F9F9; }
+.services-media[data-kind="maintenance"] { background: var(--surface, #F9F9F9); }
 .services-media[data-kind="maintenance"] img { object-fit: contain; }
 
 /* keep default cover elsewhere */
@@ -62,13 +62,13 @@
   font-family: "DM Sans", sans-serif;
   font-weight: 700;
   font-size: 1.5rem;
-color: white;
+  color: var(--text);
   transition: color .28s cubic-bezier(.22,.61,.36,1), text-shadow .28s ease;
 }
 
 .services-content {
- background-color: #fff;;
-} 
+  background-color: var(--surface, #fff);
+}
 
 /* Keep open state blue as well */
 .services-accordion.open .services-row-title {
@@ -139,9 +139,9 @@ color: white;
   font-size: 13px;
   padding: 7px 12px;
   border-radius: 999px;
-  background: #f6f7f8;
-  border: 1px solid var(--rule);
-  color: #374151;
+  background: var(--chip-bg, #f6f7f8);
+  border: 1px solid var(--rule, #e7e7e9);
+  color: var(--muted-foreground, #374151);
 }
 
 /* Image mockup */
@@ -166,6 +166,9 @@ color: white;
     var(--brand) 55%,
     color-mix(in srgb, var(--brand) 88%, #023D92) 100%
   );
+
+  border-radius: 16px;
+  box-shadow: grey 0px 10px 30px -10px;
 }
 
 /* Base sheet (invisible). Keeps layout stable to avoid “pop”. */
@@ -176,7 +179,7 @@ color: white;
   left: 50%; right: 50%;
   margin-left: -50vw;            /* full‑bleed */
   margin-right: -50vw;
-  background: #fff;
+  background: var(--surface, #fff);
   box-shadow: 0 1px 0 var(--rule) inset, 0 -1px 0 var(--rule) inset;
   opacity: 0;
   transform: translateZ(0) scaleY(0.985);
@@ -267,14 +270,14 @@ color: white;
   background-image: none !important; /* stop bg-underline conflicts */
 }
 
-/* White underline with extra spacing */
+/* Underline with theme-aware color */
 .services-row-title::after {
   content: "";
   position: absolute;
   left: 0; right: 0;
   height: 2px;
   bottom: -6px;                 /* matches nav spacing */
-  background: #fff;
+  background: color-mix(in srgb, var(--text, #fff) 88%, var(--brand, #0579fe) 12%);
   border-radius: 1px;
   transform: scaleX(0);
   transform-origin: left;
@@ -286,6 +289,13 @@ color: white;
 .services-accordion:hover .services-row-title::after,
 .services-toggle:focus-visible .services-row-title::after {
   transform: scaleX(1);
+}
+
+/* Avoid pure-white decorative arrows inside the services area — prefer muted/brand */
+.services-section svg [fill="#fff"],
+.services-section svg [stroke="#fff"] {
+  fill: var(--muted) !important;
+  stroke: var(--muted) !important;
 }
 
 /* Closed-row hover: keep text white (no color flip) */
