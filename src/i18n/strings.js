@@ -84,7 +84,7 @@ export const STR = {
     nav: { work: "Projects", process: "Process", about: "About", team: "Team", contact: "Contact" },
     hero: {
       title1: "Your product,",
-      accent: "ready for launch",
+      accent: "ready for launch.",
       lead:
         "Two specialists who tackle your website or brand with care — from concept to real impact. Clear, professional, and focused on outcomes.",
       ctaFreeAdvice: "Free consultation",
